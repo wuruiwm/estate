@@ -1,4 +1,4 @@
 runtime/*
 *.log
 .idea/*
-database.php
+app/database.php

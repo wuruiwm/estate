@@ -108,14 +108,14 @@
     <div class="layui-form-item">
         <label class="layui-form-label">标题 <span style="color: #FF5722;">*</span></label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="required" autocomplete="off" placeholder="请输入标题"
+            <input type="text" name="title" autocomplete="off" placeholder="请输入标题"
                    class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">描述<span style="color: #FF5722;">*</span></label>
         <div class="layui-input-block">
-            <input type="text" name="desc" lay-verify="required" placeholder="请输入简介" autocomplete="off"
+            <input type="text" name="desc" placeholder="请输入简介" autocomplete="off"
                    class="layui-input">
         </div>
     </div>
@@ -136,20 +136,20 @@
         <div class="layui-inline">
             <label class="layui-form-label">开盘时间<span style="color: #FF5722;">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="date" lay-verify="required" id="date1" autocomplete="off" class="layui-input">
+                <input type="text" name="date" id="date1" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">房价<span style="color: #FF5722;">*</span></label>
             <div class="layui-input-inline">
-                <input type="text" name="house_price" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="house_price" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">元/㎡</div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">开发商<span style="color: #FF5722;">*</span></label>
             <div class="layui-input-inline">
-                <input type="text" name="developer" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="developer" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -157,20 +157,20 @@
         <div class="layui-inline">
             <label class="layui-form-label">车位数量<span style="color: #FF5722;">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="parking_space" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="parking_space" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">绿化率<span style="color: #FF5722;">*</span></label>
             <div class="layui-input-inline">
-                <input type="text" name="greening_rate" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="greening_rate" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">%</div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">占地面积<span style="color: #FF5722;">*</span></label>
             <div class="layui-input-inline">
-                <input type="text" name="floor_area" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="floor_area"  autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">㎡</div>
         </div>
@@ -179,13 +179,13 @@
         <div class="layui-inline">
             <label class="layui-form-label">物业公司<span style="color: #FF5722;">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="property_company" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="property_company" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">物业费<span style="color: #FF5722;">*</span></label>
             <div class="layui-input-inline">
-                <input type="text" name="property_costs" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="property_costs" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">元/㎡</div>
         </div>
@@ -193,16 +193,14 @@
     <div class="layui-form-item">
         <label class="layui-form-label">房源地址<span style="color: #FF5722;">*</span></label>
         <div class="layui-input-block">
-            <input type="text" name="house_address" lay-verify="required" lay-verify="required" placeholder="请输入房源地址"
+            <input type="text" name="house_address" placeholder="请输入房源地址"
                    autocomplete="off"
                    class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">佣金方案</label>
-        <div class="layui-input-block" id="yongjin">
-            <input type="checkbox" name="like" title="写作">
-        </div>
+        <div class="layui-input-block" id="parent_node"></div>
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
@@ -236,15 +234,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">选择地区</label>
         <div class="layui-input-inline">
-            <select name="P1" lay-filter="province" id="province">
+            <select name="province" lay-filter="province" id="province">
             </select>
         </div>
         <div class="layui-input-inline">
-            <select name="C1" lay-filter="city" id="city">
+            <select name="city" lay-filter="city" id="city">
             </select>
         </div>
         <div class="layui-input-inline">
-            <select name="A1" lay-filter="area" id="area">
+            <select name="area" lay-filter="area" id="area">
             </select>
         </div>
     </div>
@@ -269,7 +267,7 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <button class="layui-btn" lay-submit="" lay-filter="demo2">跳转式提交</button>
+        <button class="layui-btn" lay-submit lay-filter="submit" id="submit">确认发布</button>
     </div>
 
 
@@ -383,6 +381,7 @@
             getBannerById(id, form);
         }
         //上传封面图
+        var data = [];
         var uploadInst = upload.render({
             elem: '#thumb' //绑定元素
             , url: "{:url('common/upload')}" //上传接口
@@ -391,7 +390,7 @@
                 if (res.code == 2) {
                     $('#img').attr('src', res.src);
                     $('#img').css({"width": '375', "height": '200'});
-                    $('#upload-thumb').append('<input type="hidden" name="img_id" value="' + res.id + '">');
+                    $('#upload-thumb').append('<input id="img_id" value="' + res.id + '">');
                 } else {
                     layer.msg(res.msg);
                 }
@@ -440,8 +439,13 @@
                 }
                 // 新增
             } else {
+                data.img_id = $("#img_id").val();
+                console.log(data);
+                console.log(data.field);
+
+                return false;
                 var params = {
-                    url: 'banner/insert',
+                    url: 'house/new',
                     type: 'post',
                     data: data.field,
                     sCallback: function (successMsg) {
@@ -482,8 +486,8 @@
                 //初始化赋值
                 $.each(successMsg,function(key,value){  //遍历键值对
 
-                    var zi = "<input type='checkbox' name='like[]' title='"+value.house_area+'㎡ 佣金'+value.price+"元'>";
-                    $("#yongjin").append(zi);
+                    var child_node = "<input type='checkbox' name='like' value='"+value.id+"'title='"+value.house_area+'㎡ 佣金'+value.price+"元'>";
+                    $("#parent_node").append(child_node);
                 })
 
 
@@ -547,6 +551,7 @@
         };
         window.base.getData(params);
     }
+
 
 </script>
 

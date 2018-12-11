@@ -34,7 +34,7 @@ class House extends Permissions
      * 发布新房源
      */
     public function addNewHouse(){
-        (new AddNewHouse())->goCheck();
+//        (new AddNewHouse())->goCheck();
         $post = input('post.');
         $post['init_status']=1;
         $model = new HouseSource();

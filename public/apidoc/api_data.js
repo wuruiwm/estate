@@ -61,6 +61,22 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "notice/find",
+    "title": "获取首页公告标题",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>获取首页公告标题</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/notice/find"
+      }
+    ],
+    "filename": "app/api/controller/v1/Notice.php",
+    "groupTitle": "客户端接口",
+    "name": "GetNoticeFind"
+  },
+  {
+    "type": "get",
     "url": "user/getBanner",
     "title": "获取首页轮播图",
     "group": "web",
@@ -87,22 +103,6 @@ define({ "api": [
     "filename": "app/api/controller/v1/Banner.php",
     "groupTitle": "客户端接口",
     "name": "GetUserGetbanner"
-  },
-  {
-    "type": "",
-    "url": "notice/find",
-    "title": "获取首页公告标题",
-    "group": "web",
-    "version": "0.1.0",
-    "description": "<p>获取首页公告标题</p>",
-    "sampleRequest": [
-      {
-        "url": "http://estate.dingdingmaoer.cn/api/v1/notice/find"
-      }
-    ],
-    "filename": "app/api/controller/v1/Notice.php",
-    "groupTitle": "客户端接口",
-    "name": "NoticeFind"
   },
   {
     "type": "post",

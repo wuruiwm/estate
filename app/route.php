@@ -44,6 +44,6 @@ Route::post('api/:version/user/update_mobile', 'api/:version.User/updateMobile')
 // 修改密码
 Route::post('api/:version/user/update_password', 'api/:version.User/updatePassword');
 //获取创建时间最新的公告
-Route::any('api/:version/notice/find', 'api/:version.Notice/noticeUrl');
+Route::get('api/:version/notice/find', 'api/:version.Notice/noticeUrl');
 //根据id获取公告内容
 Route::get('api/:version/notice/content', 'api/:version.Notice/noticeContent');
