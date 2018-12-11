@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap.min.css">
+	<style>
+		#form {
+			margin: 20px 20px 20px 20px;
+		}
+		.form-group{
+			margin-bottom: 20px;
+		}
+		#head {
+			background-color: #F8F8F8;
+			height: 34px;
+			margin-left: 20px;
+		}
+		#title{
+			margin-top: 30px;
+		}
+		#submit{
+			margin-top: 30px;
+		}
+		#hang {
+			line-height:34px;
+		}
+	</style>
+</head>
+<body>
+	<div id="head"><h4 id="hang"><strong>添加公告</strong></h4></div>
+	<div id="form">
+	<form action="{:url('admin/Notice/noticeAdd')}" method="post" enctype="multipart/form.data" class="form-inline">
+  		<div class="form-group">
+    		<label for="exampleInputEmail1">标题：</label>
+    		<input type="email" class="form-control" id="exampleInputEmail1" placeholder="标题">
+  		</div>
+  		<div id="title">
+    	<div class="form-group">
+    		<label for="exampleInputEmail1">内容：</label>
+    		<textarea id="container" type="text/plain" style="height: 300px;width: 1024px;"></textarea>
+  		</div>
+  		</div>
+  		<div id="submit">
+			<input class="btn btn-info" type="button" value="立即提交" onclick="tijiao();">
+		</div>
+	</form>
+	</div>
+</body>
+<script src="__PUBLIC__/bootstrap/js/jquery.js"></script>
+<script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 加载编辑器的容器 -->
+    <script id="container" name="content" type="text/plain">
+        这里写你的初始化内容
+    </script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container');
+    </script>
+	<script src="__PUBLIC__/layui/layer.js"></script>
+    <script>
+    	function tijiao(){
+    		var url = "{:url('admin/Notice/noticeAdd')}";
+    		var data = {
+    			'title':$('#exampleInputEmail1')[0].value,
+    			'content':$('textarea')[0].value
+    		};
+    		//console.log(data);
+    		$.post(url,data,function(res){
+                if (res == '添加公告成功'){
+                    window.setTimeout('tiaozhuan()',2000);
+                }
+    			layer.msg(res);
+    		})
+    	}
+    	function tiaozhuan(){
+    		    var url = "{:url('admin/Notice/noticeList')}";
+    			window.location.href = url;
+    	}
+
+    </script>
+</html>

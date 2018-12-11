@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap.min.css">
+	<style>
+		#head {
+			background: #f2f2f2;
+			height: 80px;
+			margin: 15px 20px 15px 20px;
+		}
+		#button {
+			margin-top: 15px;
+			margin-left: 20px; 
+			background: #1E9FFF;
+		}
+/*		#left{
+			height: 66px;
+			background: #009688;
+		}*/
+		.table {
+			margin: 15px 20px 0px 20px;
+		}
+/*		#page {
+			margin: 15px 20px 15px 20px;
+		}*/
+		.pagination {
+			margin: 0px 20px 0px 20px;
+		}
+		.shanchu {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="head">
+			<a href="{:url('admin/Notice/noticeAdd')}" class="btn btn-info btn-lg" type="submit" id="button">添加公告</a>
+	</div>
+	<table class="table table-bordered">
+		<tr>
+			<th>ID</th>
+			<th>标题</th>
+			<th>内容</th>
+			<th>
+				操作
+			</th>
+		</tr>
+		{volist name="list" id="v"}
+		<tr id="tr{$v.id}">
+			<td>{$v.id}</td>
+			<td>{$v.title}</td>
+			<td>{$v.content}</td>
+			<td>				
+				<a href="{:url('admin/Notice/noticeEdit',['id'=>$v.id])}" class="btn btn-success btn-xs">编辑</a>
+				<a href="{:url('admin/Notice/noticeDel')}" class="btn btn-warning btn-xs shanchu">删除</a>
+				<button class="btn btn-warning btn-xs" url="{$v.id}" data-toggle="modal" data-target="#delcfmModel" onclick="del({$v.id});">删除</button>
+			</td>
+		</tr>
+		{/volist}
+	</table>
+<!-- 	<div id="page">
+		<ul class="pagination"> 
+			<li class="previous"><a href="#">上一页</a></li>
+			<li class="active"><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li class="next"><a href="#">下一页</a></li>
+		</ul>
+	</div> -->
+	{$page}
+	<!-- <div class="modal fade" id="delcfmModel">  
+  <div class="modal-dialog">  
+    <div class="modal-content message_align">  
+      <div class="modal-header">  
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+        <h4 class="modal-title">提示信息</h4>  
+      </div>  
+      <div class="modal-body">  
+        <p>您确认要删除吗？</p>  
+      </div>  
+      <div class="modal-footer">  
+         <input type="hidden" id="url"/>  
+         <a  onclick="del()" class="btn btn-success" data-dismiss="modal">确定</a>  
+         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
+      </div>  
+    </div> /.modal-content -->  
+ <!--  </div>/.modal-dialog  
+</div>/.modal -->
+</body>
+<script src="__PUBLIC__/bootstrap/js/jquery.js"></script>
+<script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/layui/layer.js"></script>
+<script>
+function del(can){
+	//弹出窗口
+	layer.confirm('真的删除行么', function(index){
+    //关闭窗口
+    layer.close(index);
+    //var url = $('.shanchu').attr('href');
+    //拼接get访问的的url
+    var url = "{:url('admin/Notice/noticeDel')}" +'?id='+can;
+    //console.log(url);
+    //发送get请求删除行，判断返回值是否为成功，成功则remove删除那一行的标签
+    $.get(url,function(res){
+    	var tr = '#tr'+can;
+    	if (res == '删除成功') {
+    		$(tr).remove();
+    	}
+    	layer.msg(res);
+    //console.log(res);
+    })
+	})
+}
+</script>
+</html>
