@@ -27,13 +27,24 @@ class Notice extends Controller{
 	public function noticeContent($id){
 		//$id = input('id');
 		//echo $id;exit();
+		if (!is_numeric($id)) {
+			echo "id不合法";exit();
+		}
 		$notice = model('Notice');
+		$select = $notice->field(['id'])->select();
+		foreach ($select as $v) {
+			if ($id ==$v->getData()['id']) {
+				$find = $notice->field(['id','title','content','create_time','update_time'])->find($id);
+				$data = $find->getData();
+				$data['create_time'] = date('Y-n-j G:i:s',$data['create_time']);
+				$data['update_time'] = date('Y-n-j G:i:s',$data['update_time']);
+				return $data;
+			}
+		}
+		echo "id不合法";
+
 		//$id = 'id='+$id;
-		$find = $notice->field(['id','title','content','create_time','update_time'])->find($id);
-		$data = $find->getData();
-		$data['create_time'] = date('Y-n-j G:i:s',$data['create_time']);
-		$data['update_time'] = date('Y-n-j G:i:s',$data['update_time']);
-		return $data;
+
 	}
 }
 
