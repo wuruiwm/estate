@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>发布新房</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all"/>
+    <link rel="stylesheet" href="__CSS__/admin.css" media="all">
+    <style>
+        .tags-wrap {
+            border: 1px solid #e6e6e6;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .tags-wrap:after {
+            content: "";
+            display: block;
+            visibility: hidden;
+            height: 0;
+            line-height: 0;
+            clear: both;
+        }
+
+         
+        .tags-input {
+            width: 200px;
+            height: 38px;
+        }
+
+        .tags-input input {
+            border: none;
+        }
+
+        .tags, .tags-input {
+            float: left;
+        }
+
+        .tags {
+            margin-left: 10px;
+        }
+
+        .tags .layui-badge {
+            padding: 5px;
+            margin: 5px 0;
+            margin-right: 5px;
+            font-size: 14px;
+        }
+
+        .tagsremove {
+            color: #2F4056;
+        }
+
+        #imgs {
+            height: 70px;
+        }
+
+        .layui-upload-list tr {
+            float: left;
+        }
+
+    </style>
+</head>
+<body style="padding:10px;">
+<form class="layui-form layui-form-pane" id="" lay-filter="formBanner">
+    <div class="layui-form-item">
+        <label class="layui-form-label">标题 <span style="color: #FF5722;">*</span></label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="required" autocomplete="off" placeholder="请输入标题"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">描述<span style="color: #FF5722;">*</span></label>
+        <div class="layui-input-block">
+            <input type="text" name="desc" lay-verify="required" placeholder="请输入简介" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">封面图<span style="color: #FF5722;">*</span></label>
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn" id="thumb">上传图片</button>
+            <div class="layui-inline layui-word-aux">
+                建议尺寸：宽750 x 高400
+            </div>
+            <div class="layui-upload-list">
+                <img class="layui-upload-img" id="img" src="">
+                <p id="demoText"></p>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">开盘时间<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="date" lay-verify="required" id="date1" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">房价<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-inline">
+                <input type="text" name="house_price" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">元/㎡</div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">开发商<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-inline">
+                <input type="text" name="developer" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">车位数量<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="parking_space" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">绿化率<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-inline">
+                <input type="text" name="greening_rate" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">%</div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">占地面积<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-inline">
+                <input type="text" name="floor_area" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">㎡</div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">物业公司<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="property_company" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">物业费<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-inline">
+                <input type="text" name="property_costs" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">元/㎡</div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房源地址<span style="color: #FF5722;">*</span></label>
+        <div class="layui-input-block">
+            <input type="text" name="house_address" lay-verify="required" lay-verify="required" placeholder="请输入房源地址"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">范围</label>
+            <div class="layui-upload">
+                <button type="button" class="layui-btn" id="uploads">多图片上传</button>
+                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                    预览图：
+                    <div class="layui-upload-list" id="imgs">
+                        <input id="nameImage" name="list[0]" maxlength="255" class="input-xlarge required"
+                               type="hidden">
+                    </div>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">装修类型</label>
+        <div class="layui-input-block">
+            <div class="tags-wrap">
+                <div class="tags" id="tags1"></div>
+                <div class="tags-input">
+                    <input type="text" class="layui-input input-add" placeholder="添加类型">
+                </div>
+            </div>
+            <div class="layui-form-mid layui-word-aux">点击"添加类型"输入完成后,按回车键即可,最多支持12种类型</div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择地区</label>
+        <div class="layui-input-inline">
+            <select name="P1" lay-filter="province" id="province">
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select name="C1" lay-filter="city" id="city">
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select name="A1" lay-filter="area" id="area">
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item" pane="">
+        <label class="layui-form-label">开关-开</label>
+        <div class="layui-input-block">
+            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" title="开关">
+        </div>
+    </div>
+    <div class="layui-form-item" pane="">
+        <label class="layui-form-label">单选框</label>
+        <div class="layui-input-block">
+            <input type="radio" name="sex" value="男" title="男" checked="">
+            <input type="radio" name="sex" value="女" title="女">
+            <input type="radio" name="sex" value="禁" title="禁用" disabled="">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">文本域</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button class="layui-btn" lay-submit="" lay-filter="demo2">跳转式提交</button>
+    </div>
+
+
+</form>
+{include file="public/foot"}
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'upload', 'statusTags'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , upload = layui.upload,
+            statusTags = layui.statusTags;
+
+        var tag1 = statusTags.render({
+            el: "#tags1",
+            template: '<span class="layui-badge layui-bg-gray">@title <span class="tagsremove @remove"><a href="javascript:;" style="color: #FF5722">x</a></span></span>',
+            data: [
+                '毛坯',
+                '简约',
+                '豪华装'
+            ],
+            title: 0,
+        });
+        $('.input-add').on('keydown', function (e) {
+            if (e.keyCode === 13) {
+                var value = $(this).val();
+                $(this).val('');
+                tag1.add(value);
+                return false;
+            }
+        });
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        /**
+         *省市区联动
+         */
+        getProvinceList(form);
+        form.on('select(province)', function (data) {
+            var pid = data.value;
+            getCityList(pid, form);
+            $("#area").empty();
+        });
+        form.on('select(city)', function (data) {
+            var cid = data.value;
+            getAreaList(cid, form);
+        });
+
+        /**
+         * 多图上传
+         */
+        var demoListView = $('#imgs')
+            , uploadListIns = upload.render({
+            elem: '#uploads'
+            , url: "{:url('common/upload')}"
+            , multiple: true
+            , accept: "images"
+            , data: {use: 'article_thumb'}
+            , size: 10240
+            , choose: function (obj) {
+
+            }
+            , done: function (res) {
+                //上传完毕
+                console.log(res);
+
+
+                $("#nameImage").val($("#nameImage").val() + res.id + ":");
+                var tr = $(['<tr id="upload-' + res.id + '" class="edtimg">'
+                    , '<td>'
+                    , '<div class="imgs">'
+                    , '<img src="' + res.src + '" alt="' + res.id + '" class="layui-upload-img" width="90px" height="90px">'
+                    , '<a class="close-link demo-delete"> <i class="fa fa-times"></i></a>'
+                    , '</div>'
+                    , '</td>'
+                    , '</tr>'].join(''));
+                //删除
+                tr.find('.demo-delete').on('click', function () {
+                    $("#nameImage").val($("#nameImage").val().replace(files[res.id].id + ":", ''));
+                    delete files[index]; //删除对应的文件
+                    tr.remove();
+                });
+                //张数限制
+                var count = parseInt(res.id.split("-")[1]) + 1; //得到文件索引
+                if (count > 4) {
+                    $("#nameImage").val($("#nameImage").val().replace(files[res.id].id + ":", ''));
+                    //但是layUI的before方法，不管返回什么，还是会进行上传
+                    delete files[res.id];
+                    layer.msg("最多上传4张图片！");
+                    return false;
+                } else {
+                    demoListView.append(tr);
+                }
+
+
+            }, error: function (index, upload) {
+                layer.msg("服务器返回错误！");
+                layer.closeAll('loading');
+
+            }
+        });
+
+
+        var id = window.base.getQueryString('id');
+        if (id > 0) {
+            getBannerById(id, form);
+        }
+        //上传封面图
+        var uploadInst = upload.render({
+            elem: '#thumb' //绑定元素
+            , url: "{:url('common/upload')}" //上传接口
+            , data: {use: 'house_cover_head'}
+            , done: function (res) {
+                if (res.code == 2) {
+                    $('#img').attr('src', res.src);
+                    $('#img').css({"width": '375', "height": '200'});
+                    $('#upload-thumb').append('<input type="hidden" name="img_id" value="' + res.id + '">');
+                } else {
+                    layer.msg(res.msg);
+                }
+            }
+            , error: function () {
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+
+        // 获取id参数
+        var id = window.base.getQueryString('id');
+        //监听提交
+        form.on('submit(submit)', function (data) {
+            // 发送post请求 修改
+            if (id > 0) {
+                console.log(data.field);
+                var params = {
+                    url: 'banner/update?id=' + id,
+                    type: 'post',
+                    data: data.field,
+                    sCallback: function (successMsg) {
+                        if (successMsg.msg == '缺少权限') {
+                            layer.msg(successMsg.msg);
+                        }
+                        if (successMsg.errorCode == 20100) {
+                            //弹出loading
+                            var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
+                            setTimeout(function () {
+                                top.layer.close(index);
+                                top.layer.msg("修改成功");
+                                layer.closeAll("iframe");
+                                //刷新父页面
+                                parent.location.reload();
+                            }, 1000);
+                        }
+                    },
+                    eCallback: function (errorMsg) {
+                        if (errorMsg.responseJSON.errorCode == 40000) {
+                            layer.msg(errorMsg.responseJSON.msg);
+                        }
+                    }
+                }
+                // 新增
+            } else {
+                var params = {
+                    url: 'banner/insert',
+                    type: 'post',
+                    data: data.field,
+                    sCallback: function (successMsg) {
+                        if (successMsg.msg == '缺少权限') {
+                            layer.msg(successMsg.msg);
+                        }
+                        if (successMsg.errorCode == 20100) {
+                            //弹出loading
+                            var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
+                            setTimeout(function () {
+                                top.layer.close(index);
+                                top.layer.msg("添加成功", {icon: 1});
+                                layer.closeAll("iframe");
+                                //刷新父页面
+                                parent.location.reload();
+                            }, 1000);
+                        }
+                    },
+                    eCallback: function (errorMsg) {
+                        if (errorMsg.responseJSON.errorCode == '40000') {
+                            layer.msg(errorMsg.responseJSON.msg);
+                        }
+                    }
+                }
+
+            }
+            window.base.getData(params);
+            return false;
+        });
+
+    });
+
+    // 封装 GET请求 根据主键id获取该条数据
+    function getBannerById(id, form) {
+        var params = {
+            url: 'banner/item?id=' + id,
+            sCallback: function (successMsg) {
+                //初始化赋值
+                $("input[name='link_url']").val(successMsg.data.link_url);
+                $("input[name='order_id']").val(successMsg.data.order_id);
+                $('#img').attr('src', successMsg.data.img_url);
+                $('#img').attr({width: '375', height: '200'});
+                $('#upload-thumb').append('<input type="hidden" name="img_id" value="' + successMsg.data.img + '">');
+                form.render();//需要渲染一下
+            },
+            eCallback: function (errorMsg) {
+                layer.msg('您请求的信息不存在!', {icon: 2});
+            }
+        };
+        window.base.getData(params);
+    }
+
+
+    function getProvinceList(form) {
+        var params = {
+            url: 'province/list',
+            sCallback: function (successMsg) {
+                $.each(successMsg, function (i, item) {
+                    $("#province").append($("<option/>").text(item.name).attr("value", item.province_id));
+                });
+                form.render('select');
+            },
+            eCallback: function (errorMsg) {
+
+            }
+        };
+        window.base.getData(params);
+    }
+
+    function getCityList(pid, form) {
+        var params = {
+            url: 'city/list?pid=' + pid,
+            sCallback: function (successMsg) {
+                console.log(successMsg);
+                $("#city").empty();
+                $.each(successMsg, function (i, item) {
+                    $("#city").append($("<option/>").text(item.name).attr("value", item.city_id));
+                });
+                form.render('select');
+            },
+            eCallback: function (errorMsg) {
+
+            }
+        };
+        window.base.getData(params);
+    }
+    function getAreaList(cid, form) {
+        var params = {
+            url: 'area/list?cid=' + cid,
+            sCallback: function (successMsg) {
+                console.log(successMsg);
+                $("#area").empty();
+                $.each(successMsg, function (i, item) {
+                    $("#area").append($("<option/>").text(item.name).attr("value", item._id));
+                });
+                form.render('select');
+            },
+            eCallback: function (errorMsg) {
+
+            }
+        };
+        window.base.getData(params);
+    }
+
+</script>
+
+</body>
+</html>

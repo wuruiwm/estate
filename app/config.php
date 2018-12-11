@@ -259,20 +259,20 @@ return [
     // +----------------------------------------------------------------------
     'captcha'  => [
         // 验证码字符集合
-        'codeSet'  => '2345678abcdefhijkmnpqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY', 
+        'codeSet'  => '2345678abcdefhijkmnpqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY',
         // 验证码字体大小(px)
-        'fontSize' => 28, 
+        'fontSize' => 28,
         // 是否画混淆曲线
-        'useCurve' => false, 
+        'useCurve' => false,
         //是否添加杂点
         'useNoise' => true,
          // 验证码图片高度
         'imageH'   => 0,
         // 验证码图片宽度
-        'imageW'   => 0, 
+        'imageW'   => 0,
         // 验证码位数
-        'length'   => 4, 
-        // 验证成功后是否重置        
+        'length'   => 4,
+        // 验证成功后是否重置
         'reset'    => true,
         //过期时间S
         'expire'   => 300,

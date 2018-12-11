@@ -12,9 +12,6 @@ namespace app\api\model;
 class User extends BaseModel
 {
 
-
-
-
     // 根据登录手机号+密码 查询该用户--web
     public static function getUserByMobileAndPwd($mobile,$password){
         $result = self::where([

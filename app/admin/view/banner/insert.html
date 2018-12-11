@@ -14,12 +14,12 @@
 <form class="layui-form" id="" lay-filter="formBanner">
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">广告位置</label>
+            <label class="layui-form-label">图片位置</label>
             <div class="layui-input-inline">
                 <select name="type_id">
-                    <option value="">请选择广告位置</option>
-                    <option value="1">借款产品页面</option>
-                    <option value="2">信用卡页面</option>
+                    <option value="">请选择</option>
+                    <option value="1">首页轮播图</option>
+                    <!--<option value="2">信用卡页面</option>-->
                 </select>
             </div>
         </div>
@@ -59,10 +59,6 @@
         </div>
     </div>
 </form>
-
-<script src="__PUBLIC__/layui/layui.js"></script>
-<script src="__PUBLIC__/jquery/jquery.min.js"></script>
-<script src="__COMMON__/common.js"></script>
 {include file="public/foot"}
 <script>
     layui.use(['upload', 'form'], function () {
@@ -155,7 +151,7 @@
                         }
                     },
                     eCallback: function (errorMsg) {
-                        if (errorMsg.responseJSON.errorCode == 40000) {
+                        if (errorMsg.responseJSON.errorCode == '40000') {
                             layer.msg(errorMsg.responseJSON.msg);
                         }
                     }

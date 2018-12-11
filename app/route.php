@@ -1,42 +1,36 @@
 <?php
-// +----------------------------------------------------------------------
-// | Tplay [ WE ONLY DO WHAT IS NECESSARY ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2017 http://tplay.pengyichen.com All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: 听雨 < 389625819@qq.com >
-// +----------------------------------------------------------------------
 
 use think\Route;
 
-// ======================================================后台接口
-Route::get('one', 'admin/Test/one');
+/**
+ * 后台接口
+ */
 
-// 首页广告
 Route::post('admin_api/banner/insert', 'admin/Banner/add');
 Route::get('admin_api/banner/select', 'admin/Banner/getBannerAll');
 Route::post('admin_api/banner/update', 'admin/Banner/updateById');
 Route::get('admin_api/banner/item', 'admin/Banner/getItemById');
 Route::any('admin_api/banner/remove', 'admin/Banner/delById');
+Route::get('admin_api/province/list','admin/City/getProvinceList');
+Route::get('admin_api/city/list','admin/City/getCityByPid');
+Route::get('admin_api/area/list','admin/City/getAreaByCid');
+Route::post('admin_api/house/new','admin/House/addNewHouse');
+Route::get('admin_api/house/list','admin/House/getHouseList');
+Route::get('admin_api/brokerage/list', 'admin/Brokerage/getBrokerageList');
+Route::get('admin_api/brokerage/list_copy', 'admin/Brokerage/getList');
+Route::post('admin_api/brokerage/new', 'admin/Brokerage/addNewBrokerage');
+Route::post('admin_api/brokerage/update', 'admin/Brokerage/updateById');
+Route::any('admin_api/brokerage/remove', 'admin/Brokerage/delById');
 
-// =========================================前台接口
+/**
+ * 客户端接口
+ */
 
-// 获取轮播图
 Route::get('api/:version/banner/select', 'api/:version.Banner/getBanner');
-
-// 用户有关
-// 注册获取验证码
 Route::post('api/:version/register/code', 'api/:version.Register/getRandom');
-// 注册
 Route::post('api/:version/register/mobile', 'api/:version.Register/mobileReg');
-// 登录
 Route::post('api/:version/user/login', 'api/:version.WebToken/getWebToken');
-
-// 忘记密码 获取短信验证码
 Route::post('api/:version/password/code', 'api/:version.Register/getCode');
-// 提交重置密码
 Route::post('api/:version/password/update', 'api/:version.Register/password');
 // 获取用户信息
 Route::get('api/:version/user/info', 'api/:version.User/getUserById');

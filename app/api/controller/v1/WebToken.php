@@ -16,19 +16,19 @@ use app\lib\validate\WebTokenCheck;
 class WebToken extends BaseController
 {
     /**
-     * @apiDefine  web 网页
+     * @apiDefine  web 客户端接口
      */
 
     /**
+     * @api {post} user/login 用户登录
      * @apiGroup web
-     * @api {post} token/login 登录
+     * @apiVersion 0.1.0
      * @apiDescription  根据账号和密码进行登录,获取token值
-     * @apiSampleRequest http://myapi.io/api/v1/token/login
-     * @apiParam {String} username (必填)-登录账号
-     * @apiParam {String} password (必填)-登录密码
-     * @apiParam {int}  expires(可选，默认2小时)-记住密码 缓存时间
+     * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/user/login
+     * @apiParam {String} mobile 手机号
+     * @apiParam {String} password 密码
+     * @apiParam {int}  [expires] 默认不填2小时自动过期
      * @apiName 账号密码登录
-     * @apiVersion 1.0.0
      */
     public function getWebToken($mobile='',$password='',$expires=''){
         (new WebTokenCheck())->goCheck();

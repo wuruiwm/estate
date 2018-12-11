@@ -17,8 +17,7 @@ class Banner extends BaseModel
 
     public function getTypeIdAttr($value){
         $data=[
-            '1'=>'借款产品页面',
-            '2'=>'信用卡页面'
+            '1'=>'首页轮播图'
         ];
         return $data[$value];
     }

@@ -1,4 +1,4 @@
 runtime/*
 *.log
 .idea/*
-vendor/*
+database.php

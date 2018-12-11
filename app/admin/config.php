@@ -18,4 +18,5 @@ return [
 		'__JS__'       => '/static/admin/js',
 		'__COMMON__'   => '/static/public/common'
 	],
+
 ];

@@ -18,6 +18,6 @@ class AddBanner extends BaseValidate
 
     protected $message = [
         'img_id' =>'请上传图片',
-        'type_id'=>'请选择广告位置'
+        'type_id'=>'请选择图片位置'
     ];
 }

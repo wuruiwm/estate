@@ -13,7 +13,18 @@ use app\lib\validate\IDMustBePositiveInt;
 
 class Banner extends BaseController
 {
-    // 获取首页轮播图
+    /**
+     * @apiDefine  web 客户端
+     */
+
+    /**
+     * @api {get} user/getBanner 获取首页轮播图
+     * @apiGroup web
+     * @apiVersion 0.1.0
+     * @apiDescription  根据广告位置获取相应轮播图
+     * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/banner/select
+     * @apiParam {int} id 广告位置 1
+     */
     public function getBanner($id){
         (new IDMustBePositiveInt())->goCheck();
         $result = ModelBanner::getBanner($id);

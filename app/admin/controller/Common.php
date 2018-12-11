@@ -44,7 +44,7 @@ class Common extends Controller
             $file = $this->request->file('file');
         }else{
             $res['code']=1;
-            $res['msg']='没有上传文件';
+            $res['msg']='请联系开发者:758246061@qq.com';
             return json($res);
         }
         $module = $this->request->has('module') ? $this->request->param('module') : $module;//模块
@@ -80,12 +80,21 @@ class Common extends Controller
     }
 
     /**
-     * 登录
-     * @return [type] [description]
+     * @apiDefine  admin 后台管理接口
+     */
+
+    /**
+     * @api {post} admin/common/login 管理员登录
+     * @apiGroup admin
+     * @apiVersion 0.1.0
+     * @apiDescription  供后台开发者调用 正确接口地址：http://estate.dingdingmaoer.cn/admin/common/login
+     * @apiParam {String} name 账号
+     * @apiParam {String} password 密码
+     * @apiName 账号密码登录
      */
     public function login()
     {
-        if(Session::has('admin') == false) { 
+        if(Session::has('admin') == false) {
             if($this->request->isPost()) {
                 //是登录操作
                 $post = $this->request->post();
@@ -93,7 +102,7 @@ class Common extends Controller
                 $validate = new \think\Validate([
                     ['name', 'require|alphaDash', '用户名不能为空|用户名格式只能是字母、数字、——或_'],
                     ['password', 'require', '密码不能为空'],
-                    ['captcha','require|captcha','验证码不能为空|验证码不正确'],
+//                    ['captcha','require|captcha','验证码不能为空|验证码不正确'],
                 ]);
                 //验证部分数据合法性
                 if (!$validate->check($post)) {
@@ -140,7 +149,7 @@ class Common extends Controller
             }
         } else {
             $this->redirect('admin/index/index');
-        }   
+        }
     }
 
     /**
