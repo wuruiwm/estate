@@ -381,7 +381,6 @@
             getBannerById(id, form);
         }
         //上传封面图
-        var data = [];
         var uploadInst = upload.render({
             elem: '#thumb' //绑定元素
             , url: "{:url('common/upload')}" //上传接口
@@ -390,8 +389,7 @@
                 if (res.code == 2) {
                     $('#img').attr('src', res.src);
                     $('#img').css({"width": '375', "height": '200'});
-                    $('#upload-thumb').append('<input id="img_id" value="' + res.id + '">');
-                    dataimgId = res.id;
+                    $('#thumb').append('<input type="hidden" name="img_id" value="' + res.id + '">');
                 } else {
                     layer.msg(res.msg);
                 }
@@ -440,16 +438,12 @@
                 }
                 // 新增
             } else {
-                data.img_id = $("#img_id").val();
-                console.log(data);
-                console.log(data.field);
-
-                return false;
                 var params = {
                     url: 'house/new',
                     type: 'post',
                     data: data.field,
                     sCallback: function (successMsg) {
+                        console.log(successMsg);
                         if (successMsg.msg == '缺少权限') {
                             layer.msg(successMsg.msg);
                         }
@@ -487,7 +481,7 @@
                 //初始化赋值
                 $.each(successMsg,function(key,value){  //遍历键值对
 
-                    var child_node = "<input type='checkbox' name='like' value='"+value.id+"'title='"+value.house_area+'㎡ 佣金'+value.price+"元'>";
+                    var child_node = "<input type='checkbox' name='like[]' value='"+value.id+"'title='"+value.house_area+'㎡ 佣金'+value.price+"元'>";
                     $("#parent_node").append(child_node);
                 })
 
