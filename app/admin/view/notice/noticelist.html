@@ -43,7 +43,6 @@
 		<tr>
 			<th>ID</th>
 			<th>标题</th>
-			<th>内容</th>
 			<th>
 				操作
 			</th>
@@ -52,7 +51,6 @@
 		<tr id="tr{$v.id}">
 			<td>{$v.id}</td>
 			<td>{$v.title}</td>
-			<td>{$v.content}</td>
 			<td>				
 				<a href="{:url('admin/Notice/noticeEdit',['id'=>$v.id])}" class="btn btn-success btn-xs">编辑</a>
 				<a href="{:url('admin/Notice/noticeDel')}" class="btn btn-warning btn-xs shanchu">删除</a>

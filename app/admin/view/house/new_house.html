@@ -391,6 +391,7 @@
                     $('#img').attr('src', res.src);
                     $('#img').css({"width": '375', "height": '200'});
                     $('#upload-thumb').append('<input id="img_id" value="' + res.id + '">');
+                    dataimgId = res.id;
                 } else {
                     layer.msg(res.msg);
                 }
