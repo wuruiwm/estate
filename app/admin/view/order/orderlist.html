@@ -7,8 +7,48 @@
 	<link rel="stylesheet" href="">
 	<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap.min.css">
 </head>
+	<style>
+		#head {
+			background: #f2f2f2;
+			height: 80px;
+			margin: 15px 20px 15px 20px;
+		}
+		#button {
+			margin-top: 15px;
+			margin-left: 20px; 
+			background: #1E9FFF;
+		}
+		.table {
+			margin: 15px 20px 0px 20px;
+		}
+		.pagination {
+			margin: 0px 20px 0px 20px;
+		}
+		.shanchu {
+			display: none;
+		}
+	</style>
 <body>
-	
+		<table class="table table-bordered">
+		<tr>
+			<th>ID</th>
+			<th>标题</th>
+			<th>
+				操作
+			</th>
+		</tr>
+		{volist name="list" id="v"}
+		<tr id="tr{$v.id}">
+			<td>{$v.id}</td>
+			<td>{$v.title}</td>
+			<td>				
+				<a href="{:url('admin/Notice/noticeEdit',['id'=>$v.id])}" class="btn btn-success btn-xs">编辑</a>
+				<a href="{:url('admin/Notice/noticeDel')}" class="btn btn-warning btn-xs shanchu">删除</a>
+				<button class="btn btn-warning btn-xs" url="{$v.id}" data-toggle="modal" data-target="#delcfmModel" onclick="del({$v.id});">删除</button>
+			</td>
+		</tr>
+		{/volist}
+	</table>
 </body>
 <script src="__PUBLIC__/bootstrap/js/jquery.js"></script>
 <script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>

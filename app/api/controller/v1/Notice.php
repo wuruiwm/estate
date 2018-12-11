@@ -12,12 +12,9 @@ class Notice extends Controller{
      */
 	public function noticeUrl(){
 		$notice = model('Notice');
-		$select = $notice->field(['id','title'])->order('create_time desc')->limit(0,5)->select();
-		$data = [];
-		foreach ($select as $v) {
-			$data[] =$v->getData();
-		}
-		return json_encode($data);
+		$find = $notice->field(['id','title'])->order('create_time desc')->find();
+		$data = $find->getData();
+		return $data;
 	}
     /**
      * @api {get} notice/content 获取公告内容
@@ -36,7 +33,7 @@ class Notice extends Controller{
 		$data = $find->getData();
 		$data['create_time'] = date('Y-n-j G:i:s',$data['create_time']);
 		$data['update_time'] = date('Y-n-j G:i:s',$data['update_time']);
-		return json_encode($data);
+		return $data;
 	}
 }
 
