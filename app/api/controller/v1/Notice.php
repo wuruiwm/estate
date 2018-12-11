@@ -12,8 +12,11 @@ class Notice extends Controller{
      */
 	public function noticeUrl(){
 		$notice = model('Notice');
-		$find = $notice->field(['id','title'])->order('create_time desc')->find();
-		$data = $find->getData();
+		$select = $notice->field(['id','title'])->order('create_time desc')->limit(0,5)->select();
+		$data = [];
+		foreach ($select as $v) {
+			$data[] =$v->getData();
+		}
 		return json_encode($data);
 	}
     /**
