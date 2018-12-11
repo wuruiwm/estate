@@ -170,7 +170,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">占地面积<span style="color: #FF5722;">*</span></label>
             <div class="layui-input-inline">
-                <input type="text" name="floor_area"  autocomplete="off" class="layui-input">
+                <input type="text" name="floor_area" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">㎡</div>
         </div>
@@ -224,7 +224,7 @@
             <div class="tags-wrap">
                 <div class="tags" id="tags1"></div>
                 <div class="tags-input">
-                    <input type="text" class="layui-input input-add" placeholder="添加类型">
+                    <input type="text" id="decoration_type" class="layui-input input-add" placeholder="添加类型">
                 </div>
             </div>
             <div class="layui-form-mid layui-word-aux">点击"添加类型"输入完成后,按回车键即可,最多支持12种类型</div>
@@ -284,14 +284,14 @@
 
         var tag1 = statusTags.render({
             el: "#tags1",
-            template: '<span class="layui-badge layui-bg-gray">@title <span class="tagsremove @remove"><a href="javascript:;" style="color: #FF5722">x</a></span></span>',
+            template: '<span class="layui-badge layui-bg-gray idata">@title <span class="tagsremove @remove"><a href="javascript:;" style="color: #FF5722">x</a></span></span>',
             data: [
                 '毛坯',
                 '简约',
                 '豪华装'
             ],
-            title: 0,
         });
+
         $('.input-add').on('keydown', function (e) {
             if (e.keyCode === 13) {
                 var value = $(this).val();
@@ -301,7 +301,8 @@
             }
         });
 
-        //日期
+
+        // 日期
         laydate.render({
             elem: '#date'
         });
@@ -309,9 +310,7 @@
             elem: '#date1'
         });
 
-        /**
-         *省市区联动
-         */
+        // 省市区联动
         getProvinceList(form);
         form.on('select(province)', function (data) {
             var pid = data.value;
@@ -323,9 +322,7 @@
             getAreaList(cid, form);
         });
 
-        /**
-         * 多图上传
-         */
+        // 多图上传
         var data_imgs = [];
         upload.render({
             elem: '#test2'
@@ -348,12 +345,9 @@
                     '<div class="info">' + '图片' + '</div>' +
                     '</div>'
                 );
-                var id = res.id;
-                data_imgs.push(id)
-                console.log(data_imgs);
+                data_imgs.push(res.id);
             }
         });
-
         $(document).on("mouseenter mouseleave", ".file-iteme", function (event) {
             if (event.type === "mouseenter") {
                 //鼠标悬浮
@@ -403,12 +397,11 @@
             }
         });
 
-        // 获取id参数
         var id = window.base.getQueryString('id');
-        //监听提交
+        // 监听提交
         form.on('submit(submit)', function (data) {
-            // 发送post请求 修改
             if (id > 0) {
+                // 修改数据
                 console.log(data.field);
                 var params = {
                     url: 'banner/update?id=' + id,
@@ -419,13 +412,11 @@
                             layer.msg(successMsg.msg);
                         }
                         if (successMsg.errorCode == 20100) {
-                            //弹出loading
                             var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
                             setTimeout(function () {
                                 top.layer.close(index);
                                 top.layer.msg("修改成功");
                                 layer.closeAll("iframe");
-                                //刷新父页面
                                 parent.location.reload();
                             }, 1000);
                         }
@@ -436,8 +427,18 @@
                         }
                     }
                 }
-                // 新增
+                // 新增数据
             } else {
+                // 获取装修类型
+                var el = $(".idata");
+                var decoration_type= '';
+                for(var i=0;i<el.length;i++){
+                    var str = el[i].innerText;
+                    console.log($.trim(str.substring(0,str.length-1)));
+                    decoration_type += $.trim(str.substring(0,str.length-1)) + ',';
+                }
+                console.log(decoration_type); return;
+                data.field.imgIds = data_imgs.join(",");
                 var params = {
                     url: 'house/new',
                     type: 'post',
@@ -448,13 +449,11 @@
                             layer.msg(successMsg.msg);
                         }
                         if (successMsg.errorCode == 20100) {
-                            //弹出loading
                             var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
                             setTimeout(function () {
                                 top.layer.close(index);
                                 top.layer.msg("添加成功", {icon: 1});
                                 layer.closeAll("iframe");
-                                //刷新父页面
                                 parent.location.reload();
                             }, 1000);
                         }
@@ -465,7 +464,6 @@
                         }
                     }
                 }
-
             }
             window.base.getData(params);
             return false;
@@ -479,9 +477,9 @@
             url: 'brokerage/list_copy',
             sCallback: function (successMsg) {
                 //初始化赋值
-                $.each(successMsg,function(key,value){  //遍历键值对
+                $.each(successMsg, function (key, value) {  //遍历键值对
 
-                    var child_node = "<input type='checkbox' name='like[]' value='"+value.id+"'title='"+value.house_area+'㎡ 佣金'+value.price+"元'>";
+                    var child_node = "<input type='checkbox' name='like[]' value='" + value.id + "'title='" + value.house_area + '㎡ 佣金' + value.price + "元'>";
                     $("#parent_node").append(child_node);
                 })
 
@@ -489,7 +487,7 @@
                 form.render();//需要渲染一下
             },
             eCallback: function (errorMsg) {
-                layer.msg('您请求的信息不存在!', {icon: 2});
+                layer.msg('佣金方案数据缺损!', {icon: 2});
             }
         };
         window.base.getData(params);
@@ -529,6 +527,7 @@
         };
         window.base.getData(params);
     }
+
     function getAreaList(cid, form) {
         var params = {
             url: 'area/list?cid=' + cid,

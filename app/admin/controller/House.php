@@ -37,15 +37,17 @@ class House extends Permissions
 //        (new AddNewHouse())->goCheck();
         $post = input('post.');
         $post['init_status']=1;
-        $brokerage_plan = json_encode($post['like']);
+        // $brokerage_plan = json_encode($post['like']);
+        /*// 佣金方案
         $brokerage_plan_str = '';
-        foreach($brokerage_plan as $key=>$value){
+        foreach($post['like'] as $key=>$value){
             $brokerage_plan_str .=$value.',';
         }
-        // 佣金方案
-        $post['brokerage_plan_str'] = substr($brokerage_plan_str,0,strlen($brokerage_plan_str)-1);
+        $post['brokerage_plan'] = substr($brokerage_plan_str,0,strlen($brokerage_plan_str)-1);*/
 
-        return $post;
+        // 户型图
+        return json($post);
+
         $model = new HouseSource();
         $result = $model->allowField(true)->save($post);
         if($result){
