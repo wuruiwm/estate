@@ -44,8 +44,11 @@ Route::post('api/:version/user/update_mobile', 'api/:version.User/updateMobile')
 // 修改密码
 Route::post('api/:version/user/update_password', 'api/:version.User/updatePassword');
 //获取创建时间最新的公告
-Route::any('api/:version/notice/find', 'api/:version.Notice/noticeUrl');
+Route::get('api/:version/notice/find', 'api/:version.Notice/noticeUrl');
 //根据id获取公告内容
 Route::get('api/:version/notice/content', 'api/:version.Notice/noticeContent');
+<<<<<<< HEAD
 //报备客户信息提交
 Route::any('api/:version/order/add', 'api/:version.Order/orderadd');
+=======
+>>>>>>> 6ecf92eee2e4b4d3dc2f47ef2b338c3ad3329cbe
