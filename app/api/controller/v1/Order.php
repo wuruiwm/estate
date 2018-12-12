@@ -15,40 +15,40 @@ class Order extends Controller{
 		$order = model('Order');
 		$post = input('post.');
 		if (!is_string($post['name'])) {
-			return ['msg'=>'姓名不合法'];
+			return ['msg'=>'请输入正确的姓名'];
 		}
-		if(!is_numeric($post['number'])){
-			return ['msg'=>'电话不合法'];
+		$search = '/^1[34578]\d{9}$/';
+		$bool = preg_match($search,$post['number']);
+		//echo $bool; exit();
+		if ($bool == 0) {
+			return ['msg'=>'请输入正确的手机号'];
 		}
 		if(!(($post['gender'] == 1)||($post['gender'] == 2))){
-			return ['msg'=>'性别不合法'];
+			return ['msg'=>'请输入正确的性别'];
 		}
 		$post['date'] = strtotime($post['date']);
 		if (!is_numeric($post['date'])) {
-			return ['msg'=>'带看时间不合法']; 
+			return ['msg'=>'请输入正确的带看时间']; 
 		}
 		if (!is_string($post['content'])) {
-			return ['msg'=>'带看意向不合法'];
+			return ['msg'=>'请输入正确的购房意向'];
 		}
 		$post['is_new'] = 1;
 		$user_id = Token::getCurrentTokenUserId();
 		$user = model('User');
-		$res = $user->field('id')->select();
-		foreach ($res as $v) {
-			//return $v->getData();
-			if ($v->getData()['id'] == $user_id) {
-				$post['user_id'] = $user_id;
-				$data = [];
-				$data[] = $post;
-				$res = $order->saveAll($data);
-				if ($res) {
-					return ['msg'=>'报备成功'];
-				}else {
-					return ['msg'=>'报备失败'];
-				}
-			}
+		$res = $user->where('id='.$user_id)->find();
+		if (!$res) {
+			return ['msg'=>'登陆已过期,或用户id不正确'];
 		}
-		return ['msg'=>'id不合法'];
+		$post['user_id'] = $user_id;
+		$data = [];
+		$data[] = $post;
+		$res = $order->saveAll($data);
+		if ($res) {
+			return ['msg'=>'报备成功'];
+		}else {
+			return ['msg'=>'报备失败'];
+		}
 	}
 }
 
