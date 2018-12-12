@@ -28,7 +28,7 @@
 			margin-right: 40px;
 		}
 		.neilian {
-			width: 100px;
+			width: 130px;
 			display: inline;
 		}
 	</style>
@@ -36,21 +36,27 @@
 	<div id="head">
 		<form action="" class=".form-inline"></form>
 		<a href="{:url('admin/Notice/noticeAdd')}" class="btn btn-warning btn-lg" type="submit" id="button">批量删除</a>
-		<span>搜索名字</span>
-		<input type="text">
+  		<div class="form-group neilian">
+    		<label for="exampleInputName2" class="neilian">名字搜索</label>
+    		<input type="text" class="form-control neilian" id="exampleInputName2" placeholder="请输入姓名">
+  		</div>
 		<select name="baobei" class="form-control neilian">
+			<option value="">请选择类别</option>
 			<option value="0">已报备</option>
 			<option value="1">未报备</option>
 		</select>
 		<select name="daofang" class="form-control neilian">
+			<option value="">请选择类别</option>
 			<option value="0">已到访</option>
 			<option value="1">未到访</option>
 		</select>
 		<select name="chengjiao" class="form-control neilian">
+			<option value="">请选择类别</option>
 			<option value="0">已成交</option>
 			<option value="1">未成交</option>
 		</select>
 		<select name="tie" class="form-control neilian">
+			<option value="">请选择类别</option>
 			<option value="0">已提额</option>
 			<option value="1">未提额</option>
 		</select>
@@ -59,31 +65,31 @@
 	<div id="content">
 	<table class="table table-bordered">
 		<tr>
-			<th>ID</th>
-			<th>姓名</th>
-			<th>号码</th>
-			<th>性别</th>
-			<th>预计带看时间</th>
-			<th>购房意向</th>
-			<th>操作</th>
-			<th>是否报备</th>
-			<th>是否到访</th>
-			<th>是否成交</th>
-			<th>是否提额</th>
+			<td align="center"><strong>ID</strong></td>
+			<td align="center"><strong>姓名</strong></td>
+			<td align="center"><strong>号码</strong></td>
+			<td align="center"><strong>性别</strong></td>
+			<td align="center"><strong>预计带看时间</strong></td>
+			<td align="center"><strong>购房意向</strong></td>
+			<td align="center"><strong>操作</strong></td>
+			<td align="center"><strong>是否报备</strong></td>
+			<td align="center"><strong>是否到访</strong></td>
+			<td align="center"><strong>是否成交</strong></td>
+			<td align="center"><strong>是否提额</strong></td>
 		</tr>
 		{volist name="list" id="v"}
 		<tr id="tr{$v.id}">
-			<td>{$v.id}</td>
-			<td>{$v.name}</td>
-			<td>{$v.number}</td>
-			<td>{$v.gender}</td>
-			<td>{$v.date}</td>
-			<td>{$v.content}</td>
-			<td>{$v.is_new}</td>
-			<td>{$v.is_visit}</td>
-			<td>{$v.is_deal}</td>
-			<td>{$v.is_pay}</td>
-			<td>				
+			<td align="center">{$v.id}</td>
+			<td align="center">{$v.name}</td>
+			<td align="center">{$v.number}</td>
+			<td align="center">{$v.gender}</td>
+			<td align="center">{$v.date}</td>
+			<td align="center">{$v.content}</td>
+			<td align="center">{$v.is_new}</td>
+			<td align="center">{$v.is_visit}</td>
+			<td align="center">{$v.is_deal}</td>
+			<td align="center">{$v.is_pay}</td>
+			<td align="center">
 				<a href="{:url('admin/Notice/orderEdit',['id'=>$v.id])}" class="btn btn-success btn-xs">编辑</a>
 				<button class="btn btn-warning btn-xs" url="{$v.id}" data-toggle="modal" data-target="#delcfmModel" onclick="del({$v.id});">删除</button>
 			</td>
