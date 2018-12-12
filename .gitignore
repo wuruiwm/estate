@@ -1,5 +1,5 @@
 runtime/*
 *.log
 .idea/*
-app/database.php
-public/.htaccess
+/app/database.php
+/public/.htaccess
