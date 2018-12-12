@@ -52,10 +52,10 @@ class House extends Permissions
     }
 
     /**
-     * 获取房源
+     * 后台 获取所有房源
      */
-    public function getHouseList($page = '', $limit = ''){
-        return HouseSource::getList($page-1, $limit);
+    public function getHouseList($page = '', $limit = '',$action=''){
+        return HouseSource::getList($page-1, $limit,$action);
     }
 
 }
