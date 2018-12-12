@@ -116,6 +116,54 @@
         "url": "http://estate.dingdingmaoer.cn/api/v1/order/add"
       }
     ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "str",
+            "optional": false,
+            "field": "name",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "number",
+            "description": "<p>手机号码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "gender",
+            "description": "<p>1男2女</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "str",
+            "optional": false,
+            "field": "date",
+            "description": "<p>预计带看时间，例2018-11-11</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "str",
+            "optional": false,
+            "field": "content",
+            "description": "<p>购房意向</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "str",
+            "optional": false,
+            "field": "token",
+            "description": "<p>用来获取用户id的token</p>"
+          }
+        ]
+      }
+    },
     "filename": "app/api/controller/v1/Order.php",
     "groupTitle": "客户端接口",
     "name": "PostOrderAdd"
