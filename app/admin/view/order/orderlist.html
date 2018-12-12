@@ -24,26 +24,37 @@
 		.pagination {
 			margin: 0px 20px 0px 20px;
 		}
-		.shanchu {
-			display: none;
-		}
+
 	</style>
 <body>
 		<table class="table table-bordered">
 		<tr>
 			<th>ID</th>
-			<th>标题</th>
-			<th>
-				操作
-			</th>
+			<th>姓名</th>
+			<th>号码</th>
+			<th>性别</th>
+			<th>预计带看时间</th>
+			<th>购房意向</th>
+			<th>操作</th>
+			<th>是否报备</th>
+			<th>是否到访</th>
+			<th>是否成交</th>
+			<th>是否提额</th>
 		</tr>
 		{volist name="list" id="v"}
 		<tr id="tr{$v.id}">
 			<td>{$v.id}</td>
-			<td>{$v.title}</td>
+			<td>张三</td>
+			<td>16666666666</td>
+			<td>性别</td>
+			<td>预计带看时间</td>
+			<td>购房意向</td>
+			<td>已报备</td>
+			<td>未到访</td>
+			<td>未成交</td>
+			<td>未提额</td>
 			<td>				
 				<a href="{:url('admin/Notice/noticeEdit',['id'=>$v.id])}" class="btn btn-success btn-xs">编辑</a>
-				<a href="{:url('admin/Notice/noticeDel')}" class="btn btn-warning btn-xs shanchu">删除</a>
 				<button class="btn btn-warning btn-xs" url="{$v.id}" data-toggle="modal" data-target="#delcfmModel" onclick="del({$v.id});">删除</button>
 			</td>
 		</tr>
@@ -53,4 +64,26 @@
 <script src="__PUBLIC__/bootstrap/js/jquery.js"></script>
 <script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
 <script src="__PUBLIC__/layui/layer.js"></script>
+<script>
+function del(can){
+	//弹出窗口
+	layer.confirm('真的删除行么', function(index){
+    //关闭窗口
+    layer.close(index);
+    //var url = $('.shanchu').attr('href');
+    //拼接get访问的的url
+    var url = "{:url('admin/Notice/noticeDel')}" +'?id='+can;
+    //console.log(url);
+    //发送get请求删除行，判断返回值是否为成功，成功则remove删除那一行的标签
+    $.get(url,function(res){
+    	var tr = '#tr'+can;
+    	if (res == '删除成功') {
+    		$(tr).remove();
+    	}
+    	layer.msg(res);
+    //console.log(res);
+    })
+	})
+}
+</script>
 </html>

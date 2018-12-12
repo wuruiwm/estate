@@ -4,7 +4,7 @@ use think\Controller;
 
 class Notice extends Controller{
     /**
-     * @api notice/find 获取首页公告标题
+     * @api {get} notice/find 获取首页公告标题
      * @apiGroup web
      * @apiVersion 0.1.0
      * @apiDescription  获取首页公告标题
