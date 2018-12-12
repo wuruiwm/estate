@@ -14,7 +14,7 @@ namespace app\admin\model;
 
 class HouseSource extends BaseModel
 {
-    public function getCoverHeadImgAttr($value){
+    public function getHeadImgAttr($value){
         $img_url = Attachment::where('id',$value)->column('filepath');
         $http = http_type();
         if($img_url){
@@ -22,7 +22,7 @@ class HouseSource extends BaseModel
         }
     }
 
-    public function getRoomMapAttr($value){
+    /*public function getRoomMapAttr($value){
         $http = http_type();
         $room_map =  explode(',',$value);
         $data= [];
@@ -31,7 +31,7 @@ class HouseSource extends BaseModel
             $data[$key]['imgUrl']=$http.Attachment::where('id',$value)->column('filepath')[0];
         }
         return $data;
-    }
+    }*/
 
     public static function getList($page, $limit){
         $number = $page * $limit;

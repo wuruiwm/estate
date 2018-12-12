@@ -113,7 +113,7 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">描述<span style="color: #FF5722;">*</span></label>
+        <label class="layui-form-label">简介<span style="color: #FF5722;">*</span></label>
         <div class="layui-input-block">
             <input type="text" name="desc" placeholder="请输入简介" autocomplete="off"
                    class="layui-input">
@@ -134,9 +134,23 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
+            <label class="layui-form-label">头部轮播图</label>
+            <div class="layui-input-block layui-upload">
+                <button type="button" class="layui-btn" id="test2">点击上传</button>
+                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;width: 88%">
+                    预览图：
+                    <div class="layui-upload-list uploader-list" style="overflow: auto;" id="uploader-list">
+
+                    </div>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
             <label class="layui-form-label">开盘时间<span style="color: #FF5722;">*</span></label>
             <div class="layui-input-block">
-                <input type="text" name="date" id="date1" autocomplete="off" class="layui-input">
+                <input type="text" name="opening_time" id="date1" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
@@ -191,6 +205,21 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label">选择地区</label>
+        <div class="layui-input-inline">
+            <select name="province" lay-filter="province" id="province">
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select name="city" lay-filter="city" id="city">
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select name="area" lay-filter="area" id="area">
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label">房源地址<span style="color: #FF5722;">*</span></label>
         <div class="layui-input-block">
             <input type="text" name="house_address" placeholder="请输入房源地址"
@@ -204,12 +233,12 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">户型图</label>
+            <label class="layui-form-label">详情户型图</label>
             <div class="layui-input-block layui-upload">
-                <button type="button" class="layui-btn" id="test2">点击上传</button>
+                <button type="button" class="layui-btn" id="test1">点击上传</button>
                 <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;width: 88%">
                     预览图：
-                    <div class="layui-upload-list uploader-list" style="overflow: auto;" id="uploader-list">
+                    <div class="layui-upload-list uploader-list" style="overflow: auto;" id="uploader-list1">
 
                     </div>
                 </blockquote>
@@ -231,39 +260,12 @@
         </div>
     </div>
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">选择地区</label>
-        <div class="layui-input-inline">
-            <select name="province" lay-filter="province" id="province">
-            </select>
-        </div>
-        <div class="layui-input-inline">
-            <select name="city" lay-filter="city" id="city">
-            </select>
-        </div>
-        <div class="layui-input-inline">
-            <select name="area" lay-filter="area" id="area">
-            </select>
-        </div>
-    </div>
-    <div class="layui-form-item" pane="">
-        <label class="layui-form-label">开关-开</label>
-        <div class="layui-input-block">
-            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" title="开关">
-        </div>
-    </div>
-    <div class="layui-form-item" pane="">
-        <label class="layui-form-label">单选框</label>
-        <div class="layui-input-block">
-            <input type="radio" name="sex" value="男" title="男" checked="">
-            <input type="radio" name="sex" value="女" title="女">
-            <input type="radio" name="sex" value="禁" title="禁用" disabled="">
-        </div>
-    </div>
+
+
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">文本域</label>
+        <label class="layui-form-label">项目详情内容</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+            <textarea id="detail" name="detail" type="text/plain" style="height: 300px;width: 1024px;"></textarea>
         </div>
     </div>
     <div class="layui-form-item">
@@ -322,8 +324,8 @@
             getAreaList(cid, form);
         });
 
-        // 多图上传
-        var data_imgs = [];
+        // 头部轮播图上传
+        var head_imgs = [];
         upload.render({
             elem: '#test2'
             , url: "{:url('common/upload')}"
@@ -345,7 +347,7 @@
                     '<div class="info">' + '图片' + '</div>' +
                     '</div>'
                 );
-                data_imgs.push(res.id);
+                head_imgs.push(res.id);
             }
         });
         $(document).on("mouseenter mouseleave", ".file-iteme", function (event) {
@@ -362,10 +364,56 @@
         // 删除图片
         $(document).on("click", ".file-iteme .handle", function (event) {
             var s_id = ($(this).context).lastChild.innerHTML;
-            data_imgs.splice($.inArray(s_id, data_imgs), 1);
+            head_imgs.splice($.inArray(s_id, head_imgs), 1);
             $(this).parent().remove();
 
         });
+
+        // 头部轮播图上传
+        var room_maps = [];
+        upload.render({
+            elem: '#test1'
+            , url: "{:url('common/upload')}"
+            , multiple: true
+            , before: function (obj) {
+                layer.msg('图片上传中...', {
+                    icon: 16,
+                    shade: 0.01,
+                    time: 0
+                })
+            }
+            , done: function (res) {
+                layer.close(layer.msg());//关闭上传提示窗口
+                //上传完毕
+                $('#uploader-list1').append(
+                    '<div id="" class="file-iteme">' +
+                    '<div class="handle"><span class="glyphicon glyphicon-trash"><i class="layui-icon layui-icon-delete"></i></span> <span style="display: none">' + res.id + '</span></div>' +
+                    '<img style="width: 100px;height: 100px;" src=' + res.src + '>' +
+                    '<div class="info">' + '图片' + '</div>' +
+                    '</div>'
+                );
+                room_maps.push(res.id);
+            }
+        });
+        $(document).on("mouseenter mouseleave", ".file-iteme", function (event) {
+            if (event.type === "mouseenter") {
+                //鼠标悬浮
+                $(this).children(".info").fadeIn("fast");
+                $(this).children(".handle").fadeIn("fast");
+            } else if (event.type === "mouseleave") {
+                //鼠标离开
+                $(this).children(".info").hide();
+                $(this).children(".handle").hide();
+            }
+        });
+        // 删除图片
+        $(document).on("click", ".file-iteme .handle", function (event) {
+            var s_id = ($(this).context).lastChild.innerHTML;
+            room_maps.splice($.inArray(s_id, room_maps), 1);
+            $(this).parent().remove();
+
+        });
+
 
 
         getBrokerageList(form);
@@ -383,7 +431,7 @@
                 if (res.code == 2) {
                     $('#img').attr('src', res.src);
                     $('#img').css({"width": '375', "height": '200'});
-                    $('#thumb').append('<input type="hidden" name="img_id" value="' + res.id + '">');
+                    $('#thumb').append('<input type="hidden" name="cover_img" value="' + res.id + '">');
                 } else {
                     layer.msg(res.msg);
                 }
@@ -402,7 +450,7 @@
         form.on('submit(submit)', function (data) {
             if (id > 0) {
                 // 修改数据
-                console.log(data.field);
+                // console.log(data.field);
                 var params = {
                     url: 'banner/update?id=' + id,
                     type: 'post',
@@ -434,17 +482,19 @@
                 var decoration_type= '';
                 for(var i=0;i<el.length;i++){
                     var str = el[i].innerText;
-                    console.log($.trim(str.substring(0,str.length-1)));
                     decoration_type += $.trim(str.substring(0,str.length-1)) + ',';
                 }
-                console.log(decoration_type); return;
-                data.field.imgIds = data_imgs.join(",");
+                data.field.decoration_type = decoration_type.substring(0,decoration_type.length-1);
+                data.field.room_map = room_maps.join(",");
+                data.field.head_img = head_imgs.join(",");
+
+
                 var params = {
                     url: 'house/new',
                     type: 'post',
                     data: data.field,
                     sCallback: function (successMsg) {
-                        console.log(successMsg);
+                        // console.log(successMsg);
                         if (successMsg.msg == '缺少权限') {
                             layer.msg(successMsg.msg);
                         }
@@ -479,7 +529,7 @@
                 //初始化赋值
                 $.each(successMsg, function (key, value) {  //遍历键值对
 
-                    var child_node = "<input type='checkbox' name='like[]' value='" + value.id + "'title='" + value.house_area + '㎡ 佣金' + value.price + "元'>";
+                    var child_node = "<input type='checkbox' name='brokerage_plan[]' value='" + value.id + "'title='" + value.house_area + '㎡ 佣金' + value.price + "元'>";
                     $("#parent_node").append(child_node);
                 })
 
@@ -514,7 +564,7 @@
         var params = {
             url: 'city/list?pid=' + pid,
             sCallback: function (successMsg) {
-                console.log(successMsg);
+                // console.log(successMsg);
                 $("#city").empty();
                 $.each(successMsg, function (i, item) {
                     $("#city").append($("<option/>").text(item.name).attr("value", item.city_id));
@@ -532,7 +582,7 @@
         var params = {
             url: 'area/list?cid=' + cid,
             sCallback: function (successMsg) {
-                console.log(successMsg);
+                // console.log(successMsg);
                 $("#area").empty();
                 $.each(successMsg, function (i, item) {
                     $("#area").append($("<option/>").text(item.name).attr("value", item._id));
@@ -548,6 +598,16 @@
 
 
 </script>
-
+<!-- 加载编辑器的容器 -->
+<script id="detail" name="content" type="text/plain"></script>
+<!-- 配置文件 -->
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="__PUBLIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('detail');
+</script>
 </body>
 </html>

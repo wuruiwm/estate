@@ -17,6 +17,7 @@ use app\lib\exception\SuccessMessage;
 use app\lib\validate\AddBrokerage;
 use app\admin\model\Brokerage as ModelBrokerage;
 use app\lib\validate\IDMustBePositiveInt;
+use app\lib\validate\PriceMustBePositiveInt;
 
 class Brokerage extends Permissions
 {
@@ -47,6 +48,9 @@ class Brokerage extends Permissions
         (new IDMustBePositiveInt())->goCheck();
         $model = new ModelBrokerage();
         $post = input('post.');
+        if(isset($post['price'])){
+            (new PriceMustBePositiveInt())->goCheck();
+        }
         $result = $model->allowField(true)->save($post,['id' => $id]);
         if($result){
             throw new SuccessMessage();

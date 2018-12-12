@@ -13,13 +13,13 @@ return [
     // 数据库类型
     'type'            => 'mysql',
     // 服务器地址
-    'hostname'        => '118.24.8.201',
+    'hostname'        => '127.0.0.1',
     // 数据库名
-    'database'        => 'iestate',
+    'database'        => 'estate',
     // 用户名
-    'username'        => 'iestate',
+    'username'        => 'root',
     // 密码
-    'password'        => 'iActing',
+    'password'        => '123456',
     // 端口
     'hostport'        => '3306',
     // 连接dsn
