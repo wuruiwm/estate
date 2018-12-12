@@ -41,11 +41,6 @@ class Order extends Controller{
 		}
 		$post['is_new'] = 1;
 		$user_id = Token::getCurrentTokenUserId();
-		$user = model('User');
-		$res = $user->where('id='.$user_id)->find();
-		if (!$res) {
-			return ['msg'=>'登陆已过期,或用户id不正确'];
-		}
 		$post['user_id'] = $user_id;
 		$data = [];
 		$data[] = $post;
