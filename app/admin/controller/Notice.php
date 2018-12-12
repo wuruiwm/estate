@@ -18,7 +18,6 @@ class Notice extends Permissions{
 		$list = $notice->order('id desc')->paginate(10);
 		//获取分页代码
 		$page = $list->render();
-		//
 		$this->assign('list',$list);
 		$this->assign('page',$page);
 		//$this->assign('data',$data);

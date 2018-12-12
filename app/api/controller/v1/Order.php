@@ -20,7 +20,7 @@ class Order extends Controller{
 		//echo 1;exit();
 		$order = model('Order');
 		$post = input('post.');
-		if (!is_string($post['name'])) {
+		if (!empty($post['name'])) {
 			return ['msg'=>'请输入正确的姓名'];
 		}
 		$search = '/^1[34578]\d{9}$/';
@@ -36,7 +36,7 @@ class Order extends Controller{
 		if (!is_numeric($post['date'])) {
 			return ['msg'=>'请输入正确的带看时间']; 
 		}
-		if (!is_string($post['content'])) {
+		if (!empty($post['content'])) {
 			return ['msg'=>'请输入正确的购房意向'];
 		}
 		$post['is_new'] = 1;

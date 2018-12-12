@@ -24,10 +24,13 @@
 		.pagination {
 			margin: 0px 20px 0px 20px;
 		}
-
+		#content {
+			margin-right: 40px;
+		}
 	</style>
-<body>
-		<table class="table table-bordered">
+<body>	
+	<div id="content">
+	<table class="table table-bordered">
 		<tr>
 			<th>ID</th>
 			<th>姓名</th>
@@ -44,36 +47,35 @@
 		{volist name="list" id="v"}
 		<tr id="tr{$v.id}">
 			<td>{$v.id}</td>
-			<td>张三</td>
-			<td>16666666666</td>
-			<td>性别</td>
-			<td>预计带看时间</td>
-			<td>购房意向</td>
-			<td>已报备</td>
-			<td>未到访</td>
-			<td>未成交</td>
-			<td>未提额</td>
+			<td>{$v.name}</td>
+			<td>{$v.number}</td>
+			<td>{$v.gender}</td>
+			<td>{$v.date}</td>
+			<td>{$v.content}</td>
+			<td>{$v.is_new}</td>
+			<td>{$v.is_visit}</td>
+			<td>{$v.is_deal}</td>
+			<td>{$v.is_pay}</td>
 			<td>				
-				<a href="{:url('admin/Notice/noticeEdit',['id'=>$v.id])}" class="btn btn-success btn-xs">编辑</a>
+				<a href="{:url('admin/Notice/orderEdit',['id'=>$v.id])}" class="btn btn-success btn-xs">编辑</a>
 				<button class="btn btn-warning btn-xs" url="{$v.id}" data-toggle="modal" data-target="#delcfmModel" onclick="del({$v.id});">删除</button>
 			</td>
 		</tr>
 		{/volist}
 	</table>
+	</div>
 </body>
 <script src="__PUBLIC__/bootstrap/js/jquery.js"></script>
 <script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
 <script src="__PUBLIC__/layui/layer.js"></script>
-<script>
+<!-- <script>
 function del(can){
 	//弹出窗口
 	layer.confirm('真的删除行么', function(index){
     //关闭窗口
     layer.close(index);
-    //var url = $('.shanchu').attr('href');
     //拼接get访问的的url
     var url = "{:url('admin/Notice/noticeDel')}" +'?id='+can;
-    //console.log(url);
     //发送get请求删除行，判断返回值是否为成功，成功则remove删除那一行的标签
     $.get(url,function(res){
     	var tr = '#tr'+can;
@@ -81,9 +83,8 @@ function del(can){
     		$(tr).remove();
     	}
     	layer.msg(res);
-    //console.log(res);
     })
 	})
 }
-</script>
+</script> -->
 </html>
