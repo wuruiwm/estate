@@ -15,8 +15,8 @@
 		}
 		#button {
 			margin-top: 15px;
-			margin-left: 20px; 
-			background: #1E9FFF;
+			margin-left: 20px;
+			background: #FF5722; 
 		}
 		.table {
 			margin: 15px 20px 0px 20px;
@@ -27,8 +27,35 @@
 		#content {
 			margin-right: 40px;
 		}
+		.neilian {
+			width: 100px;
+			display: inline;
+		}
 	</style>
 <body>	
+	<div id="head">
+		<form action="" class=".form-inline"></form>
+		<a href="{:url('admin/Notice/noticeAdd')}" class="btn btn-warning btn-lg" type="submit" id="button">批量删除</a>
+		<span>搜索名字</span>
+		<input type="text">
+		<select name="baobei" class="form-control neilian">
+			<option value="0">已报备</option>
+			<option value="1">未报备</option>
+		</select>
+		<select name="daofang" class="form-control neilian">
+			<option value="0">已到访</option>
+			<option value="1">未到访</option>
+		</select>
+		<select name="chengjiao" class="form-control neilian">
+			<option value="0">已成交</option>
+			<option value="1">未成交</option>
+		</select>
+		<select name="tie" class="form-control neilian">
+			<option value="0">已提额</option>
+			<option value="1">未提额</option>
+		</select>
+		<button class="btn btn-info btn-lg">搜索</button>
+	</div>
 	<div id="content">
 	<table class="table table-bordered">
 		<tr>
