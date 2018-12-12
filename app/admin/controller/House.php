@@ -52,7 +52,10 @@ class House extends Permissions
     }
 
     /**
-     * 后台 获取所有房源
+     * @param string $page 当前页
+     * @param string $limit 每页显示
+     * @param string $action 当值为home_list时 为客户端首页调取数据
+     * @return \think\response\Json
      */
     public function getHouseList($page = '', $limit = '',$action=''){
         return HouseSource::getList($page-1, $limit,$action);

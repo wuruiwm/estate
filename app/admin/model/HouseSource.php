@@ -12,6 +12,10 @@
 namespace app\admin\model;
 
 
+use app\common\model\Area;
+use app\common\model\City;
+use app\common\model\Province;
+
 class HouseSource extends BaseModel
 {
     public function getHeadImgAttr($value){
@@ -44,15 +48,46 @@ class HouseSource extends BaseModel
 
     public function getBrokeragePlanAttr($value){
         $brokerage_plan = Brokerage::where('id','in',$value)->select();
-        return $brokerage_plan;
+        //return $brokerage_plan;
+        // 拼接数据
+        if($brokerage_plan){
+            return [
+                'number'=>count($brokerage_plan).'个方案',
+                'price'=>floatval($brokerage_plan[0]['price']),
+                'data'=>$brokerage_plan
+            ];
+        }
+
+    }
+    public function getCoverImgAttr($value){
+        $img_url = Attachment::where('id','in',$value)->value('filepath');
+        $http = http_type();
+        return $http . $img_url;
     }
 
     public function getInitStatusAttr($value){
         return ['新房','二手房'][$value];
     }
 
+    public function getDecorationTypeAttr($value){
+        return explode(',',$value);
+    }
+
+    public function getOpeningTimeAttr($value){
+        return date("Y-m-d",$value);
+    }
+    public function getProvinceAttr($value){
+        return Province::where('province_id',$value)->value('name');
+    }
+    public function getCityAttr($value){
+        return City::where('city_id',$value)->value('name');
+    }
+    public function getAreaAttr($value){
+        return Area::where('_id',$value)->value('name');
+    }
+
     public static function getList($page, $limit,$action){
-        if($action){
+        if($action=='home_list'){
             $field='id,title,cover_img,init_status,house_price,house_address,decoration_type,brokerage_plan';
         }else{
             $field='';
