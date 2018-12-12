@@ -30,17 +30,25 @@ class Order extends Controller{
 		if (!is_string($post['content'])) {
 			return ['msg'=>'带看意向不合法'];
 		}
-		$user_id = Token::getCurrentTokenUserId();
-		$post['user_id'] = $user_id;
 		$post['is_new'] = 1;
-		$data = [];
-		$data[] = $post;
-		$res = $order->saveAll($data);
-		if ($res) {
-			return ['msg'=>'报备成功'];
-		}else {
-			return ['msg'=>'报备失败'];
+		$user_id = Token::getCurrentTokenUserId();
+		$user = model('User');
+		$res = $user->field('id')->select();
+		foreach ($res as $v) {
+			//return $v->getData();
+			if ($v->getData()['id'] == $user_id) {
+				$post['user_id'] = $user_id;
+				$data = [];
+				$data[] = $post;
+				$res = $order->saveAll($data);
+				if ($res) {
+					return ['msg'=>'报备成功'];
+				}else {
+					return ['msg'=>'报备失败'];
+				}
+			}
 		}
+		return ['msg'=>'id不合法'];
 	}
 }
 
