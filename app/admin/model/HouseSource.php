@@ -87,7 +87,7 @@ class HouseSource extends BaseModel
     }
 
     public static function getList($page, $limit,$action){
-        if($action=='home_list'){
+        if($action){
             $field='id,title,cover_img,init_status,house_price,house_address,decoration_type,brokerage_plan';
         }else{
             $field='';
