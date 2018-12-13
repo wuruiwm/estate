@@ -15,6 +15,7 @@ namespace app\admin\controller;
 use app\admin\model\HouseSource;
 use app\lib\exception\SuccessMessage;
 use app\lib\validate\AddNewHouse;
+use app\lib\validate\Page;
 
 class House extends Permissions
 {
@@ -46,19 +47,17 @@ class House extends Permissions
         $post['opening_time'] = strtotime($post['opening_time']);
         $model = new HouseSource();
         $result = $model->allowField(true)->save($post);
+        return;
         if($result){
             throw new SuccessMessage();
         }
     }
 
-    /**
-     * @param string $page 当前页
-     * @param string $limit 每页显示
-     * @param string $action 当值为home_list时 为客户端首页调取数据
-     * @return \think\response\Json
-     */
-    public function getHouseList($page = '', $limit = '',$action=''){
-        return HouseSource::getList($page-1, $limit,$action);
+
+
+    public function getHouseList($page = '', $limit = ''){
+        (new Page())->goCheck();
+        return HouseSource::getList($page-1, $limit);
     }
 
 }

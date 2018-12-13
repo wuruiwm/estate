@@ -14,7 +14,7 @@ namespace app\admin\model;
 
 class Brokerage extends BaseModel
 {
-    protected $hidden = ['create_time','update_time','delete_time','id'];
+    protected $hidden = ['create_time','update_time','delete_time'];
     public static function getList($page, $limit){
         $number = $page * $limit;
         $brokerage = self::limit($number, $limit)

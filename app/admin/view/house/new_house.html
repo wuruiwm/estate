@@ -487,14 +487,12 @@
                 data.field.decoration_type = decoration_type.substring(0,decoration_type.length-1);
                 data.field.room_map = room_maps.join(",");
                 data.field.head_img = head_imgs.join(",");
-
-
                 var params = {
                     url: 'house/new',
                     type: 'post',
                     data: data.field,
                     sCallback: function (successMsg) {
-                        // console.log(successMsg);
+                         console.log(successMsg);
                         if (successMsg.msg == '缺少权限') {
                             layer.msg(successMsg.msg);
                         }
@@ -528,8 +526,7 @@
             sCallback: function (successMsg) {
                 //初始化赋值
                 $.each(successMsg, function (key, value) {  //遍历键值对
-
-                    var child_node = "<input type='checkbox' name='brokerage_plan[]' value='" + value.id + "'title='" + value.house_area + '㎡ 佣金' + value.price + "元'>";
+                    var child_node = "<input type='checkbox' name='brokerage_plan[]' value='"+value.id+"'  title='" + value.house_area + '㎡ 佣金' + value.price + "元'>";
                     $("#parent_node").append(child_node);
                 })
 
