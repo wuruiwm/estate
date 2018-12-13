@@ -6,6 +6,7 @@
 	<title></title>
 	<link rel="stylesheet" href="">
 	<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
 </head>
 	<style>
 		#head {
@@ -14,7 +15,6 @@
 			margin: 15px 20px 15px 20px;
 		}
 		#button {
-			margin-top: 15px;
 			margin-left: 20px;
 			background: #FF5722; 
 		}
@@ -31,41 +31,53 @@
 			width: 130px;
 			display: inline;
 		}
+		.form-group{
+			margin-left: 50px;
+			line-height:80px;
+		}
+		#sousuo {
+			margin-left: 20px;
+		}
+		#mingzi {
+			margin-right: 10px;
+		}
 	</style>
 <body>	
 	<div id="head">
 		<form action="" class=".form-inline"></form>
-		<a href="{:url('admin/Notice/noticeAdd')}" class="btn btn-warning btn-lg" type="submit" id="button">批量删除</a>
+		<button class="btn btn-warning btn-lg" id="button" onclick="delall();">批量删除</button>
   		<div class="form-group neilian">
-    		<label for="exampleInputName2" class="neilian">名字搜索</label>
+    		<label for="exampleInputName2" class="neilian" id="mingzi">名字搜索:</label>
     		<input type="text" class="form-control neilian" id="exampleInputName2" placeholder="请输入姓名">
   		</div>
+  		<div class="neilian" id="xiala">
 		<select name="baobei" class="form-control neilian">
-			<option value="">请选择类别</option>
-			<option value="0">已报备</option>
-			<option value="1">未报备</option>
+			<option value="0">请选择类别</option>
+			<option value="1">已报备</option>
+			<option value="2">未报备</option>
+			<option value="3">已到访</option>
+			<option value="4">未到访</option>
+			<option value="5">已成交</option>
+			<option value="6">未成交</option>			
+			<option value="7">已提额</option>
+			<option value="8">未提额</option>
 		</select>
-		<select name="daofang" class="form-control neilian">
-			<option value="">请选择类别</option>
-			<option value="0">已到访</option>
-			<option value="1">未到访</option>
-		</select>
-		<select name="chengjiao" class="form-control neilian">
-			<option value="">请选择类别</option>
-			<option value="0">已成交</option>
-			<option value="1">未成交</option>
-		</select>
-		<select name="tie" class="form-control neilian">
-			<option value="">请选择类别</option>
-			<option value="0">已提额</option>
-			<option value="1">未提额</option>
-		</select>
-		<button class="btn btn-info btn-lg">搜索</button>
+		</div>
+		<div class="layui-input-inline">
+            <div class="layui-inline">
+              <div class="layui-input-inline">
+                <input type="text" class="form-control" id="create_time" placeholder="创建时间" name="create_time">
+              </div>
+            </div>
+        </div>
+		<button class="btn btn-info btn-lg" id="sousuo">搜索</button>
 	</div>
 	<div id="content">
 	<table class="table table-bordered">
 		<tr>
+			<td align="center"><input type="checkbox" onclick="xuan();" value="0" id="quanxuan"></td>
 			<td align="center"><strong>ID</strong></td>
+			<td align="center"><strong>用户ID</strong></td>
 			<td align="center"><strong>姓名</strong></td>
 			<td align="center"><strong>号码</strong></td>
 			<td align="center"><strong>性别</strong></td>
@@ -79,7 +91,9 @@
 		</tr>
 		{volist name="list" id="v"}
 		<tr id="tr{$v.id}">
+			<td align="center"><input type="checkbox" value="{$v.id}" class="xuan"></td>
 			<td align="center">{$v.id}</td>
+			<td align="center">{$v.user_id}</td>
 			<td align="center">{$v.name}</td>
 			<td align="center">{$v.number}</td>
 			<td align="center">{$v.gender}</td>
@@ -90,25 +104,27 @@
 			<td align="center">{$v.is_deal}</td>
 			<td align="center">{$v.is_pay}</td>
 			<td align="center">
-				<a href="{:url('admin/Notice/orderEdit',['id'=>$v.id])}" class="btn btn-success btn-xs">编辑</a>
-				<button class="btn btn-warning btn-xs" url="{$v.id}" data-toggle="modal" data-target="#delcfmModel" onclick="del({$v.id});">删除</button>
+				<a href="{:url('admin/Order/orderEdit',['id'=>$v.id])}" class="btn btn-success btn-xs">编辑</a>
+				<button class="btn btn-warning btn-xs" onclick="del({$v.id});">删除</button>
 			</td>
 		</tr>
 		{/volist}
 	</table>
 	</div>
+	{$page}
 </body>
 <script src="__PUBLIC__/bootstrap/js/jquery.js"></script>
 <script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
 <script src="__PUBLIC__/layui/layer.js"></script>
-<!-- <script>
-function del(can){
+<script src="__PUBLIC__/layui/layui.js"></script>
+<script>
+	function del(can){
 	//弹出窗口
-	layer.confirm('真的删除行么', function(index){
+	layer.confirm('真的删除吗', function(index){
     //关闭窗口
     layer.close(index);
     //拼接get访问的的url
-    var url = "{:url('admin/Notice/noticeDel')}" +'?id='+can;
+    var url = "{:url('admin/Order/orderDel')}" +'?id='+can;
     //发送get请求删除行，判断返回值是否为成功，成功则remove删除那一行的标签
     $.get(url,function(res){
     	var tr = '#tr'+can;
@@ -119,5 +135,58 @@ function del(can){
     })
 	})
 }
-</script> -->
+	//input框的日历插件
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+      
+      //常规用法
+      laydate.render({
+        elem: '#create_time'
+      });
+    });
+	//全选
+	function xuan(){
+		if ($('#quanxuan')[0].value == 0) {
+			$('input:checkbox').prop('checked',true);
+			$('#quanxuan')[0].value = 1;
+		}else {
+			$('input:checkbox').prop('checked',false);
+			$('#quanxuan')[0].value = 0;
+		}
+	}
+	function delall(){
+		//console.log($('input:checkbox')[1].value);
+		//弹出窗口
+		layer.confirm('真的删除吗', function(index){
+    	//关闭窗口
+    	layer.close(index);
+		var data = {};
+		var check = document.getElementsByClassName('xuan');
+		var len = check.length;
+		for (var i = 0; i<len; i++) {
+		//console.log(check[i].checked);
+		if (check[i].checked) {
+			var a = check[i].value;
+			data[i] = a;
+			// var tr = '#tr'+a;
+			// $(tr).remove();
+		}
+	  }
+	  //console.log(data);
+	  var data2 = {};
+	  data2['res'] = data;
+	  var a = JSON.stringify(data2);
+	  //var a = JSON.stringify(data2);
+	  //console.log(a);
+	  
+	  var url = "{:url('admin/Order/orderdel')}";
+	  $.post(url,data,function(res){
+	  	for(var i in data){
+	  		$('#tr'+data[i]).remove();
+	  	}
+	  	layer.msg(res);
+	  })
+	  })
+	}
+</script>
 </html>

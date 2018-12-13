@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+</head>
+<style>
+	.control-label {
+		line-height:40px;
+	}
+	.row {
+		width: 300px;
+		height: 50px;
+	}
+	.text {
+		line-height: 50px;
+	}
+	#d1,#d2,#d3,#d4,#d5,#d6,#d7{
+		display: block;
+	}
+	#content {
+		margin: 40px 40px 40px 70px;
+		height: 450px;
+		width: 300px;
+	}
+</style>
+<body>
+	<div id="content">
+	<form action="" method="post" class="form-inline">
+		<div class="form-group" id="d1">
+    		<label for="exampleInputEmail1">用户ID:</label>
+    		<input type="text" name="user_id" class="form-control" value="{$data['user_id']}" id="exampleInputEmail1" placeholder="用户ID">
+  		</div>
+      <br>
+	  <div class="form-group" id="d2">
+   		<label for="exampleInputEmail1">姓名:</label>
+      	<input type="text" name="name" value="{$data['name']}" class="form-control" id="inputEmail3"
+      	>
+      </div>
+      <br>
+	  <div class="form-group" id="d3">
+   		<label for="exampleInputEmail1">手机:</label>
+      	<input type="text" name="number" value="{$data['number']}" class="form-control" id="inputEmail3"
+      	>
+      </div>
+      <br>
+      <div class="form-group" id="d4">
+      	{if condition="$data['gender'] eq 1"}
+		<label for="exampleInputEmail1">性别:&nbsp;&nbsp;&nbsp;男&nbsp;<input type="radio" name="gender" value="1" checked="checked">&nbsp;&nbsp;&nbsp;&nbsp;女&nbsp;<input type="radio" name="gender" value="2"></label>
+		{else /}
+		<label for="exampleInputEmail1">性别:&nbsp;&nbsp;&nbsp;男&nbsp;<input type="radio" name="gender" value="1">&nbsp;&nbsp;&nbsp;&nbsp;女&nbsp;<input type="radio" name="gender" value="2" checked="checked"></label>
+		{/if}
+	  </div>
+	  <br>
+	  <div class="form-group" id="d5">
+		<label for="exampleInputEmail1">预计带看时间:&nbsp;&nbsp;&nbsp;</label><div class="layui-input-inline">
+		<div class="layui-inline">
+			<div class="layui-input-inline">
+				<input type="text" class="form-control" id="create_time" placeholder="创建时间" name="date" value="{$data['date']}">
+              </div>
+           </div>
+       </div>
+   	  </div>
+   	  <br>
+   	  <div class="form-group" id="d6">
+       <label for="exampleInputEmail1">购房意向:</label><br>
+       <textarea class="form-control" id="" cols="30" rows="3" name="content">{$data['content']}</textarea>
+       </div>
+       <br>
+       <div class="form-group" id="d7">
+       <label for="exampleInputEmail1">请选择报备状态:</label>
+       	<select name="zhuangtai" class="form-control neilian">
+       	{if condition="$data['zhuangtai'] eq 1"}
+		<option value="0">请选择类别</option>
+		<option value="1" selected="selected">已报备</option>
+		<option value="3">已到访</option>
+		<option value="5">已成交</option>
+		<option value="7">已提额</option>
+		{else /}
+		{if condition="$data['zhuangtai'] eq 3"}
+		<option value="0">请选择类别</option>
+		<option value="1">已报备</option>
+		<option value="3" selected="selected">已到访</option>
+		<option value="5">已成交</option>
+		<option value="7">已提额</option>
+		{else /}
+		{if condition="$data['zhuangtai'] eq 5"}
+		<option value="0">请选择类别</option>
+		<option value="1">已报备</option>
+		<option value="3">已到访</option>
+		<option value="5" selected="selected">已成交</option>
+		<option value="7">已提额</option>
+		{else /}
+		{if condition="$data['zhuangtai'] eq 7"}
+		<option value="0">请选择类别</option>
+		<option value="1">已报备</option>
+		<option value="3">已到访</option>
+		<option value="5">已成交</option>
+		<option value="7" selected="selected">已提额</option>
+		{else /}
+		<option value="0">请选择类别</option>
+		<option value="1">已报备</option>
+		<option value="3">已到访</option>
+		<option value="5">已成交</option>
+		<option value="7">已提额</option>
+		{/if}
+		{/if}
+		{/if}
+		{/if}
+	</select>
+	<p><input type="hidden" name="id" value="{$data['id']}"></p>
+	<p><input type="submit" value="立即修改" class="btn btn-info"></p>
+</div>
+</form>
+</div>
+</body>
+<script src="__PUBLIC__/bootstrap/js/jquery.js"></script>
+<script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/layui/layer.js"></script>
+<script src="__PUBLIC__/layui/layui.js"></script>
+<script>
+	//input框的日历插件
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+      
+      //常规用法
+      laydate.render({
+        elem: '#create_time'
+      });
+    });
+    //修改是否成功的提示信息
+    //获取url里?后面的字符串
+    var a = window.location.search;
+    //console.log(a);
+    if (a == '?msg/1.shtml') {
+    	layer.msg('修改成功');
+    }else if (a == '?msg/0.shtml') {
+    	layer.msg('修改失败');
+    }
+    
+</script>
+</html>

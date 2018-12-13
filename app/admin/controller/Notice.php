@@ -103,19 +103,10 @@ class Notice extends Permissions{
 			exit();
 		}
 		$notice->id = $id;
-		// echo $notice->id;
-		// exit();
 		$res = $notice->delete();
-		if ($res) {
-			//$url = url('admin/notice/noticeList');
-            // echo "<script language='javascript' type='text/javascript'>";  
-            // echo "window.location.href='$url'";  
-            // echo "</script>";  
+		if ($res) { 
             echo '删除成功';
-		}else {
-			// echo "<script language='javascript' type='text/javascript'>";
-			// echo "alert('删除失败')";
-			// echo "</script>";  
+		}else { 
 			echo '删除失败';
 		}
 	}
