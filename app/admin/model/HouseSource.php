@@ -67,7 +67,10 @@ class HouseSource extends BaseModel
     {
         $img_url = Attachment::where('id', 'in', $value)->value('filepath');
         $http = http_type();
-        return $http . $img_url;
+        return [
+            'img_id'=>$value,
+            'img_url'=>$http . $img_url
+        ];
     }
 
     public function getInitStatusAttr($value)

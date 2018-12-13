@@ -62,6 +62,5 @@ class House extends BaseController
             return HouseSource::getHouseById($id);
         }
         throw new NullException();
-
     }
 }

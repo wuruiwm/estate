@@ -36,9 +36,7 @@ class House extends Permissions
      * 发布新房源
      */
     public function addNewHouse(){
-        /*if(input('post.title')){
-            return 'dd';
-        }*/
+
         (new AddNewHouse())->goCheck();
         $post = input('post.');
         $post['init_status']=1;
@@ -58,12 +56,18 @@ class House extends Permissions
     }
 
 
-
     public function getHouseList($page = '', $limit = ''){
         (new Page())->goCheck();
         return HouseSource::getList($page-1, $limit);
     }
 
+    public function getHouseById($id=''){
+        (new IDMustBePositiveInt())->goCheck();
+        if(!empty(HouseSource::getHouseById($id))){
+            return HouseSource::getHouseById($id);
+        }
+        throw new NullException();
+    }
 
 
 }
