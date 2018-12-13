@@ -114,7 +114,7 @@ class HouseSource extends BaseModel
     }
 
     // 客户端
-    public static function getHomeList($page, $pageSize,$province,$city)
+    public static function getHomeList($page, $limit,$province,$city)
     {
 
         $field = 'id,title,cover_img,init_status,house_price,house_address,decoration_type,brokerage_plan,province,city,area';
@@ -127,7 +127,7 @@ class HouseSource extends BaseModel
                 ->where('area',$area['_id'])
                 ->field($field)
                 ->order('create_time desc')
-                ->page($page, $pageSize)
+                ->page($page, $limit)
                 ->select();
             if (!$house) {
                 return self::DataFormat(0);
@@ -141,7 +141,7 @@ class HouseSource extends BaseModel
                 ->where('province',$province_id)
                 ->field($field)
                 ->order('create_time desc')
-                ->page($page, $pageSize)
+                ->page($page, $limit)
                 ->select();
             if (!$house) {
                 return self::DataFormat(0);

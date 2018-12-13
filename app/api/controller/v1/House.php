@@ -32,8 +32,8 @@ class House extends BaseController
      * @apiParam {string}  city 市
      * @apiName 获取首页房源列表
      */
-    public function getList($page='',$pageSize='',$province='',$city=''){
-        //(new Page())->goCheck();
+    public function getList($page='',$limit='',$province='',$city=''){
+        (new Page())->goCheck();
         if($province===''){
             throw new ParameterException([
                 'msg'=>'province参数不能为空'
@@ -44,7 +44,7 @@ class House extends BaseController
                 'msg'=>'city参数不能为空'
             ]);
         }
-        return HouseSource::getHomeList($page,$pageSize,$province,$city);
+        return HouseSource::getHomeList($page,$limit,$province,$city);
     }
 
     /**
