@@ -36,6 +36,9 @@ class House extends Permissions
      * 发布新房源
      */
     public function addNewHouse(){
+        /*if(input('post.title')){
+            return 'dd';
+        }*/
         (new AddNewHouse())->goCheck();
         $post = input('post.');
         $post['init_status']=1;
