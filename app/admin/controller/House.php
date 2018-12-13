@@ -47,7 +47,7 @@ class House extends Permissions
         $post['opening_time'] = strtotime($post['opening_time']);
         $model = new HouseSource();
         $result = $model->allowField(true)->save($post);
-        return;
+
         if($result){
             throw new SuccessMessage();
         }
