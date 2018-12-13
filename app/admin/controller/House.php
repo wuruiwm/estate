@@ -15,6 +15,7 @@ namespace app\admin\controller;
 use app\admin\model\HouseSource;
 use app\lib\exception\SuccessMessage;
 use app\lib\validate\AddNewHouse;
+use app\lib\validate\IDMustBePositiveInt;
 use app\lib\validate\Page;
 
 class House extends Permissions
@@ -59,5 +60,7 @@ class House extends Permissions
         (new Page())->goCheck();
         return HouseSource::getList($page-1, $limit);
     }
+
+
 
 }

@@ -321,14 +321,14 @@
   },
   {
     "type": "get",
-    "url": "house/list",
-    "title": "获取首页房源列表",
+    "url": "house/info",
+    "title": "获取房源详情",
     "group": "web",
     "version": "0.1.0",
-    "description": "<p>根据当前城市获取房源列表</p>",
+    "description": "<p>根据房源Id获取详细信息</p>",
     "sampleRequest": [
       {
-        "url": "http://estate.dingdingmaoer.cn/api/v1/house/list"
+        "url": "http://estate.dingdingmaoer.cn/api/v1/house/info"
       }
     ],
     "parameter": {
@@ -338,29 +338,8 @@
             "group": "Parameter",
             "type": "int",
             "optional": false,
-            "field": "page",
-            "description": "<p>当前页</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "limit",
-            "description": "<p>每页显示条数</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "province",
-            "description": "<p>省</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "city",
-            "description": "<p>市</p>"
+            "field": "id",
+            "description": "<p>房源id</p>"
           }
         ]
       }
@@ -410,6 +389,56 @@
     },
     "name": "______",
     "filename": "app/api/controller/v1/WebToken.php",
+    "groupTitle": "客户端接口"
+  },
+  {
+    "type": "get",
+    "url": "house/list",
+    "title": "获取首页房源列表",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>根据当前城市获取房源列表</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/house/list"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页显示条数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "province",
+            "description": "<p>省</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "city",
+            "description": "<p>市</p>"
+          }
+        ]
+      }
+    },
+    "name": "________",
+    "filename": "app/api/controller/v1/House.php",
     "groupTitle": "客户端接口"
   }
 ]

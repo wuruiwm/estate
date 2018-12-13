@@ -72,7 +72,7 @@ class HouseSource extends BaseModel
 
     public function getInitStatusAttr($value)
     {
-        return ['新房', '二手房'][$value];
+        return ['二手房','新房'][$value];
     }
 
     public function getDecorationTypeAttr($value)
@@ -148,5 +148,10 @@ class HouseSource extends BaseModel
             }
         }
         return $house;
+    }
+
+    // 客户端
+    public static function getHouseById($id){
+        return HouseSource::get($id);
     }
 }

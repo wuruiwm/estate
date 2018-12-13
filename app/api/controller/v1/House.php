@@ -13,7 +13,9 @@ namespace app\api\controller\v1;
 
 
 use app\admin\model\HouseSource;
+use app\lib\exception\NullException;
 use app\lib\exception\ParameterException;
+use app\lib\validate\IDMustBePositiveInt;
 use app\lib\validate\Page;
 
 class House extends BaseController
@@ -28,7 +30,7 @@ class House extends BaseController
      * @apiParam {int} limit 每页显示条数
      * @apiParam {string}  province 省
      * @apiParam {string}  city 市
-     * @apiName 账号密码登录
+     * @apiName 获取首页房源列表
      */
     public function getList($page='',$limit='',$province='',$city=''){
         (new Page())->goCheck();
@@ -43,5 +45,23 @@ class House extends BaseController
             ]);
         }
         return HouseSource::getHomeList($page,$limit,$province,$city);
+    }
+
+    /**
+     * @api {get} house/info 获取房源详情
+     * @apiGroup web
+     * @apiVersion 0.1.0
+     * @apiDescription  根据房源Id获取详细信息
+     * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/house/info
+     * @apiParam {int} id 房源id
+     * @apiName 获取房源详情
+     */
+    public function getHouseById($id=''){
+        (new IDMustBePositiveInt())->goCheck();
+        if(!empty(HouseSource::getHouseById($id))){
+            return HouseSource::getHouseById($id);
+        }
+        throw new NullException();
+
     }
 }

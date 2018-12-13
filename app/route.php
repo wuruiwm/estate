@@ -33,6 +33,7 @@ Route::post('api/:version/user/login', 'api/:version.WebToken/getWebToken');
 Route::post('api/:version/password/code', 'api/:version.Register/getCode');
 Route::post('api/:version/password/update', 'api/:version.Register/password');
 Route::get('api/:version/house/list','api/:version.House/getList');
+Route::get('api/:version/house/info','api/:version.House/getHouseById');
 
 // 获取用户信息
 Route::get('api/:version/user/info', 'api/:version.User/getUserById');
