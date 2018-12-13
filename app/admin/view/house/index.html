@@ -47,7 +47,7 @@
 </blockquote>
 <table id="banner" lay-filter="banner" ></table>
 <script type="text/html" id="showimg">
-    <div><a href="#"><img src="{{d.img_url}}" width="30" height="30"></a></div>
+    <div><a href="#"><img src="{{d.cover_img.img_url}}" width="30" height="30"></a></div>
 </script>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -61,18 +61,31 @@
             elem: '#banner'
             , height: 'full-120'
             , width: 'full'
-            , url: window.base.g_restUrl + 'banner/select' //数据接口
-            , page: false //是否开启分页
+            , url: window.base.g_restUrl + 'house/list' //数据接口
+            , page: true //是否开启分页
             , limits: [15, 25, 45, 60] // 设置每页显示？条
             , limit: 15 // 每页默认显示数量
             , cols: [[ //标题栏 列表信息
                 {checkbox: true, fixed: true}
                 , {field: 'id', title: 'ID', width: 100, fixed: 'left',align: 'center'}
-                , {field: 'link_url', title: '跳转地址(点击可编辑)', width: 300,edit: 'text'}
-                , {field: 'img_url', title: '缩略图', width: 100, templet: '#showimg', align: 'center'}
-                , {field: 'order_id', title: '排序(点击可编辑)', width: 200,edit: 'text',align: 'center'}
-                , {field: 'type_id', title: '广告位置', width: 200,align: 'center'}
-                , {field: 'create_time', title: '创建时间', width: 200, align: 'center', sort: true}
+                , {field: 'cover_img.img_url', title: '封面图', width: 100, templet: '#showimg', align: 'center'}
+                , {field: 'title', title: '标题', width: 300,}
+                , {field: 'desc', title: '简介', width: 200,}
+                , {field: 'opening_time', title: '开盘时间', width: 200,align: 'center',}
+                , {field: 'house_price', title: '房价(元)', width: 200,}
+                , {field: 'floor_area', title: '占地面积(㎡)', width: 200,}
+                , {field: 'province', title: '省', width: 200,align: 'center'}
+                , {field: 'city', title: '市', width: 200,align: 'center'}
+                , {field: 'area', title: '区', width: 200,align: 'center'}
+                , {field: 'house_address', title: '房源地址', width: 200,}
+                , {field: 'init_status', title: '房源类型', width: 200,}
+                , {field: 'property_company', title: '物业公司', width: 200,}
+                , {field: 'property_costs', title: '物业费元/㎡', width: 200,}
+                , {field: 'house_address', title: '房源地址', width: 200,}
+                , {field: 'house_address', title: '房源地址', width: 200,}
+
+                , {field: 'developer', title: '开发商', width: 200,}
+                , {field: 'create_time', title: '发布时间', width: 200, align: 'center', sort: true}
                 , {title: '操作', width: 160, align: 'center', toolbar: '#barDemo', fixed: 'right'}
             ]],
             id: 'testReload',
@@ -115,7 +128,7 @@
                     var index = layui.layer.open({
                         title: "编辑信息",
                         type: 2,
-                        content: "insert?id=" + data.id,
+                        content: "new_house?id=" + data.id,
                         success: function (layero, index) {
                             setTimeout(function () {
                                 layui.layer.tips('点击此处返回信息列表', '.layui-layer-setwin .layui-layer-close', {

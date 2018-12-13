@@ -284,6 +284,7 @@
             , upload = layui.upload,
             statusTags = layui.statusTags;
 
+
         var tag1 = statusTags.render({
             el: "#tags1",
             template: '<span class="layui-badge layui-bg-gray idata">@title <span class="tagsremove @remove"><a href="javascript:;" style="color: #FF5722">x</a></span></span>',
@@ -418,10 +419,6 @@
 
         getBrokerageList(form);
 
-        var id = window.base.getQueryString('id');
-        if (id > 0) {
-            getBannerById(id, form);
-        }
         //上传封面图
         var uploadInst = upload.render({
             elem: '#thumb' //绑定元素
@@ -446,6 +443,11 @@
         });
 
         var id = window.base.getQueryString('id');
+        console.log(id);
+        if(id>0){
+            getInfo(id,form);
+        }
+
         // 监听提交
         form.on('submit(submit)', function (data) {
             if (id > 0) {
@@ -487,14 +489,12 @@
                 data.field.decoration_type = decoration_type.substring(0,decoration_type.length-1);
                 data.field.room_map = room_maps.join(",");
                 data.field.head_img = head_imgs.join(",");
-
-
                 var params = {
                     url: 'house/new',
                     type: 'post',
                     data: data.field,
                     sCallback: function (successMsg) {
-                        // console.log(successMsg);
+                         console.log(successMsg);
                         if (successMsg.msg == '缺少权限') {
                             layer.msg(successMsg.msg);
                         }
@@ -528,8 +528,7 @@
             sCallback: function (successMsg) {
                 //初始化赋值
                 $.each(successMsg, function (key, value) {  //遍历键值对
-
-                    var child_node = "<input type='checkbox' name='brokerage_plan[]' value='" + value.id + "'title='" + value.house_area + '㎡ 佣金' + value.price + "元'>";
+                    var child_node = "<input type='checkbox' name='brokerage_plan[]' value='"+value.id+"'  title='" + value.house_area + '㎡ 佣金' + value.price + "元'>";
                     $("#parent_node").append(child_node);
                 })
 
@@ -588,6 +587,50 @@
                     $("#area").append($("<option/>").text(item.name).attr("value", item._id));
                 });
                 form.render('select');
+            },
+            eCallback: function (errorMsg) {
+
+            }
+        };
+        window.base.getData(params);
+    }
+
+    function getInfo(id, form) {
+        var params = {
+            url: 'house/info?id=' + id,
+            sCallback: function (successMsg) {
+                console.log(successMsg);
+                $("input[name='title']").val(successMsg.title);
+                $("input[name='desc']").val(successMsg.title);
+                $("input[name='cover_img']").val(successMsg.cover_img.img_url);
+
+                $('#img').attr('src', successMsg.cover_img.img_url);
+                $('#img').css({"width": '375', "height": '200'});
+                $('#thumb').append('<input type="hidden" name="cover_img" value="' + successMsg.cover_img.img_id + '">');
+
+                console.log(successMsg.head_img);
+                $.each(successMsg.head_img,function(index,value){
+                    $('#uploader-list1').append(
+                        '<div id="" class="file-iteme">' +
+                        '<div class="handle"><span class="glyphicon glyphicon-trash"><i class="layui-icon layui-icon-delete"></i></span> <span style="display: none">' + successMsg.head_img[index].img_id + '</span></div>' +
+                        '<img style="width: 100px;height: 100px;" src=' + successMsg.head_img[index].img_url + '>' +
+                        '<div class="info">' + '图片' + '</div>' +
+                        '</div>'
+                    );
+                });
+
+
+
+                $("input[name='title']").val(successMsg.title);
+                $("input[name='title']").val(successMsg.title);
+                $("input[name='title']").val(successMsg.title);
+                $("input[name='title']").val(successMsg.title);
+                $("input[name='title']").val(successMsg.title);
+                $("input[name='title']").val(successMsg.title);
+                $("input[name='title']").val(successMsg.title);
+                form.render();
+
+
             },
             eCallback: function (errorMsg) {
 

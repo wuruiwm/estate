@@ -15,6 +15,8 @@ namespace app\admin\controller;
 use app\admin\model\HouseSource;
 use app\lib\exception\SuccessMessage;
 use app\lib\validate\AddNewHouse;
+use app\lib\validate\IDMustBePositiveInt;
+use app\lib\validate\Page;
 
 class House extends Permissions
 {
@@ -34,6 +36,7 @@ class House extends Permissions
      * 发布新房源
      */
     public function addNewHouse(){
+
         (new AddNewHouse())->goCheck();
         $post = input('post.');
         $post['init_status']=1;
@@ -46,16 +49,25 @@ class House extends Permissions
         $post['opening_time'] = strtotime($post['opening_time']);
         $model = new HouseSource();
         $result = $model->allowField(true)->save($post);
+
         if($result){
             throw new SuccessMessage();
         }
     }
 
-    /**
-     * 获取房源
-     */
+
     public function getHouseList($page = '', $limit = ''){
+        (new Page())->goCheck();
         return HouseSource::getList($page-1, $limit);
     }
+
+    public function getHouseById($id=''){
+        (new IDMustBePositiveInt())->goCheck();
+        if(!empty(HouseSource::getHouseById($id))){
+            return HouseSource::getHouseById($id);
+        }
+        throw new NullException();
+    }
+
 
 }
