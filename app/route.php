@@ -23,6 +23,9 @@ Route::post('admin_api/brokerage/new', 'admin/Brokerage/addNewBrokerage');
 Route::post('admin_api/brokerage/update', 'admin/Brokerage/updateById');
 Route::any('admin_api/brokerage/remove', 'admin/Brokerage/delById');
 Route::get('admin_api/house/info', 'admin/House/getHouseById');
+Route::get('admin_api/house/remove', 'admin/House/delById');
+Route::get('admin_api/house/dels', 'admin/House/dels');
+
 
 /**
  * 客户端接口

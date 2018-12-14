@@ -117,11 +117,12 @@ class HouseSource extends BaseModel
     }
 
     // 后台
-    public static function getList($page, $limit)
+    public static function getList($page, $limit,$where)
     {
         $number = $page * $limit;
         $house = self::limit($number, $limit)
             ->order('create_time desc')
+            ->where($where)
             ->select();
         if (!$house) {
             return self::DataFormat(0);

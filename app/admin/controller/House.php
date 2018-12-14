@@ -79,9 +79,24 @@ class House extends Permissions
     }
 
 
-    public function getHouseList($page = '', $limit = ''){
+    public function getHouseList($page = '', $limit = '',$key = ''){
         (new Page())->goCheck();
-        return HouseSource::getList($page-1, $limit);
+        if(isset($key['keyword']) and !empty($key['keyword'])){
+            $where['title'] = ['like', '%' . $key['keyword'] . '%'];
+        }
+        if(isset($key['type_id']) and !empty($key['type_id'])){
+            $where['type_id'] = $key['type_id'];
+        }
+        if(isset($key['create_time']) and !empty($key['create_time'])){
+            $min_time = strtotime($key['create_time']);
+            $max_time = $min_time + 24 * 60 * 60;
+            $where['opening_time'] = [['>=',$min_time],['<=',$max_time]];
+        }
+        if(empty($where['title']) and empty($where['type_id']) and empty($where['opening_time'])){
+            $where = null;
+        }
+
+        return HouseSource::getList($page-1, $limit,$where);
     }
 
     public static function getHouseById($id=''){
@@ -92,5 +107,29 @@ class House extends Permissions
         throw new NullException();
     }
 
+
+    //删除一个
+    public function delById($id=''){
+        (new IDMustBePositiveInt())->goCheck();
+        $model = new HouseSource();
+        $result = $model::getHouseById($id);
+        if($result){
+            $result = $model::destroy($id);
+            if($result){
+                throw new SuccessMessage();
+            }
+        }
+        throw new NullException();
+    }
+
+    // 批量删除
+    public function dels($ids){
+        $model = new HouseSource();
+        $result = $model::destroy($ids);;
+        if($result>0){
+            throw new SuccessMessage();
+        }
+
+    }
 
 }
