@@ -21,7 +21,7 @@ use app\lib\validate\Page;
 class House extends BaseController
 {
     /**
-     * @api {get} house/list 获取首页房源列表
+     * @api {get} house/list 获取首页房源列表,及新房/二手房列表
      * @apiGroup web
      * @apiVersion 0.1.0
      * @apiDescription  根据当前城市获取房源列表
@@ -30,9 +30,10 @@ class House extends BaseController
      * @apiParam {int} limit 每页显示条数
      * @apiParam {string}  province 省
      * @apiParam {string}  city 市
+     * @apiParam {string}  type 房源类型(不传为新房和二手房,值1为新房,值2为二手房)
      * @apiName 获取首页房源列表
      */
-    public function getList($page='',$limit='',$province='',$city=''){
+    public function getList($page='',$limit='',$province='',$city='',$type=''){
         (new Page())->goCheck();
         if($province===''){
             throw new ParameterException([
@@ -44,7 +45,7 @@ class House extends BaseController
                 'msg'=>'city参数不能为空'
             ]);
         }
-        return HouseSource::getHomeList($page,$limit,$province,$city);
+        return HouseSource::getHomeList($page,$limit,$province,$city,$type);
     }
 
     /**
@@ -62,5 +63,18 @@ class House extends BaseController
             return HouseSource::getHouseById($id);
         }
         throw new NullException();
+    }
+
+    /**
+     * @api {get} house/head 获取房源头条
+     * @apiGroup web
+     * @apiVersion 0.1.0
+     * @apiDescription  获取房源头条,无须做下拉加载更多
+     * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/house/head
+     * @apiParam {int} limit 限制取几条 默认不参为10条
+     * @apiName 获取房源头条
+     */
+    public function getHouseHead($limit='10'){
+        return HouseSource::getHouseHead($limit);
     }
 }

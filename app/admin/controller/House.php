@@ -79,23 +79,24 @@ class House extends Permissions
     }
 
 
-    public function getHouseList($page = '', $limit = '',$key = ''){
+    public function getHouseList($page = '', $limit = '',$key=''){
         (new Page())->goCheck();
         if(isset($key['keyword']) and !empty($key['keyword'])){
             $where['title'] = ['like', '%' . $key['keyword'] . '%'];
         }
         if(isset($key['type_id']) and !empty($key['type_id'])){
-            $where['type_id'] = $key['type_id'];
+            $where['init_status'] = $key['type_id'];
         }
-        if(isset($key['create_time']) and !empty($key['create_time'])){
+        if(isset($key['create_time']) and !empty($key['create_time'])) {
             $min_time = strtotime($key['create_time']);
-            $max_time = $min_time + 24 * 60 * 60;
-            $where['opening_time'] = [['>=',$min_time],['<=',$max_time]];
+            // $max_time = $min_time + 24 * 60 * 60;
+            $where['opening_time'] = $min_time;// [['>=',$min_time],['<=',$max_time]];
+
         }
-        if(empty($where['title']) and empty($where['type_id']) and empty($where['opening_time'])){
+        if(empty($where['title']) and empty($where['init_status']) and empty($where['opening_time'])){
             $where = null;
         }
-
+        //return json($key);
         return HouseSource::getList($page-1, $limit,$where);
     }
 
@@ -131,5 +132,19 @@ class House extends Permissions
         }
 
     }
+
+    // 是否显示
+    public function isHead($id='',$is_head='')
+    {
+        $model = new HouseSource();
+        $result = $model->where('id',$id)->update([
+            'is_head'=>$is_head,
+            'update_time'=>time()
+        ]);
+        if($result){
+            throw new SuccessMessage();
+        }
+    }
+
 
 }

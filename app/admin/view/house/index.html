@@ -32,9 +32,8 @@
         <div class="layui-inline">
             <select name="type_id" lay-filter="aihao" id="option">
                 <option value="">请选择类别</option>
-
                 <option value="1">新房</option>
-                <option value="1">二手房</option>
+                <option value="2">二手房</option>
 
             </select>
         </div>
@@ -57,7 +56,7 @@
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 </script>
 <script type="text/html" id="switch_one">
-    <input type="checkbox" name="is_online" value="{{d.is_online}}" lay-skin="switch" lay-text="开启|关闭" lay-filter="IsOnline" {{ d.is_online == 0 ?'checked' : '' }}>
+    <input type="checkbox" name="is_head" value="{{d.is_head}}" lay-skin="switch" lay-text="开启|关闭" lay-filter="IsHead" {{ d.is_head == 1 ?'checked' : '' }}>
 </script>
 {include file="public/foot"}
 <script>
@@ -103,7 +102,7 @@
             }
         });
         //监听性别操作
-        form.on('switch(IsOnline)', function(obj){
+        form.on('switch(IsHead)', function(obj){
             // 获取当前控件
             var selectIfKey=obj.othis;
             // 获取当前所在行
@@ -116,10 +115,10 @@
             //layer.tips(this.obj + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
             //layer.tips(obj.elem.checked?'已开启':'已关闭', obj.othis);
             if(obj.elem.checked){
-                is_online(ifKey,0);
+                is_head(ifKey,1);
                 layer.tips('已开启', obj.othis);
             }else{
-                is_online(ifKey,1);
+                is_head(ifKey,0);
                 layer.tips('已关闭', obj.othis);
             }
         });
@@ -140,6 +139,7 @@
                 , {field: 'title', title: '标题', width: 300,}
                 , {field: 'desc', title: '简介', width: 200,}
                 , {field: 'opening_time', title: '开盘时间', width: 200,align: 'center',}
+                , {field: "is_head", title: '头条房源', width: 90, align: 'center',toolbar:"#switch_one",unresize: true}
                 , {field: 'house_price', title: '房价(元)', width: 200,}
                 , {field: 'floor_area', title: '占地面积(㎡)', width: 200,}
                 , {field: 'province', title: '省', width: 200,align: 'center',templet:function(p){
@@ -159,6 +159,7 @@
                 , {field: 'house_address', title: '房源地址', width: 200,}
                 , {field: 'developer', title: '开发商', width: 200,}
                 , {field: 'create_time', title: '发布时间', width: 200, align: 'center', sort: true}
+                , {field: 'update_time', title: '发布时间', width: 200, align: 'center', sort: true}
                 , {title: '操作', width: 160, align: 'center', toolbar: '#barDemo', fixed: 'right'}
             ]],
             id: 'testReload',
@@ -177,6 +178,7 @@
                 var demoReload = $('#demoReload');// 搜索关键词
                 var option = $('#option');// 下拉选项
                 var create_time = $('#create_time'); // 创建时间
+                //layer.alert(create_time.val());return false;
                 //执行重载
                 table.reload('testReload', {
                     page: {
@@ -302,9 +304,9 @@
     }
 
     // 是否显示
-    function is_online(id,is_online){
+    function is_head(id,is_head){
         var params = {
-            url:'loan/is_online?id='+id+'&is_online='+is_online,
+            url:'house/is_head?id='+id+'&is_head='+is_head,
             sCallback:function(successMsg){
                 if(successMsg.errorCode==20100){
                     //弹出loading

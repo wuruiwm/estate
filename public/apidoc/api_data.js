@@ -321,6 +321,35 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "house/head",
+    "title": "获取房源头条",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>获取房源头条,无须做下拉加载更多</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/house/head"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>限制取几条 默认不参为10条</p>"
+          }
+        ]
+      }
+    },
+    "name": "______",
+    "filename": "app/api/controller/v1/House.php",
+    "groupTitle": "客户端接口"
+  },
+  {
+    "type": "get",
     "url": "house/info",
     "title": "获取房源详情",
     "group": "web",
@@ -351,7 +380,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "house/list",
-    "title": "获取首页房源列表",
+    "title": "获取首页房源列表,及新房/二手房列表",
     "group": "web",
     "version": "0.1.0",
     "description": "<p>根据当前城市获取房源列表</p>",
@@ -390,6 +419,13 @@ define({ "api": [
             "optional": false,
             "field": "city",
             "description": "<p>市</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "type",
+            "description": "<p>房源类型(不传为新房和二手房,值1为新房,值2为二手房)</p>"
           }
         ]
       }

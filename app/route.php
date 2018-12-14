@@ -17,6 +17,7 @@ Route::get('admin_api/area/list','admin/City/getAreaByCid');
 Route::post('admin_api/house/new','admin/House/addNewHouse');
 Route::post('admin_api/house/update','admin/House/updateNewHouse');
 Route::get('admin_api/house/list','admin/House/getHouseList');
+Route::get('admin_api/house/is_head','admin/House/isHead');
 Route::get('admin_api/brokerage/list', 'admin/Brokerage/getBrokerageList');
 Route::get('admin_api/brokerage/list_copy', 'admin/Brokerage/getList');
 Route::post('admin_api/brokerage/new', 'admin/Brokerage/addNewBrokerage');
@@ -39,6 +40,7 @@ Route::post('api/:version/password/code', 'api/:version.Register/getCode');
 Route::post('api/:version/password/update', 'api/:version.Register/password');
 Route::get('api/:version/house/list','api/:version.House/getList');
 Route::get('api/:version/house/info','api/:version.House/getHouseById');
+Route::get('api/:version/house/head','api/:version.House/getHouseHead');
 
 // 获取用户信息
 Route::get('api/:version/user/info', 'api/:version.User/getUserById');
