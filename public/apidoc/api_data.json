@@ -440,5 +440,184 @@
     "name": "________",
     "filename": "app/api/controller/v1/House.php",
     "groupTitle": "客户端接口"
+  },
+  {
+    "type": "get",
+    "url": "order/baobei",
+    "title": "获取我的客户已报备列表",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>根据传来的用户id获取已报备列表</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/order/baobei"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页显示条数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "state",
+            "description": "<p>四种状态，1已报备，2已到访，3已成交，4已提额</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "token",
+            "description": "<p>放在header里传过来</p>"
+          }
+        ]
+      }
+    },
+    "name": "___________",
+    "filename": "app/api/controller/v1/Orderlist.php",
+    "groupTitle": "客户端接口"
+  },
+  {
+    "type": "post",
+    "url": "order/daofang",
+    "title": "获取我的客户已到访列表",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>根据传来的用户id获取已到访列表</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/order/daofang"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页显示条数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "token",
+            "description": "<p>放在header里传过来</p>"
+          }
+        ]
+      }
+    },
+    "name": "___________",
+    "filename": "app/api/controller/v1/Orderlist.php",
+    "groupTitle": "客户端接口"
+  },
+  {
+    "type": "post",
+    "url": "order/chengjiao",
+    "title": "获取我的客户已成交列表",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>根据传来的用户id获取已成交列表</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/order/chengjiao"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页显示条数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "token",
+            "description": "<p>放在header里传过来</p>"
+          }
+        ]
+      }
+    },
+    "name": "___________",
+    "filename": "app/api/controller/v1/Orderlist.php",
+    "groupTitle": "客户端接口"
+  },
+  {
+    "type": "post",
+    "url": "order/tie",
+    "title": "获取我的客户已提额列表",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>根据传来的用户id获取已提额列表</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/order/tie"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页显示条数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "token",
+            "description": "<p>放在header里传过来</p>"
+          }
+        ]
+      }
+    },
+    "name": "___________",
+    "filename": "app/api/controller/v1/Orderlist.php",
+    "groupTitle": "客户端接口"
   }
 ]

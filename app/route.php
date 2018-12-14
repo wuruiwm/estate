@@ -53,3 +53,5 @@ Route::get('api/:version/notice/find', 'api/:version.Notice/noticeUrl');
 Route::get('api/:version/notice/content', 'api/:version.Notice/noticeContent');
 //报备客户信息提交
 Route::any('api/:version/order/add', 'api/:version.Order/orderadd');
+//我的客户已报备列表
+Route::get('api/:version/order/baobei', 'api/:version.Orderlist/baobei');

@@ -138,9 +138,13 @@
     //console.log(a);
     if (a == '?msg/1.shtml') {
     	layer.msg('修改成功');
+    	setTimeout('list()',1000);
     }else if (a == '?msg/0.shtml') {
     	layer.msg('修改失败');
     }
-    
+    function list(){
+    	$url = "{:url('admin/order/orderlist')}";
+    	window.location.href=$url;
+    }
 </script>
 </html>

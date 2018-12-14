@@ -21,9 +21,6 @@
 		.table {
 			margin: 15px 20px 0px 20px;
 		}
-		.pagination {
-			margin: 0px 20px 0px 20px;
-		}
 		#content {
 			margin-right: 40px;
 		}
@@ -32,7 +29,7 @@
 			display: inline;
 		}
 		.form-group{
-			margin-left: 50px;
+			
 			line-height:80px;
 		}
 		#sousuo {
@@ -41,36 +38,42 @@
 		#mingzi {
 			margin-right: 10px;
 		}
+		#xiala {
+			line-height:80px;
+		}
+		#left{
+			margin-left: 50px;
+		}
 	</style>
 <body>	
 	<div id="head">
 		<form action="" class=".form-inline"></form>
 		<button class="btn btn-warning btn-lg" id="button" onclick="delall();">批量删除</button>
-  		<div class="form-group neilian">
+  		<div class="form-group neilian" id="left">
     		<label for="exampleInputName2" class="neilian" id="mingzi">名字搜索:</label>
     		<input type="text" class="form-control neilian" id="exampleInputName2" placeholder="请输入姓名">
   		</div>
-  		<div class="neilian" id="xiala">
-		<select name="baobei" class="form-control neilian">
-			<option value="0">请选择类别</option>
-			<option value="1">已报备</option>
-			<option value="2">未报备</option>
-			<option value="3">已到访</option>
-			<option value="4">未到访</option>
-			<option value="5">已成交</option>
-			<option value="6">未成交</option>			
-			<option value="7">已提额</option>
-			<option value="8">未提额</option>
-		</select>
-		</div>
-		<div class="layui-input-inline">
+		<div class="layui-input-inline input">
+            <div class="layui-inline">
+              <div class="layui-input-inline">
+             	<select class="form-control">
+					<option value="0">请选择类别</option>
+					<option value="1">已报备</option>
+					<option value="3">已到访</option>
+					<option value="5">已成交</option>		
+					<option value="7">已提额</option>
+				</select>
+              </div>
+            </div>
+        </div>
+        <div class="layui-input-inline">
             <div class="layui-inline">
               <div class="layui-input-inline">
                 <input type="text" class="form-control" id="create_time" placeholder="创建时间" name="create_time">
               </div>
             </div>
         </div>
-		<button class="btn btn-info btn-lg" id="sousuo">搜索</button>
+		<button class="btn btn-info btn-lg" id="sousuo" onclick="sousou();">搜索</button>
 	</div>
 	<div id="content">
 	<table class="table table-bordered">
@@ -154,12 +157,15 @@
 			$('#quanxuan')[0].value = 0;
 		}
 	}
+	//批量删除
 	function delall(){
 		//console.log($('input:checkbox')[1].value);
 		//弹出窗口
 		layer.confirm('真的删除吗', function(index){
     	//关闭窗口
     	layer.close(index);
+    	//声明一个空对象，单选框都有xuan这个类，然后数出有多少个，然后再for循环，取出单选框上的value，也就是id
+    	//循环取出的值放到空对象里，然后转换成json格式，ajax发送post给后端，并且删除选中的行
 		var data = {};
 		var check = document.getElementsByClassName('xuan');
 		var len = check.length;
@@ -187,6 +193,37 @@
 	  	layer.msg(res);
 	  })
 	  })
+	}
+	function sousou(){
+		var options = $("option:selected").val();
+		//console.log(options);
+		var name = $('#exampleInputName2').val();
+		//console.log(name);
+		var date = $('#create_time').val();
+		//console.log(date);
+		var data = {};
+		if (options != undefined) {
+			data['zhuangtai'] = options;
+		}else {
+			data['zhuangtai'] = '';
+		}
+		if (name != '') {
+			data['name'] = name;
+		}else{
+			data['name'] = '';
+		}
+		if (date != '') {
+			data['date'] = date;
+		}else {
+			data['date'] = '';
+		}
+		//console.log(data);
+		data = JSON.stringify(data);
+		//console.log(data);
+		var url = "{:url('admin/order/orderlist')}";
+		$.post(url,data,function(res){
+			console.log(res);
+		})
 	}
 </script>
 </html>
