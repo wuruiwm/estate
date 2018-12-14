@@ -15,6 +15,7 @@ Route::get('admin_api/province/list','admin/City/getProvinceList');
 Route::get('admin_api/city/list','admin/City/getCityByPid');
 Route::get('admin_api/area/list','admin/City/getAreaByCid');
 Route::post('admin_api/house/new','admin/House/addNewHouse');
+Route::post('admin_api/house/update','admin/House/updateNewHouse');
 Route::get('admin_api/house/list','admin/House/getHouseList');
 Route::get('admin_api/brokerage/list', 'admin/Brokerage/getBrokerageList');
 Route::get('admin_api/brokerage/list_copy', 'admin/Brokerage/getList');

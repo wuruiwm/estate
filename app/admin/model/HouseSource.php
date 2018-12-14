@@ -30,6 +30,7 @@ class HouseSource extends BaseModel
             $data[$k]['img_url'] = $http . $img_url[$k];
 
         }
+
         return $data;
     }
 

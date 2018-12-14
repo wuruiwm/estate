@@ -55,13 +55,36 @@ class House extends Permissions
         }
     }
 
+    // 修改
+    public function updateNewHouse($id=''){
+        (new IDMustBePositiveInt())->goCheck();
+        if(!empty(HouseSource::getHouseById($id))){
+            (new AddNewHouse())->goCheck();
+            $post = input('post.');
+            $post['init_status']=1;
+            // 佣金方案
+            $brokerage_plan_str = '';
+            foreach($post['brokerage_plan'] as $key=>$value){
+                $brokerage_plan_str .=$value.',';
+            }
+            $post['brokerage_plan'] = substr($brokerage_plan_str,0,strlen($brokerage_plan_str)-1);
+            $post['opening_time'] = strtotime($post['opening_time']);
+            $model = new HouseSource();
+            $result = $model->allowField(true)->save($post,['id' =>$id]);
+            if($result){
+                throw new SuccessMessage();
+            }
+        }
+        throw new NullException();
+    }
+
 
     public function getHouseList($page = '', $limit = ''){
         (new Page())->goCheck();
         return HouseSource::getList($page-1, $limit);
     }
 
-    public function getHouseById($id=''){
+    public static function getHouseById($id=''){
         (new IDMustBePositiveInt())->goCheck();
         if(!empty(HouseSource::getHouseById($id))){
             return HouseSource::getHouseById($id);

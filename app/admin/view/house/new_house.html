@@ -453,18 +453,30 @@
         });
 
         var id = window.base.getQueryString('id');
-        console.log(id);
+        //console.log(id);
         if(id>0){
-            getInfo(id,form);
+            getInfo(id,form,statusTags,head_imgs,room_maps);
         }
 
         // 监听提交
         form.on('submit(submit)', function (data) {
+            var id = window.base.getQueryString('id');
             if (id > 0) {
                 // 修改数据
-                // console.log(data.field);
+                // 获取装修类型
+                var el = $(".idata");
+                var decoration_type= '';
+                for(var i=0;i<el.length;i++){
+                    var str = el[i].innerText;
+                    decoration_type += $.trim(str.substring(0,str.length-1)) + ',';
+                }
+                data.field.decoration_type = decoration_type.substring(0,decoration_type.length-1);
+                data.field.room_map = room_maps.join(",");
+                data.field.head_img = head_imgs.join(",");
+
+                //console.log(data.field);return false;
                 var params = {
-                    url: 'banner/update?id=' + id,
+                    url: 'house/update?id=' + id,
                     type: 'post',
                     data: data.field,
                     sCallback: function (successMsg) {
@@ -504,7 +516,7 @@
                     type: 'post',
                     data: data.field,
                     sCallback: function (successMsg) {
-                         console.log(successMsg);
+                         //console.log(successMsg);
                         if (successMsg.msg == '缺少权限') {
                             layer.msg(successMsg.msg);
                         }
@@ -538,7 +550,7 @@
             sCallback: function (successMsg) {
                 //初始化赋值
                 $.each(successMsg, function (key, value) {  //遍历键值对
-                    var child_node = "<input type='checkbox' name='brokerage_plan[]' value='"+value.id+"'  title='" + value.house_area + '㎡ 佣金' + value.price + "元'>";
+                    var child_node = "<input type='checkbox' name='brokerage_plan[]' value='"+value.id+"'  title='" + value.house_area + '㎡ '+value.house_type+' 佣金' + value.price + "元'>";
                     $("#parent_node").append(child_node);
                 })
 
@@ -605,13 +617,13 @@
         window.base.getData(params);
     }
 
-    function getInfo(id, form) {
+    function getInfo(id, form,statusTags,head_imgs,room_maps) {
         var params = {
             url: 'house/info?id=' + id,
             sCallback: function (successMsg) {
-                console.log(successMsg);
+                //console.log(successMsg);
                 $("input[name='title']").val(successMsg.title);
-                $("input[name='desc']").val(successMsg.title);
+                $("input[name='desc']").val(successMsg.desc);
                 $("input[name='cover_img']").val(successMsg.cover_img.img_url);
 
                 $('#img').attr('src', successMsg.cover_img.img_url);
@@ -627,7 +639,10 @@
                         '<div class="info">' + '图片' + '</div>' +
                         '</div>'
                     );
+                    head_imgs.push(successMsg.head_img[index].img_id);
                 });
+
+
                 // 户型轮播图
                 $.each(successMsg.room_map,function(index,value){
                     $('#uploader-list1').append(
@@ -637,6 +652,7 @@
                         '<div class="info">' + '图片' + '</div>' +
                         '</div>'
                     );
+                    room_maps.push(successMsg.room_map[index].img_id)
                 });
 
 
@@ -650,26 +666,31 @@
                 $("input[name='property_company']").val(successMsg.property_company);
                 $("input[name='house_address']").val(successMsg.house_address);
 
+                // 编辑器赋值
                 ue.setContent(successMsg.detail);
                 // 省份
                 $("#province").val(successMsg.province.id);
+                // 城市
+                getCityList(successMsg.province.id,form);
 
-                getCityList(140000,form);
-                    // 23 140600
-                //console.log($("#city_1"));
-                var select = 'dd[lay-value="140600"]';
-                $("#city").find("option[value='140600']").prop("selected",true);
-                console.log(select);
-                /*$('#city').siblings("div.layui-form-select").find('dl').find(140600).click();
-                $("#city").val(140600);*/
-                getAreaList(successMsg.city.id,form);
+                //
+                var tag1 = statusTags.render({
+                    el: "#tags1",
+                    template: '<span class="layui-badge layui-bg-gray idata">@title <span class="tagsremove @remove"><a href="javascript:;" style="color: #FF5722">x</a></span></span>',
+                    data: successMsg.decoration_type,
+                });
+                $('.input-add').on('keydown', function (e) {
+                    if (e.keyCode === 13) {
+                        var value = $(this).val();
+                        $(this).val('');
+                        tag1.add(value);
+                        return false;
+                    }
+                });
 
-                $("#area").val(successMsg.area.id);
-
-
+                $("#parent_node").prop("checked",true);
 
                 form.render();
-
 
             },
             eCallback: function (errorMsg) {
@@ -679,10 +700,6 @@
         window.base.getData(params);
     }
 
-
 </script>
-<!-- 加载编辑器的容器 -->
-<!--<script id="detail1" name="content" type="text/plain">法大师傅大师傅</script>-->
-
 </body>
 </html>
