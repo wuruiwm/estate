@@ -444,10 +444,10 @@
   {
     "type": "get",
     "url": "order/baobei",
-    "title": "获取我的客户已报备列表",
+    "title": "获取我的客户里四种列表",
     "group": "web",
     "version": "0.1.0",
-    "description": "<p>根据传来的用户id获取已报备列表</p>",
+    "description": "<p>根据传来的用户id获取四种状态列表</p>",
     "sampleRequest": [
       {
         "url": "http://estate.dingdingmaoer.cn/api/v1/order/baobei"
@@ -487,7 +487,7 @@
         ]
       }
     },
-    "name": "___________",
+    "name": "_____________",
     "filename": "app/api/controller/v1/Orderlist.php",
     "groupTitle": "客户端接口"
   }

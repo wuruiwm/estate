@@ -5,6 +5,8 @@ class Order extends Permissions{
 	//列表
 	public function orderlist(){
 		$order = model('Order');
+		//垃圾tp5分页，是通过get传参，所以这里不能直接判断get是否为空，所以我前端传了一个字段叫panduan
+		//通过判断这个，来判断有没有get传参
 		if (!input('get.panduan')) {
 			$list = $order->order('id desc')->paginate(10);
 		}
@@ -31,6 +33,7 @@ class Order extends Permissions{
 				break;
 			  }
 			}
+			//拼接传来的参数，拼接成where条件
 			if (isset($get['name'])) {
 				$str = $str." and name='".$get['name']."'";
 			}
@@ -38,13 +41,7 @@ class Order extends Permissions{
 				$date = strtotime($get['date']);
 				$str = $str.' and date='.$date;
 			}
-			//echo $str;exit();
 			$list = $order->where($str)->order('id desc')->paginate(10,false,['query'=>$get]);
-			$sta = '';
-			foreach ($get as $k => $v) {
-				$sta = $sta .'&'.$k.'='.$v;
-			}
-			$this->assign('sta',$sta);
 		}
 		//获取分页代码
 		$page = $list->render();
