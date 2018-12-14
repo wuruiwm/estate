@@ -275,6 +275,16 @@
 
 </form>
 {include file="public/foot"}
+<!-- 编辑器配置文件 -->
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="__PUBLIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('detail');
+</script>
+
 <script>
     layui.use(['form', 'layedit', 'laydate', 'upload', 'statusTags'], function () {
         var form = layui.form
@@ -608,9 +618,9 @@
                 $('#img').css({"width": '375', "height": '200'});
                 $('#thumb').append('<input type="hidden" name="cover_img" value="' + successMsg.cover_img.img_id + '">');
 
-                console.log(successMsg.head_img);
+                // 头部轮播图
                 $.each(successMsg.head_img,function(index,value){
-                    $('#uploader-list1').append(
+                    $('#uploader-list').append(
                         '<div id="" class="file-iteme">' +
                         '<div class="handle"><span class="glyphicon glyphicon-trash"><i class="layui-icon layui-icon-delete"></i></span> <span style="display: none">' + successMsg.head_img[index].img_id + '</span></div>' +
                         '<img style="width: 100px;height: 100px;" src=' + successMsg.head_img[index].img_url + '>' +
@@ -618,16 +628,46 @@
                         '</div>'
                     );
                 });
+                // 户型轮播图
+                $.each(successMsg.room_map,function(index,value){
+                    $('#uploader-list1').append(
+                        '<div id="" class="file-iteme">' +
+                        '<div class="handle"><span class="glyphicon glyphicon-trash"><i class="layui-icon layui-icon-delete"></i></span> <span style="display: none">' + successMsg.room_map[index].img_id + '</span></div>' +
+                        '<img style="width: 100px;height: 100px;" src=' + successMsg.room_map[index].img_url + '>' +
+                        '<div class="info">' + '图片' + '</div>' +
+                        '</div>'
+                    );
+                });
+
+
+                $("input[name='opening_time']").val(successMsg.opening_time);
+                $("input[name='property_costs']").val(successMsg.property_costs);
+                $("input[name='house_price']").val(successMsg.house_price);
+                $("input[name='developer']").val(successMsg.developer);
+                $("input[name='parking_space']").val(successMsg.parking_space);
+                $("input[name='greening_rate']").val(successMsg.greening_rate);
+                $("input[name='floor_area']").val(successMsg.floor_area);
+                $("input[name='property_company']").val(successMsg.property_company);
+                $("input[name='house_address']").val(successMsg.house_address);
+
+                ue.setContent(successMsg.detail);
+                // 省份
+                $("#province").val(successMsg.province.id);
+
+                getCityList(140000,form);
+                    // 23 140600
+                //console.log($("#city_1"));
+                var select = 'dd[lay-value="140600"]';
+                $("#city").find("option[value='140600']").prop("selected",true);
+                console.log(select);
+                /*$('#city').siblings("div.layui-form-select").find('dl').find(140600).click();
+                $("#city").val(140600);*/
+                getAreaList(successMsg.city.id,form);
+
+                $("#area").val(successMsg.area.id);
 
 
 
-                $("input[name='title']").val(successMsg.title);
-                $("input[name='title']").val(successMsg.title);
-                $("input[name='title']").val(successMsg.title);
-                $("input[name='title']").val(successMsg.title);
-                $("input[name='title']").val(successMsg.title);
-                $("input[name='title']").val(successMsg.title);
-                $("input[name='title']").val(successMsg.title);
                 form.render();
 
 
@@ -642,15 +682,7 @@
 
 </script>
 <!-- 加载编辑器的容器 -->
-<script id="detail" name="content" type="text/plain"></script>
-<!-- 配置文件 -->
-<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
-<!-- 编辑器源码文件 -->
-<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
-<script type="text/javascript" src="__PUBLIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
-<!-- 实例化编辑器 -->
-<script type="text/javascript">
-    var ue = UE.getEditor('detail');
-</script>
+<!--<script id="detail1" name="content" type="text/plain">法大师傅大师傅</script>-->
+
 </body>
 </html>

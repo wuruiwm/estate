@@ -47,12 +47,14 @@
 </blockquote>
 <table id="banner" lay-filter="banner" ></table>
 <script type="text/html" id="showimg">
-    <div><a href="#"><img src="{{d.cover_img.img_url}}" width="30" height="30"></a></div>
+    <div><a href="#"><img src="{{d.cover_img.img_url}}" width="42" height="42"></a></div>
 </script>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 </script>
+
+
 {include file="public/foot"}
 <script>
     layui.use(['table', 'upload','form'], function () {
@@ -74,16 +76,21 @@
                 , {field: 'opening_time', title: '开盘时间', width: 200,align: 'center',}
                 , {field: 'house_price', title: '房价(元)', width: 200,}
                 , {field: 'floor_area', title: '占地面积(㎡)', width: 200,}
-                , {field: 'province', title: '省', width: 200,align: 'center'}
-                , {field: 'city', title: '市', width: 200,align: 'center'}
-                , {field: 'area', title: '区', width: 200,align: 'center'}
+                , {field: 'province', title: '省', width: 200,align: 'center',templet:function(p){
+                    return '<div>'+ p.province.name+'</div>'
+                }}
+                , {field: 'city', title: '市', width: 200,align: 'center',templet:function(c){
+                    return '<div>'+c.city.name+'</div>'
+                }}
+                , {field: 'area', title: '区', width: 200,align: 'center',templet:function(a){
+                    return '<div>'+ a.area.name+'</div>'
+                }}
                 , {field: 'house_address', title: '房源地址', width: 200,}
                 , {field: 'init_status', title: '房源类型', width: 200,}
                 , {field: 'property_company', title: '物业公司', width: 200,}
                 , {field: 'property_costs', title: '物业费元/㎡', width: 200,}
                 , {field: 'house_address', title: '房源地址', width: 200,}
                 , {field: 'house_address', title: '房源地址', width: 200,}
-
                 , {field: 'developer', title: '开发商', width: 200,}
                 , {field: 'create_time', title: '发布时间', width: 200, align: 'center', sort: true}
                 , {title: '操作', width: 160, align: 'center', toolbar: '#barDemo', fixed: 'right'}

@@ -349,49 +349,6 @@ define({ "api": [
     "groupTitle": "客户端接口"
   },
   {
-    "type": "post",
-    "url": "user/login",
-    "title": "用户登录",
-    "group": "web",
-    "version": "0.1.0",
-    "description": "<p>根据账号和密码进行登录,获取token值</p>",
-    "sampleRequest": [
-      {
-        "url": "http://estate.dingdingmaoer.cn/api/v1/user/login"
-      }
-    ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "mobile",
-            "description": "<p>手机号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": "<p>密码</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": true,
-            "field": "expires",
-            "description": "<p>默认不填2小时自动过期</p>"
-          }
-        ]
-      }
-    },
-    "name": "______",
-    "filename": "app/api/controller/v1/WebToken.php",
-    "groupTitle": "客户端接口"
-  },
-  {
     "type": "get",
     "url": "house/list",
     "title": "获取首页房源列表",
@@ -439,6 +396,49 @@ define({ "api": [
     },
     "name": "________",
     "filename": "app/api/controller/v1/House.php",
+    "groupTitle": "客户端接口"
+  },
+  {
+    "type": "post",
+    "url": "user/login",
+    "title": "用户登录",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>根据账号和密码进行登录,获取token值</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/user/login"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>手机号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>密码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": true,
+            "field": "expires",
+            "description": "<p>默认不填2小时自动过期</p>"
+          }
+        ]
+      }
+    },
+    "name": "_________",
+    "filename": "app/api/controller/v1/WebToken.php",
     "groupTitle": "客户端接口"
   }
 ] });

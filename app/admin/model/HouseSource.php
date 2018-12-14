@@ -90,17 +90,29 @@ class HouseSource extends BaseModel
 
     public function getProvinceAttr($value)
     {
-        return Province::where('province_id', $value)->value('name');
+        //return Province::where('province_id', $value)->value('name');
+        return [
+            'id'=>$value,
+            'name'=>Province::where('province_id', $value)->value('name')
+        ];
     }
 
     public function getCityAttr($value)
     {
-        return City::where('city_id', $value)->value('name');
+        //return City::where('city_id', $value)->value('name');
+        return [
+            'id'=>$value,
+            'name'=>City::where('city_id', $value)->value('name')
+        ];
     }
 
     public function getAreaAttr($value)
     {
-        return Area::where('_id', $value)->value('name');
+        //return Area::where('_id', $value)->value('name');
+        return [
+            'id'=>$value,
+            'name'=>Area::where('_id', $value)->value('name')
+        ];
     }
 
     // 后台
