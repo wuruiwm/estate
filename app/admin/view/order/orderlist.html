@@ -47,11 +47,11 @@
 	</style>
 <body>	
 	<div id="head">
-		<form action="" class=".form-inline"></form>
+		<form action="" method="post"></form>
 		<button class="btn btn-warning btn-lg" id="button" onclick="delall();">批量删除</button>
   		<div class="form-group neilian" id="left">
     		<label for="exampleInputName2" class="neilian" id="mingzi">名字搜索:</label>
-    		<input type="text" class="form-control neilian" id="exampleInputName2" placeholder="请输入姓名">
+    		<input type="text" name="name" class="form-control neilian" id="exampleInputName2" placeholder="请输入姓名">
   		</div>
 		<div class="layui-input-inline input">
             <div class="layui-inline">
@@ -73,6 +73,7 @@
               </div>
             </div>
         </div>
+       <!--  <input type="submit" value="提交"> -->
 		<button class="btn btn-info btn-lg" id="sousuo" onclick="sousou();">搜索</button>
 	</div>
 	<div id="content">
@@ -194,6 +195,7 @@
 	  })
 	  })
 	}
+	//搜索
 	function sousou(){
 		var options = $("option:selected").val();
 		//console.log(options);
@@ -201,28 +203,34 @@
 		//console.log(name);
 		var date = $('#create_time').val();
 		//console.log(date);
+		var url = "{:url('admin/order/orderlist')}";
 		var data = {};
 		if (options != undefined) {
-			data['zhuangtai'] = options;
+			url = url+'?zhuangtai='+options;
 		}else {
 			data['zhuangtai'] = '';
 		}
 		if (name != '') {
-			data['name'] = name;
+			url = url+'&name='+name;
 		}else{
 			data['name'] = '';
 		}
 		if (date != '') {
-			data['date'] = date;
+			url = url+'&date='+date;
 		}else {
 			data['date'] = '';
 		}
+		url = url + '&panduan=1';
 		//console.log(data);
-		data = JSON.stringify(data);
+		//data = JSON.stringify(data);
 		//console.log(data);
-		var url = "{:url('admin/order/orderlist')}";
-		$.post(url,data,function(res){
-			console.log(res);
+		// $.post(url,data,function(res){
+		// 	console.log(res);
+		// })
+		//console.log(url);
+		var data = {};
+		$.post(url,function(res){
+			document.getElementsByTagName('body')[0].innerHTML = res;
 		})
 	}
 </script>

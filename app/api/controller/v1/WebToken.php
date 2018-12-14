@@ -28,7 +28,7 @@ class WebToken extends BaseController
      * @apiParam {String} mobile 手机号
      * @apiParam {String} password 密码
      * @apiParam {int}  [expires] 默认不填2小时自动过期
-     * @apiName 账号密码登录
+     * @apiName 客户端账号密码登录
      */
     public function getWebToken($mobile='',$password='',$expires=''){
         (new WebTokenCheck())->goCheck();

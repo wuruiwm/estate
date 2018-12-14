@@ -5,21 +5,15 @@ class Order extends Permissions{
 	//列表
 	public function orderlist(){
 		$order = model('Order');
-		if (!$_POST) {
-			//分页，并且获取所有的行数据，并且按照id倒序排列,放到一个二维数组里，并且每页是10个,
+		if (!input('get.panduan')) {
 			$list = $order->order('id desc')->paginate(10);
-		}else {
-			//var_dump(input('post.'));exit();
-			$post = input('post.');
-			$res = '';
-			foreach ($post as $k => $v) {
-				$res = json_decode($k,true);
-			}
-			print_r($res);
-			$str = '';
-			if ($res['zhuangtai'] != '') {
+		}
+		else {
+			$get = input('get.');
+			$str = '1';
+			if (isset($get['zhuangtai'])) {
 			//将传来的状态码，转换成我的客户中的四种状态
-			switch ($res['zhuangtai']) {
+			switch ($get['zhuangtai']) {
 				case '1':
 				$str = 'is_new=1';
 				break;
@@ -37,15 +31,20 @@ class Order extends Permissions{
 				break;
 			  }
 			}
-			if ($res['name'] != '') {
-				$str = $str +'and name='.$res['name'];
+			if (isset($get['name'])) {
+				$str = $str." and name='".$get['name']."'";
 			}
-			if ($res['date'] != '') {
-				$date = strtotime($res['date']);
-				$str = $str + 'and date='.$date;
+			if (isset($get['date'])) {
+				$date = strtotime($get['date']);
+				$str = $str.' and date='.$date;
 			}
-			echo $str;
-			$list = $order->where($str)->order('id desc')->paginate(10);
+			//echo $str;exit();
+			$list = $order->where($str)->order('id desc')->paginate(10,false,['query'=>$get]);
+			$sta = '';
+			foreach ($get as $k => $v) {
+				$sta = $sta .'&'.$k.'='.$v;
+			}
+			$this->assign('sta',$sta);
 		}
 		//获取分页代码
 		$page = $list->render();
