@@ -38,7 +38,7 @@ class Banner extends Permissions
         $result = BannerModel::all();
         if(count($result)>=6){
             throw new ErrorMessage([
-               'msg'=>'添加失败: 图片不能超过6张'
+               'msg'=>'首页轮播图已达到上限'
             ]);
         }
 

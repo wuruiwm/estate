@@ -26,8 +26,13 @@ Route::any('admin_api/brokerage/remove', 'admin/Brokerage/delById');
 Route::get('admin_api/house/info', 'admin/House/getHouseById');
 Route::get('admin_api/house/remove', 'admin/House/delById');
 Route::get('admin_api/house/dels', 'admin/House/dels');
-
-
+Route::post('admin_api/store/new','admin/Store/newStore');
+Route::get('admin_api/store/code','admin/Store/createCode');
+Route::get('admin_api/store/list','admin/Store/getList');
+Route::get('admin_api/store/remove', 'admin/Store/delById');
+Route::get('admin_api/store/item', 'admin/store/getInfoById');
+Route::post('admin_api/store/update', 'admin/Store/updateById');
+Route::get('admin_api/store/dels', 'admin/store/dels');
 /**
  * 客户端接口
  */

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新增门店</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all"/>
+    <link rel="stylesheet" href="__CSS__/admin.css" media="all">
+</head>
+<body style="padding:10px;">
+<form class="layui-form" id="" lay-filter="formBanner">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">店名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址</label>
+        <div class="layui-input-inline">
+            <input type="text" name="address" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">负责人</label>
+        <div class="layui-input-inline">
+            <input type="text" name="manager" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系方式</label>
+        <div class="layui-input-inline">
+            <input type="text" name="phone" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">注册邀请码</label>
+        <div class="layui-input-inline">
+            <input type="text" name="reg_code" placeholder="请输入6位邀请码" autocomplete="off" class="layui-input">
+        </div>
+        <a class="layui-btn layui-btn-normal create_code_btn">点击自动生成</a>
+    </div>
+    <div class="layui-upload" id="upload-thumb">
+        <label class="layui-form-label">门店照</label>
+        <button type="button" class="layui-btn" id="thumb">上传图片</button>
+        <div class="layui-inline layui-word-aux">
+            <!--建议尺寸：宽750 x 高400-->
+        </div>
+        <div class="layui-upload-list">
+            <label class="layui-form-label"></label>
+            <img class="layui-upload-img" id="img" src="">
+            <p id="demoText"></p>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submit" id="submit">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+{include file="public/foot"}
+<script>
+    layui.use(['upload', 'form'], function () {
+        var form = layui.form;
+        var upload = layui.upload;
+
+        var id = window.base.getQueryString('id');
+        if (id > 0) {
+            getInfoById(id, form);
+        }
+        //上传缩略图
+        var uploadInst = upload.render({
+            elem: '#thumb' //绑定元素
+            , url: "{:url('common/upload')}" //上传接口
+            , data: {use: 'article_thumb'}
+            , done: function (res) {
+                //上传完毕回调
+                if (res.code == 2) {
+                    $('#img').attr('src', res.src);
+                    $('#img').css({"width": '375', "height": '200'});
+                    $('#upload-thumb').append('<input type="hidden" name="img_id" value="' + res.id + '">');
+                } else {
+                    layer.msg(res.msg);
+                }
+            }
+            , error: function () {
+                //请求异常回调
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+
+        // 获取id参数
+        var id = window.base.getQueryString('id');
+        //监听提交
+        form.on('submit(submit)', function (data) {
+            // 发送post请求 修改
+            if (id > 0) {
+                console.log(data.field);
+                var params = {
+                    url: 'store/update?id=' + id,
+                    type: 'post',
+                    data: data.field,
+                    sCallback: function (successMsg) {
+                        if (successMsg.msg == '缺少权限') {
+                            layer.msg(successMsg.msg);
+                        }
+                        if (successMsg.errorCode == 20100) {
+                            //弹出loading
+                            var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
+                            setTimeout(function () {
+                                top.layer.close(index);
+                                top.layer.msg("修改成功");
+                                layer.closeAll("iframe");
+                                //刷新父页面
+                                parent.location.reload();
+                            }, 1000);
+                        }
+                    },
+                    eCallback: function (errorMsg) {
+                        if (errorMsg.responseJSON.errorCode == 40000) {
+                            layer.msg(errorMsg.responseJSON.msg);
+                        }
+                    }
+                }
+                // 新增
+            } else {
+                var params = {
+                    url: 'store/new',
+                    type: 'post',
+                    data: data.field,
+                    sCallback: function (successMsg) {
+                        if (successMsg.msg == '缺少权限') {
+                            layer.msg(successMsg.msg);
+                        }
+                        if (successMsg.errorCode == 20100) {
+                            //弹出loading
+                            var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
+                            setTimeout(function () {
+                                top.layer.close(index);
+                                top.layer.msg("添加成功", {icon: 1});
+                                layer.closeAll("iframe");
+                                //刷新父页面
+                                parent.location.reload();
+                            }, 1000);
+                        }
+                    },
+                    eCallback: function (errorMsg) {
+                        if (errorMsg.responseJSON.errorCode == '40000') {
+                            layer.msg(errorMsg.responseJSON.msg);
+                        }
+                    }
+                }
+
+            }
+            window.base.getData(params);
+            return false;
+        });
+
+    });
+
+    // 封装 GET请求 根据主键id获取该条数据
+    function getInfoById(id, form) {
+        var params = {
+            url: 'store/item?id=' + id,
+            sCallback: function (successMsg) {
+                //初始化赋值
+                $("input[name='name']").val(successMsg.name);
+                $("input[name='manager']").val(successMsg.manager);
+                $("input[name='address']").val(successMsg.address);
+                $("input[name='reg_code']").val(successMsg.reg_code);
+                if(successMsg.img_id.img_id!=1){
+                    $('#img').attr('src', successMsg.img_id.img_url);
+                    $('#img').attr({width: '375', height: '200'});
+                    $('#upload-thumb').append('<input type="hidden" name="img_id" value="' + successMsg.img_id.img_url + '">');
+                }
+                form.render();//需要渲染一下
+            },
+            eCallback: function (errorMsg) {
+                layer.msg('您请求的信息不存在!', {icon: 2});
+            }
+        };
+        window.base.getData(params);
+    }
+
+    // 生成邀请码
+    $(".create_code_btn").on('click',function(){
+        var params = {
+            url: 'store/code',
+            sCallback: function (successMsg) {
+                //初始化赋值
+                $("input[name='reg_code']").val(successMsg.code);
+
+                form.render();//需要渲染一下
+            },
+            eCallback: function (errorMsg) {
+                layer.msg('您请求的信息不存在!', {icon: 2});
+            }
+        };
+        window.base.getData(params);
+    });
+
+
+
+</script>
+</body>
+</html>
