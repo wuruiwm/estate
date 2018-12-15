@@ -79,9 +79,25 @@ class House extends Permissions
     }
 
 
-    public function getHouseList($page = '', $limit = ''){
+    public function getHouseList($page = '', $limit = '',$key=''){
         (new Page())->goCheck();
-        return HouseSource::getList($page-1, $limit);
+        if(isset($key['keyword']) and !empty($key['keyword'])){
+            $where['title'] = ['like', '%' . $key['keyword'] . '%'];
+        }
+        if(isset($key['type_id']) and !empty($key['type_id'])){
+            $where['init_status'] = $key['type_id'];
+        }
+        if(isset($key['create_time']) and !empty($key['create_time'])) {
+            $min_time = strtotime($key['create_time']);
+            // $max_time = $min_time + 24 * 60 * 60;
+            $where['opening_time'] = $min_time;// [['>=',$min_time],['<=',$max_time]];
+
+        }
+        if(empty($where['title']) and empty($where['init_status']) and empty($where['opening_time'])){
+            $where = null;
+        }
+        //return json($key);
+        return HouseSource::getList($page-1, $limit,$where);
     }
 
     public static function getHouseById($id=''){
@@ -90,6 +106,44 @@ class House extends Permissions
             return HouseSource::getHouseById($id);
         }
         throw new NullException();
+    }
+
+
+    //删除一个
+    public function delById($id=''){
+        (new IDMustBePositiveInt())->goCheck();
+        $model = new HouseSource();
+        $result = $model::getHouseById($id);
+        if($result){
+            $result = $model::destroy($id);
+            if($result){
+                throw new SuccessMessage();
+            }
+        }
+        throw new NullException();
+    }
+
+    // 批量删除
+    public function dels($ids){
+        $model = new HouseSource();
+        $result = $model::destroy($ids);;
+        if($result>0){
+            throw new SuccessMessage();
+        }
+
+    }
+
+    // 是否显示
+    public function isHead($id='',$is_head='')
+    {
+        $model = new HouseSource();
+        $result = $model->where('id',$id)->update([
+            'is_head'=>$is_head,
+            'update_time'=>time()
+        ]);
+        if($result){
+            throw new SuccessMessage();
+        }
     }
 
 

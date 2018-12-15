@@ -47,9 +47,9 @@ class User extends BaseController
         $result->mobile = $result->phone;
         $result->phone = hide_phone($result->phone);
         if ($result->superior_id == 0) {
-            $result->superior_id = '平台';
+            $result->superior_id = '大众经纪人';
         } else {
-            $result->superior_id = \app\api\model\User::where('id', $result->superior_id)->column('nickname')[0];
+            $result->superior_id = '门店经纪人';
         }
         return $result;
     }

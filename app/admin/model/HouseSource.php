@@ -76,7 +76,7 @@ class HouseSource extends BaseModel
 
     public function getInitStatusAttr($value)
     {
-        return ['二手房','新房'][$value];
+        return ['占位','新房','二手房'][$value];
     }
 
     public function getDecorationTypeAttr($value)
@@ -117,11 +117,12 @@ class HouseSource extends BaseModel
     }
 
     // 后台
-    public static function getList($page, $limit)
+    public static function getList($page, $limit,$where)
     {
         $number = $page * $limit;
         $house = self::limit($number, $limit)
             ->order('create_time desc')
+            ->where($where)
             ->select();
         if (!$house) {
             return self::DataFormat(0);
@@ -130,8 +131,11 @@ class HouseSource extends BaseModel
     }
 
     // 客户端
-    public static function getHomeList($page, $limit,$province,$city)
+    public static function getHomeList($page, $limit,$province,$city,$type)
     {
+        if($type==''){
+            $type='1,2';
+        }
 
         $field = 'id,title,cover_img,init_status,house_price,house_address,decoration_type,brokerage_plan,province,city,area';
         if($province==='北京' || $province==='天津' || $province==='上海' || $province==='重庆'){
@@ -141,6 +145,7 @@ class HouseSource extends BaseModel
             $house = self::where('city',$city_Info['city_id'])
                 ->where('province',$city_Info['province_id'])
                 ->where('area',$area['_id'])
+                ->where('init_status','in',$type)
                 ->field($field)
                 ->order('create_time desc')
                 ->page($page, $limit)
@@ -155,6 +160,7 @@ class HouseSource extends BaseModel
             $province_id = $city['province_id'];
             $house = self::where('city',$city_id)
                 ->where('province',$province_id)
+                ->where('init_status','in',$type)
                 ->field($field)
                 ->order('create_time desc')
                 ->page($page, $limit)
@@ -169,5 +175,19 @@ class HouseSource extends BaseModel
     // 客户端
     public static function getHouseById($id){
         return HouseSource::get($id);
+    }
+
+    // 客户端头条
+    public static function getHouseHead($limit){
+        $field = 'id,title,desc,cover_img,house_address,init_status';
+        $head = self::where('is_head',1)
+            ->field($field)
+            ->limit($limit)
+            ->order('update_time desc')
+            ->select();
+        if(!empty($head)){
+           return $head;
+        }
+
     }
 }

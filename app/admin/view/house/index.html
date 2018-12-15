@@ -2,19 +2,26 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>房源列表</title>
+    <title>产品管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
-    <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
-    <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all"/>
+    <link rel="stylesheet" href="__CSS__/admin.css" media="all">
+
 </head>
 <body style="padding:10px;">
 <blockquote class="layui-elem-quote">
     <div class="layui-form" id="admin">
         <div class="layui-inline">
             <a class="layui-btn layui-btn-danger batchDel" data-type="getCheckData">批量删除</a>
+        </div>
+        <div class="layui-inline">
+            <a class="layui-btn layui-btn-normal newsAdd_btn">发布新房</a>
+        </div>
+        <div class="layui-inline">
+            <a class="layui-btn layui-btn-normal newsAdd">发布二手房</a>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">搜索名称：</label>
@@ -26,26 +33,21 @@
             <select name="type_id" lay-filter="aihao" id="option">
                 <option value="">请选择类别</option>
                 <option value="1">新房</option>
-                <option value="1">二手房</option>
+                <option value="2">二手房</option>
+
             </select>
         </div>
         <div class="layui-inline">
             <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="create_time" placeholder="创建时间" name="create_time">
+                <input type="text" class="layui-input" id="create_time" placeholder="开盘时间" name="create_time">
             </div>
         </div>
         <div class="layui-inline">
             <button class="layui-btn" data-type="reload">搜索</button>
         </div>
-        <div class="layui-inline" style="float:right;">
-            <a class="layui-btn layui-btn-normal used">发布二手房</a>
-        </div>
-        <div class="layui-inline" style="float:right;margin-right: 10px;">
-            <a class="layui-btn layui-btn-warm newHouse">发布新房</a>
-        </div>
     </div>
 </blockquote>
-<table id="banner" lay-filter="banner" ></table>
+<table id="demo" lay-filter="test" ></table>
 <script type="text/html" id="showimg">
     <div><a href="#"><img src="{{d.cover_img.img_url}}" width="42" height="42"></a></div>
 </script>
@@ -53,14 +55,77 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 </script>
-
-
+<script type="text/html" id="switch_one">
+    <input type="checkbox" name="is_head" value="{{d.is_head}}" lay-skin="switch" lay-text="开启|关闭" lay-filter="IsHead" {{ d.is_head == 1 ?'checked' : '' }}>
+</script>
 {include file="public/foot"}
 <script>
     layui.use(['table', 'upload','form'], function () {
+        // 判断是否登录成功后 token令牌存在
+//  if(!window.base.getLocalStorage('token')){
+//    window.location.href = 'login.html';
+//  }
         var table = layui.table;
+        var form = layui.form;
+
+
+
+        // 监听表格操作
+        table.on('tool(test)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+            if (layEvent === 'edit') {
+                $(window).one("resize", function () {
+                    var index = layui.layer.open({
+                        title: "编辑信息",
+                        type: 2,
+                        content: "new_house?id=" + data.id,
+                        success: function (layero, index) {
+                            setTimeout(function () {
+                                layui.layer.tips('点击此处返回信息列表', '.layui-layer-setwin .layui-layer-close', {
+                                    tips: 3
+                                });
+                            }, 500)
+                        }
+                    })
+                    layui.layer.full(index);
+                }).resize();
+            }
+            if(layEvent === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    del(data.id);
+                });
+            }
+        });
+        //监听性别操作
+        form.on('switch(IsHead)', function(obj){
+            // 获取当前控件
+            var selectIfKey=obj.othis;
+            // 获取当前所在行
+            var parentTr = selectIfKey.parents("tr");
+            // 获取当前所在行的索引
+            var parentTrIndex = parentTr.attr("data-index");
+            // 获取“是否主键”的值
+            var ifKey=parentTr.find(('td:eq(1)')).text().trim();
+
+            //layer.tips(this.obj + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+            //layer.tips(obj.elem.checked?'已开启':'已关闭', obj.othis);
+            if(obj.elem.checked){
+                is_head(ifKey,1);
+                layer.tips('已开启', obj.othis);
+            }else{
+                is_head(ifKey,0);
+                layer.tips('已关闭', obj.othis);
+            }
+        });
+
+        //第一个实例
         table.render({
-            elem: '#banner'
+            elem: '#demo'
             , height: 'full-120'
             , width: 'full'
             , url: window.base.g_restUrl + 'house/list' //数据接口
@@ -74,6 +139,7 @@
                 , {field: 'title', title: '标题', width: 300,}
                 , {field: 'desc', title: '简介', width: 200,}
                 , {field: 'opening_time', title: '开盘时间', width: 200,align: 'center',}
+                , {field: "is_head", title: '头条房源', width: 90, align: 'center',toolbar:"#switch_one",unresize: true}
                 , {field: 'house_price', title: '房价(元)', width: 200,}
                 , {field: 'floor_area', title: '占地面积(㎡)', width: 200,}
                 , {field: 'province', title: '省', width: 200,align: 'center',templet:function(p){
@@ -93,6 +159,7 @@
                 , {field: 'house_address', title: '房源地址', width: 200,}
                 , {field: 'developer', title: '开发商', width: 200,}
                 , {field: 'create_time', title: '发布时间', width: 200, align: 'center', sort: true}
+                , {field: 'update_time', title: '发布时间', width: 200, align: 'center', sort: true}
                 , {title: '操作', width: 160, align: 'center', toolbar: '#barDemo', fixed: 'right'}
             ]],
             id: 'testReload',
@@ -105,97 +172,58 @@
             }
         });
 
-        //监听单元格编辑
-        table.on('edit(banner)', function(obj){
-            var value = obj.value //得到修改后的值
-                ,data = obj.data //得到所在行所有键值
-                ,field = obj.field; //得到字段
+        // 搜索
+        var $ = layui.$, active = {
+            reload: function () {
+                var demoReload = $('#demoReload');// 搜索关键词
+                var option = $('#option');// 下拉选项
+                var create_time = $('#create_time'); // 创建时间
+                //layer.alert(create_time.val());return false;
+                //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        key: {
+                            keyword: demoReload.val(),
+                            type_id: option.val(),
+                            create_time: create_time.val()
+                        }
+                    }
+                });
+            },
+            // 批量删除
+            getCheckData: function(){ //获取选中数据
+                var checkStatus = table.checkStatus('testReload')
+                    ,data = checkStatus.data;
 
-            //layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
-            if(field=='order_id'){
-                var datas = {
-                    order_id:value
+                var deList=[];
+                data.forEach(function(n,i){
+                    deList.push(n.id);
+                });
+                if(deList!=''){
+                    layer.confirm('确定删除所选项吗？',function (index) {
+                        layer.close(index);
+                        dels(deList,table);
+                    })
+                }else{
+                    layer.tips('请选择需要删除的行',$('.batchDel'),{
+                        tips:[3,'#5fb878']
+                    })
                 }
             }
-            if(field=='link_url'){
-                var datas = {
-                    link_url:value
-                }
-            }
-            edit(data.id,datas);
+        };
+
+
+        // 点击搜索按钮
+        $('.layui-elem-quote .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
         });
 
-        //监听单元格操作编辑
-        table.on('tool(banner)', function(obj){
-            var data = obj.data; //获得当前行数据
-            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-            // 编辑
-            if (layEvent === 'edit') {
-                $(window).one("resize", function () {
-                    var index = layui.layer.open({
-                        title: "编辑信息",
-                        type: 2,
-                        content: "new_house?id=" + data.id,
-                        success: function (layero, index) {
-                            setTimeout(function () {
-                                layui.layer.tips('点击此处返回信息列表', '.layui-layer-setwin .layui-layer-close', {
-                                    tips: 3
-                                });
-                            }, 500)
-                        }
-                    })
-                    layui.layer.full(index);
-                }).resize();
-            }
-            // 删除操作
-            if(layEvent === 'del'){
-                layer.confirm('真的删除行么', function(index){
-                    //向服务端发送删除指令
-                    layer.close(index);
-                    del(data.id,obj,index)
-                });
-            }
-        })
+    })
 
-
-    });
-
-    // 发布新房
-    $(window).one("resize", function () {
-        $(".newHouse").click(function () {
-            var index = layui.layer.open({
-                title: "发布新房",
-                type: 2,
-                content: "new_house",
-                success: function (layero, index) {
-                    setTimeout(function () {
-                        layui.layer.tips('点击此处返回房源管理', '.layui-layer-setwin .layui-layer-close', {
-                            tips: 3
-                        });
-                    }, 500)
-                }
-            })
-            layui.layer.full(index);
-        })
-    }).resize();
-    // 发布二手房
-    $(window).one("resize", function () {
-        $(".used").click(function () {
-            var index = layui.layer.open({
-                title: "添加二手房",
-                type: 2,
-                content: "used",
-                success: function (layero, index) {
-                    setTimeout(function () {
-                        layui.layer.tips('点击此处返回房源管理', '.layui-layer-setwin .layui-layer-close', {
-                            tips: 3
-                        });
-                    }, 500)
-                }
-            })
-            layui.layer.full(index);
-        })
-    }).resize();
 
     //图片放大
     function hoverOpenImg() {
@@ -215,49 +243,56 @@
         $('td img').attr('style', 'max-width:70px;display:block!important');
     }
 
-    // 修改
-    function edit(id,datas){
-        var params = {
-            url:'banner/update?id=' + id,
-            type:'post',
-            data:datas,
-            sCallback:function(successMsg){
-                if(successMsg.msg=='缺少权限'){
-                    layer.msg(successMsg.msg);
+    //添加产品
+    //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
+    $(window).one("resize", function () {
+        $(".newsAdd_btn").click(function () {
+            var index = layui.layer.open({
+                title: "发布新房",
+                type: 2,
+                content: "new_house",
+                success: function (layero, index) {
+                    setTimeout(function () {
+                        layui.layer.tips('点击此处返回产品列表', '.layui-layer-setwin .layui-layer-close', {
+                            tips: 3
+                        });
+                    }, 500)
                 }
+            })
+            layui.layer.full(index);
+        })
+    }).resize();
+
+
+    // 批量删除
+    function dels(ids,table){
+        var params = {
+            url:'house/dels?ids='+ids,
+            sCallback:function(successMsg){
                 if(successMsg.errorCode==20100){
                     //弹出loading
-                    var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.5});
+                    var index = top.layer.msg('批量删除中，请稍候',{icon: 16,time:false,shade:0.5});
                     setTimeout(function(){
                         top.layer.close(index);
-                        top.layer.msg("修改成功");
+                        top.layer.msg("删除成功",{icon: 1});
                         layer.closeAll("iframe");
-                        //刷新父页面
-                        //parent.location.reload();
-                    },1000);
+                        table.reload('testReload',{});
+                    },2000);
                 }
             },
             eCallback:function(errorMsg){
-                if(errorMsg.responseJSON.errorCode==40000){
-                    layer.msg(errorMsg.responseJSON.msg);
-                }
+                layer.msg('您请求的信息不存在!',{icon: 2});
             }
-        }
+        };
         window.base.getData(params);
     }
-
     // 单删除
-    function del(id,obj,index){
+    function del(id){
         var params = {
-            url:'banner/remove?id='+id,
+            url:'house/remove?id='+id,
             sCallback:function(successMsg){
-                if(successMsg.msg=='缺少权限'){
-                    layer.msg(successMsg.msg);
-                }
                 if(successMsg.errorCode==20100){
                     //弹出loading
-                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                    layer.close(index);
                     layer.msg("删除成功",{icon: 1});
                 }
             },
@@ -267,6 +302,23 @@
         };
         window.base.getData(params);
     }
+
+    // 是否显示
+    function is_head(id,is_head){
+        var params = {
+            url:'house/is_head?id='+id+'&is_head='+is_head,
+            sCallback:function(successMsg){
+                if(successMsg.errorCode==20100){
+                    //弹出loading
+                }
+            },
+            eCallback:function(errorMsg){
+                layer.msg('您请求的信息不存在!',{icon: 2});
+            }
+        };
+        window.base.getData(params);
+    }
 </script>
+
 </body>
 </html>
