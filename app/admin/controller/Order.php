@@ -69,9 +69,9 @@ class Order extends Permissions{
 				$list[$k]['is_deal'] = '未成交';
 			}
 			if ($v['is_pay'] == 1) {
-				$list[$k]['is_pay'] = '<span style="color: red;">已提额</span>';
+				$list[$k]['is_pay'] = '<span style="color: red;">已结佣</span>';
 			}else {
-				$list[$k]['is_pay'] = '未提额';
+				$list[$k]['is_pay'] = '未结佣';
 			}
 		}
 		//将多行数据的数组list和分页代码page
@@ -199,7 +199,7 @@ class Order extends Permissions{
 				$post['is_deal'] = 1;
 				$post['is_pay'] = 0;
 				break;
-
+				//当修改为已提额状态时，同时把状态改为已提额状态和已成交
 				case '7':
 				$post['is_new'] = 0;
 				$post['is_visit'] = 0;

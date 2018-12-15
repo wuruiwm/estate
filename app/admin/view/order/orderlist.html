@@ -61,7 +61,7 @@
 					<option value="1">已报备</option>
 					<option value="3">已到访</option>
 					<option value="5">已成交</option>		
-					<option value="7">已提额</option>
+					<option value="7">已结佣</option>
 				</select>
               </div>
             </div>
@@ -90,7 +90,7 @@
 			<td align="center"><strong>是否报备</strong></td>
 			<td align="center"><strong>是否到访</strong></td>
 			<td align="center"><strong>是否成交</strong></td>
-			<td align="center"><strong>是否提额</strong></td>
+			<td align="center"><strong>是否结佣</strong></td>
 			<td align="center"><strong>操作</strong></td>
 		</tr>
 		{volist name="list" id="v"}
@@ -150,10 +150,14 @@
     });
 	//全选
 	function xuan(){
+		//我们先给全选的按钮写一个value为0，点击的时候判断value为几
+		//如果为0，就说明目前不是全选状态，就把所有的单选框选中了
+		//并且把value改为1
 		if ($('#quanxuan')[0].value == 0) {
 			$('input:checkbox').prop('checked',true);
 			$('#quanxuan')[0].value = 1;
 		}else {
+			//如果value不为0，说明是点击过全选的，这时候我们再去把所有单选框不选中
 			$('input:checkbox').prop('checked',false);
 			$('#quanxuan')[0].value = 0;
 		}
@@ -169,17 +173,23 @@
 		var data = {};
 		//选中类名为xuan的单选框，在foreach循环的时候，我给单选框加了一个class，所以循环出来的tr的单选框都有这个class
 		var check = document.getElementsByClassName('xuan');
+		//数出来有多少个，因为最后一页不一定是10个
 		var len = check.length;
+		//循环，并且判断是否选中，如果选中，则把value赋值给数组，传给后端
 		for (var i = 0; i<len; i++) {
 		if (check[i].checked) {
 			var a = check[i].value;
 			data[i] = a;
 		}
 	  }
+	  //后端不好取值，只好把对象再放到一个空对象里了
 	  var data2 = {};
 	  data2['res'] = data;
+	  //转换成json格式
 	  var a = JSON.stringify(data2);
+	  //获取url
 	  var url = "{:url('admin/Order/orderdel')}";
+	  //post传参，弹出后端提示值，并且循环传参用的data，取出值，用remove删除掉选中的tr
 	  $.post(url,data,function(res){
 	  	for(var i in data){
 	  		$('#tr'+data[i]).remove();
