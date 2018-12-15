@@ -74,20 +74,20 @@ class Order extends Permissions{
 				$list[$k]['is_pay'] = '未提额';
 			}
 		}
+		//将多行数据的数组list和分页代码page
 		$this->assign('list',$list);
 		$this->assign('page',$page);
-		//$this->assign('data',$data);
 		return $this->fetch();
 	}
 	//删除
 	public function orderDel(){
-		//var_dump(input('post.'));exit();
 		$post = input('post.');
 		$id = input('id');
 		//判断$id是否为一个数字，是数字代表是删除一个，如果不是数字，传来的是数组， 那么就是批量删除
 		if (is_numeric($id)) {
 		//获取传来的id，并且赋值给实例化对象，然后调用删除操作
 		$order = model('Order');
+		//将主键值赋值给model出来的实例化对象的
 		$order->id = $id;
 		$res = $order->delete();
 		if ($res) {
@@ -203,7 +203,7 @@ class Order extends Permissions{
 				case '7':
 				$post['is_new'] = 0;
 				$post['is_visit'] = 0;
-				$post['is_deal'] = 0;
+				$post['is_deal'] = 1;
 				$post['is_pay'] = 1;
 				break;
 			}

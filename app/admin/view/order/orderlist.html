@@ -160,7 +160,6 @@
 	}
 	//批量删除
 	function delall(){
-		//console.log($('input:checkbox')[1].value);
 		//弹出窗口
 		layer.confirm('真的删除吗', function(index){
     	//关闭窗口
@@ -168,24 +167,18 @@
     	//声明一个空对象，单选框都有xuan这个类，然后数出有多少个，然后再for循环，取出单选框上的value，也就是id
     	//循环取出的值放到空对象里，然后转换成json格式，ajax发送post给后端，并且删除选中的行
 		var data = {};
+		//选中类名为xuan的单选框，在foreach循环的时候，我给单选框加了一个class，所以循环出来的tr的单选框都有这个class
 		var check = document.getElementsByClassName('xuan');
 		var len = check.length;
 		for (var i = 0; i<len; i++) {
-		//console.log(check[i].checked);
 		if (check[i].checked) {
 			var a = check[i].value;
 			data[i] = a;
-			// var tr = '#tr'+a;
-			// $(tr).remove();
 		}
 	  }
-	  //console.log(data);
 	  var data2 = {};
 	  data2['res'] = data;
 	  var a = JSON.stringify(data2);
-	  //var a = JSON.stringify(data2);
-	  //console.log(a);
-	  
 	  var url = "{:url('admin/Order/orderdel')}";
 	  $.post(url,data,function(res){
 	  	for(var i in data){
@@ -197,40 +190,30 @@
 	}
 	//搜索
 	function sousou(){
+		//获取下拉框的value
 		var options = $("option:selected").val();
-		//console.log(options);
+		//获取name框的value
 		var name = $('#exampleInputName2').val();
-		//console.log(name);
+		//获取日期框的value
 		var date = $('#create_time').val();
-		//console.log(date);
+		//生成列表的url
 		var url = "{:url('admin/order/orderlist')}";
-		var data = {};
+		//判断三个内容框里有没有值，如果有值，则把值取出来，并且和url拼接在一起
 		if (options != undefined) {
 			url = url+'?zhuangtai='+options;
-		}else {
-			data['zhuangtai'] = '';
 		}
 		if (name != '') {
 			url = url+'&name='+name;
-		}else{
-			data['name'] = '';
 		}
 		if (date != '') {
 			url = url+'&date='+date;
-		}else {
-			data['date'] = '';
 		}
+		//拼接一个状态码，为了后台判断是否有get传参用
+		//因为垃圾tp5分页，点击页码会get传参，不能直接判断是否有get传参，我们判断get传参里是否有这个状态码
 		url = url + '&panduan=1';
-		//console.log(data);
-		//data = JSON.stringify(data);
-		//console.log(data);
-		// $.post(url,data,function(res){
-		// 	console.log(res);
-		// })
-		//console.log(url);
-		var data = {};
+		//发送get请求，并且把返回值，直接替换整个body
 		$.post(url,function(res){
-			document.getElementsByTagName('body')[0].innerHTML = res;
+			document.getElementsByTagName('html')[0].innerHTML = res;
 		})
 	}
 </script>

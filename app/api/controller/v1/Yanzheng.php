@@ -18,7 +18,6 @@ class Yanzheng extends controller{
 	public function yanzheng(){
 		//获取用户id
 		$id = Token::getCurrentTokenUserId();
-		//$id = 2;
 		//正则验证身份证号
 		$card_number = input('post.card_number');
 		$search = '/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/';
@@ -35,7 +34,6 @@ class Yanzheng extends controller{
 		$card_phone = input('post.card_phone');
 		$search = '/^1[34578]\d{9}$/';
 		$bool = preg_match($search,$card_phone);
-		//echo $bool; exit();
 		if ($bool == 0) {
 			return ['msg'=>'请输入正确的手机号'];
 		}
@@ -55,7 +53,8 @@ class Yanzheng extends controller{
 				//返回文件路径
 				$card_img = DS.'uploads'.DS.'user_card'.DS.$info->getSaveName();
 				$data['card_img'] = $card_img;
-				//print_r($data);exit();
+				//将is_submit是否提交实名认证的字段改变为1
+				$data['is_submit'] = 1;
 				//修改操作
 				$res = $user->isUpdate(true)->save($data);
 				//返回提示信息
@@ -79,7 +78,6 @@ class Yanzheng extends controller{
      */
 	public function shenhe(){
 		$id = Token::getCurrentTokenUserId();
-		//$id = 2;
 		$user = model('User');
 		$res = $user->field(['id','is_submit','is_examine'])->where('id',$id)->find();
 		$data = $res->getData();
