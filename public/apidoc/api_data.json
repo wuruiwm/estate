@@ -400,35 +400,6 @@
   },
   {
     "type": "get",
-    "url": "house/head",
-    "title": "获取房源头条",
-    "group": "web",
-    "version": "0.1.0",
-    "description": "<p>获取房源头条,无须做下拉加载更多</p>",
-    "sampleRequest": [
-      {
-        "url": "http://estate.dingdingmaoer.cn/api/v1/house/head"
-      }
-    ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "limit",
-            "description": "<p>限制取几条 默认不参为10条</p>"
-          }
-        ]
-      }
-    },
-    "name": "______",
-    "filename": "app/api/controller/v1/House.php",
-    "groupTitle": "客户端接口"
-  },
-  {
-    "type": "get",
     "url": "house/info",
     "title": "获取房源详情",
     "group": "web",
@@ -448,6 +419,35 @@
             "optional": false,
             "field": "id",
             "description": "<p>房源id</p>"
+          }
+        ]
+      }
+    },
+    "name": "______",
+    "filename": "app/api/controller/v1/House.php",
+    "groupTitle": "客户端接口"
+  },
+  {
+    "type": "get",
+    "url": "house/head",
+    "title": "获取房源头条",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>获取房源头条,无须做下拉加载更多</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/house/head"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>限制取几条 默认不参为10条</p>"
           }
         ]
       }

@@ -25,7 +25,9 @@ class Orderlist extends Controller{
 		}
 		//报备，到访，提额的字段
 		$field = ['id','name','number','content','date'];
+		//先判断状态值是不是数字，再用switch case来对每种值的情况进行判断
 		if (is_numeric($state)) {
+			if ($state==1||$state==2||$state==3||$state==4) {
 			switch ($state) {
 			case '1':
 			$str = 'is_new';
@@ -45,25 +47,35 @@ class Orderlist extends Controller{
 			$str = 'is_pay';
 			break;
 			}
-		}else {
+		  }else {
 			//如果传来的状态码不是
 			return ['msg'=>'请输入正确的状态码'];
+			}
 		}
 		$order = model('Order');
+		//获取用户id
 		$user_id = Token::getCurrentTokenUserId();
 		//$user_id = 2;
 		$str = $str.'=1 and user_id='.$user_id;
+		//=,=前端让我把一个状态的总条数传过去，没办法，只能再查询一次了
+		$count = $order->where($str)->select();
+		$count = count($count);
+		//echo $count;exit();
+		//查出符合条件的数据
 		$res = $order->field($field)
 		->where($str)
 		->order('id desc')
 		->page($page,$limit)
 		->select();
 		$data = [];
+		//循环取出res这个多个对象的集合，再对每个对象使用getData方法取出数据，然后再赋值给一个数组
+		//同时把date的时间戳，改为日期，再赋值回去
 		foreach ($res as $k => $v) {
 			$a = $v->getData();
 			$a['date'] = date('Y-n-j',$a['date']);
 			$data[] = $a;
 		}
+		$data['count'] = $count;
 		return $data;
 	}
 	/**
