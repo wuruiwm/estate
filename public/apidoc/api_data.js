@@ -320,6 +320,85 @@ define({ "api": [
     "name": "PostRegisterMobile"
   },
   {
+    "type": "post",
+    "url": "yanzheng/shenhe",
+    "title": "获取实名验证和审核状态",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>获取是否实名验证和审核状态</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/yanzheng/shenhe"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "token",
+            "description": "<p>放到header里，用来获取用户id的token</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/api/controller/v1/Yanzheng.php",
+    "groupTitle": "客户端接口",
+    "name": "PostYanzhengShenhe"
+  },
+  {
+    "type": "post",
+    "url": "yanzheng/yanzheng",
+    "title": "实名认证",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>报备客户信息提交</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/yanzheng/yanzheg"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "card_name",
+            "description": "<p>姓名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "card_phone",
+            "description": "<p>手机号码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "card_number",
+            "description": "<p>身份证号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "token",
+            "description": "<p>放到header里，用来获取用户id的token</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/api/controller/v1/Yanzheng.php",
+    "groupTitle": "客户端接口",
+    "name": "PostYanzhengYanzheng"
+  },
+  {
     "type": "get",
     "url": "house/info",
     "title": "获取房源详情",
@@ -488,6 +567,42 @@ define({ "api": [
       }
     },
     "name": "_____________",
+    "filename": "app/api/controller/v1/Orderlist.php",
+    "groupTitle": "客户端接口"
+  },
+  {
+    "type": "get",
+    "url": "order/content",
+    "title": "获取报备列表的内容详情",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>根据传来的用户id获取四种状态列表</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/order/content"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>报备列表的id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "token",
+            "description": "<p>放在header里传过来</p>"
+          }
+        ]
+      }
+    },
+    "name": "__________________",
     "filename": "app/api/controller/v1/Orderlist.php",
     "groupTitle": "客户端接口"
   }
