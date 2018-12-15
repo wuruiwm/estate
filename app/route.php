@@ -64,5 +64,11 @@ Route::get('api/:version/notice/find', 'api/:version.Notice/noticeUrl');
 Route::get('api/:version/notice/content', 'api/:version.Notice/noticeContent');
 //报备客户信息提交
 Route::any('api/:version/order/add', 'api/:version.Order/orderadd');
-//我的客户已报备列表
+//我的客户里四种列表
 Route::get('api/:version/order/baobei', 'api/:version.Orderlist/baobei');
+//我的客户列表点进去显示内容
+Route::get('api/:version/order/content', 'api/:version.Orderlist/content');
+//实名认证,上传名字，手机号，身份证号，身份证照片
+Route::post('api/:version/yanzheng/yanzheng', 'api/:version.Yanzheng/yanzheng');
+//获取实名是否验证和审核状态
+Route::any('api/:version/yanzheng/shenhe', 'api/:version.Yanzheng/shenhe');
