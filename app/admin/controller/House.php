@@ -15,6 +15,7 @@ namespace app\admin\controller;
 use app\admin\model\HouseSource;
 use app\lib\exception\SuccessMessage;
 use app\lib\validate\AddNewHouse;
+use app\lib\validate\AddUsedHouse;
 use app\lib\validate\IDMustBePositiveInt;
 use app\lib\validate\Page;
 
@@ -40,17 +41,22 @@ class House extends Permissions
      */
     public function addNewHouse()
     {
-
-        (new AddNewHouse())->goCheck();
         $post = input('post.');
-        $post['init_status'] = 1;
-        // 佣金方案
-        $brokerage_plan_str = '';
-        foreach ($post['brokerage_plan'] as $key => $value) {
-            $brokerage_plan_str .= $value . ',';
+        // 新房
+        if(input('post.init_status')=='1'){
+            (new AddNewHouse())->goCheck();
+            // 佣金方案
+            $brokerage_plan_str = '';
+            foreach ($post['brokerage_plan'] as $key => $value) {
+                $brokerage_plan_str .= $value . ',';
+            }
+            $post['brokerage_plan'] = substr($brokerage_plan_str, 0, strlen($brokerage_plan_str) - 1);
+            $post['opening_time'] = strtotime($post['opening_time']);
+        // 二手房
+        }else{
+            (new AddUsedHouse())->goCheck();
         }
-        $post['brokerage_plan'] = substr($brokerage_plan_str, 0, strlen($brokerage_plan_str) - 1);
-        $post['opening_time'] = strtotime($post['opening_time']);
+
         $model = new HouseSource();
         $result = $model->allowField(true)->save($post);
 
@@ -63,17 +69,22 @@ class House extends Permissions
     public function updateNewHouse($id = '')
     {
         (new IDMustBePositiveInt())->goCheck();
+        $post = input('post.');
         if (!empty(HouseSource::getHouseById($id))) {
-            (new AddNewHouse())->goCheck();
-            $post = input('post.');
-            $post['init_status'] = 1;
-            // 佣金方案
-            $brokerage_plan_str = '';
-            foreach ($post['brokerage_plan'] as $key => $value) {
-                $brokerage_plan_str .= $value . ',';
+            // 新房
+            if(input('post.init_status')=='1'){
+                (new AddNewHouse())->goCheck();
+                // 佣金方案
+                $brokerage_plan_str = '';
+                foreach ($post['brokerage_plan'] as $key => $value) {
+                    $brokerage_plan_str .= $value . ',';
+                }
+                $post['brokerage_plan'] = substr($brokerage_plan_str, 0, strlen($brokerage_plan_str) - 1);
+                $post['opening_time'] = strtotime($post['opening_time']);
+                // 二手房
+            }else{
+                (new AddUsedHouse())->goCheck();
             }
-            $post['brokerage_plan'] = substr($brokerage_plan_str, 0, strlen($brokerage_plan_str) - 1);
-            $post['opening_time'] = strtotime($post['opening_time']);
             $model = new HouseSource();
             $result = $model->allowField(true)->save($post, ['id' => $id]);
             if ($result) {

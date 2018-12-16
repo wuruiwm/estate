@@ -106,7 +106,7 @@
 <body style="padding:10px;">
 <form class="layui-form layui-form-pane" id="" lay-filter="formBanner">
     <div class="layui-form-item">
-        <label class="layui-form-label">标题 <span style="color: #FF5722;">*</span></label>
+        <label class="layui-form-label">名称<span style="color: #FF5722;">*</span></label>
         <div class="layui-input-block">
             <input type="text" name="title" autocomplete="off" placeholder="请输入标题"
                    class="layui-input">
@@ -473,7 +473,7 @@
                 data.field.decoration_type = decoration_type.substring(0,decoration_type.length-1);
                 data.field.room_map = room_maps.join(",");
                 data.field.head_img = head_imgs.join(",");
-
+                data.field.init_status =1;
                 //console.log(data.field);return false;
                 var params = {
                     url: 'house/update?id=' + id,
@@ -511,6 +511,7 @@
                 data.field.decoration_type = decoration_type.substring(0,decoration_type.length-1);
                 data.field.room_map = room_maps.join(",");
                 data.field.head_img = head_imgs.join(",");
+                data.field.init_status =1;
                 var params = {
                     url: 'house/new',
                     type: 'post',

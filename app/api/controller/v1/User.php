@@ -9,21 +9,18 @@
 namespace app\api\controller\v1;
 
 
-use app\admin\model\Attachment;
 use app\admin\model\Income;
 use app\api\model\ApplyOrder;
 use app\api\model\EnterPrice;
 use app\api\model\Loan;
+use app\api\model\User as ModelUser;
 use app\api\model\UserInvite;
 use app\api\model\UserRealname;
 use app\api\service\Token;
-use app\api\model\User as ModelUser;
 use app\lib\exception\ErrorMessage;
 use app\lib\exception\SuccessMessage;
 use app\lib\validate\AddRealName;
 use app\lib\validate\ChangeNickname;
-use app\lib\validate\ChangePassword;
-use app\lib\validate\ModileCode;
 use app\lib\validate\UpdateAlipay;
 use app\lib\validate\UpdateWx;
 use app\lib\validate\VerifyPhone;
@@ -33,36 +30,69 @@ use think\Db;
 class User extends BaseController
 {
 
-    //根据当前登录者获取用户信息
+    /**
+     * @api {post} user/info 获取登陆者用户信息
+     * @apiGroup user
+     * @apiVersion 0.1.0
+     * @apiDescription  根据token获取用户信息
+     * @apiParam {string} token header传参
+     * @apiSuccessExample {json} Success-Response:
+    {
+    "id": 1,
+    "nickname": "17681125543", 昵称
+    "phone": "17681125543", 手机号
+    "head_img": "http://estate.dingdingmaoer.cn/null.jpg", 用户头像
+    "level": "门店经纪人", 用户身份
+    "store_id": {
+    "id": 8,
+    "name": "安徽华邦地产", 所属房产公司名称
+    "area": "安徽" 所属区域
+    }
+    }
+     */
     public function getUserById()
     {
         $user_id = Token::getCurrentTokenUserId();
-        $result = ModelUser::get($user_id);
+        $result = ModelUser::where('id',$user_id)->field('id,nickname,phone,head_img,level,store_id')->find();
         unset($result->password);
         if (!$result) {
             throw new ErrorMessage([
                 'msg' => '账号异常：请重新登录'
             ]);
         }
-        $result->mobile = $result->phone;
-        $result->phone = hide_phone($result->phone);
-        if ($result->superior_id == 0) {
-            $result->superior_id = '大众经纪人';
-        } else {
-            $result->superior_id = '门店经纪人';
-        }
         return $result;
     }
 
-    // 修改昵称
-    public function UpdateUserById()
-    {
-        (new ChangeNickname())->goCheck();
+    /**
+     * @api {post} user/head_img 修改头像
+     * @apiGroup user
+     * @apiVersion 0.1.0
+     * @apiDescription  根据token获取用户信息
+     * @apiPermission  token header头传参
+     * @apiParam {file} head_img 用户头像
+     */
+    public function updateHeadImg(){
         $user_id = Token::getCurrentTokenUserId();
-        $post = input('post.');
-        $result = ModelUser::where('id', $user_id)
-            ->update($post);
-        if ($result) {
+        $head_img = request()->file('head_img');
+        if(empty($head_img)){
+            throw new ErrorMessage([
+                'msg'=>'请上传图片'
+            ]);
+        }
+        $head_img = $head_img->validate(['size' => 4000000, 'ext' => 'jpg,png'])->move('../public/uploads/user/');
+        if ($head_img) {
+            $head_img_path = 'uploads\user\\' . $head_img->getSaveName();
+        } else {
+            // 上传失败获取错误信息
+            throw new ErrorMessage([
+                'msg' => '上传失败'
+            ]);
+        }
+        $result = ModelUser::where('id',$user_id)
+            ->update([
+                'head_img'=>$head_img_path
+            ]);
+        if($result){
             throw new SuccessMessage();
         }
     }
@@ -79,161 +109,6 @@ class User extends BaseController
             ]);
         }
         throw new SuccessMessage();
-    }
-
-    // 修改手机号
-    public function updateMobile()
-    {
-        (new ModileCode())->goCheck();
-        $user_id = Token::getCurrentTokenUserId();
-        //$post = input('post.');
-        $result = ModelUser::where('id', $user_id)
-            ->update([
-                'phone' => input('post.mobile')
-            ]);
-        if ($result) {
-            throw new SuccessMessage();
-        }
-    }
-
-    // 设置支付宝
-    public function UpdateUserAlipay()
-    {
-        (new UpdateAlipay())->goCheck();
-        $user_id = Token::getCurrentTokenUserId();
-        //$post = input('post.');
-        $result = ModelUser::where('id', $user_id)
-            ->update([
-                'alipay_name' => input('post.alipay_name'),
-                'alipay_no' => input('post.alipay_no')
-            ]);
-        if ($result) {
-            throw new SuccessMessage();
-        }
-    }
-
-    // 设置微信
-    public function UpdateUserWx()
-    {
-        (new UpdateWx())->goCheck();
-        $user_id = Token::getCurrentTokenUserId();
-        //$post = input('post.');
-        $result = ModelUser::where('id', $user_id)
-            ->update([
-                'wx_no' => input('post.wx_no'),
-            ]);
-        if ($result) {
-            throw new SuccessMessage();
-        }
-    }
-
-    // 修改密码
-    public function updatePassword()
-    {
-        $user_id = Token::getCurrentTokenUserId();
-        $code = input('post.code');
-        if ($code !== \think\Cache::get('codeNumber')) {
-            throw new ErrorMessage([
-                'msg' => '验证码错误'
-            ]);
-        }
-        (new ChangePassword())->goCheck();
-        $password = input('post.password');
-        $password = password($password);
-        $result = ModelUser::where('id', $user_id)
-            ->update([
-                'password' => $password
-            ]);
-        if ($result) {
-            throw new SuccessMessage();
-        }
-    }
-
-
-    // 实名
-    public function realname()
-    {
-        //return input('post.mobile');
-        $user_id = Token::getCurrentTokenUserId();
-        (new AddRealName())->goCheck();
-        // 正面
-        $file_1 = request()->file('img_1');
-        if (empty($file_1)) {
-            throw new ErrorMessage([
-                'msg' => '请上传正面照'
-            ]);
-        }
-
-        // 反面
-        $file_2 = request()->file('img_2');
-        if (empty($file_2)) {
-            throw new ErrorMessage([
-                'msg' => '请上传反面照'
-            ]);
-        }
-
-        // 获取正面
-        $info_1 = $file_1->validate(['size' => 4000000, 'ext' => 'jpg,png'])->move('../public/uploads/user/');
-        if ($info_1) {
-            //uploads\user\20181106\615fac65bc552aaa692cfc36d2c6ab82.jpg
-            $img_1_path = 'uploads\user\\' . $info_1->getSaveName();
-            // return $img_1_path;
-        } else {
-            // 上传失败获取错误信息
-            throw new ErrorMessage([
-                'msg' => '上传失败'
-            ]);
-        }
-
-        // 获取反面
-        $info_2 = $file_2->validate(['size' => 4000000, 'ext' => 'jpg,png'])->move('../public/uploads/user/');
-        if ($info_2) {
-            //uploads\user\20181106\615fac65bc552aaa692cfc36d2c6ab82.jpg
-            $img_2_path = 'uploads\user\\' . $info_2->getSaveName();
-            //return $img_2_path;
-        } else {
-            // 上传失败获取错误信息
-            throw new ErrorMessage([
-                'msg' => '上传失败'
-            ]);
-        }
-
-        $data = [
-            'name' => input('post.name'),
-            'card_no' => input('post.card_no'),
-            'mobile' => input('post.mobile'),
-            'img_1' => $img_1_path,
-            'img_2' => $img_2_path,
-            'user_id' => $user_id
-        ];
-        $realModel = new UserRealname();
-        $real = $realModel->where('user_id', $user_id)->find();
-        if (!$real) {// 新增
-            $result = $realModel->create($data);
-            if ($result) {
-                throw new SuccessMessage();
-            }
-        }// 修改
-        else {
-            $data['status'] = 0;
-            $result = $realModel->where('user_id', $user_id)->update($data);
-            if ($result) {
-                throw new SuccessMessage();
-            }
-        }
-        throw new ErrorMessage([
-            'msg' => '提交失败'
-        ]);
-    }
-
-    public function item()
-    {
-        $user_id = Token::getCurrentTokenUserId();
-        $result = UserRealname::where('user_id', $user_id)
-            ->find();
-        $result['img_1'] = http_type() . '\\' . $result['img_1'];
-        $result['img_2'] = http_type() . '\\' . $result['img_2'];
-        return $result;
     }
 
 

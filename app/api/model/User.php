@@ -9,8 +9,41 @@
 namespace app\api\model;
 
 
+use app\admin\model\Attachment;
+use app\admin\model\Store;
+
 class User extends BaseModel
 {
+
+    protected function getHeadImgAttr($value)
+    {
+        if (empty($value)) {
+            return http_type() . '/default_head.jpg';
+        }
+        return http_type() . '/' . $value;
+    }
+    protected function getLevelAttr($value)
+    {
+        return ['','门店经纪人','大众经纪人'][$value];
+    }
+    protected function getStoreIdAttr($value)
+    {
+        $store = Store::where('id',$value)->find();
+       // return $store;
+        if(empty($store)){
+            return [
+                'id'=>$value,
+                'name'=>'',
+                'area'=>''
+            ];
+
+        }
+        return [
+            'id'=>$value,
+            'name'=>$store['name'],
+            'area'=>$store['area']
+        ];
+    }
 
     // 根据登录手机号+密码 查询该用户--web
     public static function getUserByMobileAndPwd($mobile,$password){

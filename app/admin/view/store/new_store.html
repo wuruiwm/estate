@@ -21,9 +21,16 @@
         <div class="layui-form-mid layui-word-aux"></div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">地址</label>
+        <label class="layui-form-label">详细地址</label>
         <div class="layui-input-inline">
             <input type="text" name="address" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux"></div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">主营区域</label>
+        <div class="layui-input-inline">
+            <input type="text" name="area" placeholder="请输入" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-form-mid layui-word-aux"></div>
     </div>
@@ -183,6 +190,8 @@
                 $("input[name='manager']").val(successMsg.manager);
                 $("input[name='address']").val(successMsg.address);
                 $("input[name='reg_code']").val(successMsg.reg_code);
+                $("input[name='area']").val(successMsg.area);
+                $("input[name='phone']").val(successMsg.phone);
                 if(successMsg.img_id.img_id!=1){
                     $('#img').attr('src', successMsg.img_id.img_url);
                     $('#img').attr({width: '375', height: '200'});

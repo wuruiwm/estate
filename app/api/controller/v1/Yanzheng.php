@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace app\api\controller\v1;
 use think\Controller;
 use app\api\service\Token;
@@ -6,12 +6,12 @@ use app\api\model;
 class Yanzheng extends controller{
 	/**
      * @api {post} yanzheng/yanzheng 实名认证
-     * @apiGroup web
+     * @apiGroup user
      * @apiVersion 0.1.0
      * @apiDescription  报备客户信息提交
      * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/yanzheng/yanzheg
-     * @apiParam {string} card_name 姓名 
-     * @apiParam {int} card_phone 手机号码 
+     * @apiParam {string} card_name 姓名
+     * @apiParam {int} card_phone 手机号码
      * @apiParam {int} card_number 身份证号
      * @apiParam {string} token 放到header里，用来获取用户id的token
      */

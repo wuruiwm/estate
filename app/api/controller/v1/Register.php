@@ -9,6 +9,7 @@
 namespace app\api\controller\v1;
 
 
+use app\admin\model\Store;
 use app\api\model\Code;
 use app\api\model\User;
 use app\api\model\UserAscend;
@@ -28,7 +29,7 @@ class Register extends BaseController
 {
     /**
      * @api {post} register/code 获取验证码[注册用]
-     * @apiGroup web
+     * @apiGroup user
      * @apiVersion 0.1.0
      * @apiDescription  用户注册时，输入手机号获取验证码
      * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/register/code
@@ -54,22 +55,40 @@ class Register extends BaseController
     }
 
     /**
-     * @api {post} register/mobile 用户注册
-     * @apiGroup web
+     * @api {post} register/mobile 注册
+     * @apiGroup user
      * @apiVersion 0.1.0
      * @apiDescription  输入手机号和短信验证码进行注册
      * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/register/mobile
+     * @apiParam {string} nickname 用户昵称
      * @apiParam {string} mobile 手机号
      * @apiParam {string} code 验证码
      * @apiParam {string} password 密码
+     * @apiParam {string} type  注册类型,1为邀请码,2为普通
+     * @apiParam {string} [invite_code] 门店邀请码,当type为1必填,type为2时可选
      */
     public function mobileReg()
     {
-        //1.验证
+
         (new MobileRegister())->goCheck();
         $mobile = input('post.mobile');
         $password = input('post.password');
         $code = input('post.code');
+
+        // 判断注册类型 1 邀请码 2 普通注册
+        $type = input('post.type');
+        if ($type==='1') {
+            $store_id = Store::where('reg_code',input('post.invite_code'))->value('id');
+            if(empty($store_id)){
+                throw new ErrorMessage([
+                    'msg'=>'邀请码错误,请联系您的房产公司负责人获取'
+                ]);
+            }
+            $level = 1;
+        }else{
+            $store_id = 0;
+            $level = 2;
+        }
 
         //2.检测用户
         $result = User::where('phone', $mobile)->find();
@@ -89,7 +108,9 @@ class Register extends BaseController
         $post = [
             'phone' => $mobile,
             'password' => $password,
-            'nickname'=>$mobile
+            'nickname' => input('post.nickname'),
+            'store_id'=>$store_id,
+            'level'=>$level
         ];
         $model = new User();
         $user = $model->create($post);
@@ -113,7 +134,7 @@ class Register extends BaseController
 
     /**
      * @api {post} password/code 获取验证码[找密用]
-     * @apiGroup web
+     * @apiGroup user
      * @apiVersion 0.1.0
      * @apiDescription  用户忘记密码时，输入手机号获取验证码
      * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/password/code
@@ -134,7 +155,7 @@ class Register extends BaseController
 
     /**
      * @api {post} password/update 重置密码
-     * @apiGroup web
+     * @apiGroup user
      * @apiVersion 0.1.0
      * @apiDescription  重新修改用户密码
      * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/password/update

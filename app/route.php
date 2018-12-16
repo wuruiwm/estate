@@ -33,6 +33,10 @@ Route::get('admin_api/store/remove', 'admin/Store/delById');
 Route::get('admin_api/store/item', 'admin/store/getInfoById');
 Route::post('admin_api/store/update', 'admin/Store/updateById');
 Route::get('admin_api/store/dels', 'admin/store/dels');
+
+Route::get('admin_api/user/list','admin/User/getList');
+Route::get('admin_api/user/remove', 'admin/User/delById');
+Route::get('admin_api/user/dels', 'admin/User/dels');
 /**
  * 客户端接口
  */
@@ -47,13 +51,12 @@ Route::get('api/:version/house/list','api/:version.House/getList');
 Route::get('api/:version/house/info','api/:version.House/getHouseById');
 Route::get('api/:version/house/head','api/:version.House/getHouseHead');
 
-// 获取用户信息
+
 Route::get('api/:version/user/info', 'api/:version.User/getUserById');
-// 修改用户信息
+Route::post('api/:version/user/head_img', 'api/:version.User/updateHeadImg');
 Route::post('api/:version/user/update', 'api/:version.User/UpdateUserById');
 
-// 验证手机号user/verify
-Route::post('api/:version/user/verify', 'api/:version.User/verifyPhone');
+
 // 修改新手机号
 Route::post('api/:version/user/update_mobile', 'api/:version.User/updateMobile');
 // 修改密码

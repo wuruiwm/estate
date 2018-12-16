@@ -20,15 +20,18 @@ class WebToken extends BaseController
      */
 
     /**
-     * @api {post} user/login 用户登录
-     * @apiGroup web
+     * @apiDefine  user 用户
+     */
+
+    /**
+     * @api {post} user/login 登录
+     * @apiGroup user
      * @apiVersion 0.1.0
      * @apiDescription  根据账号和密码进行登录,获取token值
      * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/user/login
      * @apiParam {String} mobile 手机号
      * @apiParam {String} password 密码
      * @apiParam {int}  [expires] 默认不填2小时自动过期
-     * @apiName 客户端账号密码登录
      */
     public function getWebToken($mobile='',$password='',$expires=''){
         (new WebTokenCheck())->goCheck();

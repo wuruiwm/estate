@@ -52,7 +52,9 @@
     <div><a href="#"><img src="{{d.cover_img.img_url}}" width="42" height="42"></a></div>
 </script>
 <script type="text/html" id="barDemo">
+
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+
     <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 </script>
 <script type="text/html" id="switch_one">
@@ -69,23 +71,46 @@
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
+
             if (layEvent === 'edit') {
-                $(window).one("resize", function () {
-                    var index = layui.layer.open({
-                        title: "编辑信息",
-                        type: 2,
-                        content: "new_house?id=" + data.id,
-                        success: function (layero, index) {
-                            setTimeout(function () {
-                                layui.layer.tips('点击此处返回信息列表', '.layui-layer-setwin .layui-layer-close', {
-                                    tips: 3
-                                });
-                            }, 500)
-                        }
-                    })
-                    layui.layer.full(index);
-                }).resize();
+
+                if(data.init_status=='新房'){
+                    $(window).one("resize", function () {
+                        var index = layui.layer.open({
+                            title: "编辑信息",
+                            type: 2,
+                            content: "new_house?id=" + data.id,
+                            success: function (layero, index) {
+                                setTimeout(function () {
+                                    layui.layer.tips('点击此处返回信息列表', '.layui-layer-setwin .layui-layer-close', {
+                                        tips: 3
+                                    });
+                                }, 500)
+                            }
+                        })
+                        layui.layer.full(index);
+                    }).resize();
+                }
+                if(data.init_status=='二手房'){
+                    $(window).one("resize", function () {
+                        var index = layui.layer.open({
+                            title: "编辑信息",
+                            type: 2,
+                            content: "used?id=" + data.id,
+                            success: function (layero, index) {
+                                setTimeout(function () {
+                                    layui.layer.tips('点击此处返回信息列表', '.layui-layer-setwin .layui-layer-close', {
+                                        tips: 3
+                                    });
+                                }, 500)
+                            }
+                        })
+                        layui.layer.full(index);
+                    }).resize();
+                }
             }
+
+
             if (layEvent === 'del') {
                 layer.confirm('真的删除行么', function (index) {
                     obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
@@ -125,38 +150,37 @@
             , limit: 15 // 每页默认显示数量
             , cols: [[ //标题栏 列表信息
                 {checkbox: true, fixed: true}
-                , {field: 'id', title: 'ID', width: 100, fixed: 'left', align: 'center'}
+                , {field: 'id', title: 'ID', width: 80, fixed: 'left', align: 'center'}
                 , {field: 'cover_img.img_url', title: '封面图', width: 100, templet: '#showimg', align: 'center'}
-                , {field: 'title', title: '标题', width: 300,}
+                , {field: 'title', title: '名称', width: 300,}
                 , {field: 'desc', title: '简介', width: 200,}
-                , {field: 'opening_time', title: '开盘时间', width: 200, align: 'center',}
-                , {field: "is_head", title: '头条房源', width: 90, align: 'center', toolbar: "#switch_one", unresize: true}
-                , {field: 'house_price', title: '房价(元)', width: 200,}
-                , {field: 'floor_area', title: '占地面积(㎡)', width: 200,}
+                , {field: 'init_status', title: '房源类型', width: 150,align:'center',sort: true}
+                , {field: 'opening_time', title: '开盘时间', width: 200, align: 'center',sort: true}
+                , {field: "is_head", title: '头条房源', width: 150,sort: true, align: 'center', toolbar: "#switch_one", unresize: true}
+                , {field: 'house_price', title: '房价(元)', width: 200,sort: true}
+                , {field: 'floor_area', title: '占地面积(㎡)', width: 200,sort: true}
                 , {
-                    field: 'province', title: '省', width: 200, align: 'center', templet: function (p) {
+                    field: 'province', title: '省', width: 200, align: 'center',sort: true, templet: function (p) {
                         return '<div>' + p.province.name + '</div>'
                     }
                 }
                 , {
-                    field: 'city', title: '市', width: 200, align: 'center', templet: function (c) {
+                    field: 'city', title: '市', width: 200, align: 'center', sort: true,templet: function (c) {
                         return '<div>' + c.city.name + '</div>'
                     }
                 }
                 , {
-                    field: 'area', title: '区', width: 200, align: 'center', templet: function (a) {
+                    field: 'area', title: '区', width: 200, align: 'center',sort: true, templet: function (a) {
                         return '<div>' + a.area.name + '</div>'
                     }
                 }
                 , {field: 'house_address', title: '房源地址', width: 200,}
-                , {field: 'init_status', title: '房源类型', width: 200,}
+
                 , {field: 'property_company', title: '物业公司', width: 200,}
                 , {field: 'property_costs', title: '物业费元/㎡', width: 200,}
-                , {field: 'house_address', title: '房源地址', width: 200,}
-                , {field: 'house_address', title: '房源地址', width: 200,}
-                , {field: 'developer', title: '开发商', width: 200,}
+                , {field: 'house_address', title: '房源地址', width: 200,sort: true}
+                , {field: 'developer', title: '开发商', width: 200,sort: true}
                 , {field: 'create_time', title: '发布时间', width: 200, align: 'center', sort: true}
-                , {field: 'update_time', title: '发布时间', width: 200, align: 'center', sort: true}
                 , {title: '操作', width: 160, align: 'center', toolbar: '#barDemo', fixed: 'right'}
             ]],
             id: 'testReload',
@@ -260,6 +284,23 @@
         })
     }).resize();
 
+    $(window).one("resize", function () {
+        $(".newsAdd").click(function () {
+            var index = layui.layer.open({
+                title: "发布二手房",
+                type: 2,
+                content: "used",
+                success: function (layero, index) {
+                    setTimeout(function () {
+                        layui.layer.tips('点击此处返回产品列表', '.layui-layer-setwin .layui-layer-close', {
+                            tips: 3
+                        });
+                    }, 500)
+                }
+            })
+            layui.layer.full(index);
+        })
+    }).resize();
 
     // 批量删除
     function dels(ids, table) {

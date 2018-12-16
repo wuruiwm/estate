@@ -1,10 +1,714 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>发布二手房</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all"/>
+    <link rel="stylesheet" href="__CSS__/admin.css" media="all">
+    <style>
+        .tags-wrap {
+            border: 1px solid #e6e6e6;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .tags-wrap:after {
+            content: "";
+            display: block;
+            visibility: hidden;
+            height: 0;
+            line-height: 0;
+            clear: both;
+        }
+
+         
+        .tags-input {
+            width: 200px;
+            height: 38px;
+        }
+
+        .tags-input input {
+            border: none;
+        }
+
+        .tags, .tags-input {
+            float: left;
+        }
+
+        .tags {
+            margin-left: 10px;
+        }
+
+        .tags .layui-badge {
+            padding: 5px;
+            margin: 5px 0;
+            margin-right: 5px;
+            font-size: 14px;
+        }
+
+        .tagsremove {
+            color: #2F4056;
+        }
+
+        /*多图上传*/
+        .uploader-list {
+            margin-left: -15px;
+        }
+
+        .uploader-list .info {
+            position: relative;
+            margin-top: -25px;
+            background-color: black;
+            color: white;
+            filter: alpha(Opacity=80);
+            -moz-opacity: 0.5;
+            opacity: 0.5;
+            width: 100px;
+            height: 25px;
+            text-align: center;
+            display: none;
+        }
+
+        .uploader-list .handle {
+            position: relative;
+            background-color: black;
+            color: white;
+            filter: alpha(Opacity=80);
+            -moz-opacity: 0.5;
+            opacity: 0.5;
+            width: 100px;
+            text-align: right;
+            height: 18px;
+            margin-bottom: -18px;
+            display: none;
+        }
+
+        .uploader-list .handle span {
+            margin-right: 5px;
+        }
+
+        .uploader-list .handle span:hover {
+            cursor: pointer;
+        }
+
+        .uploader-list .file-iteme {
+            margin: 12px 0 0 15px;
+            padding: 1px;
+            float: left;
+        }
+
+    </style>
 </head>
-<body>
-二手
+<body style="padding:10px;">
+<form class="layui-form layui-form-pane" id="" lay-filter="formBanner">
+    <div class="layui-form-item">
+        <label class="layui-form-label">名称<span style="color: #FF5722;">*</span></label>
+        <div class="layui-input-block">
+            <input type="text" name="title" autocomplete="off" placeholder="请输入名称"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">简介<span style="color: #FF5722;">*</span></label>
+        <div class="layui-input-block">
+            <input type="text" name="desc" placeholder="请输入简介" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">封面图<span style="color: #FF5722;">*</span></label>
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn" id="thumb">上传图片</button>
+            <div class="layui-inline layui-word-aux">
+                建议尺寸：宽750 x 高400
+            </div>
+            <div class="layui-upload-list">
+                <img class="layui-upload-img" id="img" src="">
+                <p id="demoText"></p>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">头部轮播图</label>
+            <div class="layui-input-block layui-upload">
+                <button type="button" class="layui-btn" id="test2">点击上传</button>
+                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;width: 88%">
+                    预览图：
+                    <div class="layui-upload-list uploader-list" style="overflow: auto;" id="uploader-list">
+
+                    </div>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <!--<div class="layui-inline">
+            <label class="layui-form-label">开盘时间<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="opening_time" id="date1" autocomplete="off" class="layui-input">
+            </div>
+        </div>-->
+        <div class="layui-inline">
+            <label class="layui-form-label">房价<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-inline">
+                <input type="text" name="house_price" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">元/㎡</div>
+        </div>
+        <!--<div class="layui-inline">
+            <label class="layui-form-label">开发商<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-inline">
+                <input type="text" name="developer" autocomplete="off" class="layui-input">
+            </div>
+        </div>-->
+    </div>
+    <div class="layui-form-item">
+        <!--<div class="layui-inline">
+            <label class="layui-form-label">车位数量<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="parking_space" autocomplete="off" class="layui-input">
+            </div>
+        </div>-->
+        <!--<div class="layui-inline">
+            <label class="layui-form-label">绿化率<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-inline">
+                <input type="text" name="greening_rate" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">%</div>
+        </div>-->
+        <div class="layui-inline">
+            <label class="layui-form-label">房屋类型<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-inline">
+                <input type="text" name="house_type" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">三室一厅</div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">房屋面积<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-inline">
+                <input type="text" name="floor_area" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">㎡</div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <!--<div class="layui-inline">
+            <label class="layui-form-label">物业公司<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="property_company" autocomplete="off" class="layui-input">
+            </div>
+        </div>-->
+        <div class="layui-inline">
+            <label class="layui-form-label">物业费<span style="color: #FF5722;">*</span></label>
+            <div class="layui-input-inline">
+                <input type="text" name="property_costs" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">元/㎡</div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择地区</label>
+        <div class="layui-input-inline">
+            <select name="province" lay-filter="province" id="province">
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select name="city" lay-filter="city" id="city">
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <select name="area" lay-filter="area" id="area">
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房源地址<span style="color: #FF5722;">*</span></label>
+        <div class="layui-input-block">
+            <input type="text" name="house_address" placeholder="请输入房源地址"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <!--<div class="layui-form-item">
+        <label class="layui-form-label">佣金方案</label>
+        <div class="layui-input-block" id="parent_node"></div>
+    </div>-->
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">房源图片</label>
+            <div class="layui-input-block layui-upload">
+                <button type="button" class="layui-btn" id="test1">点击上传</button>
+                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;width: 88%">
+                    预览图：
+                    <div class="layui-upload-list uploader-list" style="overflow: auto;" id="uploader-list1">
+
+                    </div>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">装修类型</label>
+        <div class="layui-input-block">
+            <div class="tags-wrap">
+                <div class="tags" id="tags1"></div>
+                <div class="tags-input">
+                    <input type="text" id="decoration_type" class="layui-input input-add" placeholder="添加类型">
+                </div>
+            </div>
+            <div class="layui-form-mid layui-word-aux">点击"添加类型"输入完成后,按回车键即可,最多支持12种类型</div>
+        </div>
+    </div>
+
+
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">房源介绍</label>
+        <div class="layui-input-block">
+            <textarea id="detail" name="detail" type="text/plain" style="height: 300px;width: 1024px;"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button class="layui-btn" lay-submit lay-filter="submit" id="submit">确认发布</button>
+    </div>
+
+
+</form>
+{include file="public/foot"}
+<!-- 编辑器配置文件 -->
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="__PUBLIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('detail');
+</script>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'upload', 'statusTags'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , upload = layui.upload,
+            statusTags = layui.statusTags;
+
+
+        var tag1 = statusTags.render({
+            el: "#tags1",
+            template: '<span class="layui-badge layui-bg-gray idata">@title <span class="tagsremove @remove"><a href="javascript:;" style="color: #FF5722">x</a></span></span>',
+            data: [
+                '毛坯',
+                '简约',
+                '豪华装'
+            ],
+        });
+
+        $('.input-add').on('keydown', function (e) {
+            if (e.keyCode === 13) {
+                var value = $(this).val();
+                $(this).val('');
+                tag1.add(value);
+                return false;
+            }
+        });
+
+
+        // 日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        // 省市区联动
+        getProvinceList(form);
+        form.on('select(province)', function (data) {
+            var pid = data.value;
+            getCityList(pid, form);
+            $("#area").empty();
+        });
+        form.on('select(city)', function (data) {
+            var cid = data.value;
+            getAreaList(cid, form);
+        });
+
+        // 头部轮播图上传
+        var head_imgs = [];
+        upload.render({
+            elem: '#test2'
+            , url: "{:url('common/upload')}"
+            , multiple: true
+            , before: function (obj) {
+                layer.msg('图片上传中...', {
+                    icon: 16,
+                    shade: 0.01,
+                    time: 0
+                })
+            }
+            , done: function (res) {
+                layer.close(layer.msg());//关闭上传提示窗口
+                //上传完毕
+                $('#uploader-list').append(
+                    '<div id="" class="file-iteme">' +
+                    '<div class="handle"><span class="glyphicon glyphicon-trash"><i class="layui-icon layui-icon-delete"></i></span> <span style="display: none">' + res.id + '</span></div>' +
+                    '<img style="width: 100px;height: 100px;" src=' + res.src + '>' +
+                    '<div class="info">' + '图片' + '</div>' +
+                    '</div>'
+                );
+                head_imgs.push(res.id);
+            }
+        });
+        $(document).on("mouseenter mouseleave", ".file-iteme", function (event) {
+            if (event.type === "mouseenter") {
+                //鼠标悬浮
+                $(this).children(".info").fadeIn("fast");
+                $(this).children(".handle").fadeIn("fast");
+            } else if (event.type === "mouseleave") {
+                //鼠标离开
+                $(this).children(".info").hide();
+                $(this).children(".handle").hide();
+            }
+        });
+        // 删除图片
+        $(document).on("click", ".file-iteme .handle", function (event) {
+            var s_id = ($(this).context).lastChild.innerHTML;
+            head_imgs.splice($.inArray(s_id, head_imgs), 1);
+            $(this).parent().remove();
+
+        });
+
+        // 头部轮播图上传
+        var room_maps = [];
+        upload.render({
+            elem: '#test1'
+            , url: "{:url('common/upload')}"
+            , multiple: true
+            , before: function (obj) {
+                layer.msg('图片上传中...', {
+                    icon: 16,
+                    shade: 0.01,
+                    time: 0
+                })
+            }
+            , done: function (res) {
+                layer.close(layer.msg());//关闭上传提示窗口
+                //上传完毕
+                $('#uploader-list1').append(
+                    '<div id="" class="file-iteme">' +
+                    '<div class="handle"><span class="glyphicon glyphicon-trash"><i class="layui-icon layui-icon-delete"></i></span> <span style="display: none">' + res.id + '</span></div>' +
+                    '<img style="width: 100px;height: 100px;" src=' + res.src + '>' +
+                    '<div class="info">' + '图片' + '</div>' +
+                    '</div>'
+                );
+                room_maps.push(res.id);
+            }
+        });
+        $(document).on("mouseenter mouseleave", ".file-iteme", function (event) {
+            if (event.type === "mouseenter") {
+                //鼠标悬浮
+                $(this).children(".info").fadeIn("fast");
+                $(this).children(".handle").fadeIn("fast");
+            } else if (event.type === "mouseleave") {
+                //鼠标离开
+                $(this).children(".info").hide();
+                $(this).children(".handle").hide();
+            }
+        });
+        // 删除图片
+        $(document).on("click", ".file-iteme .handle", function (event) {
+            var s_id = ($(this).context).lastChild.innerHTML;
+            room_maps.splice($.inArray(s_id, room_maps), 1);
+            $(this).parent().remove();
+
+        });
+
+
+
+        // getBrokerageList(form);
+
+        //上传封面图
+        var uploadInst = upload.render({
+            elem: '#thumb' //绑定元素
+            , url: "{:url('common/upload')}" //上传接口
+            , data: {use: 'house_cover_head'}
+            , done: function (res) {
+                if (res.code == 2) {
+                    $('#img').attr('src', res.src);
+                    $('#img').css({"width": '375', "height": '200'});
+                    $('#thumb').append('<input type="hidden" name="cover_img" value="' + res.id + '">');
+                } else {
+                    layer.msg(res.msg);
+                }
+            }
+            , error: function () {
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+
+        var id = window.base.getQueryString('id');
+        //console.log(id);
+        if(id>0){
+            getInfo(id,form,statusTags,head_imgs,room_maps);
+        }
+
+        // 监听提交
+        form.on('submit(submit)', function (data) {
+            var id = window.base.getQueryString('id');
+            if (id > 0) {
+                // 修改数据
+                // 获取装修类型
+                var el = $(".idata");
+                var decoration_type= '';
+                for(var i=0;i<el.length;i++){
+                    var str = el[i].innerText;
+                    decoration_type += $.trim(str.substring(0,str.length-1)) + ',';
+                }
+                data.field.decoration_type = decoration_type.substring(0,decoration_type.length-1);
+                data.field.room_map = room_maps.join(",");
+                data.field.head_img = head_imgs.join(",");
+                data.field.init_status =2;
+                //console.log(data.field);return false;
+                var params = {
+                    url: 'house/update?id=' + id,
+                    type: 'post',
+                    data: data.field,
+                    sCallback: function (successMsg) {
+                        if (successMsg.msg == '缺少权限') {
+                            layer.msg(successMsg.msg);
+                        }
+                        if (successMsg.errorCode == 20100) {
+                            var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
+                            setTimeout(function () {
+                                top.layer.close(index);
+                                top.layer.msg("修改成功");
+                                layer.closeAll("iframe");
+                                parent.location.reload();
+                            }, 1000);
+                        }
+                    },
+                    eCallback: function (errorMsg) {
+                        if (errorMsg.responseJSON.errorCode == 40000) {
+                            layer.msg(errorMsg.responseJSON.msg);
+                        }
+                    }
+                }
+                // 新增数据
+            } else {
+                // 获取装修类型
+                var el = $(".idata");
+                var decoration_type= '';
+                for(var i=0;i<el.length;i++){
+                    var str = el[i].innerText;
+                    decoration_type += $.trim(str.substring(0,str.length-1)) + ',';
+                }
+                data.field.decoration_type = decoration_type.substring(0,decoration_type.length-1);
+                data.field.room_map = room_maps.join(",");
+                data.field.head_img = head_imgs.join(",");
+                data.field.init_status =2;
+                var params = {
+                    url: 'house/new',
+                    type: 'post',
+                    data: data.field,
+                    sCallback: function (successMsg) {
+                        //console.log(successMsg);
+                        if (successMsg.msg == '缺少权限') {
+                            layer.msg(successMsg.msg);
+                        }
+                        if (successMsg.errorCode == 20100) {
+                            var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
+                            setTimeout(function () {
+                                top.layer.close(index);
+                                top.layer.msg("添加成功", {icon: 1});
+                                layer.closeAll("iframe");
+                                parent.location.reload();
+                            }, 1000);
+                        }
+                    },
+                    eCallback: function (errorMsg) {
+                        if (errorMsg.responseJSON.errorCode == '40000') {
+                            layer.msg(errorMsg.responseJSON.msg);
+                        }
+                    }
+                }
+            }
+            window.base.getData(params);
+            return false;
+        });
+
+    });
+
+    /*// 获取所有佣金方案
+    function getBrokerageList(form) {
+        var params = {
+            url: 'brokerage/list_copy',
+            sCallback: function (successMsg) {
+                //初始化赋值
+                $.each(successMsg, function (key, value) {  //遍历键值对
+                    var child_node = "<input type='checkbox' name='brokerage_plan[]' value='"+value.id+"'  title='" + value.house_area + '㎡ '+value.house_type+' 佣金' + value.price + "元'>";
+                    $("#parent_node").append(child_node);
+                })
+
+
+                form.render();//需要渲染一下
+            },
+            eCallback: function (errorMsg) {
+                layer.msg('佣金方案数据缺损!', {icon: 2});
+            }
+        };
+        window.base.getData(params);
+    }*/
+
+
+    function getProvinceList(form) {
+        var params = {
+            url: 'province/list',
+            sCallback: function (successMsg) {
+                $.each(successMsg, function (i, item) {
+                    $("#province").append($("<option/>").text(item.name).attr("value", item.province_id));
+                });
+                form.render('select');
+            },
+            eCallback: function (errorMsg) {
+
+            }
+        };
+        window.base.getData(params);
+    }
+
+    function getCityList(pid, form) {
+        var params = {
+            url: 'city/list?pid=' + pid,
+            sCallback: function (successMsg) {
+                // console.log(successMsg);
+                $("#city").empty();
+                $.each(successMsg, function (i, item) {
+                    $("#city").append($("<option/>").text(item.name).attr("value", item.city_id));
+                });
+                form.render('select');
+            },
+            eCallback: function (errorMsg) {
+
+            }
+        };
+        window.base.getData(params);
+    }
+
+    function getAreaList(cid, form) {
+        var params = {
+            url: 'area/list?cid=' + cid,
+            sCallback: function (successMsg) {
+                // console.log(successMsg);
+                $("#area").empty();
+                $.each(successMsg, function (i, item) {
+                    $("#area").append($("<option/>").text(item.name).attr("value", item._id));
+                });
+                form.render('select');
+            },
+            eCallback: function (errorMsg) {
+
+            }
+        };
+        window.base.getData(params);
+    }
+
+    function getInfo(id, form,statusTags,head_imgs,room_maps) {
+        var params = {
+            url: 'house/info?id=' + id,
+            sCallback: function (successMsg) {
+                //console.log(successMsg);
+                $("input[name='title']").val(successMsg.title);
+                $("input[name='desc']").val(successMsg.desc);
+                $("input[name='cover_img']").val(successMsg.cover_img.img_url);
+
+                $('#img').attr('src', successMsg.cover_img.img_url);
+                $('#img').css({"width": '375', "height": '200'});
+                $('#thumb').append('<input type="hidden" name="cover_img" value="' + successMsg.cover_img.img_id + '">');
+
+                // 头部轮播图
+                $.each(successMsg.head_img,function(index,value){
+                    $('#uploader-list').append(
+                        '<div id="" class="file-iteme">' +
+                        '<div class="handle"><span class="glyphicon glyphicon-trash"><i class="layui-icon layui-icon-delete"></i></span> <span style="display: none">' + successMsg.head_img[index].img_id + '</span></div>' +
+                        '<img style="width: 100px;height: 100px;" src=' + successMsg.head_img[index].img_url + '>' +
+                        '<div class="info">' + '图片' + '</div>' +
+                        '</div>'
+                    );
+                    head_imgs.push(successMsg.head_img[index].img_id);
+                });
+
+
+                // 户型轮播图
+                $.each(successMsg.room_map,function(index,value){
+                    $('#uploader-list1').append(
+                        '<div id="" class="file-iteme">' +
+                        '<div class="handle"><span class="glyphicon glyphicon-trash"><i class="layui-icon layui-icon-delete"></i></span> <span style="display: none">' + successMsg.room_map[index].img_id + '</span></div>' +
+                        '<img style="width: 100px;height: 100px;" src=' + successMsg.room_map[index].img_url + '>' +
+                        '<div class="info">' + '图片' + '</div>' +
+                        '</div>'
+                    );
+                    room_maps.push(successMsg.room_map[index].img_id)
+                });
+
+
+                //$("input[name='opening_time']").val(successMsg.opening_time);
+                $("input[name='property_costs']").val(successMsg.property_costs);
+                $("input[name='house_price']").val(successMsg.house_price);
+                //$("input[name='developer']").val(successMsg.developer);
+                $("input[name='parking_space']").val(successMsg.parking_space);
+                $("input[name='greening_rate']").val(successMsg.greening_rate);
+                $("input[name='floor_area']").val(successMsg.floor_area);
+                //$("input[name='property_company']").val(successMsg.property_company);
+                $("input[name='house_address']").val(successMsg.house_address);
+                $("input[name='house_type']").val(successMsg.house_type);
+
+                // 编辑器赋值
+                ue.setContent(successMsg.detail);
+                // 省份
+                $("#province").val(successMsg.province.id);
+                // 城市
+                getCityList(successMsg.province.id,form);
+
+                //
+                var tag1 = statusTags.render({
+                    el: "#tags1",
+                    template: '<span class="layui-badge layui-bg-gray idata">@title <span class="tagsremove @remove"><a href="javascript:;" style="color: #FF5722">x</a></span></span>',
+                    data: successMsg.decoration_type,
+                });
+                $('.input-add').on('keydown', function (e) {
+                    if (e.keyCode === 13) {
+                        var value = $(this).val();
+                        $(this).val('');
+                        tag1.add(value);
+                        return false;
+                    }
+                });
+
+                $("#parent_node").prop("checked",true);
+
+                form.render();
+
+            },
+            eCallback: function (errorMsg) {
+
+            }
+        };
+        window.base.getData(params);
+    }
+
+</script>
 </body>
 </html>

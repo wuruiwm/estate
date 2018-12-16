@@ -54,14 +54,14 @@ class HouseSource extends BaseModel
         $brokerage_plan = Brokerage::where('id', 'in', $value)->select();
         //return $brokerage_plan;
         // 拼接数据
-        if ($brokerage_plan) {
+        if (count($brokerage_plan) > 0) {
             return [
                 'number' => count($brokerage_plan),
                 'price' => floatval($brokerage_plan[0]['price']),
                 'data' => $brokerage_plan
             ];
         }
-
+        return $brokerage_plan;
     }
 
     public function getCoverImgAttr($value)
@@ -69,14 +69,14 @@ class HouseSource extends BaseModel
         $img_url = Attachment::where('id', 'in', $value)->value('filepath');
         $http = http_type();
         return [
-            'img_id'=>$value,
-            'img_url'=>$http . $img_url
+            'img_id' => $value,
+            'img_url' => $http . $img_url
         ];
     }
 
     public function getInitStatusAttr($value)
     {
-        return ['占位','新房','二手房'][$value];
+        return ['占位', '新房', '二手房'][$value];
     }
 
     public function getDecorationTypeAttr($value)
@@ -86,15 +86,37 @@ class HouseSource extends BaseModel
 
     public function getOpeningTimeAttr($value)
     {
-        return date("Y-m-d", $value);
+        if ($value == 0) {
+            return '无';
+        } else {
+            return date("Y-m-d", $value);
+        }
+    }
+
+    public function getPropertyCompanyAttr($value)
+    {
+        if ($value == '') {
+            return '无';
+        } else {
+            return $value;
+        }
+    }
+
+    public function getDeveloperAttr($value)
+    {
+        if ($value == '') {
+            return '无';
+        } else {
+            return $value;
+        }
     }
 
     public function getProvinceAttr($value)
     {
         //return Province::where('province_id', $value)->value('name');
         return [
-            'id'=>$value,
-            'name'=>Province::where('province_id', $value)->value('name')
+            'id' => $value,
+            'name' => Province::where('province_id', $value)->value('name')
         ];
     }
 
@@ -102,8 +124,8 @@ class HouseSource extends BaseModel
     {
         //return City::where('city_id', $value)->value('name');
         return [
-            'id'=>$value,
-            'name'=>City::where('city_id', $value)->value('name')
+            'id' => $value,
+            'name' => City::where('city_id', $value)->value('name')
         ];
     }
 
@@ -111,13 +133,13 @@ class HouseSource extends BaseModel
     {
         //return Area::where('_id', $value)->value('name');
         return [
-            'id'=>$value,
-            'name'=>Area::where('_id', $value)->value('name')
+            'id' => $value,
+            'name' => Area::where('_id', $value)->value('name')
         ];
     }
 
     // 后台
-    public static function getList($page, $limit,$where)
+    public static function getList($page, $limit, $where)
     {
         $number = $page * $limit;
         $house = self::limit($number, $limit)
@@ -131,21 +153,21 @@ class HouseSource extends BaseModel
     }
 
     // 客户端
-    public static function getHomeList($page, $limit,$province,$city,$type)
+    public static function getHomeList($page, $limit, $province, $city, $type)
     {
-        if($type==''){
-            $type='1,2';
+        if ($type == '') {
+            $type = '1,2';
         }
 
         $field = 'id,title,cover_img,init_status,house_price,house_address,decoration_type,brokerage_plan,province,city,area';
-        if($province==='北京' || $province==='天津' || $province==='上海' || $province==='重庆'){
-            $area_name =  mb_substr($city,0,2); // 彭水
-            $area =  Area::where('name','like',"%{$area_name}%")->find();
-            $city_Info = City::where('city_id',$area['city_id'])->find();
-            $house = self::where('city',$city_Info['city_id'])
-                ->where('province',$city_Info['province_id'])
-                ->where('area',$area['_id'])
-                ->where('init_status','in',$type)
+        if ($province === '北京' || $province === '天津' || $province === '上海' || $province === '重庆') {
+            $area_name = mb_substr($city, 0, 2); // 彭水
+            $area = Area::where('name', 'like', "%{$area_name}%")->find();
+            $city_Info = City::where('city_id', $area['city_id'])->find();
+            $house = self::where('city', $city_Info['city_id'])
+                ->where('province', $city_Info['province_id'])
+                ->where('area', $area['_id'])
+                ->where('init_status', 'in', $type)
                 ->field($field)
                 ->order('create_time desc')
                 ->page($page, $limit)
@@ -154,13 +176,13 @@ class HouseSource extends BaseModel
                 return self::DataFormat(0);
             }
 
-        }else{
-            $city = City::where('name','like',$city)->find();
+        } else {
+            $city = City::where('name', 'like', $city)->find();
             $city_id = $city['city_id'];
             $province_id = $city['province_id'];
-            $house = self::where('city',$city_id)
-                ->where('province',$province_id)
-                ->where('init_status','in',$type)
+            $house = self::where('city', $city_id)
+                ->where('province', $province_id)
+                ->where('init_status', 'in', $type)
                 ->field($field)
                 ->order('create_time desc')
                 ->page($page, $limit)
@@ -173,20 +195,22 @@ class HouseSource extends BaseModel
     }
 
     // 客户端
-    public static function getHouseById($id){
+    public static function getHouseById($id)
+    {
         return HouseSource::get($id);
     }
 
     // 客户端头条
-    public static function getHouseHead($limit){
+    public static function getHouseHead($limit)
+    {
         $field = 'id,title,desc,cover_img,house_address,init_status';
-        $head = self::where('is_head',1)
+        $head = self::where('is_head', 1)
             ->field($field)
             ->limit($limit)
             ->order('update_time desc')
             ->select();
-        if(!empty($head)){
-           return $head;
+        if (!empty($head)) {
+            return $head;
         }
 
     }
