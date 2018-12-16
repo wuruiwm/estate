@@ -31,18 +31,9 @@ class User extends BaseModel
         $store = Store::where('id',$value)->find();
        // return $store;
         if(empty($store)){
-            return [
-                'id'=>$value,
-                'name'=>'',
-                'area'=>''
-            ];
-
+            return '无';
         }
-        return [
-            'id'=>$value,
-            'name'=>$store['name'],
-            'area'=>$store['area']
-        ];
+        return $store['name'];
     }
 
     // 根据登录手机号+密码 查询该用户--web

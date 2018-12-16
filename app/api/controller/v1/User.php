@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 
 use app\admin\model\Income;
+use app\admin\model\Store;
 use app\api\model\ApplyOrder;
 use app\api\model\EnterPrice;
 use app\api\model\Loan;
@@ -43,17 +44,14 @@ class User extends BaseController
     "phone": "17681125543", 手机号
     "head_img": "http://estate.dingdingmaoer.cn/null.jpg", 用户头像
     "level": "门店经纪人", 用户身份
-    "store_id": {
-    "id": 8,
-    "name": "安徽华邦地产", 所属房产公司名称
-    "area": "安徽" 所属区域
-    }
+    "store_id":"安徽华邦地产", 所属房产公司名称
+    "area": "安徽" 主营区域
     }
      */
     public function getUserById()
     {
         $user_id = Token::getCurrentTokenUserId();
-        $result = ModelUser::where('id',$user_id)->field('id,nickname,phone,head_img,level,store_id')->find();
+        $result = ModelUser::where('id',$user_id)->field('id,nickname,phone,head_img,level,store_id,area')->find();
         unset($result->password);
         if (!$result) {
             throw new ErrorMessage([
@@ -92,6 +90,36 @@ class User extends BaseController
             ->update([
                 'head_img'=>$head_img_path
             ]);
+        if($result){
+            throw new SuccessMessage();
+        }
+    }
+    /**
+     * @api {post} user/update 修改用户信息
+     * @apiGroup user
+     * @apiVersion 0.1.0
+     * @apiDescription  根据token获取用户信息
+     * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/user/update
+     * @apiPermission  token header头传参
+     * @apiParam [nickname] 用户昵称
+     * @apiParam [area] 主营地区
+     * @apiParam [store_name] 门店名称
+     *
+     */
+    public function updateById(){
+        $user_id = Token::getCurrentTokenUserId();
+        $model = new ModelUser();
+        $post = input('post.');
+        $store_name = input('post.store_name');
+        if(isset($store_name)){
+            $store = Store::where('name',$store_name)->find();
+            if(!$store){
+                throw new ErrorMessage([
+                    'msg'=>'该门店未入驻平台,请先联系平台负责人'
+                ]);
+            }
+        }
+        $result = $model->allowField(true)->save($post,['id' => $user_id]);
         if($result){
             throw new SuccessMessage();
         }

@@ -408,7 +408,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n\"id\": 1,\n\"nickname\": \"17681125543\", 昵称\n\"phone\": \"17681125543\", 手机号\n\"head_img\": \"http://estate.dingdingmaoer.cn/null.jpg\", 用户头像\n\"level\": \"门店经纪人\", 用户身份\n\"store_id\": {\n\"id\": 8,\n\"name\": \"安徽华邦地产\", 所属房产公司名称\n\"area\": \"安徽\" 所属区域\n}\n}",
+          "content": "{\n\"id\": 1,\n\"nickname\": \"17681125543\", 昵称\n\"phone\": \"17681125543\", 手机号\n\"head_img\": \"http://estate.dingdingmaoer.cn/null.jpg\", 用户头像\n\"level\": \"门店经纪人\", 用户身份\n\"store_id\":\"安徽华邦地产\", 所属房产公司名称\n\"area\": \"安徽\" 主营区域\n}",
           "type": "json"
         }
       ]
@@ -459,6 +459,51 @@
     "filename": "app/api/controller/v1/WebToken.php",
     "groupTitle": "用户",
     "name": "PostUserLogin"
+  },
+  {
+    "type": "post",
+    "url": "user/update",
+    "title": "修改用户信息",
+    "group": "user",
+    "version": "0.1.0",
+    "description": "<p>根据token获取用户信息</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/user/update"
+      }
+    ],
+    "permission": [
+      {
+        "name": "token header头传参"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "optional": true,
+            "field": "nickname",
+            "description": "<p>用户昵称</p>"
+          },
+          {
+            "group": "Parameter",
+            "optional": true,
+            "field": "area",
+            "description": "<p>主营地区</p>"
+          },
+          {
+            "group": "Parameter",
+            "optional": true,
+            "field": "store_name",
+            "description": "<p>门店名称</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/api/controller/v1/User.php",
+    "groupTitle": "用户",
+    "name": "PostUserUpdate"
   },
   {
     "type": "post",

@@ -50,11 +50,9 @@ Route::post('api/:version/password/update', 'api/:version.Register/password');
 Route::get('api/:version/house/list','api/:version.House/getList');
 Route::get('api/:version/house/info','api/:version.House/getHouseById');
 Route::get('api/:version/house/head','api/:version.House/getHouseHead');
-
-
 Route::get('api/:version/user/info', 'api/:version.User/getUserById');
 Route::post('api/:version/user/head_img', 'api/:version.User/updateHeadImg');
-Route::post('api/:version/user/update', 'api/:version.User/UpdateUserById');
+Route::post('api/:version/user/update', 'api/:version.User/updateById');
 
 
 // 修改新手机号
