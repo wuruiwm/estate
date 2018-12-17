@@ -557,6 +557,58 @@
   },
   {
     "type": "get",
+    "url": "house/loupan",
+    "title": "获取所有楼盘信息，不需要传参",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>获取所有楼盘信息</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/house/loupan"
+      }
+    ],
+    "filename": "app/api/controller/v1/Loupan.php",
+    "groupTitle": "客户端接口",
+    "name": "GetHouseLoupan"
+  },
+  {
+    "type": "get",
+    "url": "house/loupan2",
+    "title": "获取所有楼盘信息，传省和市",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>获取所有楼盘信息</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/house/loupan2"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "province",
+            "description": "<p>传省的名字 例如 安徽省</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "city",
+            "description": "<p>传市的名字 例如 蚌埠市</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/api/controller/v1/Loupan.php",
+    "groupTitle": "客户端接口",
+    "name": "GetHouseLoupan2"
+  },
+  {
+    "type": "get",
     "url": "notice/content",
     "title": "获取公告内容",
     "group": "web",

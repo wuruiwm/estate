@@ -23,6 +23,7 @@ class Order extends Controller{
 		if (!$post['name']) {
 			return ['msg'=>'请输入正确的姓名'];
 		}
+		
 		$search = '/^1[34578]\d{9}$/';
 		$bool = preg_match($search,$post['number']);
 		//echo $bool; exit();
