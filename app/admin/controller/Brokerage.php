@@ -12,6 +12,7 @@
 namespace app\admin\controller;
 
 // 佣金方案管理
+use app\lib\exception\ErrorMessage;
 use app\lib\exception\NullException;
 use app\lib\exception\SuccessMessage;
 use app\lib\validate\AddBrokerage;
@@ -50,6 +51,20 @@ class Brokerage extends Permissions
         $post = input('post.');
         if(isset($post['price'])){
             (new PriceMustBePositiveInt())->goCheck();
+        }
+        if(isset($post['store_percentage'])){
+            if($post['store_percentage']<1 || $post['store_percentage']>100){
+                throw new ErrorMessage([
+                    'msg'=>'请输入1-100之间的数字'
+                ]);
+            }
+        }
+        if(isset($post['public_percentage'])){
+            if($post['public_percentage']<1 || $post['public_percentage']>100){
+                throw new ErrorMessage([
+                    'msg'=>'请输入1-100之间的数字'
+                ]);
+            }
         }
         $result = $model->allowField(true)->save($post,['id' => $id]);
         if($result){

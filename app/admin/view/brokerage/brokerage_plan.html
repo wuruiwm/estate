@@ -16,6 +16,7 @@
         <div class="layui-inline">
             <a class="layui-btn layui-btn-normal newsAdd_btn">添加佣金方案</a>
         </div>
+        <span class="layui-badge layui-bg-gray">鼠标点击每个单元格可以进行编辑修改</span>
     </div>
 </blockquote>
 <table id="banner" lay-filter="banner" ></table>
@@ -40,9 +41,15 @@
             , cols: [[ //标题栏 列表信息
                 {checkbox: true, fixed: true}
                 , {field: 'id', title: 'ID', width: 100, fixed: 'left',align: 'center'}
-                , {field: 'house_area', title: '房屋面积㎡(点击可编辑)', width: 300,edit: 'text'}
-                , {field: 'house_type', title: '房屋类型(点击可编辑)', width: 300,edit: 'text'}
-                , {field: 'price', title: '佣金奖励元(点击可编辑)', width: 200,edit: 'text',align: 'center'}
+                , {field: 'house_area', title: '房屋面积㎡', width: 300,edit: 'text'}
+                , {field: 'house_type', title: '房屋类型', width: 300,edit: 'text'}
+                , {field: 'price', title: '佣金奖励元', width: 200,edit: 'text',align: 'center'}
+                , {field: 'store_percentage', title: '门店经纪人佣金比例', width: 300,edit: 'text',align: 'center',templet:function(d){
+                    return '<div>'+ d.store_percentage+'%</div>'
+                }}
+                , {field: 'public_percentage', title: '大众经纪人佣金比例', width: 300,edit: 'text',align: 'center',templet:function(d){
+                    return '<div>'+ d.public_percentage+'%</div>'
+                }}
                 , {field: 'create_time', title: '创建时间', width: 200, align: 'center', sort: true}
                 , {title: '操作', width: 160, align: 'center', toolbar: '#barDemo', fixed: 'right'}
             ]],
@@ -61,9 +68,17 @@
                 var datas ={
                     "house_type":value
                 }
-            }else{
+            }else if(field==='price'){
                 var datas ={
                     "price":value
+                }
+            }else if(field==='store_percentage'){
+                var datas ={
+                    "store_percentage":value
+                }
+            }else if(field==='public_percentage'){
+                var datas ={
+                    "public_percentage":value
                 }
             }
             edit(data.id,datas);

@@ -25,7 +25,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">房屋类型<span style="color: #FF5722;">*</span></label>
         <div class="layui-input-inline">
-            <input type="text" name="house_type" placeholder="请输入佣金奖励 元" autocomplete="off" class="layui-input">
+            <input type="text" name="house_type" placeholder="请输入房屋类型" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -33,8 +33,22 @@
         <div class="layui-input-inline">
             <input type="text" name="price" placeholder="请输入佣金奖励 元" autocomplete="off" class="layui-input">
         </div>
-    </div>
 
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">门店百分比<span style="color: #FF5722;">*</span></label>
+        <div class="layui-input-inline">
+            <input type="text" name="store_percentage" placeholder="请输入门店经纪人占比率" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux">%</div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">大众百分比<span style="color: #FF5722;">*</span></label>
+        <div class="layui-input-inline">
+            <input type="text" name="public_percentage" placeholder="请输入大众经纪人占比率" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux">%</div>
+    </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit lay-filter="submit" id="submit">立即提交</button>
@@ -50,7 +64,10 @@
         form.on('submit(submit)', function (data) {
             var data ={
                 "house_area":data.field.area_min+'-'+data.field.area_max,
-                "price":data.field.price
+                "price":data.field.price,
+                "house_type":data.field.house_type,
+                "store_percentage":data.field.store_percentage,
+                "public_percentage":data.field.public_percentage,
             };
                 var params = {
                     url: 'brokerage/new',
