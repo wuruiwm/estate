@@ -55,23 +55,28 @@ class Order extends Permissions{
 			$list[$k]['date'] = date('Y-n-j',$v['date']);
 			if ($v['is_new'] == 1) {
 				$list[$k]['is_new'] = '<span style="color: red;">已报备</span>';
-			}else {
-				$list[$k]['is_new'] = '未报备';
-			}
-			if ($v['is_visit'] == 1) {
-				$list[$k]['is_visit'] = '<span style="color: red;">已到访</span>';
-			}else {
 				$list[$k]['is_visit'] = '未到访';
-			}
-			if ($v['is_deal'] == 1) {
-				$list[$k]['is_deal'] = '<span style="color: red;">已成交</span>';
-			}else {
 				$list[$k]['is_deal'] = '未成交';
-			}
-			if ($v['is_pay'] == 1) {
-				$list[$k]['is_pay'] = '<span style="color: red;">已结佣</span>';
-			}else {
 				$list[$k]['is_pay'] = '未结佣';
+				$list[$k]['settlement'] = '1';
+			}else if ($v['is_visit'] == 1) {
+				$list[$k]['is_new'] = '<span style="color: red;">已报备</span>';
+				$list[$k]['is_visit'] = '<span style="color: red;">已到访</span>';
+				$list[$k]['is_deal'] = '未成交';
+				$list[$k]['is_pay'] = '未结佣';
+				$list[$k]['settlement'] = '1';
+			}else if (($v['is_deal'] == 1) && ($v['is_pay'] == 0)) {
+				$list[$k]['is_new'] = '<span style="color: red;">已报备</span>';
+				$list[$k]['is_visit'] = '<span style="color: red;">已到访</span>';
+				$list[$k]['is_deal'] = '<span style="color: red;">已成交</span>';
+				$list[$k]['is_pay'] = '未结佣';
+				$list[$k]['settlement'] = 0;
+			}else if ($v['is_pay'] == 1) {
+				$list[$k]['is_new'] = '<span style="color: red;">已报备</span>';
+				$list[$k]['is_visit'] = '<span style="color: red;">已到访</span>';
+				$list[$k]['is_deal'] = '<span style="color: red;">已成交</span>';
+				$list[$k]['is_pay'] = '<span style="color: red;">已结佣</span>';
+				$list[$k]['settlement'] = '1';
 			}
 		}
 		//将多行数据的数组list和分页代码page
@@ -133,9 +138,9 @@ class Order extends Permissions{
 			//将数组中的四种状态码转换成前端的下拉框的值
 			if ($data['is_new']==1) {
 				$data['zhuangtai'] = 1;
-			}else if ($data['is_visit']) {
+			}else if ($data['is_visit']==1) {
 				$data['zhuangtai'] = 3;
-			}else if ($data['is_deal']) {
+			}else if ($data['is_deal']==1 && $data['is_pay'] == 0) {
 				$data['zhuangtai'] = 5;
 			}else if ($data['is_pay']) {
 				$data['zhuangtai'] = 7;
@@ -220,6 +225,9 @@ class Order extends Permissions{
 			}
 			
 		}
+	}
+	public function yongjin(){
+		
 	}
 }
 
