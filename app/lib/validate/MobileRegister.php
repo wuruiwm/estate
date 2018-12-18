@@ -16,13 +16,15 @@ class MobileRegister extends BaseValidate
         'mobile|手机号'=>'require|isNotEmpty|isMobile',
         'password|密码'=>'require|isNotEmpty|StrongPassword',
         'code'=>'require|isNotEmpty',
-        'type'=>'require|isNotEmpty'
+        'type'=>'require|isNotEmpty',
+        'area'=>'require|isNotEmpty'
     ];
     public $message = [
         'nickname'=>'请输入用户昵称',
         'mobile'=>'请输入正确的手机号',
         'password'=>'请输入6到32位密码',
         'code'=>'请输入验证码',
-        'type'=>'请选择注册类型'
+        'type'=>'请选择注册类型',
+        'area'=>'请输入主营区域'
     ];
 }

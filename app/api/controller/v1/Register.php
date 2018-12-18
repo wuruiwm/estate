@@ -64,6 +64,7 @@ class Register extends BaseController
      * @apiParam {string} mobile 手机号
      * @apiParam {string} code 验证码
      * @apiParam {string} password 密码
+     * @apiParam {string} area 主营区域
      * @apiParam {string} type  注册类型,1为邀请码,2为普通
      * @apiParam {string} [invite_code] 门店邀请码,当type为1必填,type为2时可选
      */
