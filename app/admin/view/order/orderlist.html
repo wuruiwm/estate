@@ -86,7 +86,7 @@
 			<td align="center"><strong>号码</strong></td>
 			<td align="center"><strong>性别</strong></td>
 			<td align="center"><strong>预计带看时间</strong></td>
-			<td align="center"><strong>购房意向</strong></td>
+			<td align="center"><strong>报备楼盘</strong></td>
 			<td align="center"><strong>是否报备</strong></td>
 			<td align="center"><strong>是否到访</strong></td>
 			<td align="center"><strong>是否成交</strong></td>
@@ -103,14 +103,14 @@
 			<td align="center">{$v.number}</td>
 			<td align="center">{$v.gender}</td>
 			<td align="center">{$v.date}</td>
-			<td align="center">{$v.content}</td>
+			<td align="center">{$v.house_title}</td>
 			<td align="center">{$v.is_new}</td>
 			<td align="center">{$v.is_visit}</td>
 			<td align="center">{$v.is_deal}</td>
 			<td align="center">{$v.is_pay}</td>
 			<td align="center">
 				{if condition="$v.settlement eq 0"}
-				<button class="btn btn-primary btn-xs yongjin" value="{$v.id}" data-toggle="modal" data-target="#jiesuan">结算佣金</button>
+				<button class="btn btn-primary btn-xs yongjin" value="{$v.id}" data-toggle="modal" data-target="#jiesuan" onclick="chuan({$v.house_id},{$v.id})">结算佣金</button>
 				{else /}
 				<button class="btn btn-primary btn-xs" disabled="disabled">结算佣金</button>
 				{/if}
@@ -124,16 +124,22 @@
 	</table>
 	</div>
 	{$page}
-	<div id="jiesuan" class="modal fade">
-		<div class="modal-dialog">
+	<div id="jiesuan" class="modal fade jiesuan">
+		<div class="modal-dialog" id="order_id">
 			<div class="modal-content">
-				<div class="modal-header">佣金结算</div>
+				<div class="modal-header"><h3 align="center">佣金结算</h5></div>
 				<div class="modal-body">
-					<form action="">
-						<p>用户名<input type="text"></p>
-						<p>密码<input type="password"></p>
-						<p><input type="submit" value=""></p>
-					</form>
+					<h4 align="center"><p><strong>下拉选择佣金方案结算佣金</strong></p></h4>
+					<div style="margin-top: 10px;">
+					<select class="form-control" id="fangan">
+						<option value="0">请选择佣金方案</option>
+						<option value="1">方案1</option>
+						<option value="2">方案2</option>
+						<option value="3">方案3</option>		
+						<option value="4">方案4</option>
+					</select>
+					</div>
+					<div style="margin-top: 10px;" align="center"><button class="btn btn-danger" onclick="jiesuan()">结算佣金</button></div>
 				</div>
 			</div>
 		</div>
@@ -248,8 +254,31 @@
 			document.getElementsByTagName('html')[0].innerHTML = res;
 		})
 	}
-	$('.yongjin').click(function(){
-		console.log($(this).val());
-	})
+	function chuan(house_id,order_id){
+		var val = document.getElementById('jiesuan').value;
+		val = house_id;
+		var val2 = document.getElementById('order_id').value;
+		val2 = order_id;
+		var url = "{:url('admin/order/yongjin')}";
+		url = url +'?house_id='+val;
+		$.get(url,function(res){
+			if (res) {
+				var fangan = $('#fangan');
+				fangan.empty();
+				fangan.append($('<option value="0">请选择佣金方案</option>'));
+				for(var k in res){
+					var str = "<option value='"+res[k]['id']+"'>"+res[k]['house_area']+"㎡&nbsp;"+res[k]['house_type']+"&nbsp;佣金"+res[k]['price']+"&nbsp;大众经纪人佣金比例"+res[k]['public_percentage']+"%&nbsp;门店经纪人佣金比例"+res[k]['store_percentage']+"%</option>";
+					fangan.append($(str));
+				}
+			}else{
+				layer.msg('当前楼盘佣金方案为空');
+			}
+		})
+	}
+	function jiesuan(){
+		var house_id = document.getElementById('jiesuan').aaa;
+		var order_id = document.getElementById('order_id').value;
+		console.log(house_id);
+	}
 </script>
 </html>

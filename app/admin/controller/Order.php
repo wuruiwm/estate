@@ -25,7 +25,7 @@ class Order extends Permissions{
 				break;
 
 				case '5':
-				$str = 'is_deal=1';
+				$str = 'is_deal=1 and is_pay=0';
 				break;
 
 				case '7':
@@ -226,8 +226,20 @@ class Order extends Permissions{
 			
 		}
 	}
-	public function yongjin(){
-		
+	public function yongjin($house_id=''){
+		$house =  model('HouseSource');
+		$res = $house->field(['brokerage_plan'])->where('id',$house_id)->find();
+		$brokerage_plan = $res->getData()['brokerage_plan'];
+		//var_dump($brokerage_plan);exit();
+		$data = explode(',',$brokerage_plan);
+		//print_r($data);
+		$brokerage =  model('Brokerage');
+		$fangan = [];
+		foreach ($data as $k => $v) {
+			$fangan[] = $brokerage->field(['id','house_area','house_type','price','store_percentage','public_percentage'])->where('id',$v)->find()->getData();
+		}
+		//var_dump($fangan);
+		return json($fangan);
 	}
 }
 

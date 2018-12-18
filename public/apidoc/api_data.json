@@ -514,7 +514,7 @@
     "description": "<p>报备客户信息提交</p>",
     "sampleRequest": [
       {
-        "url": "http://estate.dingdingmaoer.cn/api/v1/yanzheng/yanzheg"
+        "url": "http://estate.dingdingmaoer.cn/api/v1/yanzheng/yanzheng"
       }
     ],
     "parameter": {
@@ -588,14 +588,14 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "int",
+            "type": "string",
             "optional": false,
             "field": "province",
             "description": "<p>传省的名字 例如 安徽省</p>"
           },
           {
             "group": "Parameter",
-            "type": "int",
+            "type": "string",
             "optional": false,
             "field": "city",
             "description": "<p>传市的名字 例如 蚌埠市</p>"
@@ -667,6 +667,34 @@
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "str",
+            "optional": false,
+            "field": "house_title",
+            "description": "<p>楼盘名字</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "str",
+            "optional": false,
+            "field": "province",
+            "description": "<p>省份 例如 安徽省</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "str",
+            "optional": false,
+            "field": "city",
+            "description": "<p>市 例如 合肥市</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "str",
+            "optional": false,
+            "field": "house_id",
+            "description": "<p>楼盘id</p>"
+          },
           {
             "group": "Parameter",
             "type": "str",

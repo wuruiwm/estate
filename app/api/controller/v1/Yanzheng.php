@@ -9,7 +9,7 @@ class Yanzheng extends controller{
      * @apiGroup user
      * @apiVersion 0.1.0
      * @apiDescription  报备客户信息提交
-     * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/yanzheng/yanzheg
+     * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/yanzheng/yanzheng
      * @apiParam {string} card_name 姓名
      * @apiParam {int} card_phone 手机号码
      * @apiParam {int} card_number 身份证号
@@ -55,6 +55,7 @@ class Yanzheng extends controller{
 				$data['card_img'] = $card_img;
 				//将is_submit是否提交实名认证的字段改变为1
 				$data['is_submit'] = 1;
+				$data['is_examine'] = 0;
 				//修改操作
 				$res = $user->isUpdate(true)->save($data);
 				//返回提示信息
@@ -79,7 +80,7 @@ class Yanzheng extends controller{
 	public function shenhe(){
 		$id = Token::getCurrentTokenUserId();
 		$user = model('User');
-		$res = $user->field(['id','is_submit','is_examine'])->where('id',$id)->find();
+		$res = $user->field(['id','is_submit','is_examine','card_name','card_number','card_phone','card_img'])->where('id',$id)->find();
 		$data = $res->getData();
 		return $data;
 	}
