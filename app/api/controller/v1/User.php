@@ -32,7 +32,7 @@ class User extends BaseController
 {
 
     /**
-     * @api {post} user/info 获取登陆者用户信息
+     * @api {get} user/info 获取登陆者用户信息
      * @apiGroup user
      * @apiVersion 0.1.0
      * @apiDescription  根据token获取用户信息

@@ -75,6 +75,7 @@ class Register extends BaseController
         $mobile = input('post.mobile');
         $password = input('post.password');
         $code = input('post.code');
+        $area = input('post.area');
 
         // 判断注册类型 1 邀请码 2 普通注册
         $type = input('post.type');
@@ -111,7 +112,8 @@ class Register extends BaseController
             'password' => $password,
             'nickname' => input('post.nickname'),
             'store_id'=>$store_id,
-            'level'=>$level
+            'level'=>$level,
+            'area'=>$area
         ];
         $model = new User();
         $user = $model->create($post);
