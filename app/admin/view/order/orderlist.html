@@ -57,11 +57,11 @@
             <div class="layui-inline">
               <div class="layui-input-inline">
              	<select class="form-control">
-					<option value="0">请选择类别</option>
-					<option value="1">已报备</option>
-					<option value="3">已到访</option>
-					<option value="5">已成交</option>		
-					<option value="7">已结佣</option>
+					<option value="0" class="leibie">请选择类别</option>
+					<option value="1" class="leibie">已报备</option>
+					<option value="3" class="leibie">已到访</option>
+					<option value="5" class="leibie">已成交</option>		
+					<option value="7" class="leibie">已结佣</option>
 				</select>
               </div>
             </div>
@@ -125,7 +125,7 @@
 	</div>
 	{$page}
 	<div id="jiesuan" class="modal fade jiesuan">
-		<div class="modal-dialog" id="order_id">
+		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header"><h3 align="center">佣金结算</h5></div>
 				<div class="modal-body">
@@ -229,7 +229,7 @@
 	//搜索
 	function sousou(){
 		//获取下拉框的value
-		var options = $("option:selected").val();
+		var options = $(".leibie:selected").val();
 		//获取name框的value
 		var name = $('#exampleInputName2').val();
 		//获取日期框的value
@@ -247,7 +247,7 @@
 			url = url+'&date='+date;
 		}
 		//拼接一个状态码，为了后台判断是否有get传参用
-		//因为垃圾tp5分页，点击页码会get传参，不能直接判断是否有get传参，我们判断get传参里是否有这个状态码
+		//因为垃圾tp5分页，点击页码会get传参，不能直接判断是否有get传参，我判断get传参里是否有这个状态码
 		url = url + '&panduan=1';
 		//发送get请求，并且把返回值，直接替换整个body
 		$.post(url,function(res){
@@ -255,19 +255,19 @@
 		})
 	}
 	function chuan(house_id,order_id){
-		var val = document.getElementById('jiesuan').value;
-		val = house_id;
-		var val2 = document.getElementById('order_id').value;
-		val2 = order_id;
 		var url = "{:url('admin/order/yongjin')}";
-		url = url +'?house_id='+val;
+		url = url +'?house_id='+house_id+'&order_id='+order_id;
 		$.get(url,function(res){
 			if (res) {
 				var fangan = $('#fangan');
 				fangan.empty();
-				fangan.append($('<option value="0">请选择佣金方案</option>'));
+				var can = '<option value="0" id="canshu" house_id="'+res['house_id']+'" user_id='+'"'+res['user_id']+'" order_id='+'"'+res['order_id']+'"'+'>请选择佣金方案</option>';
+				fangan.append($(can));
+				delete res['user_id'];
+				delete res['house_id'];
+				delete res['order_id'];
 				for(var k in res){
-					var str = "<option value='"+res[k]['id']+"'>"+res[k]['house_area']+"㎡&nbsp;"+res[k]['house_type']+"&nbsp;佣金"+res[k]['price']+"&nbsp;大众经纪人佣金比例"+res[k]['public_percentage']+"%&nbsp;门店经纪人佣金比例"+res[k]['store_percentage']+"%</option>";
+					var str = "<option class='fangan' value='"+res[k]['id']+"'>"+res[k]['house_area']+"㎡&nbsp;"+res[k]['house_type']+"&nbsp;佣金"+res[k]['price']+"&nbsp;大众经纪人佣金比例"+res[k]['public_percentage']+"%&nbsp;门店经纪人佣金比例"+res[k]['store_percentage']+"%</option>";
 					fangan.append($(str));
 				}
 			}else{
@@ -276,9 +276,22 @@
 		})
 	}
 	function jiesuan(){
-		var house_id = document.getElementById('jiesuan').aaa;
-		var order_id = document.getElementById('order_id').value;
-		console.log(house_id);
+		var user_id = $('#canshu').attr('user_id');
+		var house_id = $('#canshu').attr('house_id');
+		var order_id = $('#canshu').attr('order_id');
+		var url = "{:url('admin/order/jiesuan')}";
+		url = url+'?user_id='+user_id+'&house_id='+house_id+'&order_id='+order_id;
+		var options = $('.fangan:selected').val();
+		if (options != undefined) {
+			url = url+'&brokerage_id='+options;
+			$.get(url,function(res){
+				// console.log(res['reg']);
+				layer.msg(res['reg']);
+			})
+		}else{
+			layer.msg('请选择佣金方案');
+		}
+
 	}
 </script>
 </html>
