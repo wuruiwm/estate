@@ -16,29 +16,27 @@ class addUsedUser extends BaseValidate
 {
     protected $rule = [
         'title'=>'require|isNotEmpty',
-        'head_img'=>'require|isNotEmpty',
         'house_price'=>'require|isNotEmpty|number',
         'floor_area'=>'require|isNotEmpty|number',
         'property_costs'=>'require|isNotEmpty|number',
+        'decoration_type'=>'require|isNotEmpty',
         'province'=>'require|isNotEmpty',
         'city'=>'require|isNotEmpty',
         'area'=>'require|isNotEmpty',
         'house_address'=>'require|isNotEmpty',
         'room_map'=>'require|isNotEmpty',
-        'decoration_type'=>'require|isNotEmpty',
         'detail'=>'require|isNotEmpty',
     ];
 
     protected $message = [
         'title' =>'请输入名称',
-        'head_img'=>'请上传头部轮播图',
         'house_price'=>'请输入房价',
         'house_address'=>'请输入房源地址',
         'area'=>'请选择所属区域',
         'floor_area'=>'请输入占地面积',
         'property_costs'=>'请输入物业费',
         'decoration_type'=>'请填写装修类型',
-        'room_map'=>'请上传房屋照片',
+        'room_map'=>'请上传房源照片',
         'detail'=>'请输入房源介绍',
         'city'=>'请选择所属城市',
         'province'=>'请选择所属省份',

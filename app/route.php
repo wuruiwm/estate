@@ -58,6 +58,8 @@ Route::post('api/:version/user/update', 'api/:version.User/updateById');
 Route::get('api/:version/province/list','api/:version.City/getProvinceList');
 Route::get('api/:version/city/list','api/:version.City/getCityByPid');
 Route::get('api/:version/area/list','api/:version.City/getAreaByCid');
+Route::post('api/:version/house/add_used','api/:version.House/addUsed');
+
 
 // 修改新手机号
 Route::post('api/:version/user/update_mobile', 'api/:version.User/updateMobile');

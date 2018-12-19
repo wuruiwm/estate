@@ -15,8 +15,11 @@ namespace app\api\controller\v1;
 use app\admin\model\HouseSource;
 use app\lib\exception\NullException;
 use app\lib\exception\ParameterException;
+use app\lib\exception\SuccessMessage;
+use app\lib\validate\addUsedUser;
 use app\lib\validate\IDMustBePositiveInt;
 use app\lib\validate\Page;
+use app\api\service\Token;
 
 class House extends BaseController
 {
@@ -143,8 +146,52 @@ class House extends BaseController
     }
 
 
-    // 客户端用户发布房源
+    /**
+     * @api {get} house/add_used 发布房源
+     * @apiGroup house
+     * @apiVersion 0.1.0
+     * @apiDescription  用户发布房源信息
+     * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/house/add_used
+     * @apiParam {string} title 标题
+     * @apiParam {int} house_price 房价
+     * @apiParam {int} floor_area 房屋面积
+     * @apiParam {int} property_costs 物业费用
+     * @apiParam {string} decoration_type 装修类型
+     * @apiParam {string} province 省 取province_id 值
+     * @apiParam {string} city 市 取 city_id 值
+     * @apiParam {string} area 区 取 area_id 值
+     * @apiParam {string} house_address 房源详细地址
+     * @apiParam {string} room_map 房源图片 以,分割的字符串 例如：134,136
+     * @apiParam {string} detail 房源详情介绍
+     * @apiExample {curl} 接口发送示例:
+     * {
+    "title":"用户测试发布二手房",
+    "house_price":"6000",
+    "floor_area":"120",
+    "property_costs":"1.3",
+    "decoration_type":"毛坯",
+    "province":340000,
+    "city":340100,
+    "area":1006,
+    "house_address":"安徽省合肥市",
+    "room_map":"136",
+    "detail":"今年刚刚装修的房子，准备用来结婚用的，因房主公司遇到困难，急需用一笔钱，不议价，有意的朋友请联系13013090543"
+    }
+     */
     public function addUsed(){
-
+        $user_id = Token::getCurrentTokenUserId();
+        (new addUsedUser())->goCheck();
+        $post = input('post.');
+        $imgs = input('post.room_map');
+        $imgs = explode(",", $imgs);
+        $post['cover_img'] = $imgs[0];
+        $post['head_img']=$imgs[0];
+        $post['init_status']=2;
+        $post['user_id']=$user_id;
+        $model = new HouseSource();
+        $result = $model->allowField(true)->save($post);
+        if ($result) {
+            throw new SuccessMessage();
+        }
     }
 }

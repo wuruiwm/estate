@@ -135,6 +135,112 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "house/add_used",
+    "title": "发布房源",
+    "group": "house",
+    "version": "0.1.0",
+    "description": "<p>用户发布房源信息</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/house/add_used"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>标题</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "house_price",
+            "description": "<p>房价</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "floor_area",
+            "description": "<p>房屋面积</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "property_costs",
+            "description": "<p>物业费用</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "decoration_type",
+            "description": "<p>装修类型</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "province",
+            "description": "<p>省 取province_id 值</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "city",
+            "description": "<p>市 取 city_id 值</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "area",
+            "description": "<p>区 取 area_id 值</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "house_address",
+            "description": "<p>房源详细地址</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "room_map",
+            "description": "<p>房源图片 以,分割的字符串 例如：134,136</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "detail",
+            "description": "<p>房源详情介绍</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "接口发送示例:",
+        "content": "{\n    \"title\":\"用户测试发布二手房\",\n    \"house_price\":\"6000\",\n    \"floor_area\":\"120\",\n    \"property_costs\":\"1.3\",\n    \"decoration_type\":\"毛坯\",\n    \"province\":340000,\n    \"city\":340100,\n    \"area\":1006,\n    \"house_address\":\"安徽省合肥市\",\n    \"room_map\":\"136\",\n    \"detail\":\"今年刚刚装修的房子，准备用来结婚用的，因房主公司遇到困难，急需用一笔钱，不议价，有意的朋友请联系13013090543\"\n    }",
+        "type": "curl"
+      }
+    ],
+    "filename": "app/api/controller/v1/House.php",
+    "groupTitle": "房源",
+    "name": "GetHouseAdd_used"
+  },
+  {
+    "type": "get",
     "url": "house/head",
     "title": "房源头条",
     "group": "house",
