@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="__PUBLIC__/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+</head>
+	<style>
+		#head {
+			background: #f2f2f2;
+			height: 80px;
+			margin: 15px 20px 15px 20px;
+		}
+		#button {
+			margin-left: 20px;
+			background: #FF5722; 
+		}
+		.neilian {
+			width: 130px;
+			display: inline;
+		}
+		.form-group{
+			line-height:80px;
+		}
+		#sousuo {
+			margin-left: 20px;
+		}
+		#mingzi {
+			margin-right: 10px;
+		}
+		#left{
+			margin-left: 50px;
+		}
+		.table {
+			margin: 15px 20px 0px 20px;
+		}
+		#content {
+			margin-right: 40px;
+		}
+	</style>
+<body>
+	<div id="head">
+		<form action="" method="post">
+  		<div class="form-group neilian" id="left">
+    		<label for="exampleInputName2" class="neilian" id="mingzi">名字搜索:</label>
+    		<input type="text" name="name" class="form-control neilian" id="exampleInputName2" placeholder="请输入姓名">
+  		</div>
+        <div class="layui-input-inline">
+            <div class="layui-inline">
+              <div class="layui-input-inline">
+                <input type="text" class="form-control" id="create_time" placeholder="结算佣金日期" name="create_time">
+              </div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-info btn-lg" value="搜索" id="sousuo">
+		</form>
+	</div>
+	<div id="content">
+	<table class="table table-bordered">
+		<tr>
+			<td align="center"><strong>ID</strong></td>
+			<td align="center"><strong>用户ID</strong></td>
+			<td align="center"><strong>报备订单ID</strong></td>
+			<td align="center"><strong>楼盘ID</strong></td>
+			<td align="center"><strong>佣金方案ID</strong></td>
+			<td align="center"><strong>佣金方案</strong></td>
+			<td align="center"><strong>获得实际佣金</strong></td>
+			<td align="center"><strong>结算佣金日期</strong></td>
+			<td align="center"><strong>操作</strong></td>
+		</tr>
+		{volist name="list" id="v"}
+		<tr id="tr{$v.id}">
+			<td align="center">{$v.id}</td>
+			<td align="center">{$v.user_id}</td>
+			<td align="center">{$v.order_id}</td>
+			<td align="center">{$v.house_id}</td>
+			<td align="center">{$v.brokerage_id}</td>
+			<td align="center">{$v.house_area}㎡&nbsp;{$v.house_type}&nbsp;佣金{$v.price}&nbsp;大众经纪人佣金比例{$v.public_percentage}%&nbsp;门店经纪人{$v.store_percentage}%</td>
+			<td align="center">500元</td>
+			<td align="center">{$v.date}</td>
+			<td align="center">
+			<button class="btn btn-danger btn-xs" onclick="revoke({$v.id});">撤销</button>
+			</td>
+		</tr>
+		{/volist}
+	</table>
+	</div>
+</body>
+<script src="__PUBLIC__/bootstrap/js/jquery.js"></script>
+<script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/layui/layer.js"></script>
+<script src="__PUBLIC__/layui/layui.js"></script>
+<script>
+	function revoke(can){
+	//弹出窗口
+	layer.confirm('撤销后，这条佣金记录将被删除,订单会重新变为已成交，未结佣状态', function(index){
+    //关闭窗口
+    layer.close(index);
+    //拼接get访问的的url
+    var url = "{:url('admin/Brokeragelist/revoke')}" +'?id='+can;
+    //发送get请求删除行，判断返回值是否为成功，成功则remove删除那一行的标签
+    $.get(url,function(res){
+    	var tr = '#tr'+can;
+    	if (res.msg == '撤销成功') {
+    		$(tr).remove();
+    	}
+    	layer.msg(res.msg);
+    })
+	})
+}
+	//input框的日历插件
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+      
+      //常规用法
+      laydate.render({
+        elem: '#create_time'
+      });
+    });
+</script>
+</html>

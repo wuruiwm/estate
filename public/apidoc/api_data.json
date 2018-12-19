@@ -184,6 +184,39 @@
     "name": "GetHouseList"
   },
   {
+    "type": "get",
+    "url": "user/info",
+    "title": "获取登陆者用户信息",
+    "group": "user",
+    "version": "0.1.0",
+    "description": "<p>根据token获取用户信息</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "token",
+            "description": "<p>header传参</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n\"id\": 1,\n\"nickname\": \"17681125543\", 昵称\n\"phone\": \"17681125543\", 手机号\n\"head_img\": \"http://estate.dingdingmaoer.cn/null.jpg\", 用户头像\n\"level\": \"门店经纪人\", 用户身份\n\"store_id\":\"安徽华邦地产\", 所属房产公司名称\n\"area\": \"安徽\" 主营区域\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/api/controller/v1/User.php",
+    "groupTitle": "用户",
+    "name": "GetUserInfo"
+  },
+  {
     "type": "post",
     "url": "password/code",
     "title": "获取验证码[找密用]",
@@ -338,6 +371,13 @@
             "group": "Parameter",
             "type": "string",
             "optional": false,
+            "field": "area",
+            "description": "<p>主营区域</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
             "field": "type",
             "description": "<p>注册类型,1为邀请码,2为普通</p>"
           },
@@ -383,39 +423,6 @@
     "filename": "app/api/controller/v1/User.php",
     "groupTitle": "用户",
     "name": "PostUserHead_img"
-  },
-  {
-    "type": "post",
-    "url": "user/info",
-    "title": "获取登陆者用户信息",
-    "group": "user",
-    "version": "0.1.0",
-    "description": "<p>根据token获取用户信息</p>",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "token",
-            "description": "<p>header传参</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n\"id\": 1,\n\"nickname\": \"17681125543\", 昵称\n\"phone\": \"17681125543\", 手机号\n\"head_img\": \"http://estate.dingdingmaoer.cn/null.jpg\", 用户头像\n\"level\": \"门店经纪人\", 用户身份\n\"store_id\":\"安徽华邦地产\", 所属房产公司名称\n\"area\": \"安徽\" 主营区域\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/api/controller/v1/User.php",
-    "groupTitle": "用户",
-    "name": "PostUserInfo"
   },
   {
     "type": "post",
@@ -557,22 +564,6 @@
   },
   {
     "type": "get",
-    "url": "house/loupan",
-    "title": "获取所有楼盘信息，不需要传参",
-    "group": "web",
-    "version": "0.1.0",
-    "description": "<p>获取所有楼盘信息</p>",
-    "sampleRequest": [
-      {
-        "url": "http://estate.dingdingmaoer.cn/api/v1/house/loupan"
-      }
-    ],
-    "filename": "app/api/controller/v1/Loupan.php",
-    "groupTitle": "客户端接口",
-    "name": "GetHouseLoupan"
-  },
-  {
-    "type": "get",
     "url": "house/loupan2",
     "title": "获取所有楼盘信息，传省和市",
     "group": "web",
@@ -651,6 +642,35 @@
     "filename": "app/api/controller/v1/Notice.php",
     "groupTitle": "客户端接口",
     "name": "GetNoticeFind"
+  },
+  {
+    "type": "post",
+    "url": "comm/commlist",
+    "title": "获取我的客户里的佣金管理",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>报获取我的客户里的佣金管理</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/comm/commlist"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "str",
+            "optional": false,
+            "field": "token",
+            "description": "<p>用来获取用户id的token，放在header里</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/api/controller/v1/Commission.php",
+    "groupTitle": "客户端接口",
+    "name": "PostCommCommlist"
   },
   {
     "type": "post",
