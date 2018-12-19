@@ -1,0 +1,72 @@
+input{
+	border:0;
+	font-family: -webkit-pictograph;
+	}
+input.housename{
+	font-weight: bold;
+    font-size: .3rem;
+    font-family: -webkit-pictograph;
+}
+#main-content{
+	padding: .2rem;
+}
+.desc-top {
+	border-bottom: 2px solid #EEEEEE;
+	padding: 0 0 .3rem 0;
+}
+.desc-top .info li, .li-list li {
+	padding: .05rem 0;
+}
+.desc-top li span{
+	float:right;
+}
+.desc-top li span a{
+	color:#C1060F;
+}
+.desc-top .info li label, .li-list li label{
+	color:#A8A8A8;
+}
+.plan-list{
+	padding: .2rem 0;
+	display: flex;
+	column-count: 1;
+	flex-wrap: wrap;
+}
+.item-list{
+	box-shadow: 0 3px 0px #ccc;
+	padding: .6rem 0;
+    border-radius: .2rem;
+    width: 2rem;
+    text-align: center;
+    border: 1px solid #eee;
+	float: left;
+	margin: .1rem .18rem;
+}
+.item-list>div{
+	padding: .05rem;
+}
+div.rmb{
+	color:#C1060F;
+}
+
+
+.li-list,.main-style,.pro-desc{float: left; margin-top: .5rem;}
+.li-list li {
+	padding: .15rem 0;
+	float: left;
+}
+.main-style li {
+	width: 2rem;
+	float: left;
+	margin: .2rem 0 0 .2rem;
+}
+.main-style li img{
+	max-width: 100%;
+}
+.pro-desc p{
+	color:#A8A8A8;
+	text-indent: 2em;
+	padding: .2rem 0;
+	font-family: -webkit-pictograph;
+}
+

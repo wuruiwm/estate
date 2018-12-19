@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>房源内容信息</title>
+    <!-- 引入YDUI样式 -->
+</head>
+<body>
+
+<div class="pro-desc">
+    <h6>项目介绍</h6>
+    <div id="info"></div>
+    <script id="info_data" type="text/html">
+        {{@data.detail}}
+    </script>
+</div>
+<script src="../ajax/jquery.min.js"></script>
+<script src="../ajax/common.js"></script>
+<script src="../ajax/template-web.js"></script>
+<script>
+    $(function () {
+        getInfo();
+    });
+    function getInfo() {
+        var params = {
+            url: 'house/info?id=24',
+            sCallback: function (successMsg) {
+                console.log(successMsg);
+                var html = template('info_data', {data: successMsg});
+                $('#info').html(html);
+
+            },
+            eCallback: function (errorMsg) {
+                console.log(errorMsg);
+            }
+        }
+        window.base.getData(params);
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>我的客户</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+		<!-- 引入YDUI样式 -->
+		<link rel="stylesheet" href="../build/css/ydui.css" />
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
+		<style>
+			.tab-nav-item.tab-active{
+				color:#C1060F
+			}
+			.item-list{
+				padding: .2rem;
+			}
+			.item-list li{
+				padding: .025rem;
+				color:#A1A1A1
+			}
+			
+			.item-list li input{
+				border: 0;
+				color:#A1A1A1
+			}
+			.item-list li span{
+				float: right;
+				color: #C1060F;
+				font-size: .2rem;
+			}
+			.item-list li.name input{
+				font-size: .3rem; color:#000; margin-bottom: .1rem; font-family: initial;
+			}
+			span.nocash{
+				color:green !important;
+			}
+			.plan input{
+				overflow: hidden;
+				text-overflow:ellipsis;
+				white-space: nowrap;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="logincantion">
+			<header class="m-navbar">
+				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+					<i class="back-ico"></i>
+				</a>
+				<div class="navbar-center">
+					<span class="navbar-title">我的客户</span>
+				</div>
+			</header>
+			<div class="m-tab" data-ydui-tab><!-- 这里添加data-ydui-tab就可以啦 -->
+				<ul class="tab-nav">
+					<li class="tab-nav-item tab-active"><a href="javascript:;">已报备</a></li>
+					<li class="tab-nav-item"><a href="javascript:;">已到访</a></li>
+					<li class="tab-nav-item"><a href="javascript:;">已成交</a></li>
+					<li class="tab-nav-item"><a href="javascript:;">已结佣</a></li>
+				</ul>
+				<div class="tab-panel">
+					<div class="tab-panel-item tab-active">
+						<!-- 这里都是报备的客户 -->
+						<div id="infolist" class="infolist">
+							<div class="item-list">
+								<ul>
+									<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input></li>
+									<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
+									<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
+									<li class="plan"><label>意向：</label><input value="三室一厅,一厨一卫,120平米" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="tab-panel-item">
+						<!-- 这里都是到访的客户 -->
+						<div id="infolist" class="infolist">
+							<div class="item-list">
+								<ul>
+									<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input></li>
+									<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
+									<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
+									<li class="plan"><label>意向：</label><input value="三室一厅,一厨一卫,120平米" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="tab-panel-item">
+						<!-- 这里是成交的 -->
+						<div id="infolist" class="infolist">
+							<div class="item-list">
+								<ul>
+									<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input> <span>已结佣</span></li>
+									<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
+									<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
+									<li class="plan"><label>意向：</label><input value="三室一厅,一厨一卫,120平米" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
+								</ul>
+							</div>
+							<div class="item-list">
+								<ul>
+									<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input> <span class="nocash">未结佣</span></li>
+									<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
+									<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
+									<li class="plan"><label>意向：</label><input value="三室一厅,一厨一卫,120平米" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="tab-panel-item">
+						<!-- 这里都结佣了 -->
+						<div id="infolist" class="infolist">
+							<div class="item-list">
+								<ul>
+									<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input></li>
+									<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
+									<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
+									<li class="plan"><label>意向：</label><input value="三室一厅,一厨一卫,120平米" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 报备客户按钮 -->
+			<a href="reportecustomers/index.html">
+				<div id="preparation">报备</div>
+			</a>
+		</div>
+	</body>
+	<script src="../js/jq331.min.js"></script>
+	<script src="../build/js/ydui.flexible.js"></script>
+	<!-- 引入YDUI脚本 -->
+	<script src="../build/js/ydui.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(document).ready(function(){
+			if(!dataToken){
+				!function (win, $) {
+					var dialog = win.YDUI.dialog;													
+					dialog.confirm('系统提示', '您还没有登录，现在去登录...', [
+						{
+							txt: '取消',
+							color: false, /* false:黑色  true:绿色 或 使用颜色值 */
+							callback: function () {
+								history.go(-1);
+							}
+						},
+						{
+							txt: '确定',
+							color: true,
+							callback: function () {
+								location.href="./login.html";
+							}
+						}
+					]);
+				}(window, jQuery);					
+				return;
+			}
+			//token判断时效，超时退出登录
+			var _interval_handler=-1;
+			
+			var _EXPIRE_TIME = datamoretime;//判断时效时间，则注销
+			(function () {
+				if (dataToken) {//已登录
+				//刷新最后使用时间
+				sessionStorage.setItem("nxgx_lastVisitTime", new Date().getTime());
+				_interval_handler=setInterval(checkExpired, 10*1000);//10秒钟检查一次，是否超时
+				}
+			})();
+			
+			function checkExpired() {
+			console.log("10秒检查一次是否过期"+window.location.href+"::"+new Date());
+			var storeLastTime=sessionStorage.getItem("nxgx_lastVisitTime")?sessionStorage.getItem("nxgx_lastVisitTime"):-1;
+			if (storeLastTime==-1) clearInterval(_interval_handler);
+			else {
+					if ((new Date()).getTime()-storeLastTime>_EXPIRE_TIME) {  //过期了
+					!function (win, $) {
+						var dialog = win.YDUI.dialog;
+						/* 加载中提示框 */									
+							dialog.loading.open('登录超时...');
+							setTimeout(function () {
+								dialog.loading.close();/* 移除loading */
+								location.href="./login.html";
+							}, 2000);
+					
+					}(window, jQuery);	
+					clearInterval(_interval_handler);
+				}
+			}
+			};
+			
+			
+			
+			$('.item-list').click(function(){
+				location.href="./customerinfo.html";
+			});
+		})
+	</script>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>我的佣金</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <!-- 引入YDUI样式 -->
+    <link rel="stylesheet" href="../build/css/ydui.css" />
+	<link rel="stylesheet" href="../css/common.css" />
+	<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
+    <!-- 引入YDUI自适应解决方案类库 -->
+    <script src="../build/js/ydui.flexible.js"></script>
+	<style>
+		.topbg{width: 100%; position: relative;}
+		.topbg img{max-width: 100%;}
+		.yjinfo{left: calc(50% - 25px);position: absolute;top: calc(50% - 65px); color:#fff;text-align: center;}
+		.ktyj{ margin-top: .25rem;}
+		.desc{
+			padding: .1rem 0;
+			border-bottom: .1rem solid #eee;
+			text-align: center;
+			color: #737373;
+			font-size: .25rem;
+		}
+		.item-list{
+			padding: .35rem;
+		}
+		.item-list li{
+			padding: .025rem;
+			color:#A1A1A1
+		}
+		
+		.item-list li input{
+			border: 0;
+			color:#A1A1A1
+		}
+		.item-list li span{
+			float: right;
+			color: #C1060F;
+			font-size: .25rem;
+		}
+		.item-list li.name input{
+			font-size: .3rem; color:#000; margin-bottom: .1rem; font-family: initial;
+		}
+		
+	</style>
+</head>
+<body>
+	<section class="g-flexview">
+		<!-- 顶部内容 -->
+		<header class="m-navbar">
+			<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+				<i class="back-ico"></i>
+			</a>
+			<div class="navbar-center">
+				<span class="navbar-title">我的佣金</span>
+			</div>
+		</header>
+		
+		<!-- 主体内容 -->
+		<div class="g-scrollview">
+			<div class="topbg">
+				<img src="../static/images/bg.jpg" />
+				<div class="yjinfo">
+					<div>可提佣金</div>
+					<div class="ktyj"><i class="fa fa-cny"></i>&nbsp;<a style="font-size: .35rem;">150000</a></div>
+				</div>
+				<p class="desc">佣金明细</p>
+			</div>
+			<div id="infolist" class="infolist">
+				<div class="item-list">
+					<ul>
+						<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input></li>
+						<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
+						<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
+						<li class="plan"><label>佣金方案：</label><input value="100-120㎡" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
+					</ul>
+				</div>
+				<div class="item-list">
+					<ul>
+						<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input></li>
+						<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
+						<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
+						<li class="plan"><label>佣金方案：</label><input value="100-120㎡" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
+					</ul>
+				</div>
+				
+			</div>
+		</div>
+		<!-- 报备客户按钮 -->
+		<a href="reportecustomers/index.html">
+			<div id="preparation">报备</div>
+		</a>
+</section>
+<!-- 引入jQuery 3.0+ -->
+<script src="../js/jq331.min.js"></script>
+<!-- 引入YDUI脚本 -->
+<script src="../build/js/ydui.js"></script>
+<script src="../js/Index.js"></script>
+
+</body>
+</html>

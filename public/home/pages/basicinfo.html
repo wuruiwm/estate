@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>基本信息</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+		<!-- 引入YDUI样式 -->
+		<link rel="stylesheet" href="../build/css/ydui.css" />
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
+		
+		<!-- 引入YDUI自适应解决方案类库 -->
+		<script src="../build/js/ydui.flexible.js"></script>
+		<script src="../js/jq331.min.js"></script>
+		<!-- 引入YDUI脚本 -->
+		<script src="../build/js/ydui.js"></script>
+		<style>
+			label{
+				display: inline-block;
+				min-width: 1.2rem;
+				text-align: right;
+				color:#666666;
+			}
+			input{
+				border:1px solid #eee;
+				padding: .1rem .3rem;
+				color:#666666;
+				}
+			.basicinfo{padding: .2rem;}
+			.basicinfo div{
+				padding: .35rem .2rem;
+			}
+			.modifywd{
+				margin-left: .1rem;
+				padding: .1rem .2rem;
+				/* border: 1px solid #eee; */
+				border-radius: .1rem;
+				color: #ffffff;
+				background: #C1060F;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="logincantion">
+			<header class="m-navbar">
+				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+					<i class="back-ico"></i>
+				</a>
+				<div class="navbar-center">
+					<span class="navbar-title">基本信息</span>
+				</div>
+			</header>
+			<div class="basicinfo">
+				<div style="position: relative;">
+					<label>头像：</label>
+					<div style="position:absolute;width: 1.2rem; height:1.2rem; right:1rem; top: -0.3rem;"><img style="width:100%; 50%;" src="../static/images/computer.png" /></div>
+				</div>
+				<div>
+					<label>密码：</label>
+					<input type="password" readonly="readonly" value="000" name="password" />
+					<a href="./modifywd.html"  class="modifywd">修改</a>
+				</div>
+				<div>
+					<label>姓名：</label>
+					<input type="text"  readonly="readonly"  value="妖姬" name="name"/>
+				</div>
+				<div>
+					<label>主营地区：</label>
+					<input type="text"  readonly="readonly"  value="合肥" name="area"/>
+				</div>
+				<div>
+					<label>所属门店：</label>
+					<input type="text"  readonly="readonly"  value="好来屋房产" name="belong"/>
+				</div>
+			</div>
+		</div>
+		<!-- 报备客户按钮 -->
+		<a href="./reportecustomers/index.html">
+			<div id="preparation">报备</div>
+		</a>
+	</body>
+	<script>
+	
+</script>
+</html>

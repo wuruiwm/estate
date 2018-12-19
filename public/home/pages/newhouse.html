@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>新房分销</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <!-- 引入YDUI样式 -->
+    <link rel="stylesheet" href="../build/css/ydui.css" />
+	<link rel="stylesheet" href="../css/common.css" />
+	<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
+    <!-- 引入YDUI自适应解决方案类库 -->
+    <script src="../build/js/ydui.flexible.js"></script>
+	<style>
+		.item-list{
+			float: left;
+			padding: .3rem;
+		}
+		.item-list .left-img{
+			width: 3rem;
+			height: 2rem;
+			margin: 0 .2rem 0 0;
+			float: left;
+		}
+		img{
+			max-width: 100%;
+			height: 100%;
+		}
+		.desc-right .desc-title{
+			padding: 0 0 .1rem 0;
+		}
+		.desc-right .desc-address{
+			color:#5D5D5D ;
+		}
+		.desc-right .desc-content{
+			color:#898989 ;
+			display: inline-block;
+		}
+		.desc-right{
+			padding: .3rem 0;
+			overflow: hidden;
+			text-overflow:ellipsis;
+			white-space: nowrap;
+		}
+		.desc-right span{
+			float: right;
+		}
+		.desc-right span a{
+			color:#C1060F;
+		}
+		.desc-right .yong{
+			padding: .02rem .2rem;
+			color:#fff;
+			background: #FF9966;
+			border-radius: .1rem;
+		}
+		p.desc-tip{
+			padding: .1rem 0;
+		}
+	</style>
+</head>
+<body>
+	<section class="g-flexview">
+		<!-- 顶部内容 -->
+		<header class="m-navbar">
+			<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+				<i class="back-ico"></i>
+			</a>
+			<div class="navbar-center">
+				<span class="navbar-title">新房分销</span>
+			</div>
+		</header>
+		
+		<!-- 新房分销列表 -->
+		<div class="g-scrollview">
+			<div class="item-list">
+				<div class="left-img">
+					<img src="../static/images/house3.png" />
+				</div>
+				<div class="desc-right">
+					<p class="desc-title">圣联·香御公馆<span><a>10000</a>&nbsp元/㎡</span></p>
+					<p class="desc-address">合肥习友路与香樟大道交口</p>
+					<p class="desc-tip"><label class="yong">个人</label> <label class="yong">别墅</label></p>
+					<p class="desc-content"><label class="yong">佣</label>&nbsp;&nbsp;<span>15000元/套</span><span>(3个方案)</span></p>
+				</div>
+			</div>
+			<div class="item-list">
+				<div class="left-img">
+					<img src="../static/images/house3.png" />
+				</div>
+				<div class="desc-right">
+					<p class="desc-title">圣联·香御公馆<span><a>10000</a>&nbsp元/㎡</span></p>
+					<p class="desc-address">合肥习友路与香樟大道交口</p>
+					<p class="desc-tip"><label class="yong">个人</label> <label class="yong">别墅</label></p>
+					<p class="desc-content"><label class="yong">佣</label>&nbsp;&nbsp;<span>15000元/套</span><span>(3个方案)</span></p>
+				</div>
+			</div>
+		</div>
+		<!-- 发布按钮 -->
+		<a href="./release.html">
+			<div id="release">发布</div>
+		</a>
+		<!-- 报备客户按钮 -->
+		<a href="reportecustomers/index.html">
+			<div id="preparation">报备</div>
+		</a>
+		<!-- 底部导航 -->
+		<footer class="m-tabbar">
+			<a href="../Index.html" class="tabbar-item">
+				<span class="tabbar-icon">
+					<i class="fa fa-home"></i>
+				</span>
+				<span class="tabbar-txt">首页</span>
+			</a>
+			<a href="#" class="tabbar-item tabbar-active">
+				<span class="tabbar-icon">
+					<i class="icon-home"></i>
+				</span>
+				<span class="tabbar-txt">新房分销</span>
+			</a>
+			<a href="./oldhouse.html" class="tabbar-item">
+				<span class="tabbar-icon">
+					<i class="fa fa-institution"></i>
+				</span>
+				<span class="tabbar-txt">二手房</span>
+			</a>
+			<a href="./percenter.html" class="tabbar-item">
+				<span class="tabbar-icon">
+					<i class="icon-ucenter-outline"></i>
+				</span>
+				<span class="tabbar-txt">我的</span>
+			</a>
+		</footer>
+</section>
+<!-- 引入jQuery 3.0+ -->
+<script src="../js/jq331.min.js"></script>
+<!-- 引入YDUI脚本 -->
+<script src="../build/js/ydui.js"></script>
+<script src="../js/Index.js"></script>
+<script>
+	$(document).ready(function(){
+		$('.item-list').click(function(){
+				location.href="./contentdetails.html"
+		});
+	});
+</script>
+</body>
+</html>

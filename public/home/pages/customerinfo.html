@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>客户信息</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+		<!-- 引入YDUI样式 -->
+		<link rel="stylesheet" href="../build/css/ydui.css" />
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
+		
+		<!-- 引入YDUI自适应解决方案类库 -->
+		<script src="../build/js/ydui.flexible.js"></script>
+		<script src="../js/jq331.min.js"></script>
+		<!-- 引入YDUI脚本 -->
+		<script src="../build/js/ydui.js"></script>
+		<style>
+			label{
+				display: inline-block;
+				min-width: 1.5rem;
+				text-align: right;
+				color:#666666;
+			}
+			input{
+				border:1px solid #eee;
+				padding: .1rem .3rem;
+				color:#666666;
+				}
+			.basicinfo{padding: .2rem;}
+			.basicinfo div{
+				padding: .35rem .2rem;
+				display: flex;
+				align-items: center;
+			}
+			.truemodify{
+				background: #C1060F;
+				border: none;
+				color: #ffffff;
+				padding: .2rem 1rem;
+				border-radius: .2rem;
+				margin-top: .2rem;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="logincantion">
+			<header class="m-navbar">
+				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+					<i class="back-ico"></i>
+				</a>
+				<div class="navbar-center">
+					<span class="navbar-title">客户信息</span>
+				</div>
+			</header>
+			<div class="basicinfo">
+				<div>
+					<label>客户姓名：</label>
+					<input type="text" readonly="readonly"  value="金磊磊" name="" />
+				</div>
+				<div>
+					<label>报备楼盘：</label>
+					<input type="text" readonly="readonly" value="新地中心" name="" />
+				</div>
+				<div>
+					<label>客户电话：</label>
+					<input type="number" pattern="[0-9]*" readonly="readonly"  value="15256935637" name="" autocomplete="off" />
+				</div>
+				<div>
+					<label>客户性别：</label>
+					<input type="text" readonly="readonly"  value="男" name="" />
+				</div>
+				<div>
+					<label>带看时间：</label>
+					<input type="text" readonly="readonly" value="2018-02-12" name="" />					
+				</div>
+				<div>
+					<label>购房意向：</label>
+					<textarea style="color:#666666" name="" readonly="readonly" rows="10" cols="28">
+						三室一厅 坐北朝南，有阳台，120平米 
+					</textarea>			
+				</div>
+				
+				<!-- 报备客户按钮 -->
+				<a href="./release.html">
+					<div id="release">发布</div>
+				</a>
+				<!-- 报备客户按钮 -->
+				<a href="./reportecustomers/index.html">
+					<div id="preparation">报备</div>
+				</a>
+			</div>
+		</div>
+	</body>
+</html>

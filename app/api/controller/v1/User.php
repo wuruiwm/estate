@@ -77,7 +77,7 @@ class User extends BaseController
                 'msg'=>'请上传图片'
             ]);
         }
-        $head_img = $head_img->validate(['size' => 4000000, 'ext' => 'jpg,png'])->move('../public/uploads/user/');
+        $head_img = $head_img->validate(['size' => 4000000, 'ext' => 'jpg,png,jpeg'])->move('../public/uploads/user/');
         if ($head_img) {
             $head_img_path = 'uploads\user\\' . $head_img->getSaveName();
         } else {

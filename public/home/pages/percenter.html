@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <!-- 引入YDUI样式 -->
+    <link rel="stylesheet" href="../build/css/ydui.css" />
+	<link rel="stylesheet" href="../css/common.css" />
+	<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
+	<style>
+		.topbg{width: 100%; position: relative;}
+		.topbg img{max-width: 100%;}
+		.userinfo .userimg{width: 1rem; height: 1rem;}
+		.userinfo .userimg img{height: 100%;width: 100%;border-radius: 50%;}
+		.userinfo{left: calc(50% - 25px);position: absolute;top: calc(50% - 65px);}
+		.username{color:#ffffff; margin-top: .1rem;}
+		.minelist div {padding: .1rem .35rem;font-size: 0.25rem;}
+		.minelist div label{color:#C1060F}
+		.minelist div a{display: inline-block;padding: .2rem; color: #666666;}
+		.confirm-bd{
+			text-align: center !important;
+		}
+	</style>
+</head>
+<body>
+	<section class="g-flexview">
+		<!-- 顶部内容 -->
+		<header class="m-navbar">
+			<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+				<i class="back-ico"></i>
+			</a>
+			<div class="navbar-center">
+				<span class="navbar-title">个人中心</span>
+			</div>
+		</header>
+		
+		<!-- 主体内容 -->
+		<div class="g-scrollview">
+			<div class="topbg">
+				<img src="../static/images/bg.jpg" />
+				<div class="userinfo">
+					<div class="userimg"><img src="../static/images/house3.png" /></div>
+					<div class="username">用户姓名</div>
+				</div>
+			</div>
+			<div class="minelist">
+				<div><label><i class="fa fa-address-card"></i></label>&nbsp;&nbsp;<a href="./basicinfo.html">基本信息</a></div>
+				<div><label><i class="fa fa-user"></i></label>&nbsp;&nbsp;<a href="./mycustomer.html">我的客户</a></div>
+				<div><label><i class="fa fa-rmb"></i></label>&nbsp;&nbsp;<a href="./mycommission.html">我的佣金</a></div>
+				<div><label><i class="fa fa-user"></i></label>&nbsp;&nbsp;<a href="./checking.html">经纪人验证</a></div>
+				<div id="getVip"><label><i class="fa fa-vimeo"></i></label>&nbsp;&nbsp;<a href="#">开通会员</a></div>
+				<div id="logoutSteam"><label><i class="fa fa-window-close"></i>&nbsp;&nbsp;</label><a href="#">退出登录</a></div>
+			</div>
+		</div>
+		<!-- 报备客户按钮 -->
+		<a href="reportecustomers/index.html">
+			<div id="preparation">报备</div>
+		</a>
+		<!-- 底部导航 -->
+		<footer class="m-tabbar">
+			<a href="../Index.html" class="tabbar-item">
+				<span class="tabbar-icon">
+					<i class="fa fa-home"></i>
+				</span>
+				<span class="tabbar-txt">首页</span>
+			</a>
+			<a href="./newhouse.html" class="tabbar-item">
+				<span class="tabbar-icon">
+					<i class="icon-home"></i>
+				</span>
+				<span class="tabbar-txt">新房分销</span>
+			</a>
+			<a href="./oldhouse.html" class="tabbar-item">
+				<span class="tabbar-icon">
+					<i class="fa fa-institution"></i>
+				</span>
+				<span class="tabbar-txt">二手房</span>
+			</a>
+			<a href="#" class="tabbar-item tabbar-active">
+				<span class="tabbar-icon">
+					<i class="icon-ucenter-outline"></i>
+				</span>
+				<span class="tabbar-txt">我的</span>
+			</a>
+		</footer>
+</section>
+<!-- 引入jQuery 3.0+ -->
+<script src="../js/jq331.min.js"></script>
+<!-- 引入YDUI脚本 -->
+<script src="../build/js/ydui.js"></script>
+ <script src="../build/js/ydui.flexible.js"></script>
+	<script src="../js/common.js"></script>
+<!-- <script src="../js/Index.js"></script> -->
+<script>
+	$(document).ready(function(){
+// 		var dataToken = sessionStorage.getItem('token'); // 获取token
+// 		var dataToken = sessionStorage.getItem('token'); // 获取token
+// 		var datamoretime = sessionStorage.getItem('moretime'); // 获取时效时间//token 的过期时间
+		console.log(dataToken);
+		console.log(datamoretime);
+		if(!dataToken){
+ 			!function (win, $) {
+ 				var dialog = win.YDUI.dialog;													
+ 				dialog.confirm('系统提示', '您还没有登录，现在去登录...', [
+ 					{
+ 						txt: '取消',
+ 						color: false, /* false:黑色  true:绿色 或 使用颜色值 */
+ 						callback: function () {
+ 							history.go(-1);
+ 						}
+ 					},
+ 					{
+ 						txt: '确定',
+ 						color: true,
+ 						callback: function () {
+ 							location.href="./login.html";
+ 						}
+ 					}
+ 				]);
+ 			}(window, jQuery);					
+			return;
+		}
+		//token判断时效，超时退出登录
+		var _interval_handler=-1;
+		
+		var _EXPIRE_TIME = datamoretime;//判断时效时间，则注销
+		(function () {
+		    if (dataToken) {//已登录
+		       //刷新最后使用时间
+		       sessionStorage.setItem("nxgx_lastVisitTime", new Date().getTime());
+		       _interval_handler=setInterval(checkExpired, 10*1000);//10秒钟检查一次，是否超时
+		      }
+		})();
+		 
+		function checkExpired() {
+		   console.log("10秒检查一次是否过期"+window.location.href+"::"+new Date());
+		   var storeLastTime=sessionStorage.getItem("nxgx_lastVisitTime")?sessionStorage.getItem("nxgx_lastVisitTime"):-1;
+		   if (storeLastTime==-1) clearInterval(_interval_handler);
+		   else {
+		        if ((new Date()).getTime()-storeLastTime>_EXPIRE_TIME) {  //过期了
+		         !function (win, $) {
+		         	var dialog = win.YDUI.dialog;
+		         	/* 加载中提示框 */									
+		         		dialog.loading.open('登录超时...');
+		         		setTimeout(function () {
+		         			dialog.loading.close();/* 移除loading */
+		         			location.href="./login.html";
+		         		}, 2000);
+		         
+		         }(window, jQuery);	
+		          clearInterval(_interval_handler);
+		     }
+		  }
+		};
+		
+		//开通会员
+		$('#getVip').click(function(){
+			!function (win, $) {
+				var dialog = win.YDUI.dialog;													
+					dialog.alert('系统升级，敬请期待...！');		
+			}(window, jQuery);	
+		});
+		
+		//退出登录
+		$('#logoutSteam').click(function(){
+			!function (win, $) {
+				var dialog = win.YDUI.dialog;													
+				dialog.confirm('系统提示', '确认要退出吗？', function () {
+					sessionStorage.removeItem('token'); //清除token
+					location.href="./login.html";
+				});
+			}(window, jQuery);
+		});
+});
+</script>
+</body>
+</html>

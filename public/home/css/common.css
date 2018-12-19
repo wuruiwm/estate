@@ -1,0 +1,57 @@
+/* 头部 nvaber 公共样式 */
+.tabbar-icon :after, .tabbar-icon :before {
+    font-size: .4rem!important;
+    display: block;
+}
+.ios .g-scrollview {
+    margin-top: 0px;
+}
+body{background: #FFFFFF;}
+.m-navbar{
+	background: #C1060F;
+	position: initial;
+	}
+.back-ico:before , .navbar-title{
+	color:#ffffff !important;
+	font-size: .3rem !important;
+	}
+	
+.tabbar-active {
+	color: #C1060F !important;
+}
+/* 报备客户按钮 */
+#preparation{
+	padding: 0;
+	display: flex;
+    width: .75rem;
+    height: .75rem;
+    border-radius: 50%;
+    background: #C1060F;
+    color: #ffffff;
+    position: fixed;
+	color:#ffffff;
+    bottom: 1.5rem;
+	right: .5rem;
+    align-items: center;
+    justify-content: center;
+	box-shadow: 0 0px 5px 2px #666;
+	z-index: 1;
+}
+/*  发布按钮样式 */
+#release{
+	padding: 0;
+	display: flex;
+	width: .75rem;
+	height: .75rem;
+	border-radius: 50%;
+	background: #C1060F;
+	color: #ffffff;
+	position: fixed;
+	color:#ffffff;
+	bottom: 3rem;
+	right: .5rem;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 0px 5px 2px #666;
+	z-index: 1;
+}

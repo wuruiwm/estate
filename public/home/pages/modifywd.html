@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>修改密码</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+		<!-- 引入YDUI样式 -->
+		<link rel="stylesheet" href="../build/css/ydui.css" />
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
+		<script src="../js/jq331.min.js"></script>
+		<script src="../js/common.js"></script>
+		<style>
+			label{
+				display: inline-block;
+				min-width: 1.5rem;
+				text-align: right;
+				color:#666666;
+			}
+			input{
+				border:1px solid #eee;
+				padding: .1rem .3rem;
+				color:#666666;
+				}
+			.basicinfo{padding: .2rem;}
+			.basicinfo div{
+				padding: .35rem .2rem;
+			}
+			.truemodify{
+				background: #C1060F;
+				border: none;
+				color: #ffffff;
+				padding: .2rem 1rem;
+				border-radius: .2rem;
+				margin: 2rem auto;
+				font-family: -webkit-pictograph;
+				display: block;
+			}
+			.getcode{
+				padding: 0 .3rem;
+				color: #666;
+				text-decoration: underline;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="logincantion">
+			<header class="m-navbar">
+				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+					<i class="back-ico"></i>
+				</a>
+				<div class="navbar-center">
+					<span class="navbar-title">修改密码</span>
+				</div>
+			</header>
+			<div class="basicinfo">
+				<div>
+					<label>账号：</label>
+					<input type="text" readonly="readonly" value="15256935637" name="account" /><a class="getcode" id="getcode">获取验证码</a>
+				</div>
+				<div id="messageCode">
+					<label>短信验证码：</label>
+					<input type="text"  value="" name="code" />
+				</div>
+				<div>
+					<label>新密码：</label>
+					<input type="password"  value="" name="newpassword" />
+				</div>
+				<div>
+					<label>确认新密码：</label>
+					<input type="password" value="" name="crimpassword" />
+					<!-- <p style="color:#666666; padding: .3rem;">忘记密码？<a id="resetPwd" style="color:#C1060F;text-decoration: underline;">重置密码</a></p> -->
+				</div>
+				<button class="truemodify">确认修改</button>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function(){
+				var getCode = commapi + "password/code";
+				var modifypwdApi = commapi + "password/update";
+				var dataToken = sessionStorage.getItem('token'); // 获取token
+				console.log(dataToken);
+				if(!dataToken){
+					location.href="./login.html";
+					return;
+				}
+				$('#messageCode').hide();
+				$('#getcode').click(function(){
+					$('#messageCode').show();
+				});
+				
+				//获取手机验证码
+				$('#getcode').click(function(){
+					var telnumber = $("input[name='account']").val(); //用户账号
+					$.ajax({
+						url: getCode,
+						type: "POST",
+						data: {'mobile': telnumber},
+						success: function(result) {
+							console.log(result);//成功
+								!function (win, $) {
+									var dialog = win.YDUI.dialog;						
+										dialog.toast('信息已发送！', 'success', 1000);
+										setTimeout(function () {
+											dialog.loading.close();/* 移除loading */
+										}, 2000);
+								
+							}(window, jQuery);	
+						},
+						error:function(msg){
+								console.log(msg) // 失败返回
+								console.log('0')
+								var json=JSON.parse(msg.responseText);
+								// 验证不通过
+								if(json.errorCode==40000){
+										alert(json.msg);
+								}
+								// 用户名不存在
+								if(json.errorCode==40301){
+										alert(json.msg);
+								}
+						}
+					});
+				});
+				
+				//修改密码
+				$('.truemodify').click(function(){
+					var useraccount = $("input[name='account']").val(); //用户账号
+					var code = $("input[name='code']").val(); //短信验证码
+					var newpwd = $("input[name='newpassword']").val(); //密码
+					var crimpwd = $("input[name='crimpassword']").val(); //确认密码
+					if(newpwd !== crimpwd){
+						!function (win, $) {
+							var dialog = win.YDUI.dialog;
+							dialog.toast('两次密码不一致，请仔细核对！', 'error', 2000);
+								setTimeout(function () {
+									dialog.loading.close();
+								}, 2000);	
+							}(window, jQuery);	
+							return;
+					}
+					$.ajax({
+						url: modifypwdApi,
+						type: "POST",
+						data: {'mobile': useraccount, 'code': code, 'password': newpwd, 'password_old': crimpwd},
+						success: function(result) {
+							console.log(result);//成功
+								!function (win, $) {
+									var dialog = win.YDUI.dialog;
+									dialog.toast('修改成功,正在跳转登录页...', 'success', 2000);
+										setTimeout(function () {
+											dialog.loading.close();/* 移除loading */
+											location.href="./login.html";
+										}, 2000);
+								
+							}(window, jQuery);	
+						},
+						error:function(msg){
+								console.log(msg) // 失败返回
+								console.log('0')
+								var json=JSON.parse(msg.responseText);
+								// 验证不通过
+								if(json.errorCode==40000){
+										alert(json.msg);
+								}
+								// 用户名不存在
+								if(json.errorCode==40301){
+										alert(json.msg);
+								}
+						}
+					});
+				});
+				
+			})
+		</script>
+		<!-- 引入YDUI脚本 -->
+		<script src="../build/js/ydui.flexible.js"></script>
+		<script src="../build/js/ydui.js"></script>
+	</body>
+</html>

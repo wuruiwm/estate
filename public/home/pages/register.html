@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>注册</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+		<!-- 引入YDUI样式 -->
+		<link rel="stylesheet" href="../build/css/ydui.css" />
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
+		<!-- 引入YDUI自适应解决方案类库 -->
+		<script src="../js/jq331.min.js"></script>
+		<script src="../js/common.js"></script>
+		<style>
+			.registerform {
+				padding: .5rem .2rem;
+			}
+			.registerform div{
+				align-items: center;
+				padding: .25rem;
+				display: flex;
+			}
+			.registerform label {
+					color:#C1060F;
+					font-size: .3rem;
+			}
+			.registerform input {
+				height: .8rem;
+				border: 0;
+				padding: .1rem;
+				
+			}
+			.trueregister{
+			margin-top: 1rem;
+			border: navajowhite;
+			background: #C1060F;
+			color: #fff;
+			padding: .15rem 1.5rem;
+			border-radius: .2rem;
+			text-align: center;
+			}
+			.btn-warning{
+				background: #C1060F;
+				height: .5rem;
+				line-height: .5rem;
+			}
+			.btn-disabled{
+				background: #CCC !important;
+			}
+			#hasCode{
+				color:#868686;
+				text-decoration: underline;
+				padding: 0 .2rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="logincantion">
+			<header class="m-navbar">
+				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+					<i class="back-ico"></i>
+				</a>
+				<div class="navbar-center">
+					<span class="navbar-title">注册</span>
+				</div>
+			</header>
+			<div class="registerform">
+					<div class="name">
+						<label><i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;|</label>&nbsp;
+						<input type="text"   placeholder="请输入姓名" value="" name="username"  />
+					</div>
+					<div class="admin">
+						<label><i class="fa fa-phone-square"></i>&nbsp;&nbsp;|</label>&nbsp;
+						<input type="number" pattern="[0-9]*"  placeholder="请输入手机号码" value="" name="usertel" autocomplete="off" />
+						<button type="button" class="btn btn-warning" id="J_GetCode">获取短信验证码</button>
+					</div>
+					<div class="messagecode">
+						<label><i class="fa fa-commenting"></i>&nbsp;&nbsp;|</label>&nbsp;
+						<input type="number" pattern="[0-9]*" value="" name="messarscode" placeholder="请输入短信验证码" />
+					</div>  
+					<div class="password">
+						<label><i class="fa fa-key"></i>&nbsp;&nbsp;|</label>&nbsp;
+						<input type="password" value="" name="userpwd" placeholder="请正确输入密码" />
+					</div>
+					<div class="maincity">
+						<label><i class="fa fa-location-arrow"></i>&nbsp;&nbsp;|</label>&nbsp;
+						<input type="text" readonly id="J_Address" value="" name="maincity" placeholder="请选择主营城市">
+					</div>
+					<div class="belongto">
+					<label><i class="fa fa-university"></i>&nbsp;&nbsp;|</label>&nbsp;
+					<input type="text" value="" name="belongtoshop" placeholder="所属门店" />
+					</div>  
+					<div class="yaoqingcode">
+					 	<label><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;|</label>&nbsp;
+					 	<input type="text" value="" name="yaoqingcode" placeholder="请正确输入邀请码" />
+					</div>  
+					<p style="text-align: center;">
+						<button class="trueregister">注册</button><a id='hasCode'>我有邀请码</a>
+						<p style="margin-top: .3rem; color:#666666;text-align: center;">已有账号？<a href="./login.html" style="color:#C1060F;">立即登录</a></p>
+					</p>
+			</div>
+		</div>
+	</body>
+	<script>
+		$(document).ready(function(){
+			var getcodeApi = commapi + "register/code"; //手机验证码获取
+			var postregisterApi = commapi + "register/mobile"; //提交用户注册信息
+			
+			// 短信验证码
+			var $getCode = $('#J_GetCode');
+		
+			/* 定义参数 */
+			$getCode.sendCode({
+				disClass: 'btn-disabled',
+				secs: 30,
+				run: false,
+				runStr: '{%s}秒后重新获取',
+				resetStr: '重新获取验证码'
+			});
+		
+			$getCode.on('click', function () {
+				/* ajax 成功发送验证码后调用【start】 */
+				YDUI.dialog.loading.open('发送中');
+				setTimeout(function(){
+					
+					YDUI.dialog.loading.close();
+					
+					$getCode.sendCode('start');
+					YDUI.dialog.toast('已发送', 'success', 1500);
+					
+				}, 1500);
+			});
+			
+			$('.belongto, .yaoqingcode,.maincity').hide();
+			$('#hasCode').click(function(){
+				$('.belongto, .yaoqingcode,.maincity').show();
+			});
+			//获取手机验证码
+			$('#J_GetCode').click(function(){
+				var tel = $("input[name='usertel']").val();
+				$.ajax({
+						url: getcodeApi,
+						type: "POST",
+						data: {'mobile': tel},
+						success: function(result) {
+							console.log(result);
+							//获取验证码成功
+						},
+						error:function(msg){
+								console.log(msg) // 失败返回
+						}
+				});
+			});
+			
+			//用户注册提交信息
+			$('.trueregister').click(function(){
+				//var username = $("input[name='username']").val(); //用户姓名
+				var usertel = $("input[name='usertel']").val(); //手机号码
+				var usercode = $("input[name='messarscode']").val(); //短信验证码
+				var userpwd = $("input[name='userpwd']").val(); //注册密码
+				console.log(usertel);
+				console.log(usercode);
+				console.log(userpwd);
+				$.ajax({
+					url: postregisterApi,
+					type: "POST",
+					data: {'mobile': usertel, 'code': usercode, 'password': userpwd},
+					success: function(result) {
+						console.log(result);//注册成功
+							!function (win, $) {
+								var dialog = win.YDUI.dialog;
+								/* 加载中提示框 */									
+									dialog.loading.open('恭喜注册成功!');
+									setTimeout(function () {
+										dialog.loading.close();/* 移除loading */
+									}, 2000);
+							
+						}(window, jQuery);	
+					},
+					error:function(msg){
+							console.log(msg) // 失败返回
+							console.log('0')
+							var json=JSON.parse(msg.responseText);
+							// 验证不通过
+							if(json.errorCode==40000){
+									alert(json.msg);
+							}
+							// 用户名不存在
+							if(json.errorCode==40301){
+									alert(json.msg);
+							}
+					}
+				});
+			});
+		});
+	</script>
+	<script src="../build/js/ydui.flexible.js"></script>
+	<!-- 引入YDUI脚本 -->
+	<script src="../build/js/ydui.js"></script>
+</html>

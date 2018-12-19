@@ -1,0 +1,72 @@
+body{
+	font-size: 13px;
+}
+.header {
+	background: #C1060F ;
+	color: #ffffff;
+}
+
+/* 顶部布局样式 */
+.header-main  {
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+/* .header-main div{
+	margin: 0 .3rem;
+} */
+.header-main input { border: none; width:80%;}
+.header-main .search {
+	width: 65%;
+	background: #fff;
+    padding: .08rem 0;
+	margin: 0 .2rem;
+    border-radius: .5rem;
+}
+#bannerImage{
+	height: 5rem;
+}
+#bannerImage .slider-item img{
+	height: 100%;
+	max-width: 100%;
+}
+
+/* 四个导航和公告样式 */
+.menu-list {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.menu-list .item-menu {
+	width: 20%;
+	margin: .2rem;
+	font-size:.2rem;
+	text-align: center;
+}
+.menu-list .item-menu  img{
+	margin: 0.2rem auto;
+	max-width: 60%;
+}
+.notice{
+	padding: .2rem .5rem;
+    display: flex;
+    align-items: center;
+	border-bottom: .1rem solid #EDEDED;
+}
+.notice .title {
+	background: #C1060F;
+    color: #ffffff;
+    padding: .05rem .2rem;
+    border-radius: .1rem;
+}
+.notice .desc{color:#B8B8B8}
+
+
+/* 房源列表样式 */
+.house-list{margin-top: .2rem;}
+.house-list .tips{
+	color:#C1060F;
+	text-align: center;
+}

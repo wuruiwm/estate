@@ -1,10 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <!-- 引入YDUI样式 -->
+    <link rel="stylesheet" href="build/css/ydui.css" />
+	<link rel="stylesheet" href="build/css/city.css" />
+	<link rel="stylesheet" href="./css/Index.css" />
+	<link rel="stylesheet" href="css/common.css" />
+	<link rel="stylesheet" href="./css/fontcss/css/font-awesome.min.css" />
+	
 </head>
 <body>
-首页页面
+	<section class="g-flexview">
+		 <div id="container" style="display: none;"></div> <!-- 定位地图容器 -->
+		<!-- 顶部内容 -->
+		<header class="m-navbar header">
+			<div class="header-main">
+				<div class="location"><a id="currentCity"></a><label>&nbsp;&nbsp;▼</label></div>
+				<div class="search"><i class="icon-search" style="color:#C1060F; margin: 0 .2rem 0 .2rem;"></i><input type="search" value="" placeholder="房源搜索" /></div>
+				<div class="news">
+					<a style="display: inline-block;margin-top: 0.1rem;" href="./pages/newslist.html">
+						<i class="fa fa-server" style="font-size:.35rem;"></i>
+					</a>
+				</div>
+			</div>
+		</header>
+		
+		<!-- 主体内容 -->
+		<div class="g-scrollview">
+			<!-- banner 图 -->
+			<div class="m-slider" id="bannerImage">
+				<div class="slider-wrapper" id="bannerList"><!-- 轮播图模板显示位置 --></div>
+				<div class="slider-pagination"></div>
+			</div>
+			
+			<!-- 四个菜单当行加公告 -->
+			<div class="menu">
+				<div class="menu-list">
+					<div class="item-menu">
+						<a href="pages/newhouse.html">
+							<img src="static/images/newhouse.png" />
+							<label>新房分销</label>
+						</a>
+					</div>
+					<div class="item-menu">
+						<a href="pages/oldhouse.html">
+							<img src="static/images/house2.png" />
+							<label>二手房</label>
+						</a>
+					</div>
+					<div class="item-menu">
+						<a href="pages/computer.html">
+							<img src="static/images/computer.png" />
+							<label>贷款计算器</label>
+						<a/>
+					</div>
+					<div class="item-menu">
+						<a href="pages/mycustomer.html">
+							<img src="static/images/house1.png" />
+							<label>带客看房</label>
+						<a/>
+					</div>
+				</div>
+				<div class="notice">
+					<span class="title">公告</span>&nbsp;&nbsp;
+					<div class="desc"></div>
+				</div>
+			</div>
+			
+			<!-- 房源列表 -->
+			<div class="house-list">
+				<p class="tips"><i class="icon-discount"></i>&nbsp;&nbsp;最新房源</p>
+			</div>
+		</div>
+		<!-- 报备客户按钮 -->
+		<a href="pages/reportecustomers/index.html">
+			<div id="preparation">报备</div>
+		</a>
+		<!-- 底部导航 -->
+		<footer class="m-tabbar">
+			<a href="#" class="tabbar-item tabbar-active">
+				<span class="tabbar-icon">
+					<i class="fa fa-home"></i>
+				</span>
+				<span class="tabbar-txt">首页</span>
+			</a>
+			<a href="pages/newhouse.html" class="tabbar-item">
+				<span class="tabbar-icon">
+					<i class="icon-home"></i>
+				</span>
+				<span class="tabbar-txt">新房分销</span>
+			</a>
+			<a href="pages/oldhouse.html" class="tabbar-item">
+				<span class="tabbar-icon">
+					<i class="fa fa-institution"></i>
+				</span>
+				<span class="tabbar-txt">二手房</span>
+			</a>
+			<a href="pages/percenter.html" class="tabbar-item">
+				<span class="tabbar-icon">
+					<i class="icon-ucenter-outline"></i>
+				</span>
+				<span class="tabbar-txt">我的</span>
+			</a>
+		</footer>
+</section>
+<script id="bannerscr" type="text/html">
+   {{each data as value index}}
+		<div class="slider-item">
+			<a href="#">
+				<img src="{{value.img_id}}">
+			</a>
+		</div>
+   {{/each}}
+</script>
+<script src="js/jq331.min.js"></script>
+<script src="build/js/ydui.js"></script>
+<!-- 引入YDUI自适应解决方案类库 -->
+<script src="build/js/ydui.flexible.js"></script>
+<script src="build/js/citys.js"></script>
+<script src="build/js/ydui.citys.js"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=1c2a3d03debccf4e9f5502d493d3acfd"></script>
+<script src="js/template.js"></script>
+<script src="js/common.js"></script>
+<script src="js/Index.js"></script>
 </body>
 </html>
