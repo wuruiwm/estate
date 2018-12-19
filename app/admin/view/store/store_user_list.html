@@ -17,10 +17,7 @@
             <a class="layui-btn layui-btn-danger batchDel" data-type="getCheckData">批量删除</a>
         </div>
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-normal newsAdd_btn">新增门店</a>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">搜索店名：</label>
+            <label class="layui-form-label">搜索姓名：</label>
             <div class="layui-input-inline">
                 <input class="layui-input" name="keyword" id="keyword" autocomplete="off">
             </div>
@@ -32,44 +29,40 @@
 </blockquote>
 <table id="table" lay-filter="test"></table>
 <script type="text/html" id="showimg">
-    <div><a href="#"><img src="{{d.img_id.img_url}}" width="30" height="30"></a></div>
+    <div><a href="#"><img src="{{d.head_img}}" width="30" height="30"></a></div>
 </script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="view">查看门店用户</a>
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除用户</a>
 </script>
 {include file="public/foot"}
 <script>
     layui.use(['table', 'form'], function () {
         var table = layui.table;
         var form = layui.form;
-
+        var id = window.base.getQueryString('id');
+        layer.msg(id);
 
         table.render({
             elem: '#table'
             , height: 'full-120'
             , width: 'full'
-            , url: window.base.g_restUrl + 'store/list' //数据接口
+            , url: window.base.g_restUrl + 'store/user_list?store_id='+id //数据接口
             , page: false //是否开启分页
             , limits: [15, 25, 45, 60] // 设置每页显示？条
             , limit: 15 // 每页默认显示数量
             , cols: [[ //标题栏 列表信息
                 {checkbox: true, fixed: true}
                 , {field: 'id', title: 'ID', width: 100, fixed: 'left', align: 'center'}
-                , {field: 'img_id', title: '门店照', width: 100, templet: '#showimg', align: 'center'}
-                , {field: 'name', title: '店名', width: 300}
-                , {field: 'manager', title: '负责人', width: 100}
-                , {field: 'phone', title: '联系方式', width: 200}
-                , {field: 'area', title: '主营地区', width: 200}
-                , {
-                    field: 'reg_code', title: '邀请码', width: 100, align: 'center', templet: function (d) {
-                        return ' <span class="layui-badge layui-bg-black">'+ d.reg_code+'</span>'
-                    }
-                }
-                , {field: 'address', title: '地址', width: 400,}
-                , {field: 'create_time', title: '创建时间', width: 200, align: 'center', sort: true}
-                , {title: '操作', width: 300, align: 'center', toolbar: '#barDemo', fixed: 'right'}
+                , {field: 'head_img', title: '用户头像', width: 100, templet: '#showimg', align: 'center'}
+                , {field: 'nickname', title: '昵称', width: 300}
+                , {field: 'phone', title: '手机号', width: 200}
+                , {field: 'card_name', title: '真实姓名', width: 400,}
+                , {field: 'card_number', title: '身份证ID', width: 400,}
+                , {field: 'level', title: '类型', width: 200}
+                , {field: 'store_id', title: '所属房产', width: 200}
+                , {field: 'login_time', title: '上次登录', width: 200, align: 'center', sort: true}
+                , {field: 'create_time', title: '注册时间', width: 200, align: 'center', sort: true}
+                , {title: '操作', width: 160, align: 'center', toolbar: '#barDemo', fixed: 'right'}
             ]],
             id: 'testReload',
             done: function (res, curr, count) {
@@ -129,24 +122,7 @@
         table.on('tool(test)', function (obj) {
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-            // 编辑操作
-            if (layEvent === 'edit') {
-                $(window).one("resize", function () {
-                    var index = layui.layer.open({
-                        title: "编辑信息",
-                        type: 2,
-                        content: "new_store?id=" + data.id,
-                        success: function (layero, index) {
-                            setTimeout(function () {
-                                layui.layer.tips('点击此处返回信息列表', '.layui-layer-setwin .layui-layer-close', {
-                                    tips: 3
-                                });
-                            }, 500)
-                        }
-                    })
-                    layui.layer.full(index);
-                }).resize();
-            }
+
             // 删除操作
             if (layEvent === 'del') {
                 layer.confirm('真的删除行么', function (index) {
@@ -155,52 +131,15 @@
                     del(data.id, obj, index)
                 });
             }
-            // 查看操作
-            if (layEvent === 'view') {
-                $(window).one("resize", function () {
-                    var index = layui.layer.open({
-                        title: "查看信息",
-                        type: 2,
-                        content: "store_user_list?id=" + data.id,
-                        success: function (layero, index) {
-                            setTimeout(function () {
-                                layui.layer.tips('点击此处返回信息列表', '.layui-layer-setwin .layui-layer-close', {
-                                    tips: 3
-                                });
-                            }, 500)
-                        }
-                    })
-                    layui.layer.full(index);
-                }).resize();
-            }
         });
 
     }); // layui结束
 
 
-    // 添加广告
-    $(window).one("resize", function () {
-        $(".newsAdd_btn").click(function () {
-            var index = layui.layer.open({
-                title: "新增门店",
-                type: 2,
-                content: "new_store",
-                success: function (layero, index) {
-                    setTimeout(function () {
-                        layui.layer.tips('点击此处返回门店管理', '.layui-layer-setwin .layui-layer-close', {
-                            tips: 3
-                        });
-                    }, 500)
-                }
-            })
-            layui.layer.full(index);
-        })
-    }).resize();
-
     // 单删除
     function del(id, obj, index) {
         var params = {
-            url: 'store/remove?id=' + id,
+            url: 'user/remove?id=' + id,
             sCallback: function (successMsg) {
                 if (successMsg.msg == '缺少权限') {
                     layer.msg(successMsg.msg);
@@ -218,36 +157,7 @@
         };
         window.base.getData(params);
     }
-    // 单修改
-    function edit(id, data) {
-        var params = {
-            url: 'store/update?id=' + id,
-            type: 'post',
-            data: data,
-            sCallback: function (successMsg) {
-                if (successMsg.msg == '缺少权限') {
-                    layer.msg(successMsg.msg);
-                }
-                if (successMsg.errorCode == 20100) {
-                    //弹出loading
-                    var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
-                    setTimeout(function () {
-                        top.layer.close(index);
-                        top.layer.msg("修改成功");
-                        layer.closeAll("iframe");
-                        //刷新父页面
-                        //parent.location.reload();
-                    }, 1000);
-                }
-            },
-            eCallback: function (errorMsg) {
-                if (errorMsg.responseJSON.errorCode == 40000) {
-                    layer.msg(errorMsg.responseJSON.msg);
-                }
-            }
-        }
-        window.base.getData(params);
-    }
+
     //图片放大
     function hoverOpenImg() {
         var img_show = null; // tips提示
@@ -269,7 +179,7 @@
     // 批量删除
     function dels(ids, table) {
         var params = {
-            url: 'store/dels?ids=' + ids,
+            url: 'user/dels?ids=' + ids,
             sCallback: function (successMsg) {
                 if (successMsg.errorCode == 20100) {
                     //弹出loading

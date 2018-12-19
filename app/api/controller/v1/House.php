@@ -141,4 +141,10 @@ class House extends BaseController
     public function getHouseHead($limit='10'){
         return HouseSource::getHouseHead($limit);
     }
+
+
+    // 客户端用户发布房源
+    public function addUsed(){
+
+    }
 }

@@ -29,6 +29,9 @@ class Store extends Permissions
     {
         return $this->fetch();
     }
+    public function store_user_list(){
+       return $this->fetch();
+    }
 
     public function newStore()
     {

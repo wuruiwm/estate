@@ -61,4 +61,18 @@ class User extends Permissions
         }
     }
 
+    public function getStoreUserList($page = '', $limit = '', $key = '',$store_id='')
+    {
+        (new Page())->goCheck();
+        if (isset($key['keyword']) and !empty($key['keyword'])) {
+            $where['card_name'] = ['like', '%' . $key['keyword'] . '%'];
+        }
+        if (empty($where['card_name'])) {
+            $where = null;
+        }
+
+        $result = userModel::getStoreUserList($page - 1, $limit, $where,$store_id);
+        return $result;
+    }
+
 }
