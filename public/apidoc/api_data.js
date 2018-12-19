@@ -364,6 +364,30 @@ define({ "api": [
     "name": "GetHouseList"
   },
   {
+    "type": "post",
+    "url": "upload/file_img",
+    "title": "修改头像",
+    "group": "upload",
+    "version": "0.1.0",
+    "description": "<p>上传图片</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "file",
+            "optional": false,
+            "field": "file",
+            "description": "<p>文件名</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/api/controller/v1/Upload.php",
+    "groupTitle": "上传图片",
+    "name": "PostUploadFile_img"
+  },
+  {
     "type": "get",
     "url": "user/info",
     "title": "获取登陆者用户信息",
