@@ -70,4 +70,17 @@ class User extends BaseModel
         return self::DataFormat($result, 0, 'ok', self::count());
     }
 
+    public static function getStoreUserList($page, $limit, $where,$store_id)
+    {
+        $number = $page * $limit;
+        $result = self::limit($number, $limit)
+            ->order('create_time desc')
+            ->where($where)
+            ->where('store_id',$store_id)
+            ->select();
+        if (!$result) {
+            return self::DataFormat(0);
+        }
+        return self::DataFormat($result, 0, 'ok', self::count());
+    }
 }

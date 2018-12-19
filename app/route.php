@@ -33,6 +33,8 @@ Route::get('admin_api/store/remove', 'admin/Store/delById');
 Route::get('admin_api/store/item', 'admin/store/getInfoById');
 Route::post('admin_api/store/update', 'admin/Store/updateById');
 Route::get('admin_api/store/dels', 'admin/store/dels');
+Route::get('admin_api/store/user_list', 'admin/User/getStoreUserList');
+
 
 Route::get('admin_api/user/list','admin/User/getList');
 Route::get('admin_api/user/remove', 'admin/User/delById');
@@ -53,6 +55,10 @@ Route::get('api/:version/house/head','api/:version.House/getHouseHead');
 Route::get('api/:version/user/info', 'api/:version.User/getUserById');
 Route::post('api/:version/user/head_img', 'api/:version.User/updateHeadImg');
 Route::post('api/:version/user/update', 'api/:version.User/updateById');
+Route::get('api/:version/province/list','api/:version.City/getProvinceList');
+Route::get('api/:version/city/list','api/:version.City/getCityByPid');
+Route::get('api/:version/area/list','api/:version.City/getAreaByCid');
+Route::post('api/:version/house/add_used','api/:version.House/addUsed');
 
 
 // 修改新手机号
