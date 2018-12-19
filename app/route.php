@@ -42,6 +42,8 @@ Route::get('admin_api/user/dels', 'admin/User/dels');
 /**
  * 客户端接口
  */
+Route::post('api/:version/upload/file_img', 'api/:version.Upload/upload');
+
 
 Route::get('api/:version/banner/select', 'api/:version.Banner/getBanner');
 Route::post('api/:version/register/code', 'api/:version.Register/getRandom');
@@ -59,6 +61,7 @@ Route::get('api/:version/province/list','api/:version.City/getProvinceList');
 Route::get('api/:version/city/list','api/:version.City/getCityByPid');
 Route::get('api/:version/area/list','api/:version.City/getAreaByCid');
 Route::post('api/:version/house/add_used','api/:version.House/addUsed');
+
 
 
 // 修改新手机号
