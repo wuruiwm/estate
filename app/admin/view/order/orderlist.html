@@ -170,7 +170,6 @@
 	//input框的日历插件
     layui.use('laydate', function(){
       var laydate = layui.laydate;
-      
       //常规用法
       laydate.render({
         elem: '#create_time'
@@ -250,9 +249,7 @@
 		//因为垃圾tp5分页，点击页码会get传参，不能直接判断是否有get传参，我判断get传参里是否有这个状态码
 		url = url + '&panduan=1';
 		//发送get请求，并且把返回值，直接替换整个body
-		$.post(url,function(res){
-			document.getElementsByTagName('html')[0].innerHTML = res;
-		})
+		window.location.href = url;
 	}
 	function chuan(house_id,order_id){
 		var url = "{:url('admin/order/yongjin')}";

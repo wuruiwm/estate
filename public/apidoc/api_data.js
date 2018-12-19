@@ -825,6 +825,35 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "comm/commlist",
+    "title": "获取我的客户里的佣金管理",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>报获取我的客户里的佣金管理</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/comm/commlist"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "str",
+            "optional": false,
+            "field": "token",
+            "description": "<p>用来获取用户id的token，放在header里</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/api/controller/v1/Commission.php",
+    "groupTitle": "客户端接口",
+    "name": "PostCommCommlist"
+  },
+  {
+    "type": "post",
     "url": "order/add",
     "title": "报备客户信息提交",
     "group": "web",

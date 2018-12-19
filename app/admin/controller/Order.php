@@ -288,6 +288,10 @@ class Order extends Permissions{
 		$data['house_title'] = $order_res['house_title'];
 		$data['number'] = $order_res['number'];
 		$data['commission'] = $commission;
+		$t = time();
+		$t = date('Y-n-j',$t);
+		$t = strtotime($t);
+		$data['date'] = $t;
 		$data2 = [$data];
 		$commission = model('Commission');
 		//判断佣金结算的表里有没有这个订单id，如果有，则不让结算，提示已经结算过佣金，如果没有才让结算
