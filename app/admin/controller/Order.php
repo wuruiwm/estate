@@ -226,20 +226,86 @@ class Order extends Permissions{
 			
 		}
 	}
-	public function yongjin($house_id=''){
+	public function yongjin($house_id='',$order_id=''){
+		//获取佣金方案
 		$house =  model('HouseSource');
 		$res = $house->field(['brokerage_plan'])->where('id',$house_id)->find();
 		$brokerage_plan = $res->getData()['brokerage_plan'];
-		//var_dump($brokerage_plan);exit();
+		//获取到楼盘里选中的方案，多个佣金方案的id用逗号隔开 1,5,8
+		//用explode 将字符串分割成数组
 		$data = explode(',',$brokerage_plan);
-		//print_r($data);
+		//实例化佣金方案的model
+		//循环取出数据，where条件为我们刚刚从楼盘取出的方案，并且将结果赋值给一个空数组
 		$brokerage =  model('Brokerage');
 		$fangan = [];
 		foreach ($data as $k => $v) {
 			$fangan[] = $brokerage->field(['id','house_area','house_type','price','store_percentage','public_percentage'])->where('id',$v)->find()->getData();
 		}
-		//var_dump($fangan);
+		//实例化order表
+		$order = model('Order');
+		//查出order表对应的用户id，再把传过来的order_id和house_id  三个id赋值给数组，再unset掉不需要的键值对，然后将这个数组和查出佣金方案的数据加在一起
+		$order_res = $order->field(['id','user_id'])->where('id',$order_id)->find()->getData();
+		$order_res['order_id'] = $order_res['id'];
+		unset($order_res['id']);
+		$fangan['house_id'] = $house_id;
+		$fangan = $fangan + $order_res;
 		return json($fangan);
+	}
+	public function jiesuan(){
+		//获取get传参
+		$get = input('get.');
+		//实例化n个model
+		$user = model('User');
+		$brokerage = model('Brokerage');
+		$order = model('order');
+		//传来的userid查出数据
+		$user_res = $user->field(['id','level'])->where('id',$get['user_id'])->find()->getData();
+		$brokerage_res = $brokerage->field(['id','house_area','house_type','price','store_percentage','public_percentage'])->where('id',$get['brokerage_id'])->find()->getData();
+		//获取订单状态
+		$order_res = $order->field(['id','name','house_title','number','is_deal','is_pay'])->where('id',$get['order_id'])->find()->getData();
+		//订单必须是已成交，并且未结佣
+		if (!(($order_res['is_deal'] == 1)&&($order_res['is_pay'] == 0))) {
+			return json(['reg'=>'当前订单不是已成交状态']);
+		}
+		//判断用户是大众经纪人还是门店经纪人，走不同的佣金
+		if ($user_res['level'] == 1) {
+			$commission = $brokerage_res['price']*$brokerage_res['store_percentage']/100;
+		}else if ($user_res['level'] == 2) {
+			$commission = $brokerage_res['price']*$brokerage_res['public_percentage']/100;
+		}
+		//将对应的值赋值到数组里，然后存到数据库
+		$data = [];
+		$data['user_id'] = $user_res['id'];
+		$data['order_id'] = $order_res['id'];
+		$data['house_id'] = $get['house_id'];
+		$data['brokerage_id'] = $brokerage_res['id'];
+		$data['name'] = $order_res['name'];
+		$data['house_area'] = $brokerage_res['house_area'];
+		$data['house_type'] = $brokerage_res['house_type'];
+		$data['price'] = $brokerage_res['price'];
+		$data['store_percentage'] = $brokerage_res['store_percentage'];
+		$data['public_percentage'] = $brokerage_res['public_percentage'];
+		$data['house_title'] = $order_res['house_title'];
+		$data['number'] = $order_res['number'];
+		$data['commission'] = $commission;
+		$data2 = [$data];
+		$commission = model('Commission');
+		//判断佣金结算的表里有没有这个订单id，如果有，则不让结算，提示已经结算过佣金，如果没有才让结算
+		$yanzheng = $commission->where('order_id',$get['order_id'])->select();
+		if ($yanzheng) {
+			return json(['reg'=>'该笔订单已经结算过佣金']);
+		}
+		$res = $commission->saveAll($data2);
+		//判断插入是否成功，成功则将订单状态改为已结佣状态，提示结算成功
+		if ($res) {
+			$zhuangtai = ['id'=>$get['order_id'],'is_new'=>0,'is_visit'=>0,'is_deal'=>1,'is_pay'=>1];
+			$res = $order->isUpdate(true)->save($zhuangtai);
+			if ($res) {
+				return json(['reg'=>'佣金结算成功']);
+			}
+		}else{
+			return json(['reg'=>'佣金结算失败']);
+		}
 	}
 }
 
