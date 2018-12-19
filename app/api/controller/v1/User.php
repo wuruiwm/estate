@@ -117,8 +117,17 @@ class User extends BaseController
                 throw new ErrorMessage([
                     'msg'=>'该门店未入驻平台,请先联系平台负责人'
                 ]);
+            }else{
+                //return $store['id']; //1
+                $result = $model->allowField(true)->save([
+                    'store_id'=>$store['id']
+                ],['id' => $user_id]);
+                if($result){
+                    throw new SuccessMessage();
+                }
             }
         }
+
         $result = $model->allowField(true)->save($post,['id' => $user_id]);
         if($result){
             throw new SuccessMessage();
