@@ -39,6 +39,12 @@ Route::get('admin_api/store/user_list', 'admin/User/getStoreUserList');
 Route::get('admin_api/user/list','admin/User/getList');
 Route::get('admin_api/user/remove', 'admin/User/delById');
 Route::get('admin_api/user/dels', 'admin/User/dels');
+Route::get('admin_api/user/remove_store_user', 'admin/User/removeStoreUserById');
+Route::get('admin_api/user/remove_store_users', 'admin/User/removeStoreUserByIds');
+
+
+
+
 /**
  * 客户端接口
  */

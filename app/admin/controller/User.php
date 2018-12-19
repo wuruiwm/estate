@@ -10,6 +10,7 @@
 // +----------------------------------------------------------------------
 
 namespace app\admin\controller;
+
 use app\admin\model\User as userModel;
 use app\lib\exception\NullException;
 use app\lib\exception\SuccessMessage;
@@ -18,9 +19,11 @@ use app\lib\validate\Page;
 
 class User extends Permissions
 {
-    public function index(){
+    public function index()
+    {
         return $this->fetch();
     }
+
     public function getList($page = '', $limit = '', $key = '')
     {
         (new Page())->goCheck();
@@ -50,6 +53,19 @@ class User extends Permissions
         throw new NullException();
     }
 
+    public function removeStoreUserById($id = '')
+    {
+        (new IDMustBePositiveInt())->goCheck();
+        $result = userModel::get($id);
+        $model = new userModel();
+        if ($result) {
+            $result = $model->where('id', $id)
+                ->update(['store_id' => 0, 'level' => 2]);
+            if ($result > 0) {
+                throw new SuccessMessage();
+            }
+        }
+    }
 
 
     public function dels($ids)
@@ -61,7 +77,18 @@ class User extends Permissions
         }
     }
 
-    public function getStoreUserList($page = '', $limit = '', $key = '',$store_id='')
+    public function removeStoreUserByIds($ids)
+    {
+        $model = new userModel();
+        $ids = explode(",", $ids);
+        foreach($ids as $k=>$v){
+            $model->where('id', $ids[$k])
+                ->update(['store_id' => 0, 'level' => 2]);
+        }
+        throw new SuccessMessage();
+    }
+
+    public function getStoreUserList($page = '', $limit = '', $key = '', $store_id = '')
     {
         (new Page())->goCheck();
         if (isset($key['keyword']) and !empty($key['keyword'])) {
@@ -71,7 +98,7 @@ class User extends Permissions
             $where = null;
         }
 
-        $result = userModel::getStoreUserList($page - 1, $limit, $where,$store_id);
+        $result = userModel::getStoreUserList($page - 1, $limit, $where, $store_id);
         return $result;
     }
 

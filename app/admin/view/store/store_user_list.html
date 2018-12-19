@@ -14,7 +14,7 @@
 <blockquote class="layui-elem-quote">
     <div class="layui-form" id="admin">
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-danger batchDel" data-type="getCheckData">批量删除</a>
+            <a class="layui-btn layui-btn-danger batchDel" data-type="getCheckData">批量移除</a>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">搜索姓名：</label>
@@ -32,7 +32,7 @@
     <div><a href="#"><img src="{{d.head_img}}" width="30" height="30"></a></div>
 </script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除用户</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">移除经纪人</a>
 </script>
 {include file="public/foot"}
 <script>
@@ -40,7 +40,7 @@
         var table = layui.table;
         var form = layui.form;
         var id = window.base.getQueryString('id');
-        layer.msg(id);
+
 
         table.render({
             elem: '#table'
@@ -99,12 +99,12 @@
                     deList.push(n.id);
                 });
                 if (deList != '') {
-                    layer.confirm('确定删除所选项吗？', function (index) {
+                    layer.confirm('确定移除所选项吗？', function (index) {
                         layer.close(index);
                         dels(deList, table);
                     })
                 } else {
-                    layer.tips('请选择需要删除的行', $('.batchDel'), {
+                    layer.tips('请选择需要移除的行', $('.batchDel'), {
                         tips: [3, '#5fb878']
                     })
                 }
@@ -125,7 +125,7 @@
 
             // 删除操作
             if (layEvent === 'del') {
-                layer.confirm('真的删除行么', function (index) {
+                layer.confirm('真的移除么', function (index) {
                     //向服务端发送删除指令
                     layer.close(index);
                     del(data.id, obj, index)
@@ -139,7 +139,7 @@
     // 单删除
     function del(id, obj, index) {
         var params = {
-            url: 'user/remove?id=' + id,
+            url: 'user/remove_store_user?id=' + id,
             sCallback: function (successMsg) {
                 if (successMsg.msg == '缺少权限') {
                     layer.msg(successMsg.msg);
@@ -148,7 +148,7 @@
                     //弹出loading
                     obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                     layer.close(index);
-                    layer.msg("删除成功", {icon: 1});
+                    layer.msg("移除成功", {icon: 1});
                 }
             },
             eCallback: function (errorMsg) {
@@ -179,14 +179,14 @@
     // 批量删除
     function dels(ids, table) {
         var params = {
-            url: 'user/dels?ids=' + ids,
+            url: 'user/remove_store_users?ids=' + ids,
             sCallback: function (successMsg) {
                 if (successMsg.errorCode == 20100) {
                     //弹出loading
-                    var index = top.layer.msg('批量删除中，请稍候', {icon: 16, time: false, shade: 0.5});
+                    var index = top.layer.msg('批量移除中，请稍候', {icon: 16, time: false, shade: 0.5});
                     setTimeout(function () {
                         top.layer.close(index);
-                        top.layer.msg("删除成功", {icon: 1});
+                        top.layer.msg("移除成功", {icon: 1});
                         layer.closeAll("iframe");
                         table.reload('testReload', {});
                     }, 2000);
