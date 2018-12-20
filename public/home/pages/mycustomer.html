@@ -43,101 +43,80 @@
 				text-overflow:ellipsis;
 				white-space: nowrap;
 			}
+			.g-scrollview:after{
+				height: 0;
+			}
 		</style>
 	</head>
 	<body>
-		<div class="logincantion">
-			<header class="m-navbar">
-				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
-					<i class="back-ico"></i>
-				</a>
-				<div class="navbar-center">
-					<span class="navbar-title">我的客户</span>
-				</div>
-			</header>
-			<div class="m-tab" data-ydui-tab><!-- 这里添加data-ydui-tab就可以啦 -->
-				<ul class="tab-nav">
-					<li class="tab-nav-item tab-active"><a href="javascript:;">已报备</a></li>
-					<li class="tab-nav-item"><a href="javascript:;">已到访</a></li>
-					<li class="tab-nav-item"><a href="javascript:;">已成交</a></li>
-					<li class="tab-nav-item"><a href="javascript:;">已结佣</a></li>
-				</ul>
-				<div class="tab-panel">
-					<div class="tab-panel-item tab-active">
-						<!-- 这里都是报备的客户 -->
-						<div id="infolist" class="infolist">
-							<div class="item-list">
-								<ul>
-									<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input></li>
-									<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
-									<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
-									<li class="plan"><label>意向：</label><input value="三室一厅,一厨一卫,120平米" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
-								</ul>
-							</div>
-						</div>
+		<section class="g-flexview" id="J_List"  >
+		<div class="logincantion" >
+			<div class="g-scrollview" >
+				<header class="m-navbar ">
+					<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+						<i class="back-ico"></i>
+					</a>
+					<div class="navbar-center">
+						<span class="navbar-title">我的客户</span>
 					</div>
-					<div class="tab-panel-item">
-						<!-- 这里都是到访的客户 -->
-						<div id="infolist" class="infolist">
-							<div class="item-list">
-								<ul>
-									<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input></li>
-									<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
-									<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
-									<li class="plan"><label>意向：</label><input value="三室一厅,一厨一卫,120平米" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="tab-panel-item">
-						<!-- 这里是成交的 -->
-						<div id="infolist" class="infolist">
-							<div class="item-list">
-								<ul>
-									<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input> <span>已结佣</span></li>
-									<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
-									<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
-									<li class="plan"><label>意向：</label><input value="三室一厅,一厨一卫,120平米" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
-								</ul>
-							</div>
-							<div class="item-list">
-								<ul>
-									<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input> <span class="nocash">未结佣</span></li>
-									<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
-									<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
-									<li class="plan"><label>意向：</label><input value="三室一厅,一厨一卫,120平米" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="tab-panel-item">
-						<!-- 这里都结佣了 -->
-						<div id="infolist" class="infolist">
-							<div class="item-list">
-								<ul>
-									<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input></li>
-									<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
-									<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
-									<li class="plan"><label>意向：</label><input value="三室一厅,一厨一卫,120平米" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
-								</ul>
-							</div>
-						</div>
-					</div>
+				</header>
+				<div class="m-tab" data-ydui-tab><!-- 这里添加data-ydui-tab就可以啦 -->
+					<ul class="tab-nav">
+						<li class="tab-nav-item tab-active" data-state="1"><a href="javascript:;">已报备</a></li>
+						<li class="tab-nav-item" data-state="2"><a href="javascript:;">已到访</a></li>
+						<li class="tab-nav-item" data-state="3"><a href="javascript:;">已成交</a></li>
+						<li class="tab-nav-item" data-state="4"><a href="javascript:;">已结佣</a></li>
+					</ul>
+					<div class="tab-panel" ></div>											
 				</div>
 			</div>
-			<!-- 报备客户按钮 -->
-			<a href="reportecustomers/index.html">
-				<div id="preparation">报备</div>
-			</a>
 		</div>
+			
+			
+		<!-- 报备客户按钮 -->
+		<a href="reportecustomers/index.html">
+			<div id="preparation">报备</div>
+		</a>
+		</section>
 	</body>
 	<script src="../js/jq331.min.js"></script>
 	<script src="../build/js/ydui.flexible.js"></script>
 	<!-- 引入YDUI脚本 -->
 	<script src="../build/js/ydui.js"></script>
+	<script src="../js/template.js"></script>
+	<script src="../js/DataLazyLoad.js"></script>
+	<script src="../js/dropload.js"></script>
 	<script src="../js/common.js"></script>
+	<script id="yibaobei" type="text/html">
+		{{each data as value index}}
+			{{if data[index].id}}
+				<a href='./customerinfo.html?id={{data[index].id}}'>
+					<div id="baobeiLIst" class="infolist" data-id="{{data[index].id}}" >
+						<div class="item-list">
+							<ul>
+								<li class="name">
+								<input class="name" value="{{data[index].name}}" name="" readonly="readonly"></input>
+								{{if data[index].is_pay!=null }}
+									{{if data[index].is_pay== '1'}}
+									<span style="color:green;">结佣</span>
+									{{else}}
+									<span>未结佣</span>
+									{{/if}}
+								{{/if}}
+								</li>
+								<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
+								<li class="tel"><label>手机：</label><input value="{{data[index].number}}" name="" readonly="readonly"></input></li>
+								<li class="plan"><label>意向：</label><input value="{{data[index].content}}" name="" readonly="readonly"></input><span><a>{{data[index].date}}</a></span></li>
+							</ul>
+						</div>
+					</div>
+				</a>
+			{{/if}}
+		{{/each}}
+	</script>
 	<script>
 		$(document).ready(function(){
+			var mycustomerApi = commapi + "order/baobei";
 			if(!dataToken){
 				!function (win, $) {
 					var dialog = win.YDUI.dialog;													
@@ -164,16 +143,20 @@
 			var _interval_handler=-1;
 			
 			var _EXPIRE_TIME = datamoretime;//判断时效时间，则注销
+			//var _EXPIRE_TIME = 10000;
 			(function () {
 				if (dataToken) {//已登录
 				//刷新最后使用时间
 				sessionStorage.setItem("nxgx_lastVisitTime", new Date().getTime());
-				_interval_handler=setInterval(checkExpired, 10*1000);//10秒钟检查一次，是否超时
+				_interval_handler=setInterval(checkExpired, 10*1000);//10秒钟检查一次，是否超时	
+				
+				//获取已报备列表
+				getbestnewList(1) 			
 				}
 			})();
 			
 			function checkExpired() {
-			console.log("10秒检查一次是否过期"+window.location.href+"::"+new Date());
+			//console.log("10秒检查一次是否过期"+window.location.href+"::"+new Date());
 			var storeLastTime=sessionStorage.getItem("nxgx_lastVisitTime")?sessionStorage.getItem("nxgx_lastVisitTime"):-1;
 			if (storeLastTime==-1) clearInterval(_interval_handler);
 			else {
@@ -184,20 +167,48 @@
 							dialog.loading.open('登录超时...');
 							setTimeout(function () {
 								dialog.loading.close();/* 移除loading */
+								sessionStorage.removeItem('token'); //清除token
 								location.href="./login.html";
 							}, 2000);
 					
 					}(window, jQuery);	
 					clearInterval(_interval_handler);
+					}
 				}
+			};		
+			
+			function getbestnewList (state) {					
+				$(".tab-panel").html('');
+				var page = 1, pageSize = 10;
+					$.ajax({
+						url: mycustomerApi,
+						type: 'GET',									
+						data: { 'page': page, 'limit':pageSize, 'state': state},								
+						beforeSend: function(request) {
+									request.setRequestHeader("token", dataToken);
+								},
+						success: function (ret) {							
+							var html = template('yibaobei', {data: ret});
+							$('.tab-panel').append(html);
+						}
+					});
+																			
 			}
-			};
+			
+			$('.tab-nav li').click(function(){
+				var status = $(this).data('state');
+				$('.tab-nav li').removeClass('tab-active');
+				$(this).addClass('tab-active');
+				getbestnewList(status) //点击显示不同状态的列表信息
+			});	
+			
+// 			$(window).scroll(function() {
+// 			if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
+// 			  
+// 			}
+// 		  });
 			
 			
-			
-			$('.item-list').click(function(){
-				location.href="./customerinfo.html";
-			});
 		})
 	</script>
 </html>

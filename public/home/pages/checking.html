@@ -11,34 +11,49 @@
 		<link rel="stylesheet" href="../build/css/ydui.css" />
 		<link rel="stylesheet" href="../css/common.css" />
 		<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
-		
+		<link rel="stylesheet" href="../css/upload/bootstrap-fileinput.css" />
+		<link rel="stylesheet" href="../css/upload/bootstrap.min.css" />
+		<!-- <link rel="stylesheet" href="../css/upload/index.css" /> -->
 		<!-- 引入YDUI自适应解决方案类库 -->
 		<script src="../build/js/ydui.flexible.js"></script>
 		<script src="../js/jq331.min.js"></script>
+		<script src="../js/common.js"></script>
 		<!-- 引入YDUI脚本 -->
 		<script src="../build/js/ydui.js"></script>
+		<script src="../js/upload/bootstrap-fileinput.js"></script>
 		<style>
+			.page-header{
+				margin: 0;
+				border-bottom: 0;
+			}
+			.fileinput,.form-group{
+				margin-bottom: 0;
+			}
 			label{
+				font-size: 12px;
 				display: inline-block;
 				min-width: 1.9rem;
 				text-align: right;
 				color:#666666;
+				font-weight: normal;
+				margin-bottom: 0;
 			}
 			input{
+				font-size: 12px;
+				font-family: -webkit-pictograph;
 				border:1px solid #eee;
 				padding: .1rem .3rem;
 				color:#666666;
 				}
 			.basicinfo{padding: .2rem;}
-			.basicinfo div{
-				display: flex;
-				padding: .35rem .2rem;
+			.basicinfo div{			
+				padding: .25rem .2rem;
 				align-items: center;
 			}
 			.modifywd{
 				margin-left: .1rem;
 				padding: .1rem .2rem;
-				/* border: 1px solid #eee; */
+				 border: 1px solid #eee; 
 				border-radius: .1rem;
 				color: #ffffff;
 				background: #C1060F;
@@ -55,7 +70,7 @@
 				background: #C1060F;
 				padding: .15rem 2rem;
 				border-radius: .1rem;
-				margin: 1.2rem auto .5rem auto;
+				margin: 0 auto;
 			}
 			#tips{
 				padding: .2rem;
@@ -66,13 +81,27 @@
 				padding: .1rem 0;
 			}
 			#tips .desc{
+				font-size: 13px;
 				text-indent: 2em;
 				line-height: .4rem;
+			}
+			.require{
+				color:red;
+			}
+			.thumbnail{
+				border: 1px dashed #ddd;
+			}
+			.appendimg{
+				position:absolute;width:1.5rem; top:1.5rem;right:.5rem;
+			}
+			.unsubmit{
+				background: #ccc !important;
 			}
 		</style>
 	</head>
 	<body>
-		<div class="logincantion">
+		
+		<div class="logincantion" >
 			<header class="m-navbar">
 				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
 					<i class="back-ico"></i>
@@ -82,24 +111,40 @@
 				</div>
 			</header>
 			<div class="basicinfo">
-				<div>
-					<label>姓名：</label>
-					<input type="text"  placeholder="请输入真实姓名" value="" name="name"/>
-				</div>
-				<div>
-					<label>手机号：</label>
-					<input type="number" pattern="[0-9]*"  placeholder="请输入手机号码" value="" name="tel" autocomplete="off" />
-				</div>
-				<div>
-					<label>身份证号码：</label>
-					<input type="text" placeholder="输入有效身份证号码"  value="" name="idcard"/>
-				</div>
-				<div>
-					<label>身份证正面照片：</label>
-					<span id="uploadbotton">+</span>
-					<input id="upload" type="file" name="" value=""/>
-				</div>
-				<button id="submitClick">提交</button>
+				<img class="appendimg" / > <!-- 审核状态图标 -->
+				<div class="page-header">
+					<form method="post" enctype='multipart/form-data'>
+						<div>
+							<label>姓名<a class="require">&nbsp;*&nbsp;&nbsp;</a></label>
+							<input type="text"  placeholder="请输入身份证姓名" value="" name="name"/>
+						</div>
+						<div>
+							<label>手机号<a class="require">&nbsp;*&nbsp;&nbsp;</a></label>
+							<input type="number" pattern="[0-9]*"  placeholder="请输入手机号码" value="" name="tel" autocomplete="off" />
+						</div>
+						<div>
+							<label>身份证号码<a class="require">&nbsp;*&nbsp;&nbsp;</a></label>
+							<input type="text" placeholder="输入有效身份证号码"  value="" name="idcard"/>
+						</div>					
+						<div class="form-group" id="uploadForm" > 
+							<div class="fileinput fileinput-new" data-provides="fileinput"  id="exampleInputUpload">
+								<div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:165px;">
+									<img id='picImg' style="width: 100%;height: auto;max-height: 140px;" src="../static/images/noimage.png" alt="" />
+								</div>
+								<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 165px;"></div>
+								<div>
+									<span class="btn btn-primary btn-file">
+										<span class="fileinput-new" style="font-size: 12px;"><a style="color:#fff">&nbsp;*&nbsp;&nbsp;</a>上传身份证照片</span>
+										<span class="fileinput-exists">换一张</span>
+										<input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+									</span>
+									<a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+								</div>
+							</div>
+						</div>
+						<button  type="button" id="submitClick" class="font-sty">提交审核验证</button>
+					</form>				 
+				</div>								
 			</div>
 			<!-- 温馨提示 -->
 			<div id="tips">
@@ -109,6 +154,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<!-- 回到首页 -->
 		<a href="../Index.html">
 			<div id="preparation"><i style="font-size: .4rem;" class='fa fa-home'></i></div>
@@ -116,10 +162,92 @@
 	</body>
 	<script>
 		$(document).ready(function(){
-			$('#upload').hide();
-			$('#uploadbotton').click(function(){
-				$('#upload').click();
+			var checkingApi = commapi + "yanzheng/yanzheng"; 
+			var getstatusApi = commapi + "yanzheng/shenhe";
+			 $('#submitClick').click(function () {
+				 var name = $("input[name='name']").val();
+				 var tel = $("input[name='tel']").val();
+				 var idcode = $("input[name='idcard']").val();
+				 var data = new FormData($('#uploadForm')[0]);			 
+				 var form = new FormData();
+				  form.append("image",$('#picID')[0].files[0]);
+				  form.append("card_name",name);
+				  form.append("card_phone",tel);
+				  form.append("card_number",idcode);
+				  //console.log($('#picID')[0].files[0])
+				  if(name =='' || tel =='' || idcode =='' || $('#picID')[0].files[0] ==null){
+					  	!function (win, $) {
+					  		var dialog = win.YDUI.dialog;						
+					  			dialog.toast('带 * 为必填字段', 'error', 2000);
+					  			setTimeout(function () {
+					  				dialog.loading.close();/* 移除loading */
+					  			}, 2000);					  	
+							}(window, jQuery);					
+				  }else{
+					 $.ajax({
+					 	url: checkingApi,
+					 	type: 'POST',
+					 	data: form,             
+					 	cache: false,
+					 	contentType: false,
+					 	processData: false,
+					 	beforeSend: function(request) {
+					 			request.setRequestHeader("token", dataToken);
+					 			},
+					 	success: function (data) {
+								!function (win, $) {
+									var dialog = win.YDUI.dialog;						
+										dialog.toast('提交成功', 'success', 2000);
+										setTimeout(function () {
+											dialog.loading.close();/* 移除loading */
+										}, 2000);							
+								}(window, jQuery);	
+								$('.appendimg').attr('src','../static/images/checking.png');
+					 	},              
+					 }); 
+				  }       
 			});
+			
+			//获取验证资料
+			$.ajax({
+			url: getstatusApi,
+			type: 'POST',
+			data: {},             			
+			beforeSend: function(request) {
+					request.setRequestHeader("token", dataToken);
+					},
+			success: function (data) {
+						console.log(data)
+						if(data.is_submit == 1){ //已经提交的状态下获取验证资料信息
+								if(data.is_examine == 0){ //审核中不给再次提交
+									$('.appendimg').attr('src','../static/images/checking.png');
+									$("input[name='name']").attr('readonly','readonly');
+									$("input[name='tel']").attr('readonly','readonly');
+									$("input[name='idcard']").attr('readonly','readonly');							
+									$('#submitClick').attr('disabled','disabled');
+									$('#submitClick').addClass('unsubmit');
+								}else if(data.is_examine == 1){ //审核通过 不给再次提交
+									$('.appendimg').attr('src','../static/images/pass.png');							
+									$("input[name='name']").attr('readonly','readonly');
+									$("input[name='tel']").attr('readonly','readonly');
+									$("input[name='idcard']").attr('readonly','readonly');							
+									$('#submitClick').attr('disabled','disabled');
+									$('#submitClick').addClass('unsubmit');
+								}else{ //审核不通过
+									$('.appendimg').attr('src','../static/images/unpass.png');
+								};
+							
+							$("input[name='name']").val(data.card_name);
+							$("input[name='tel']").val(data.card_phone);
+							$("input[name='idcard']").val(data.card_number);						
+							$('#picImg').attr('src',commimgurl + data.card_img)						
+						}			
+					},              
+			}); 
+			
 		});
 	</script>
+	<!-- 引入YDUI脚本 -->
+	<script src="../build/js/ydui.flexible.js"></script>
+	<script src="../build/js/ydui.js"></script>
 </html>

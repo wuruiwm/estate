@@ -12,20 +12,20 @@
 	<link rel="stylesheet" href="../css/common.css" />
 	<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
     <!-- 引入YDUI自适应解决方案类库 -->
-    <script src="../build/js/ydui.flexible.js"></script>
+    
 	<style>
 		.item-list{
-			float: left;
 			padding: .3rem;
 		}
 		.item-list .left-img{
+			position: relative;
 			width: 3rem;
 			height: 2rem;
 			margin: 0 .2rem 0 0;
 			float: left;
 		}
 		img{
-			max-width: 100%;
+			width: 100%;
 			height: 100%;
 		}
 		.desc-right .desc-title{
@@ -46,6 +46,19 @@
 			text-overflow:ellipsis;
 			white-space: nowrap;
 		}
+		.desc-right p{
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.status{
+			position: absolute;
+			top: 0;
+			color: #fff;
+			background: #C1060F;
+			padding: .05rem .4rem .05rem .1rem;
+			border-radius: 0 .2rem .2rem 0;
+		}
 	</style>
 </head>
 <body>
@@ -59,40 +72,8 @@
 				<span class="navbar-title">房源头条</span>
 			</div>
 		</header>
-		
 		<!-- 房源头条列表 -->
-		<div class="g-scrollview">
-			<div class="item-list">
-				<div class="left-img">
-					<img src="../static/images/house3.png" />
-				</div>
-				<div class="desc-right">
-					<p class="desc-title">圣联·香御公馆</p>
-					<p class="desc-address">合肥习友路与香樟大道交口</p>
-					<p class="desc-content">这是一个比较好的楼盘，地理位置很好，价格很贵</p>
-				</div>
-			</div>
-			<div class="item-list">
-				<div class="left-img">
-					<img src="../static/images/house3.png" />
-				</div>
-				<div class="desc-right">
-					<p class="desc-title">圣联·香御公馆</p>
-					<p class="desc-address">合肥习友路与香樟大道交口</p>
-					<p class="desc-content">这是一个比较好的楼盘，地理位置很好，价格很贵</p>
-				</div>
-			</div>
-			<div class="item-list">
-				<div class="left-img">
-					<img src="../static/images/house3.png" />
-				</div>
-				<div class="desc-right">
-					<p class="desc-title">圣联·香御公馆</p>
-					<p class="desc-address">合肥习友路与香樟大道交口</p>
-					<p class="desc-content">这是一个比较好的楼盘，地理位置很好，价格很贵</p>
-				</div>
-			</div>
-		</div>
+		<div class="g-scrollview" id="listContent"></div>
 		<!-- 报备客户按钮 -->
 		<a href="reportecustomers/index.html">
 			<div id="preparation">报备</div>
@@ -100,15 +81,60 @@
 </section>
 <!-- 引入jQuery 3.0+ -->
 <script src="../js/jq331.min.js"></script>
+<script src="../js/template.js"></script>
+<script src="../js/common.js"></script>
+<script src="../build/js/ydui.flexible.js"></script>
 <!-- 引入YDUI脚本 -->
 <script src="../build/js/ydui.js"></script>
-<script src="../js/Index.js"></script>
+<!-- <script src="../js/Index.js"></script> -->
+<script id="houseList" type="text/html">
+	{{each data as value index}}
+		<a
+		{{if data[index].init_status= "新房"}}
+		href="./contentdetails.html?id={{data[index].id}}"
+		{{else}}
+		href="./olddetails.html?id={{data[index].id}}"
+		{{/if}}
+		>
+			<div class="item-list" data-id="{{data[index].id}}">
+				<div class="left-img">
+					<img src="{{data[index].cover_img.img_url}}" />
+					<span class="status">{{data[index].init_status}}</span>
+				</div>
+				<div class="desc-right">
+					<p class="desc-title">{{data[index].title}}</p>
+					<p class="desc-address">{{data[index].house_address}}</p>
+					<p class="desc-content">{{data[index].desc}}</p>
+				</div>
+			</div>
+		</a>
+	{{/each}}
+</script>
 <script>
 	$(document).ready(function(){
+		var nenwslistApi = commapi + 'house/head';//房源头条接口
 		$('.item-list').click(function(){
-				location.href="./contentdetails.html"
+			location.href="./contentdetails.html";
+		});
+		
+		//获取房源头条列表
+		$.ajax({
+			url: nenwslistApi,
+			type: 'GET',									
+			data: {},											
+			success: function (ret) {	
+				console.log(ret)
+				if(ret.length==0){
+					$('#listContent').html("<img style='max-width: 100%;height: auto;' src='../static/images/nodata.png' />");
+				}else{
+					var html = template('houseList', {data: ret});
+					$('#listContent').html(html);
+				}
+			}
 		});
 	});
 </script>
+
+
 </body>
 </html>

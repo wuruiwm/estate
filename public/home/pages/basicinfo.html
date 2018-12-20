@@ -12,11 +12,6 @@
 		<link rel="stylesheet" href="../css/common.css" />
 		<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
 		
-		<!-- 引入YDUI自适应解决方案类库 -->
-		<script src="../build/js/ydui.flexible.js"></script>
-		<script src="../js/jq331.min.js"></script>
-		<!-- 引入YDUI脚本 -->
-		<script src="../build/js/ydui.js"></script>
 		<style>
 			label{
 				display: inline-block;
@@ -25,6 +20,7 @@
 				color:#666666;
 			}
 			input{
+				font-family: -webkit-pictograph;
 				border:1px solid #eee;
 				padding: .1rem .3rem;
 				color:#666666;
@@ -32,6 +28,7 @@
 			.basicinfo{padding: .2rem;}
 			.basicinfo div{
 				padding: .35rem .2rem;
+				position: relative;
 			}
 			.modifywd{
 				margin-left: .1rem;
@@ -40,6 +37,24 @@
 				border-radius: .1rem;
 				color: #ffffff;
 				background: #C1060F;
+			}
+			.modifyinfo{
+				color:#cecece;
+				padding-left:.2rem ;
+			}
+			
+			#userlogo{
+				border-radius: 50%;
+				height: 100%;
+				width: 100%;
+			}
+			.logo-wrapper{
+				padding: 0 !important;
+				position: absolute !important;
+				width: .8rem !important;
+				height: .8rem !important;
+				right: 1rem !important;
+				top: 0 !important;
 			}
 		</style>
 	</head>
@@ -56,7 +71,10 @@
 			<div class="basicinfo">
 				<div style="position: relative;">
 					<label>头像：</label>
-					<div style="position:absolute;width: 1.2rem; height:1.2rem; right:1rem; top: -0.3rem;"><img style="width:100%; 50%;" src="../static/images/computer.png" /></div>
+					<div class="logo-wrapper">
+						<img id="userlogo" style="width:100%; 50%;" onclick="$('#sfz_1').click()"  />
+						<input type="file" class="ajax-upload" accept="image/gif,image/jpeg,image/x-png"   id="sfz_1"  style="display:none">
+					</div>
 				</div>
 				<div>
 					<label>密码：</label>
@@ -64,25 +82,118 @@
 					<a href="./modifywd.html"  class="modifywd">修改</a>
 				</div>
 				<div>
-					<label>姓名：</label>
-					<input type="text"  readonly="readonly"  value="妖姬" name="name"/>
+					<label>昵称：</label>
+					<input type="text"   value="" name="name"/>
 				</div>
 				<div>
 					<label>主营地区：</label>
-					<input type="text"  readonly="readonly"  value="合肥" name="area"/>
+					<input type="text"    value="" name="area"/>
 				</div>
 				<div>
 					<label>所属门店：</label>
-					<input type="text"  readonly="readonly"  value="好来屋房产" name="belong"/>
-				</div>
+					<input type="text"    value="" name="belong"/>					
+				</div>				
 			</div>
+			<p class="modifyinfo">&nbsp;*&nbsp;基本信息编辑即可修改！</p>
 		</div>
 		<!-- 报备客户按钮 -->
 		<a href="./reportecustomers/index.html">
 			<div id="preparation">报备</div>
 		</a>
 	</body>
+	<!-- 引入YDUI自适应解决方案类库 -->
+	<script src="../build/js/ydui.flexible.js"></script>
+	<script src="../js/jq331.min.js"></script>
+	<!-- 引入YDUI脚本 -->
+	<script src="../build/js/ydui.js"></script>
+	<script src="../js/common.js"></script>
 	<script>
-	
-</script>
+		$(document).ready(function(){
+			//获取用户基本信息
+			var getuserinfoApi = commapi + "user/info";//获取信息
+			var modifyinfoApi = commapi + 'user/update';//修改信息
+			var modifylogoApi = commapi + 'user/head_img'; //修改头像
+			$.ajax({
+				url: getuserinfoApi,
+				type: 'GET',									
+				data: {},
+				beforeSend: function(request) {
+						request.setRequestHeader("token", dataToken);
+						},
+				success: function (ret) {	
+					console.log(ret);
+					$('#userlogo').attr('src',ret.head_img);
+					$("input[name='name']").val(ret.nickname);
+					$("input[name='area']").val(ret.area);
+					$("input[name='belong']").val(ret.store_id);					
+				}
+			});
+			
+			//修改基本信息
+			$(".basicinfo div input").blur(function(){
+				var currentVal = $(this).val();
+				if($(this).attr('name')=='name'){
+					var data={
+						'nickname': currentVal
+					}
+				}else if($(this).attr('name')=='area'){
+					var data={
+						'area': currentVal
+					}
+				}else{
+					var data={
+						'store_name': currentVal
+					}
+				}
+				$.ajax({
+					url: modifyinfoApi,
+					type: 'POST',									
+					data: data,
+					beforeSend: function(request) {
+							request.setRequestHeader("token", dataToken);
+							},
+					success: function (ret) {	
+						YDUI.dialog.toast('信息更新成功', 'none', 1500);
+						
+					},
+					error:function(msg){
+						var json=JSON.parse(msg.responseText);
+						YDUI.dialog.toast(json.msg, 'none', 2000); // 失败返回
+					}
+				});
+			});	
+						
+			//换头像
+			$('.ajax-upload').on('change',function(){//当 input file 已经选中时触发js
+			var formData = new FormData();//先实例化formdata
+			var file     = this.files[0];//获取文件名
+			var id       = this.id;//本input的id
+			//var url      = '/usercenter/business/upload';//接受处理本JS方法的路径
+
+			formData.append("head_img", file);//append方法用于向formdata中注入内容
+
+			$.ajax({
+				type: "post",
+				url: modifylogoApi,
+				//async:false,
+				contentType: false,
+				processData: false,
+				data: formData,//传过来
+				dataType: 'json',
+				cache: false,
+				contentType: false,
+				processData: false,
+				beforeSend: function(request) {
+						request.setRequestHeader("token", dataToken);
+						},
+				success: function (data) {
+					//$('#'+id+"1").val(data.url);//在隐藏的hidden中返回文件的路径
+		　　　　　　　$('#userlogo').attr('src',data.url);//改变当前的显示图片
+					window.location.reload();
+				}
+			});
+		})										
+					
+	});
+	</script>
 </html>

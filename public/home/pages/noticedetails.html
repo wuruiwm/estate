@@ -13,11 +13,7 @@
 		<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
 		<script src="../js/jq331.min.js"></script>
 		<!-- 引入YDUI自适应解决方案类库 -->
-		<script src="../build/js/ydui.flexible.js"></script>
-		<!-- 引入YDUI脚本 -->
-		<script src="../build/js/ydui.js"></script>
-		<script src="../js/common.js"></script>
-		<script src="../js/login.js"></script>
+		
 		<style>
 			.content{
 				padding: .2rem;
@@ -66,8 +62,18 @@
 			var noticedetailsApi = commapi + "notice/content";
 			var id =  params.id; //获取地址栏的id
 			var dataToken = sessionStorage.getItem('token'); // 获取token
-			if(!dataToken){
-				location.href="./login.html";
+			if(!dataToken){				
+				!function (win, $) {
+					var dialog = win.YDUI.dialog;
+					/* 加载中提示框 */									
+						dialog.loading.open('登录超时，跳转中...');
+						setTimeout(function () {
+							dialog.loading.close();/* 移除loading */
+							sessionStorage.removeItem('token'); //清除token
+							location.href="./login.html";
+						}, 2000);
+				
+				}(window, jQuery);								
 				return;
 			}
 			//公告详情
@@ -87,4 +93,9 @@
 				});
 		});
 	</script>
+	<script src="../build/js/ydui.flexible.js"></script>
+	<!-- 引入YDUI脚本 -->
+	<script src="../build/js/ydui.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/login.js"></script>
 </html>

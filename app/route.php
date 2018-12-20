@@ -94,3 +94,5 @@ Route::any('api/:version/house/loupan', 'api/:version.Loupan/loupan');
 Route::get('api/:version/house/loupan2', 'api/:version.Loupan/loupan2');
 //获取我的客户里的佣金管理
 Route::post('api/:version/comm/commlist', 'api/:version.Commission/commlist');
+//首页房源搜索
+Route::get('api/:version/house/search', 'api/:version.Housesearch/search');

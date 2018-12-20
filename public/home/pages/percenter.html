@@ -16,8 +16,8 @@
 		.topbg img{max-width: 100%;}
 		.userinfo .userimg{width: 1rem; height: 1rem;}
 		.userinfo .userimg img{height: 100%;width: 100%;border-radius: 50%;}
-		.userinfo{left: calc(50% - 25px);position: absolute;top: calc(50% - 65px);}
-		.username{color:#ffffff; margin-top: .1rem;}
+		.userinfo{left: calc(50% - 25px);position: absolute;top: calc(50% - 65px); text-align: -webkit-center;}
+		.username{color:#ffffff; margin-top: .25rem;}
 		.minelist div {padding: .1rem .35rem;font-size: 0.25rem;}
 		.minelist div label{color:#C1060F}
 		.minelist div a{display: inline-block;padding: .2rem; color: #666666;}
@@ -43,17 +43,17 @@
 			<div class="topbg">
 				<img src="../static/images/bg.jpg" />
 				<div class="userinfo">
-					<div class="userimg"><img src="../static/images/house3.png" /></div>
-					<div class="username">用户姓名</div>
+					<div class="userimg"><img id="userlogo"  /></div>
+					<div class="username"></div>
 				</div>
 			</div>
 			<div class="minelist">
 				<div><label><i class="fa fa-address-card"></i></label>&nbsp;&nbsp;<a href="./basicinfo.html">基本信息</a></div>
 				<div><label><i class="fa fa-user"></i></label>&nbsp;&nbsp;<a href="./mycustomer.html">我的客户</a></div>
 				<div><label><i class="fa fa-rmb"></i></label>&nbsp;&nbsp;<a href="./mycommission.html">我的佣金</a></div>
-				<div><label><i class="fa fa-user"></i></label>&nbsp;&nbsp;<a href="./checking.html">经纪人验证</a></div>
+				<div><label><i class="fa fa-check-circle"></i></label>&nbsp;&nbsp;<a href="./checking.html">经纪人验证&nbsp;</a></div>
 				<div id="getVip"><label><i class="fa fa-vimeo"></i></label>&nbsp;&nbsp;<a href="#">开通会员</a></div>
-				<div id="logoutSteam"><label><i class="fa fa-window-close"></i>&nbsp;&nbsp;</label><a href="#">退出登录</a></div>
+				<div id="logoutSteam"><label><i class="fa fa-warning"></i>&nbsp;&nbsp;</label><a href="#">退出登录</a></div>
 			</div>
 		</div>
 		<!-- 报备客户按钮 -->
@@ -68,13 +68,13 @@
 				</span>
 				<span class="tabbar-txt">首页</span>
 			</a>
-			<a href="./newhouse.html" class="tabbar-item">
+			<a id="newhouseclick" href="#" class="tabbar-item">
 				<span class="tabbar-icon">
 					<i class="icon-home"></i>
 				</span>
 				<span class="tabbar-txt">新房分销</span>
 			</a>
-			<a href="./oldhouse.html" class="tabbar-item">
+			<a id="oldhouseclick" href="#" class="tabbar-item">
 				<span class="tabbar-icon">
 					<i class="fa fa-institution"></i>
 				</span>
@@ -126,7 +126,6 @@
 		}
 		//token判断时效，超时退出登录
 		var _interval_handler=-1;
-		
 		var _EXPIRE_TIME = datamoretime;//判断时效时间，则注销
 		(function () {
 		    if (dataToken) {//已登录
@@ -137,7 +136,7 @@
 		})();
 		 
 		function checkExpired() {
-		   console.log("10秒检查一次是否过期"+window.location.href+"::"+new Date());
+		   //console.log("10秒检查一次是否过期"+window.location.href+"::"+new Date());
 		   var storeLastTime=sessionStorage.getItem("nxgx_lastVisitTime")?sessionStorage.getItem("nxgx_lastVisitTime"):-1;
 		   if (storeLastTime==-1) clearInterval(_interval_handler);
 		   else {
@@ -148,6 +147,7 @@
 		         		dialog.loading.open('登录超时...');
 		         		setTimeout(function () {
 		         			dialog.loading.close();/* 移除loading */
+									sessionStorage.removeItem('token'); //清除token
 		         			location.href="./login.html";
 		         		}, 2000);
 		         
@@ -156,6 +156,37 @@
 		     }
 		  }
 		};
+			
+		//获取用户基本信息
+		var getuserinfoApi = commapi + "user/info";
+		$.ajax({
+			url: getuserinfoApi,
+			type: 'GET',
+			async: false,
+			data: {},
+			beforeSend: function(request) {
+					request.setRequestHeader("token", dataToken);
+					},
+			success: function (ret) {	
+				console.log(ret);
+				$('#userlogo').attr('src',ret.head_img);
+				$(".username").html(ret.nickname);			
+			},
+			error:function(msg){// 验证不通过						
+					var json=JSON.parse(msg.responseText);						
+					if(json.errorCode==40300){	
+						!function (win, $) {
+							var dialog = win.YDUI.dialog;
+							 dialog.loading.open('登录超时！');				
+								setTimeout(function () {
+									dialog.loading.close();/* 移除loading */
+									sessionStorage.removeItem('token'); //清除token
+									location.href="./login.html";
+								}, 2000);					  	
+						}(window, jQuery);
+					}						
+			}
+		});
 		
 		//开通会员
 		$('#getVip').click(function(){
@@ -175,6 +206,22 @@
 				});
 			}(window, jQuery);
 		});
+		
+		//进入新房
+		$('#newhouseclick').click(function(){
+			var province = decodeURI(GetQueryString('province'));
+			var city = decodeURI(GetQueryString('city'));
+			console.log(city)
+			location.href="./newhouse.html?province="+ encodeURI(province)+'&'+'city='+encodeURI(city);
+		});
+		//进入二手房
+		$('#oldhouseclick').click(function(){
+			var province = decodeURI(GetQueryString('province'));
+			var city = decodeURI(GetQueryString('city'));
+			console.log(city)
+			location.href="./oldhouse.html?province="+ encodeURI(province)+'&'+'city='+encodeURI(city);
+		});
+		
 });
 </script>
 </body>

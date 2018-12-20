@@ -14,55 +14,54 @@
     <!-- 引入YDUI自适应解决方案类库 -->
     <script src="../build/js/ydui.flexible.js"></script>
 	<style>
-		.item-list{
-			float: left;
-			padding: .3rem;
-		}
-		.item-list .left-img{
-			width: 3rem;
-			height: 2rem;
-			margin: 0 .2rem 0 0;
-			float: left;
-		}
-		img{
-			max-width: 100%;
-			height: 100%;
-		}
-		.desc-right .desc-title{
-			padding: 0 0 .1rem 0;
-		}
-		.desc-right .desc-address{
-			color:#5D5D5D ;
-		}
-		.desc-right .desc-content{
-			color:#898989 ;
-			display: inline-block;
-		}
-		.desc-right{
-			padding: .3rem 0;
-			overflow: hidden;
-			text-overflow:ellipsis;
-			white-space: nowrap;
-		}
-		.desc-right span{
-			float: right;
-		}
-		.desc-right span a{
-			color:#C1060F;
-		}
-		.desc-right .yong{
-			padding: .02rem .2rem;
-			color:#fff;
-			background: #FF9966;
-			border-radius: .1rem;
-			
-		}
-		.style{
-			margin-left: .2rem;
-		}
-		p.desc-tip{
-			padding: .1rem 0;
-		}
+	.item-list{
+		padding: .3rem;
+	}
+	.item-list .left-img{
+		width: 3rem;
+		height: 2rem;
+		margin: 0 .2rem 0 0;
+		float: left;
+	}
+	img{
+		width: 100%;
+		height: 100%;
+	}
+	.desc-right .desc-title{
+		padding: 0 0 .1rem 0;
+	}
+	.desc-right p{
+		padding: .1rem 0 0 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.desc-right .desc-address{
+		color:#5D5D5D ;
+	}
+	.desc-right .desc-content{
+		color:#898989 ;
+		display: inline-block;
+	}
+	.desc-right{
+		overflow: hidden;
+		text-overflow:ellipsis;
+		white-space: nowrap;
+	}
+	.desc-right span a{
+		padding: .05rem 0;
+		color: #C1060F;
+		display: inline-block;
+	}
+	.desc-right .yong{
+		padding: .02rem .2rem;
+		color:#fff;
+		background: #FF9966;
+		border-radius: .1rem;
+	}
+	p.desc-tip{
+		padding: .1rem 0;
+	}
 	</style>
 </head>
 <body>
@@ -79,30 +78,7 @@
 		
 		<!-- 二手房源列表 -->
 		<div class="g-scrollview">
-			<div class="g-scrollview">
-				<div class="item-list">
-					<div class="left-img">
-						<img src="../static/images/house3.png" />
-					</div>
-					<div class="desc-right">
-						<p class="desc-title">圣联·香御公馆<span><a>10000</a>&nbsp元/㎡</span></p>
-						<p class="desc-address">合肥习友路与香樟大道交口</p>
-						<p class="desc-tip"><label class="yong">别墅</label><label class="yong style">个人</label></p>
-						<p class="desc-content"><label class="yong">佣</label>&nbsp;&nbsp;<span>15000元/套</span><span>(3个方案)</span></p>
-					</div>
-				</div>
-				<div class="item-list">
-					<div class="left-img">
-						<img src="../static/images/house3.png" />
-					</div>
-					<div class="desc-right">
-						<p class="desc-title">圣联·香御公馆<span><a>10000</a>&nbsp元/㎡</span></p>
-						<p class="desc-address">合肥习友路与香樟大道交口</p>
-						<p class="desc-tip"><label class="yong">别墅</label><label class="yong style">个人</label></p>
-						<p class="desc-content"><label class="yong">佣</label>&nbsp;&nbsp;<span>15000元/套</span><span>(3个方案)</span></p>
-					</div>
-				</div>
-			</div>
+			<div class="g-scrollview" id="getoldlist"></div>
 		</div>
 		<!-- 发布按钮 -->
 		<a href="./release.html">
@@ -120,7 +96,7 @@
 				</span>
 				<span class="tabbar-txt">首页</span>
 			</a>
-			<a href="./newhouse.html" class="tabbar-item">
+			<a id="newhouseclick" href="#" class="tabbar-item">
 				<span class="tabbar-icon">
 					<i class="icon-home"></i>
 				</span>
@@ -132,7 +108,7 @@
 				</span>
 				<span class="tabbar-txt">二手房</span>
 			</a>
-			<a href="./percenter.html" class="tabbar-item">
+			<a id="mine" href="#" class="tabbar-item">
 				<span class="tabbar-icon">
 					<i class="icon-ucenter-outline"></i>
 				</span>
@@ -144,11 +120,64 @@
 <script src="../js/jq331.min.js"></script>
 <!-- 引入YDUI脚本 -->
 <script src="../build/js/ydui.js"></script>
-<script src="../js/Index.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/template.js"></script>
+<!-- <script src="../js/Index.js"></script> -->
+<script id="oldhouselist" type="text/html">
+	{{each data as value index}}
+		<a href="olddetails.html?id={{data[index].id}}">
+			<div class="item-list" data="{{data[index].id}}">
+				<div class="left-img">
+					<img src="{{data[index].cover_img.img_url}}" />
+				</div>
+				<div class="desc-right">
+					<p class="desc-title"><p>{{data[index].title}}</p><span><a>{{data[index].house_price}}&nbsp元/㎡</a></span></p>
+					<p class="desc-address">{{data[index].house_address}}</p>
+					<p class="desc-tip">
+						{{each data[index].decoration_type as item id}}
+						<label class="yong">{{item}}</label>
+						{{/each}}
+					</p>				
+				</div>
+			</div>
+		</a>
+	{{/each}}
+	
+</script>
 <script>
 	$(document).ready(function(){
-		$('.item-list').click(function(){
-				location.href="./contentdetails.html"
+		var getnewhouseApi = commapi + "house/list";
+		var page = 1, limit = 10;
+		var province =  decodeURI(GetQueryString('province'));
+		var city =   decodeURI(GetQueryString('city'));
+		$.ajax({
+				url: getnewhouseApi,
+				type: 'GET',									
+				data: {'page': page, 'limit': limit, 'province': province, 'city': city, 'type': 2},											
+				success: function (ret) {	
+					console.log(ret)
+					if(ret.length==0){						
+						$('#getoldlist').html("<img style='max-width: 100%;height: auto;' src='../static/images/nodata.png' />");
+					}else{
+						var html = template('oldhouselist', {data: ret});
+						$('#getoldlist').html(html);
+					}
+				}
+				});
+		//进入新房
+		$('#newhouseclick').click(function(){
+			var province = decodeURI(GetQueryString('province'));
+			var city = decodeURI(GetQueryString('city'));
+			console.log(city)
+			location.href="./newhouse.html?province="+ encodeURI(province)+'&'+'city='+encodeURI(city);
+		});
+		
+		//进入我的
+		$('#mine').click(function(){
+			var province = decodeURI(GetQueryString('province'));
+			var city = decodeURI(GetQueryString('city'));
+			console.log(city)
+			location.href="./percenter.html?province="+ encodeURI(province)+'&'+'city='+encodeURI(city);
 		});
 	});
 </script>

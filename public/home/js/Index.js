@@ -1,7 +1,12 @@
 $(document).ready(function() {
-	var getbannerApi = commapi + "banner/select";
-	var getnoticeApi = commapi + "notice/find";
-	var noticedetailsApi = commapi + "notice/content";	
+	var getbannerApi = commapi + "banner/select"; //轮播
+	var getnoticeApi = commapi + "notice/find"; //公告标题
+	var noticedetailsApi = commapi + "notice/content";	//公告详情
+	var bestnewhouseApi = commapi + "house/list";	//房源列表
+	var provincename='';
+	var cityname='';
+	var p = '';
+	var c = '';
 	 //底部导航高亮显示
 	  $('.m-tabbar a').each(function () {
 			$(this).click(function() {
@@ -31,33 +36,10 @@ $(document).ready(function() {
 				}
 		});
 		
-		//加载地图，调用浏览器定位服务
-		var map, geolocation;
-		map = new AMap.Map('container', {
-		resizeEnable: true
-		});
-		map.plugin('AMap.Geolocation', function() {
-		geolocation = new AMap.Geolocation({
-				enableHighAccuracy: true, 
-				timeout: 10000 
-				});
-			geolocation.getCityInfo(getCity)
-		});
-		function getCity(status, result) {
-			if(status!='complete'){
-			console.log(status)
-			showToast('定位失败');
-			}else{
-			console.log(result.province);
-			console.log(result.city);
-			var currentCity = result.city;
-			$('#currentCity').html(currentCity) //显示当前城市的位置
-			}
-		};
 		
 		//切换城市
-		!function () {
-			var $target = $('#currentCity');
+		(function () {
+			var $target = $('.location');
 			$target.on('click', function (event) {
 				event.stopPropagation();
 				$target.citySelect('open');
@@ -65,11 +47,83 @@ $(document).ready(function() {
 		
 			$target.on('done.ydui.cityselect', function (ret) {
 				$(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
-				//console.log(ret);
-				var changeCity = ret.city;
-				$('#currentCity').html(changeCity) //显示切换城市的位置
+				provincename = ret.provance;
+				cityname = ret.city;
+				p = ret.provance;;
+				c = ret.city;
+				$('#currentCity').html(cityname); //显示切换城市的位置	
+				
+				getbestnewList(provincename,cityname);
 			});
-		}();
+		})();
+		
+		
+		//加载地图，调用浏览器定位服务
+		(function (){
+			var map, geolocation;
+			map = new AMap.Map('container', {
+			resizeEnable: true
+			});
+			map.plugin('AMap.Geolocation', function() {
+			geolocation = new AMap.Geolocation({
+					enableHighAccuracy: true, 
+					timeout: 10000 
+					});
+				geolocation.getCityInfo(getCity)
+			});
+			function getCity(status, result) {
+				if(status!='complete'){
+				console.log(status)
+				showToast('定位失败');
+				}else{
+					p = provincename = result.province;
+					c = cityname = result.city;
+					$('#currentCity').html(cityname) //显示当前城市的位置
+					console.log(provincename + '/' + cityname);
+					getbestnewList(provincename,cityname); //获取当前城市 最新房源列表
+				}												
+			};
+		})();
+
+		
+		//首页 获取房源列表	
+		function getbestnewList (provincename ,cityname) {	
+			$("#bestnewList").html('');
+			var page = 1, pageSize = 3;
+			console.log(provincename + '#' + cityname);
+			var loadMore = function (callback) {
+				$.ajax({
+					url: bestnewhouseApi,
+					type: 'GET',
+					async:false,
+					data: { 'page': page, 'limit':pageSize, 'province': provincename, 'city':cityname},
+					success: function (ret) {
+						typeof callback == 'function' && callback(ret);
+					}
+				});
+			};
+
+			$('#J_List').infiniteScroll({
+				binder: '#J_List',
+				pageSize: pageSize,
+				initLoad: true,
+				//doneTxt:'没有更多数据',
+				loadListFn: function () {
+					provincename = p;
+					cityname = c;
+					var def = $.Deferred();
+					loadMore(function (listArr) {
+							var html = template('Listitem', {data: listArr});
+							$('#bestnewList').append(html).find('img').lazyLoad({binder: '#J_List'});
+							def.resolve(listArr);
+							$('.list-loading').hide();	
+							$('.list-donetip').hide();							
+								++page;							
+							});
+					return def.promise();
+				},												
+			});				
+		}
 		
 		//获取公告
 		$.ajax({
@@ -104,7 +158,26 @@ $(document).ready(function() {
 		});
 		
 		
+	  //进入新房分销
+			$("#getnewhouselist,#newhouseclick").click(function(){
+				//provincename  cityname			
+				location.href="pages/newhouse.html?province="+ encodeURI(provincename)+'&'+'city='+encodeURI(cityname);
+			});
+			
+		//进入二手房
+				$("#getoldhouselist,#oldhouseclick").click(function(){
+					//provincename  cityname			
+					location.href="pages/oldhouse.html?province="+ encodeURI(provincename)+'&'+'city='+encodeURI(cityname);
+				});
+				
+		//进入我的
+			$("#mine").click(function(){
+				//provincename  cityname			
+				location.href="pages/percenter.html?province="+ encodeURI(provincename)+'&'+'city='+encodeURI(cityname);
+			});		
+				
 });
+
 
 
 	

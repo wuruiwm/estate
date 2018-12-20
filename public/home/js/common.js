@@ -1,5 +1,5 @@
 var commapi = "http://estate.dingdingmaoer.cn/api/v1/"; //接口公共地址
-
+var commimgurl = "http://estate.dingdingmaoer.cn/"; //图片前缀
 var dataToken = sessionStorage.getItem('token'); // 获取token
 var datamoretime = sessionStorage.getItem('moretime'); // 获取时效时间
 //获取地址栏参数 
@@ -25,3 +25,17 @@ var datamoretime = sessionStorage.getItem('moretime'); // 获取时效时间
     var params = getParams();
     //获取地址栏上的userName
     var userName =  params.userName;
+	
+
+//地址栏中文编码处理	
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配            
+    var context = "";             
+    if (r != null)
+        context = r[2];             
+	reg = null;             
+	r = null; 
+    return context == null || context == "" || context == "undefined" ? "" : context;         
+}     
+

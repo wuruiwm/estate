@@ -19,7 +19,7 @@
 		.yjinfo{left: calc(50% - 25px);position: absolute;top: calc(50% - 65px); color:#fff;text-align: center;}
 		.ktyj{ margin-top: .25rem;}
 		.desc{
-			padding: .1rem 0;
+			padding: .15rem 0;
 			border-bottom: .1rem solid #eee;
 			text-align: center;
 			color: #737373;
@@ -63,32 +63,14 @@
 		<!-- 主体内容 -->
 		<div class="g-scrollview">
 			<div class="topbg">
-				<img src="../static/images/bg.jpg" />
+				<img src="../static/images/cash.png" />
 				<div class="yjinfo">
 					<div>可提佣金</div>
-					<div class="ktyj"><i class="fa fa-cny"></i>&nbsp;<a style="font-size: .35rem;">150000</a></div>
+					<div class="ktyj"><i class="fa fa-cny"></i>&nbsp;<a  id="cashtotal" style="font-size: .35rem;"></a></div>
 				</div>
 				<p class="desc">佣金明细</p>
 			</div>
-			<div id="infolist" class="infolist">
-				<div class="item-list">
-					<ul>
-						<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input></li>
-						<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
-						<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
-						<li class="plan"><label>佣金方案：</label><input value="100-120㎡" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
-					</ul>
-				</div>
-				<div class="item-list">
-					<ul>
-						<li class="name"><input class="name" value="金磊磊" name="" readonly="readonly"></input></li>
-						<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
-						<li class="tel"><label>手机：</label><input value="15256935637" name="" readonly="readonly"></input></li>
-						<li class="plan"><label>佣金方案：</label><input value="100-120㎡" name="" readonly="readonly"></input><span><a>1000</a>元</span></li>
-					</ul>
-				</div>
-				
-			</div>
+			<div id="infolist" class="infolist"></div>
 		</div>
 		<!-- 报备客户按钮 -->
 		<a href="reportecustomers/index.html">
@@ -98,8 +80,44 @@
 <!-- 引入jQuery 3.0+ -->
 <script src="../js/jq331.min.js"></script>
 <!-- 引入YDUI脚本 -->
+<script src="../js/common.js"></script>
 <script src="../build/js/ydui.js"></script>
-<script src="../js/Index.js"></script>
-
+<script src="../js/template.js"></script>
+<!-- <script src="../js/Index.js"></script> -->
+<script id="cashscript" type="text/html">
+	{{each data as value index}}
+	{{if data[index].id}}
+		<div class="item-list">
+			<ul>
+				<li class="name"><input class="name" value="{{data[index].name}}" name="" readonly="readonly"></input></li>
+				<li class="houseplace"><label>楼盘：</label><input value="{{data[index].house_title}}" name="" readonly="readonly"></input></li>
+				<li class="tel"><label>手机：</label><input value="{{data[index].number}}" name="" readonly="readonly"></input></li>
+				<li class="plan"><label>佣金方案：</label><input value="{{data[index].house_area}}㎡" name="" readonly="readonly"></input><span><a>{{data[index].commission}}</a>元</span></li>
+			</ul>
+		</div>
+	{{/if}}
+	{{/each}}
+</script>
 </body>
+<script>
+	$(document).ready(function(){
+		var getmycashApi = commapi + "comm/commlist";
+		console.log(dataToken)
+		$.ajax({
+			url: getmycashApi,
+			type: 'POST',									
+			data: {},
+			beforeSend: function(request) {
+					request.setRequestHeader("token", dataToken);
+					},
+			success: function (ret) {	
+				console.log(ret)
+				$('#cashtotal').html(ret.sum);
+				var html = template('cashscript', {data: ret});
+				$('#infolist').html(html);
+					
+			}
+		});
+	});
+</script>
 </html>

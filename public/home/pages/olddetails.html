@@ -13,6 +13,11 @@
 	<link rel="stylesheet" href="../css/common.css" />
 	<link rel="stylesheet" href="../css/contentdetails.css" />
 	<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
+	<style>
+		.info ul li input{
+			width:calc(90% - 80px);
+		}
+	</style>
 </head>
 <body>
 	<section class="g-flexview">
@@ -36,37 +41,24 @@
 			<!-- banner图下的所有信息展示 -->
 			<div id="main-content">
 				<div class="desc-top">
-					<div class="info">
-						<ul>
-							<li><input class="housename" value="" name="housetitle" readonly="readonly"  /><span><a class="houseprice"></a>&nbsp;元&nbsp;/&nbsp;㎡</span></li>
-							<li><label>开盘时间：</label><input style="width:calc(100% - 65px);" value="" name="opentime" readonly="readonly"  /></li>
-							<li><label>房源地址：</label><input style="width:calc(100% - 65px);" value="" name="houseadress" readonly="readonly"  /></li>
-						</ul>
-					</div>
-					<div class="yongjinplan">
-						<h6>佣金方案</h6>
-						<div class="plan-list"></div>
-					</div>
-				</div>
-				<!-- 佣金方案下面 -->
-				<div class="desc-text">
-					<div class="li-list" id="operlist">
-						<ul>
-							<li><label>开发商：</label><input value="" name="developer" readonly="readonly"  /></li>
-							<li><label>地区：</label><input value="" name="areaname" readonly="readonly"  /></li>
-							<li><label>绿化率：</label><input value="" name="greening_rate" readonly="readonly"  /></li>
-							<li><label>车位数量：</label><input value="" name="parking_space" readonly="readonly"  /></li>
-							<li><label>占地面积(㎡)：</label><input value="" name="floor_area" readonly="readonly"  /></li>
-							<li><label>物业费(元/㎡)：</label><input value="" name="property_costs" readonly="readonly"  /></li>
-							<li><label>物业公司：</label><input value="" name="property_company" readonly="readonly"  /></li>
-							<li><label>装修类型：</label><input value="" name="style" readonly="readonly"  /></li>
-						</ul>
-					</div>
+				<div class="info">
+					<ul>
+					<li><input class="housename" value="" name="housetitle" readonly="readonly" /><span><a class="houseprice"></a>&nbsp;元&nbsp;/&nbsp;㎡</span></li>
+					<li><label>小区名称：</label><input  value="" name="title" readonly="readonly"  /></li>
+					<li><label>占地面积：</label><input  value="" name="floor_area" readonly="readonly"  /></li>
+					<li><label>房源类型：</label><input  value="" name="style" readonly="readonly"  /></li>
+					<li><label>房源户型：</label><input  value="" name="huxing" readonly="readonly"  /></li>
+					<li><label>装修类型：</label><input  value="" name="zhuangxiu" readonly="readonly"  /></li>
+					<li><label>物业费(元/㎡)：</label><input  value="" name="wuye" readonly="readonly"  /></li>
+					<li><label>房源地址：</label><input  value="" name="houseadress" readonly="readonly"  /></li> 
+					</ul>
+				</div>					
+				</div>				
+				<div class="desc-text">					
 					<!-- 主要户型 -->
 					<div class="main-style">
-						<h6>主要户型</h6>
+						<h6>房源图片</h6>
 						<ul id='roomap'></ul>
-						</br>
 					</div>
 					<!-- 项目介绍 -->
 					<div class="pro-desc">
@@ -109,15 +101,6 @@
 		{{/each}}
 	</script>
 	
-	<!-- 佣金方案 -->
-	<script id="cashplan" type="text/html">
-		{{each dataplan as value index}}
-			<div class="item-list">
-				<div>{{dataplan[index].house_area}}㎡&nbsp;<a>{{dataplan[index].house_type}}</a></div>
-				<div class="rmb">佣:{{dataplan[index].price}}</div>
-			</div>	
-		{{/each}}
-	</script>
 	
 	<script>
 		$(document).ready(function(){
@@ -136,24 +119,21 @@
 								autoplay: 3000,
 								lazyLoad: true
 						});
-						var html = template('cashplan', {dataplan: ret.brokerage_plan.data});
-						$('.plan-list').html(html);
+											
 						$("input[name='housetitle']").val(ret.title);
 						$('.navbar-title').html(ret.title);
-						$("input[name='opentime']").val(ret.opening_time);
+						
+						$("input[name='title']").val(ret.title);
+						$("input[name='floor_area']").val(ret.floor_area);
+						$("input[name='style']").val(ret.init_status);
+						$("input[name='huxing']").val(ret.house_type);
+						$("input[name='zhuangxiu']").val(ret.decoration_type.join('、'));
+						$("input[name='wuye']").val(ret.property_costs);
 						$("input[name='houseadress']").val(ret.house_address);
 						$('.houseprice').html(ret.house_price);						
-						$("input[name='developer']").val(ret.developer);
-						$("input[name='areaname']").val(ret.area.name);
-						$("input[name='greening_rate']").val(ret.greening_rate+'%');
-						$("input[name='parking_space']").val(ret.parking_space);
-						$("input[name='floor_area']").val(ret.floor_area);
-						$("input[name='property_costs']").val(ret.property_costs);
-						$("input[name='property_company']").val(ret.property_company);
-						var stylelist = ret.decoration_type;
-						$("input[name='style']").val(stylelist.join('、'));
+					
 						var html = template('roomimg', {dataimg: ret.room_map});
-						$('#roomap').html(html);						
+						$('#roomap').html(html);
 						var html = template('contentscript', {data: ret});
 						$('#content').html(html);
 					},					

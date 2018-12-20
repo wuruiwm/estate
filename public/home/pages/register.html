@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>注册</title>
+		<title>注册账号</title>
 		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
 		<meta content="yes" name="apple-mobile-web-app-capable" />
 		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
@@ -20,7 +20,7 @@
 			}
 			.registerform div{
 				align-items: center;
-				padding: .25rem;
+				padding: .2rem .25rem;
 				display: flex;
 			}
 			.registerform label {
@@ -28,6 +28,7 @@
 					font-size: .3rem;
 			}
 			.registerform input {
+				font-family: -webkit-pictograph;
 				height: .8rem;
 				border: 0;
 				padding: .1rem;
@@ -64,41 +65,41 @@
 					<i class="back-ico"></i>
 				</a>
 				<div class="navbar-center">
-					<span class="navbar-title">注册</span>
+					<span class="navbar-title">注册账号</span>
 				</div>
 			</header>
 			<div class="registerform">
 					<div class="name">
 						<label><i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;|</label>&nbsp;
-						<input type="text"   placeholder="请输入姓名" value="" name="username"  />
+						<input type="text"   placeholder="昵称" value="" name="username"  />
 					</div>
 					<div class="admin">
 						<label><i class="fa fa-phone-square"></i>&nbsp;&nbsp;|</label>&nbsp;
-						<input type="number" pattern="[0-9]*"  placeholder="请输入手机号码" value="" name="usertel" autocomplete="off" />
-						<button type="button" class="btn btn-warning" id="J_GetCode">获取短信验证码</button>
+						<input type="number" pattern="[0-9]*"  placeholder="手机号码" value="" name="usertel" autocomplete="off" />
+						<button type="button" class="btn btn-warning font-sty" id="J_GetCode">获取短信验证码</button>
 					</div>
 					<div class="messagecode">
 						<label><i class="fa fa-commenting"></i>&nbsp;&nbsp;|</label>&nbsp;
-						<input type="number" pattern="[0-9]*" value="" name="messarscode" placeholder="请输入短信验证码" />
+						<input type="number" pattern="[0-9]*" value="" name="messarscode" placeholder="短信验证码" />
 					</div>  
 					<div class="password">
 						<label><i class="fa fa-key"></i>&nbsp;&nbsp;|</label>&nbsp;
-						<input type="password" value="" name="userpwd" placeholder="请正确输入密码" />
+						<input type="password" value="" name="userpwd" placeholder="设置密码" />
 					</div>
 					<div class="maincity">
 						<label><i class="fa fa-location-arrow"></i>&nbsp;&nbsp;|</label>&nbsp;
-						<input type="text" readonly id="J_Address" value="" name="maincity" placeholder="请选择主营城市">
+						<input type="text" id="J_Address" value="" name="maincity" placeholder="填写主营城市">
 					</div>
-					<div class="belongto">
+					<!-- <div class="belongto">
 					<label><i class="fa fa-university"></i>&nbsp;&nbsp;|</label>&nbsp;
 					<input type="text" value="" name="belongtoshop" placeholder="所属门店" />
-					</div>  
+					</div>  -->
 					<div class="yaoqingcode">
 					 	<label><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;|</label>&nbsp;
-					 	<input type="text" value="" name="yaoqingcode" placeholder="请正确输入邀请码" />
+					 	<input type="text" value="" name="yaoqingcode" placeholder="正确输入邀请码" />
 					</div>  
 					<p style="text-align: center;">
-						<button class="trueregister">注册</button><a id='hasCode'>我有邀请码</a>
+						<button class="trueregister font-sty">注册</button><a id='hasCode'>我有邀请码</a>
 						<p style="margin-top: .3rem; color:#666666;text-align: center;">已有账号？<a href="./login.html" style="color:#C1060F;">立即登录</a></p>
 					</p>
 			</div>
@@ -121,53 +122,75 @@
 				resetStr: '重新获取验证码'
 			});
 		
+			//获取验证码
 			$getCode.on('click', function () {
-				/* ajax 成功发送验证码后调用【start】 */
-				YDUI.dialog.loading.open('发送中');
-				setTimeout(function(){
-					
-					YDUI.dialog.loading.close();
-					
-					$getCode.sendCode('start');
-					YDUI.dialog.toast('已发送', 'success', 1500);
-					
-				}, 1500);
+				var tel = $("input[name='usertel']").val();
+				if(tel){
+					$.ajax({
+							url: getcodeApi,
+							type: "POST",
+							data: {'mobile': tel},
+							success: function(result) {
+								console.log(result);
+								//获取验证码成功
+								YDUI.dialog.loading.open('发送中');
+								setTimeout(function(){									
+									YDUI.dialog.loading.close();									
+									$getCode.sendCode('start');
+									YDUI.dialog.toast('已发送', 'success', 1500);
+									
+								}, 1500);
+							},
+							error:function(msg){
+								var json=JSON.parse(msg.responseText);
+								YDUI.dialog.toast(json.msg, 'none', 1500); // 失败返回
+							}
+					});				
+				}else{					
+					YDUI.dialog.toast('请输入正确的手机号码！', 'none', 1500);
+				}																				
 			});
 			
-			$('.belongto, .yaoqingcode,.maincity').hide();
+			$('.belongto, .yaoqingcode').hide();
 			$('#hasCode').click(function(){
-				$('.belongto, .yaoqingcode,.maincity').show();
-			});
-			//获取手机验证码
-			$('#J_GetCode').click(function(){
-				var tel = $("input[name='usertel']").val();
-				$.ajax({
-						url: getcodeApi,
-						type: "POST",
-						data: {'mobile': tel},
-						success: function(result) {
-							console.log(result);
-							//获取验证码成功
-						},
-						error:function(msg){
-								console.log(msg) // 失败返回
-						}
-				});
-			});
+				$('.belongto, .yaoqingcode').show();
+			});			
 			
 			//用户注册提交信息
 			$('.trueregister').click(function(){
-				//var username = $("input[name='username']").val(); //用户姓名
+				var username = $("input[name='username']").val(); //用户姓名
 				var usertel = $("input[name='usertel']").val(); //手机号码
 				var usercode = $("input[name='messarscode']").val(); //短信验证码
 				var userpwd = $("input[name='userpwd']").val(); //注册密码
-				console.log(usertel);
-				console.log(usercode);
-				console.log(userpwd);
+				var maincity = $("input[name='maincity']").val(); //主营城市
+				var shopcode = $("input[name='yaoqingcode']").val(); //门店邀请码				
+				var Storebroker = {
+					'nickname': username, 
+					'mobile': usertel, 
+					'code': usercode, 
+					'password': userpwd, 
+					'area': maincity, 
+					'invite_code': shopcode,
+					'type': 1 //门店经纪人
+				};				
+				var Popularbroker = {
+					'nickname': username, 
+					'mobile': usertel, 
+					'code': usercode, 
+					'password': userpwd, 
+					'area': maincity, 					
+					'type': 2 ,// 大众经纪人
+					};
+				if(shopcode !=''){
+					var postdata = Storebroker;
+				}else{
+					var postdata = Popularbroker;
+				}
+				
 				$.ajax({
 					url: postregisterApi,
 					type: "POST",
-					data: {'mobile': usertel, 'code': usercode, 'password': userpwd},
+					data: postdata,
 					success: function(result) {
 						console.log(result);//注册成功
 							!function (win, $) {
@@ -176,22 +199,19 @@
 									dialog.loading.open('恭喜注册成功!');
 									setTimeout(function () {
 										dialog.loading.close();/* 移除loading */
+										location.href="./login.html";
 									}, 2000);
 							
 						}(window, jQuery);	
 					},
-					error:function(msg){
-							console.log(msg) // 失败返回
-							console.log('0')
-							var json=JSON.parse(msg.responseText);
-							// 验证不通过
-							if(json.errorCode==40000){
-									alert(json.msg);
-							}
-							// 用户名不存在
-							if(json.errorCode==40301){
-									alert(json.msg);
-							}
+					error:function(msg){// 验证不通过						
+						var json=JSON.parse(msg.responseText);						
+						if(json.errorCode==40000){									
+								YDUI.dialog.toast(json.msg, 'none', 1500); // 失败返回
+						}						
+						if(json.errorCode==40301){// 用户名不存在								
+								YDUI.dialog.toast(json.msg, 'none', 1500); // 失败返回
+						}
 					}
 				});
 			});

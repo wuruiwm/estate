@@ -366,7 +366,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "upload/file_img",
-    "title": "修改头像",
+    "title": "上传图片",
     "group": "upload",
     "version": "0.1.0",
     "description": "<p>上传图片</p>",
@@ -783,17 +783,24 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "string",
+            "type": "int",
             "optional": false,
             "field": "province",
-            "description": "<p>传省的名字 例如 安徽省</p>"
+            "description": "<p>传省的ID</p>"
           },
           {
             "group": "Parameter",
-            "type": "string",
+            "type": "int",
             "optional": false,
             "field": "city",
-            "description": "<p>传市的名字 例如 蚌埠市</p>"
+            "description": "<p>传市的ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "area",
+            "description": "<p>传县的ID</p>"
           }
         ]
       }
@@ -801,6 +808,35 @@ define({ "api": [
     "filename": "app/api/controller/v1/Loupan.php",
     "groupTitle": "客户端接口",
     "name": "GetHouseLoupan2"
+  },
+  {
+    "type": "get",
+    "url": "House/search",
+    "title": "首页模糊搜索",
+    "group": "web",
+    "version": "0.1.0",
+    "description": "<p>首页模糊搜索</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/House/search"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "search",
+            "description": "<p>搜索关键词</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/api/controller/v1/Housesearch.php",
+    "groupTitle": "客户端接口",
+    "name": "GetHouseSearch"
   },
   {
     "type": "get",
@@ -900,17 +936,24 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "str",
+            "type": "int",
             "optional": false,
             "field": "province",
-            "description": "<p>省份 例如 安徽省</p>"
+            "description": "<p>省份ID</p>"
           },
           {
             "group": "Parameter",
-            "type": "str",
+            "type": "int",
             "optional": false,
             "field": "city",
-            "description": "<p>市 例如 合肥市</p>"
+            "description": "<p>市ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "area",
+            "description": "<p>区县ID</p>"
           },
           {
             "group": "Parameter",

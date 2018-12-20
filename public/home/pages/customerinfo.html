@@ -11,12 +11,6 @@
 		<link rel="stylesheet" href="../build/css/ydui.css" />
 		<link rel="stylesheet" href="../css/common.css" />
 		<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
-		
-		<!-- 引入YDUI自适应解决方案类库 -->
-		<script src="../build/js/ydui.flexible.js"></script>
-		<script src="../js/jq331.min.js"></script>
-		<!-- 引入YDUI脚本 -->
-		<script src="../build/js/ydui.js"></script>
 		<style>
 			label{
 				display: inline-block;
@@ -59,29 +53,27 @@
 			<div class="basicinfo">
 				<div>
 					<label>客户姓名：</label>
-					<input type="text" readonly="readonly"  value="金磊磊" name="" />
+					<input type="text" readonly="readonly"  value="" name="customerName" />
 				</div>
 				<div>
 					<label>报备楼盘：</label>
-					<input type="text" readonly="readonly" value="新地中心" name="" />
+					<input type="text" readonly="readonly" value="" name="" />
 				</div>
 				<div>
 					<label>客户电话：</label>
-					<input type="number" pattern="[0-9]*" readonly="readonly"  value="15256935637" name="" autocomplete="off" />
+					<input type="number" pattern="[0-9]*" readonly="readonly"  value="" name="customerTel" autocomplete="off" />
 				</div>
 				<div>
 					<label>客户性别：</label>
-					<input type="text" readonly="readonly"  value="男" name="" />
+					<input type="text" readonly="readonly"  value="" name="Sex" />
 				</div>
 				<div>
 					<label>带看时间：</label>
-					<input type="text" readonly="readonly" value="2018-02-12" name="" />					
+					<input type="text" readonly="readonly" value="" name="Time" />					
 				</div>
 				<div>
 					<label>购房意向：</label>
-					<textarea style="color:#666666" name="" readonly="readonly" rows="10" cols="28">
-						三室一厅 坐北朝南，有阳台，120平米 
-					</textarea>			
+					<textarea style="color:#666666;padding: .2rem;" name="Content" readonly="readonly" rows="10" cols="28"></textarea>			
 				</div>
 				
 				<!-- 报备客户按钮 -->
@@ -95,4 +87,41 @@
 			</div>
 		</div>
 	</body>
+	<!-- 引入YDUI自适应解决方案类库 -->
+	<script src="../build/js/ydui.flexible.js"></script>
+	<script src="../js/jq331.min.js"></script>
+	<!-- 引入YDUI脚本 -->
+	<script src="../build/js/ydui.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+		$(document).ready(function(){
+			var getcustomerinfoApi = commapi + 'order/content'
+			var currentid = params.id;
+			$.ajax({
+					url : getcustomerinfoApi,
+					type : "GET",
+					data: {'id': currentid},
+					beforeSend: function(request) {
+					request.setRequestHeader("token", dataToken);
+						},
+					success : function(result) {
+						console.log(result)
+						$("input[name='customerName']").val(result.name);
+						$("input[name='customerTel']").val(result.number);
+						var sex = result.gender;
+						if(sex = '1'){
+							sex = '男'
+						}else{
+							sex = '女'
+						}
+						$("input[name='Sex']").val(sex);
+						$("input[name='Time']").val(result.date);
+						$("textarea[name='Content']").val(result.content);
+					},
+					error:function(msg){
+						console.log(msg) // 失败返回
+					}
+			});
+		});
+	</script>
 </html>

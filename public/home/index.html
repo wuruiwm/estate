@@ -13,7 +13,6 @@
 	<link rel="stylesheet" href="./css/Index.css" />
 	<link rel="stylesheet" href="css/common.css" />
 	<link rel="stylesheet" href="./css/fontcss/css/font-awesome.min.css" />
-	
 </head>
 <body>
 	<section class="g-flexview">
@@ -22,7 +21,11 @@
 		<header class="m-navbar header">
 			<div class="header-main">
 				<div class="location"><a id="currentCity"></a><label>&nbsp;&nbsp;▼</label></div>
-				<div class="search"><i class="icon-search" style="color:#C1060F; margin: 0 .2rem 0 .2rem;"></i><input type="search" value="" placeholder="房源搜索" /></div>
+				<div class="search"><i class="icon-search" style="color:#C1060F; margin: 0 .2rem 0 .2rem;"></i>
+					<input type="search" value="" placeholder="房源搜索" />
+					
+				</div>
+				<!-- <label>搜索</label> -->
 				<div class="news">
 					<a style="display: inline-block;margin-top: 0.1rem;" href="./pages/newslist.html">
 						<i class="fa fa-server" style="font-size:.35rem;"></i>
@@ -32,7 +35,7 @@
 		</header>
 		
 		<!-- 主体内容 -->
-		<div class="g-scrollview">
+		<div class="g-scrollview" id="J_List">
 			<!-- banner 图 -->
 			<div class="m-slider" id="bannerImage">
 				<div class="slider-wrapper" id="bannerList"><!-- 轮播图模板显示位置 --></div>
@@ -43,13 +46,13 @@
 			<div class="menu">
 				<div class="menu-list">
 					<div class="item-menu">
-						<a href="pages/newhouse.html">
+						<a  id="getnewhouselist" href="#">
 							<img src="static/images/newhouse.png" />
 							<label>新房分销</label>
 						</a>
 					</div>
 					<div class="item-menu">
-						<a href="pages/oldhouse.html">
+						<a id="getoldhouselist" href="#">
 							<img src="static/images/house2.png" />
 							<label>二手房</label>
 						</a>
@@ -76,6 +79,7 @@
 			<!-- 房源列表 -->
 			<div class="house-list">
 				<p class="tips"><i class="icon-discount"></i>&nbsp;&nbsp;最新房源</p>
+				<div id="bestnewList"></div> <!-- 房源列表模块 -->
 			</div>
 		</div>
 		<!-- 报备客户按钮 -->
@@ -90,19 +94,19 @@
 				</span>
 				<span class="tabbar-txt">首页</span>
 			</a>
-			<a href="pages/newhouse.html" class="tabbar-item">
+			<a id="newhouseclick" href="#" class="tabbar-item">
 				<span class="tabbar-icon">
 					<i class="icon-home"></i>
 				</span>
 				<span class="tabbar-txt">新房分销</span>
 			</a>
-			<a href="pages/oldhouse.html" class="tabbar-item">
+			<a id="oldhouseclick" href="#" class="tabbar-item">
 				<span class="tabbar-icon">
 					<i class="fa fa-institution"></i>
 				</span>
 				<span class="tabbar-txt">二手房</span>
 			</a>
-			<a href="pages/percenter.html" class="tabbar-item">
+			<a id="mine" href="#" class="tabbar-item">
 				<span class="tabbar-icon">
 					<i class="icon-ucenter-outline"></i>
 				</span>
@@ -110,15 +114,6 @@
 			</a>
 		</footer>
 </section>
-<script id="bannerscr" type="text/html">
-   {{each data as value index}}
-		<div class="slider-item">
-			<a href="#">
-				<img src="{{value.img_id}}">
-			</a>
-		</div>
-   {{/each}}
-</script>
 <script src="js/jq331.min.js"></script>
 <script src="build/js/ydui.js"></script>
 <!-- 引入YDUI自适应解决方案类库 -->
@@ -128,6 +123,51 @@
 <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=1c2a3d03debccf4e9f5502d493d3acfd"></script>
 <script src="js/template.js"></script>
 <script src="js/common.js"></script>
+<script src="js/DataLazyLoad.js"></script>
 <script src="js/Index.js"></script>
+<!-- 轮播图 -->
+<script id="bannerscr" type="text/html">
+   {{each data as value index}}
+		<div class="slider-item">
+			<a href="#">
+				<img src="{{value.img_id}}">
+			</a>
+		</div>
+   {{/each}}
+</script>
+
+<!-- //房源列表 -->
+<script id="Listitem" type="text/html">
+	{{each data as value index}}
+		<a 
+		{{if data[index].init_status == "新房"}}
+		href="pages/contentdetails.html?id={{data[index].id}}"
+		{{else}}
+		href="pages/olddetails.html?id={{data[index].id}}"
+		{{/if}}
+		
+		>
+			<div class="item-list">
+				<div class="left-img">
+					<img src="{{data[index].cover_img.img_url}}" />
+					<span class="housestyle">{{data[index].init_status}}</span>
+				</div>
+				<div class="desc-right">
+				<p class="desc-title"><label class="main-title">{{data[index].title}}</label><span><label class="price">{{data[index].house_price}}</label>&nbsp;元/㎡</span></p>
+				<p class="desc-address">{{data[index].house_address}}</p>
+				<p class="desc-tip">
+					{{each data[index].decoration_type as item index}}
+					<label class="yong style">{{item}}</label>
+					{{/each}}
+				</p>
+					{{if data[index].init_status == "二手房"}}<p style="display: none;" class="desc-content"><label class="yong">佣</label>&nbsp;<span>({{data[index].brokerage_plan.number}}个方案)</span>&nbsp;&nbsp;<span>{{data[index].brokerage_plan.price}}元/套&nbsp;</span></p>
+					{{else}}
+					<p class="desc-content"><label class="yong">佣</label>&nbsp;<span>({{data[index].brokerage_plan.number}}个方案)</span>&nbsp;&nbsp;<span>{{data[index].brokerage_plan.price}}元/套&nbsp;</span></p>
+					{{/if}}
+				</div>
+			</div>
+		</a>
+	{{/each}}
+</script>
 </body>
 </html>

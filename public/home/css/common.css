@@ -1,3 +1,6 @@
+.font-sty{
+	font-family: -webkit-pictograph;
+}
 /* 头部 nvaber 公共样式 */
 .tabbar-icon :after, .tabbar-icon :before {
     font-size: .4rem!important;
