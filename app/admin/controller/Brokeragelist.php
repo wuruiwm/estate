@@ -4,7 +4,21 @@ use think\Controller;
 class Brokeragelist extends Controller{
 	public function brokeragelist(){
 		$commission =  model('Commission');
-		$list = $commission->order('id desc')->paginate(10);
+		if (!input('get.panduan')) {
+			//var_dump(input('get.'));exit();
+			$list = $commission->order('id desc')->paginate(10);
+		}else{
+			$get = input('get.');
+			$str = '1';
+			if (isset($get['user_id'])) {
+				$str = $str." and user_id='".$get['user_id']."'";
+			}
+			if (isset($get['date'])) {
+				$date = strtotime($get['date']);
+				$str = $str . ' and date='.$date;
+			}
+			$list = $commission->where($str)->order('id desc')->paginate(10,false,['query'=>$get]);
+		}
 		$page = $list->render();
 		foreach ($list as $k => $v) {
 			$list[$k]['date'] = date('Y-n-j',$v['date']);

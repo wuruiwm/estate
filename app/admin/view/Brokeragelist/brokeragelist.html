@@ -40,13 +40,15 @@
 		#content {
 			margin-right: 40px;
 		}
+		#pagea{
+			margin-left: 20px;
+		}
 	</style>
 <body>
 	<div id="head">
-		<form action="" method="post">
   		<div class="form-group neilian" id="left">
-    		<label for="exampleInputName2" class="neilian" id="mingzi">名字搜索:</label>
-    		<input type="text" name="name" class="form-control neilian" id="exampleInputName2" placeholder="请输入姓名">
+    		<label for="exampleInputName2" class="neilian" id="mingzi">用户ID搜索:</label>
+    		<input type="text" name="name" class="form-control neilian" id="exampleInputName2" placeholder="请输入用户ID">
   		</div>
         <div class="layui-input-inline">
             <div class="layui-inline">
@@ -55,8 +57,7 @@
               </div>
             </div>
         </div>
-        <input type="submit" class="btn btn-info btn-lg" value="搜索" id="sousuo">
-		</form>
+        <button class="btn btn-info btn-lg" id="sousuo" onclick="sousou();">搜索</button>
 	</div>
 	<div id="content">
 	<table class="table table-bordered">
@@ -88,6 +89,7 @@
 		{/volist}
 	</table>
 	</div>
+	<div id="pagea">{$page}</div>
 </body>
 <script src="__PUBLIC__/bootstrap/js/jquery.js"></script>
 <script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
@@ -120,5 +122,23 @@
         elem: '#create_time'
       });
     });
+    function sousou(){
+    	var user_id = $('#exampleInputName2').val();
+    	var date = $('#create_time').val();
+    	var url = "{:url('admin/Brokeragelist/brokeragelist')}";
+    	//console.log(user_id);
+    	if (user_id != '') {
+    		url = url + '?user_id=' + user_id;
+    		if (date != '') {
+    		url = url + '&date='+date;
+    		}
+    	}else{
+  			if (date != '') {
+    		url = url + '?date='+date;
+    		}
+    	}
+    	url = url + '&panduan=1';
+    	window.location.href = url;
+    }
 </script>
 </html>

@@ -44,6 +44,9 @@
 		#left{
 			margin-left: 50px;
 		}
+		#pagea {
+			margin-left: 20px;
+		}
 	</style>
 <body>
 	<div id="head">
@@ -73,7 +76,6 @@
               </div>
             </div>
         </div>
-       <!--  <input type="submit" value="提交"> -->
 		<button class="btn btn-info btn-lg" id="sousuo" onclick="sousou();">搜索</button>
 	</div>
 	<div id="content">
@@ -107,7 +109,7 @@
 			<td align="center">{$v.is_new}</td>
 			<td align="center">{$v.is_visit}</td>
 			<td align="center">{$v.is_deal}</td>
-			<td align="center">{$v.is_pay}</td>
+			<td align="center" id="td{$v.id}">{$v.is_pay}</td>
 			<td align="center">
 				{if condition="$v.settlement eq 0"}
 				<button class="btn btn-primary btn-xs yongjin" value="{$v.id}" data-toggle="modal" data-target="#jiesuan" onclick="chuan({$v.house_id},{$v.id})">结算佣金</button>
@@ -123,7 +125,7 @@
 		{/volist}
 	</table>
 	</div>
-	{$page}
+	<div id="pagea">{$page}</div>
 	<div id="jiesuan" class="modal fade jiesuan">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -248,41 +250,60 @@
 		//拼接一个状态码，为了后台判断是否有get传参用
 		//因为垃圾tp5分页，点击页码会get传参，不能直接判断是否有get传参，我判断get传参里是否有这个状态码
 		url = url + '&panduan=1';
+		console.log(url);
 		//发送get请求，并且把返回值，直接替换整个body
 		window.location.href = url;
 	}
 	function chuan(house_id,order_id){
+		//将传进去的参数拼接成url，get传参给后端
+		//点击结算佣金以后，改变模态框里的下拉框的内容
 		var url = "{:url('admin/order/yongjin')}";
 		url = url +'?house_id='+house_id+'&order_id='+order_id;
+		//发送get传参
 		$.get(url,function(res){
 			if (res) {
+				//清空下拉框里的内容
 				var fangan = $('#fangan');
 				fangan.empty();
+				//输出一个请选择佣金方案的下拉框 并且把后端传过来的值放里面，方便结算的时候判断是点击哪个td结算佣金进来的
 				var can = '<option value="0" id="canshu" house_id="'+res['house_id']+'" user_id='+'"'+res['user_id']+'" order_id='+'"'+res['order_id']+'"'+'>请选择佣金方案</option>';
+				//将写好的请选择佣金方案的下拉框插到select里的最后面
 				fangan.append($(can));
+				//删除掉不需要进行for in循环的字段
 				delete res['user_id'];
 				delete res['house_id'];
 				delete res['order_id'];
+				//for in 循环取出方案，并且造一个下拉框，然后放到select的最后面
 				for(var k in res){
 					var str = "<option class='fangan' value='"+res[k]['id']+"'>"+res[k]['house_area']+"㎡&nbsp;"+res[k]['house_type']+"&nbsp;佣金"+res[k]['price']+"&nbsp;大众经纪人佣金比例"+res[k]['public_percentage']+"%&nbsp;门店经纪人佣金比例"+res[k]['store_percentage']+"%</option>";
 					fangan.append($(str));
 				}
 			}else{
+				//如果传来的值为空，说明点击的订单对应的楼盘佣金方案为空
 				layer.msg('当前楼盘佣金方案为空');
 			}
 		})
 	}
 	function jiesuan(){
+		//先获取三个参数
 		var user_id = $('#canshu').attr('user_id');
 		var house_id = $('#canshu').attr('house_id');
 		var order_id = $('#canshu').attr('order_id');
+		//拼接一个url
 		var url = "{:url('admin/order/jiesuan')}";
 		url = url+'?user_id='+user_id+'&house_id='+house_id+'&order_id='+order_id;
+		//取出当前下拉框选中的值，如果没有选中，则是undefined
 		var options = $('.fangan:selected').val();
+		//判断是否选中值，没有则提示请选择佣金方案
+		//有值，则将值拼接成url，发送给后端，如果返回值为结算成功，则将对应的未结佣改成已结佣，并且将结算佣金按钮置为不可点击
 		if (options != undefined) {
 			url = url+'&brokerage_id='+options;
 			$.get(url,function(res){
-				// console.log(res['reg']);
+				if (res['reg'] == '佣金结算成功') {
+					var str = 'td'+order_id;
+					document.getElementById(str).innerHTML = '<span style="color: red;">已结佣</span>';
+					$('button[value='+order_id+']').attr('disabled','disabled');
+				}
 				layer.msg(res['reg']);
 			})
 		}else{
