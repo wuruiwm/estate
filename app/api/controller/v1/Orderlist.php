@@ -24,7 +24,7 @@ class Orderlist extends Controller{
 			return ['msg'=>'请输入正确的每页显示的个数'];
 		}
 		//报备，到访，提额的字段
-		$field = ['id','name','number','content','date'];
+		$field = ['id','name','number','content','house_title','date'];
 		//先判断状态值是不是数字，再用switch case来对每种值的情况进行判断
 		if (is_numeric($state)) {
 			if ($state==1||$state==2||$state==3||$state==4) {
@@ -40,7 +40,7 @@ class Orderlist extends Controller{
 			case '3':
 			//如果传来的参数为3，也就是已成交，那么就将查询字段改变
 			$str = 'is_deal';
-			$field = ['id','name','number','content','is_pay','date'];
+			$field = ['id','name','number','content','is_pay','date','house_title'];
 			break;
 
 			case '4':
@@ -97,7 +97,7 @@ class Orderlist extends Controller{
 		}
 		//实例化model，然后查出数据，再if判断，如果内容为空，则返回内容为空
 		$order = model('Order');
-		$res = $order->field(['id','name','number','gender','date','content'])->where('user_id',$user_id)->where('id',$id)->find();
+		$res = $order->field(['id','name','number','gender','date','content','house_title'])->where('user_id',$user_id)->where('id',$id)->find();
 		if (!$res) {
 			return ['reg'=>'传入的id内容为空'];
 		}
