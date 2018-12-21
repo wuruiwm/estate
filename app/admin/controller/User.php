@@ -24,6 +24,10 @@ class User extends Permissions
         return $this->fetch();
     }
 
+    public function realname(){
+        return $this->fetch();
+    }
+
     public function getList($page = '', $limit = '', $key = '')
     {
         (new Page())->goCheck();
@@ -100,6 +104,26 @@ class User extends Permissions
 
         $result = userModel::getStoreUserList($page - 1, $limit, $where, $store_id);
         return $result;
+    }
+
+    public function getRealname($page = '', $limit = '', $key = ''){
+        (new Page())->goCheck();
+        if (isset($key['keyword']) and !empty($key['keyword'])) {
+            $where['card_name'] = ['like', '%' . $key['keyword'] . '%'];
+        }
+        if (empty($where['card_name'])) {
+            $where = null;
+        }
+        $result = userModel::getRealnameList($page - 1, $limit, $where);
+        return $result;
+    }
+
+    public function updateRealname($id='',$is_examine=''){
+        (new IDMustBePositiveInt())->goCheck();
+        $result = userModel::update(['id'=>$id,'is_examine'=>$is_examine]);
+        if($result){
+            throw new SuccessMessage();
+        }
     }
 
 }

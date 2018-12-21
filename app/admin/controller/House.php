@@ -36,6 +36,8 @@ class House extends Permissions
         return $this->fetch();
     }
 
+
+
     /**
      * 发布新房源
      */

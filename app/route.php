@@ -41,9 +41,8 @@ Route::get('admin_api/user/remove', 'admin/User/delById');
 Route::get('admin_api/user/dels', 'admin/User/dels');
 Route::get('admin_api/user/remove_store_user', 'admin/User/removeStoreUserById');
 Route::get('admin_api/user/remove_store_users', 'admin/User/removeStoreUserByIds');
-
-
-
+Route::get('admin_api/user/realname', 'admin/User/getRealname');
+Route::get('admin_api/user/update_realname', 'admin/User/updateRealname');
 
 /**
  * 客户端接口

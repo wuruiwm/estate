@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>实名管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all"/>
+    <link rel="stylesheet" href="__CSS__/admin.css" media="all">
+</head>
+<body style="padding:10px;">
+<blockquote class="layui-elem-quote">
+    <div class="layui-form" id="admin">
+        <div class="layui-inline">
+            <label class="layui-form-label">搜索姓名：</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" name="keyword" id="keyword" autocomplete="off">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn" data-type="reload">搜索</button>
+        </div>
+    </div>
+</blockquote>
+<table id="table" lay-filter="test"></table>
+<script type="text/html" id="showimg">
+    <div><a href="#"><img src="{{d.head_img}}" width="30" height="30"></a></div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="check">审核</a>
+</script>
+
+<script type="text/html" id="check">
+    {{# if(d.is_examine==1){ }}
+    <a id="dsh{{d.id}}" style="color: #12af28">已通过</a>
+    {{# }else if(d.is_examine==2){ }}
+    <a id="dsh{{d.id}}" style="color: red">未通过</a>
+    {{# }else{ }}
+    <a id="dsh{{d.id}}">待审核</a>
+    {{# } }}
+</script>
+
+{include file="public/foot"}
+<script>
+    layui.use(['table', 'form'], function () {
+        var table = layui.table;
+        var form = layui.form;
+
+
+        table.render({
+            elem: '#table'
+            , height: 'full-120'
+            , width: 'full'
+            , url: window.base.g_restUrl + 'user/realname' //数据接口
+            , page: false //是否开启分页
+            , limits: [15, 25, 45, 60] // 设置每页显示？条
+            , limit: 15 // 每页默认显示数量
+            , cols: [[ //标题栏 列表信息
+                {checkbox: true, fixed: true}
+                , {field: 'id', title: 'ID', width: 100, fixed: 'left', align: 'center'}
+                , {field: 'nickname', title: '昵称', width: 200}
+                , {field: 'card_name', title: '真实姓名', width: 200}
+                , {field: 'card_number', title: '身份证ID', width: 200,}
+                , {field: 'card_img', title: '身份证正面照', width: 200, templet: '#showimg', align: 'center'}
+                , {field: 'card_phone', title: '手机号', width: 400,}
+                , {field: 'is_examine', title: '审核状态', width: 200,templet:'#check'}
+                , {field: 'update_time', title: '提交时间', width: 200, align: 'center', sort: true}
+                , {title: '操作', width: 160, align: 'center', toolbar: '#barDemo', fixed: 'right'}
+            ]],
+            id: 'testReload',
+            done: function (res, curr, count) {
+                hoverOpenImg();//显示大图
+                $('table tr').on('click', function () {
+                    $('table tr').css('background', '');
+                    $(this).css('background', '<%=PropKit.use("config.properties").get("table_color")%>');
+                });
+            }
+        });
+
+        // 搜索
+        var $ = layui.$, active = {
+            reload: function () {
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        key: {
+                            keyword: $("input[name='keyword']").val()
+                        }
+                    }
+                });
+            },
+
+        };
+        // 搜索
+        $('.layui-elem-quote .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+
+        //工具栏 审核
+        table.on('tool(test)', function (obj) {
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            // 审核操作
+            if (layEvent === 'check') {
+                layer.confirm('该用户是否通过实名审核？', {
+                    btn: ['通过', '未通过'] //按钮
+                }, function () {
+                    layer.msg('通过', {icon: 1});
+                    realname(data.id,1)
+                    $("#dsh"+data.id+"").html('已通过');
+                    $("#dsh"+data.id+"").css("color","#12af28");
+                }, function () {
+                    realname(data.id,2)
+                    layer.msg('未通过', {icon:2});
+                    $("#dsh"+data.id+"").html('未通过');
+                    $("#dsh"+data.id+"").css("color","red");
+                });
+            }
+        });
+
+    }); // layui结束
+
+
+    // 审核
+    function realname(id,is_examine, index) {
+        var params = {
+            url: 'user/update_realname?id=' + id+'&is_examine='+ is_examine,
+            sCallback: function (successMsg) {
+                if (successMsg.msg == '缺少权限') {
+                    layer.msg(successMsg.msg);
+                }
+                if (successMsg.errorCode == 20100) {
+                    layer.close(index);
+                    //location.reload();
+
+                }
+            },
+            eCallback: function (errorMsg) {
+                layer.msg('您请求的信息不存在!', {icon: 2});
+            }
+        };
+        window.base.getData(params);
+    }
+
+    //图片放大
+    function hoverOpenImg() {
+        var img_show = null; // tips提示
+        $('td img').hover(function () {
+            var kd = $(this).width();
+            var kd1 = kd * 6;          //图片放大倍数
+            var kd2 = kd * 6 + 30;       //图片放大倍数
+            var img = "<img class='img_msg' src='" + $(this).attr('src') + "' style='width:" + kd1 + "px;' />";
+            img_show = layer.tips(img, this, {
+                tips: [2, 'rgba(41,41,41,.1)']
+                , area: [kd2 + 'px']
+            });
+        }, function () {
+            layer.close(img_show);
+        });
+        $('td img').attr('style', 'max-width:70px;display:block!important');
+    }
+
+</script>
+</body>
+</html>

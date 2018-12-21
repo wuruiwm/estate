@@ -48,6 +48,11 @@ class User extends BaseModel
         return $value;
     }
 
+    /*public function getIsExamineAttr($value)
+    {
+        return ['待审核','已通过','未通过'][$value];
+    }*/
+
     public function getStoreIdAttr($value)
     {
         $store_name = Store::where('id',$value)->value('name');
@@ -77,6 +82,20 @@ class User extends BaseModel
             ->order('create_time desc')
             ->where($where)
             ->where('store_id',$store_id)
+            ->select();
+        if (!$result) {
+            return self::DataFormat(0);
+        }
+        return self::DataFormat($result, 0, 'ok', self::count());
+    }
+
+    public static function getRealnameList($page, $limit, $where)
+    {
+        $number = $page * $limit;
+        $result = self::limit($number, $limit)
+            ->order('update_time desc')
+            ->where($where)
+            ->where('is_submit',1)
             ->select();
         if (!$result) {
             return self::DataFormat(0);
