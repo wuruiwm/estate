@@ -9,11 +9,13 @@ class Housesearch extends Controller{
      * @apiDescription  首页模糊搜索
      * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/House/search
      * @apiParam {string} search 搜索关键词  
+     * @apiParam {int} city 市的ID 
      */
 	public function search(){
 		$search = input('get.search');
+		$city = input('get.city');
 		$house = model('HouseSource');
-		$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status'])->where('title','like',"%$search%")->select();
+		$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status'])->where('city',$city)->where('title','like',"%$search%")->select();
 		$data = [];
 		foreach ($res as $k => $v) {
 			$data[] = $v->getData();
