@@ -56,6 +56,7 @@
     		<label for="exampleInputName2" class="neilian" id="mingzi">名字搜索:</label>
     		<input type="text" name="name" class="form-control neilian" id="exampleInputName2" placeholder="请输入姓名">
   		</div>
+  		<input type="text" name="user_id" class="form-control neilian" id="user_id" placeholder="请输入用户ID">
 		<div class="layui-input-inline input">
             <div class="layui-inline">
               <div class="layui-input-inline">
@@ -84,7 +85,7 @@
 			<td align="center"><input type="checkbox" onclick="xuan();" value="0" id="quanxuan"></td>
 			<td align="center"><strong>ID</strong></td>
 			<td align="center"><strong>用户ID</strong></td>
-			<td align="center"><strong>姓名</strong></td>
+			<td align="center"><strong>报备客户姓名</strong></td>
 			<td align="center"><strong>号码</strong></td>
 			<td align="center"><strong>性别</strong></td>
 			<td align="center"><strong>预计带看时间</strong></td>
@@ -235,11 +236,16 @@
 		var name = $('#exampleInputName2').val();
 		//获取日期框的value
 		var date = $('#create_time').val();
+		//获取用户ID框的value
+		var user_id = $('#user_id').val();
 		//生成列表的url
 		var url = "{:url('admin/order/orderlist')}";
+		//拼接一个状态码，为了后台判断是否有get传参用
+		//因为垃圾tp5分页，点击页码会get传参，不能直接判断是否有get传参，我判断get传参里是否有这个状态码
+		url = url + '?panduan=1';
 		//判断三个内容框里有没有值，如果有值，则把值取出来，并且和url拼接在一起
 		if (options != undefined) {
-			url = url+'?zhuangtai='+options;
+			url = url+'&zhuangtai='+options;
 		}
 		if (name != '') {
 			url = url+'&name='+name;
@@ -247,12 +253,15 @@
 		if (date != '') {
 			url = url+'&date='+date;
 		}
-		//拼接一个状态码，为了后台判断是否有get传参用
-		//因为垃圾tp5分页，点击页码会get传参，不能直接判断是否有get传参，我判断get传参里是否有这个状态码
-		url = url + '&panduan=1';
-		console.log(url);
-		//发送get请求，并且把返回值，直接替换整个body
-		window.location.href = url;
+		if (user_id != '') {
+			url = url+'&user_id='+user_id;
+		}
+		if (url == '/admin/order/orderlist.shtml?panduan=1&zhuangtai=0') {
+			layer.msg('搜索条件不能为空');
+		}else{
+			//执行搜索
+			window.location.href = url;
+		}
 	}
 	function chuan(house_id,order_id){
 		//将传进去的参数拼接成url，get传参给后端

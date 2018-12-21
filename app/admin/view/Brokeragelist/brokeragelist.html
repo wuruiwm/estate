@@ -50,6 +50,8 @@
     		<label for="exampleInputName2" class="neilian" id="mingzi">用户ID搜索:</label>
     		<input type="text" name="name" class="form-control neilian" id="exampleInputName2" placeholder="请输入用户ID">
   		</div>
+  		<input type="text" name="order" class="form-control neilian" id="order" placeholder="请输入订单ID">
+  		<input type="text" name="loupan" class="form-control neilian" id="loupan" placeholder="请输入楼盘ID">
         <div class="layui-input-inline">
             <div class="layui-inline">
               <div class="layui-input-inline">
@@ -80,7 +82,7 @@
 			<td align="center">{$v.house_id}</td>
 			<td align="center">{$v.brokerage_id}</td>
 			<td align="center">{$v.house_area}㎡&nbsp;{$v.house_type}&nbsp;佣金{$v.price}&nbsp;大众经纪人佣金比例{$v.public_percentage}%&nbsp;门店经纪人{$v.store_percentage}%</td>
-			<td align="center">500元</td>
+			<td align="center">{$v.commission}元</td>
 			<td align="center">{$v.date}</td>
 			<td align="center">
 			<button class="btn btn-danger btn-xs" onclick="revoke({$v.id});">撤销</button>
@@ -123,26 +125,37 @@
       });
     });
     function sousou(){
-    	//获取两个input框的值
+    	//获取input框的值
     	var user_id = $('#exampleInputName2').val();
     	var date = $('#create_time').val();
+    	var order = $('#order').val();
+    	var loupan = $('#loupan').val();
     	//生成url
     	var url = "{:url('admin/Brokeragelist/brokeragelist')}";
-    	//判断user_id框是否为空，走不同的拼接
-    	if (user_id != '') {
-    		url = url + '?user_id=' + user_id;
-    		if (date != '') {
-    		url = url + '&date='+date;
-    		}
-    	}else{
-  			if (date != '') {
-    		url = url + '?date='+date;
-    		}
-    	}
     	//拼接一个状态码， 方便后端判断是否有传参
-    	url = url + '&panduan=1';
+    	url = url + '?panduan=1';
+    	//拼接用户ID
+    	if (user_id != '') {
+    		url = url + '&user_id=' + user_id;
+    	}
+    	//拼接时间
+    	if (date != '') {
+    		url = url + '&date=' + date;
+    	}
+    	//拼接order
+    	if (order != '') {
+    		url = url + '&order_id=' + order;
+    	}
+    	//拼接楼盘
+    	if (loupan != '') {
+    		url = url + '&house_id=' + loupan;
+    	}
+    	if (url == '/admin/brokeragelist/brokeragelist.shtml?panduan=1') {
+    		layer.msg('搜索条件不能为空');
+    	}else{
     	//执行搜索
     	window.location.href = url;
+    	}
     }
 </script>
 </html>

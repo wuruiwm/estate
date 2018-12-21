@@ -13,9 +13,10 @@ class Order extends Permissions{
 		else {
 			$get = input('get.');
 			$str = '1';
-			if (isset($get['zhuangtai'])) {
+			$zhuangtai = input('zhuangtai');
+			if (isset($zhuangtai)) {
 			//将传来的状态码，转换成我的客户中的四种状态
-			switch ($get['zhuangtai']) {
+			switch ($zhuangtai) {
 				case '1':
 				$str = 'is_new=1';
 				break;
@@ -33,13 +34,19 @@ class Order extends Permissions{
 				break;
 			  }
 			}
+			$name = input('name');
 			//拼接传来的参数，拼接成where条件
-			if (isset($get['name'])) {
-				$str = $str." and name='".$get['name']."'";
+			if (isset($name)) {
+				$str = $str." and name='".$name."'";
 			}
-			if (isset($get['date'])) {
-				$date = strtotime($get['date']);
+			$date = input('date');
+			if (isset($date)) {
+				$date = strtotime($date);
 				$str = $str.' and date='.$date;
+			}
+			$user_id = input('user_id');
+			if (isset($user_id)) {
+				$str = $str." and user_id='".$user_id."'";
 			}
 			$list = $order->where($str)->order('id desc')->paginate(10,false,['query'=>$get]);
 		}

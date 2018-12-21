@@ -13,12 +13,20 @@ class Brokeragelist extends Controller{
 			//否则获取get传参，并且拼接成where语句
 			$get = input('get.');
 			$str = '1';
+			//判断四个字段是否存在，如果存在，则执行拼接where语句操作
 			if (isset($get['user_id'])) {
 				$str = $str." and user_id='".$get['user_id']."'";
 			}
 			if (isset($get['date'])) {
+				//把前端传过来的日期，转为时间戳，再进行拼接判断
 				$date = strtotime($get['date']);
 				$str = $str . ' and date='.$date;
+			}
+			if (isset($get['order_id'])) {
+				$str = $str." and order_id='".$get['order_id']."'";
+			}
+			if (isset($get['house_id'])) {
+				$str = $str." and house_id='" . $get['house_id']."'";
 			}
 			$list = $commission->where($str)->order('id desc')->paginate(10,false,['query'=>$get]);
 		}

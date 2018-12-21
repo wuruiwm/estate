@@ -8,27 +8,26 @@ class Notice extends Permissions{
 	//列表
 	public function noticeList(){
 		$notice = model('Notice');
-		//$res = $notice->select();
-		// $data = [];
-		// foreach ($res as $v) {
-		// 	$data[] = $v->getData();
-		// }
-		//var_dump($data);	
-		//分页，并且获取所有的行数据，并且按照id倒序排列,放到一个二维数组里，并且每页是10个,
-		$list = $notice->order('id desc')->paginate(10);
+		$get = input('get.');
+		if (!input('get.panduan')) {
+			//分页，并且获取所有的行数据，并且按照id倒序排列,放到一个二维数组里，并且每页是10个,
+			$list = $notice->order('id desc')->paginate(10);
+		}else{
+			$title = input('title');
+			if (isset($title)) {
+			}
+			$list = $notice->where('title','like',"%$title%")->order('id desc')->paginate(10,false,['query'=>$get]);
+		}
 		//获取分页代码
 		$page = $list->render();
 		$this->assign('list',$list);
 		$this->assign('page',$page);
-		//$this->assign('data',$data);
 		return $this->fetch();
 	}
 	//添加
 	public function noticeAdd(){
 		//获取post传参
 		$post = input('post.');
-		//echo $post['title'],$post['content'];
-		//exit();
 		//判断post传参是否为空，为空则说明没有添加数据过来，直接输出模板
 		if (empty($post)) {
 			return $this->fetch();
@@ -43,7 +42,6 @@ class Notice extends Permissions{
 			echo '内容不能为空';
 			exit();
 		}
-		//(new AddNotice())->goCheck();
 		//将post传参赋值给model实例化对象，然后调用save方法，插到数据库
 		$notice->title = $post['title'];
 		$notice->content = $post['content'];
@@ -52,9 +50,6 @@ class Notice extends Permissions{
 		if ($res) {
 			echo "添加公告成功";
 		}
-		// if ($res) {
-		// 	throw new SuccessMessage(['msg'=>'添加公告成功']);
-		// }
 	}
 	//编辑
 	public function noticeEdit(){
@@ -82,12 +77,8 @@ class Notice extends Permissions{
 		if (!(is_numeric($id))) {
 			return "公告id不合法";
 		}
-		//echo $id;exit();
 		$notice = model('Notice');
-		$res = $notice->find($id);
-		//print_r($res->getData());
 		$data = $res->getData();
-		//print_r($data);exit();
 		$this->assign('data',$data);
 		return $this->fetch();
 		}
@@ -97,7 +88,6 @@ class Notice extends Permissions{
 		//获取传来的id，并且赋值给实例化对象，然后调用删除操作
 		$notice = model('Notice');
 		$id = input('id');
-		//echo $id;exit();
 		if (!is_numeric($id)) {
 			echo "id不合法";
 			exit();
