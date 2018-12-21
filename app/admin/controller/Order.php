@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace app\admin\controller;
 use think\Controller;
 class Order extends Permissions{
@@ -20,7 +20,7 @@ class Order extends Permissions{
 				case '1':
 				$str = 'is_new=1';
 				break;
-				
+
 				case '3':
 				$str = 'is_visit=1';
 				break;
@@ -55,7 +55,7 @@ class Order extends Permissions{
 		//遍历，再if判断数据库中的状态值，改成对应信息，然后再存进数组
 		foreach ($list as $k => $v) {
 			if ($v['gender'] == 1) {
-				$list[$k]['gender'] = '男'; 
+				$list[$k]['gender'] = '男';
 			}else{
 				$list[$k]['gender'] = '女';
 			}
@@ -106,7 +106,7 @@ class Order extends Permissions{
             echo '删除成功';
 		}else {
 			echo '删除失败';
-		}			
+		}
 	  }else {
 	  	//var_dump($post);exit();
 	  	//数出数组单元，遍历数组，根据取出的值删除行，并且把返回结果，加上$a再赋值给$a
@@ -197,7 +197,7 @@ class Order extends Permissions{
 				$post['is_deal'] = 0;
 				$post['is_pay'] = 0;
 				break;
-				
+
 				case '3':
 				$post['is_new'] = 0;
 				$post['is_visit'] = 1;
@@ -230,7 +230,7 @@ class Order extends Permissions{
 			}else {
 				$this->redirect('orderedit',['id'=>$id,'?msg'=>'0']);
 			}
-			
+
 		}
 	}
 	public function yongjin($house_id='',$order_id=''){
@@ -283,6 +283,7 @@ class Order extends Permissions{
 		//将对应的值赋值到数组里，然后存到数据库
 		$data = [];
 		$data['user_id'] = $user_res['id'];
+        $data['level']=$user_res['level'];
 		$data['order_id'] = $order_res['id'];
 		$data['house_id'] = $get['house_id'];
 		$data['brokerage_id'] = $brokerage_res['id'];

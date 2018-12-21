@@ -1,34 +1,39 @@
-<?php 
+<?php
 namespace app\admin\controller;
+use app\admin\model\Commission;
+use app\api\model\User;
 use think\Controller;
+
 class Brokeragelist extends Controller{
 	//佣金列表
 	public function brokeragelist(){
 		//实例化model
-		$commission =  model('Commission');
+		//$commission =  model('Commission');
 		//判断是否有参数传过来，没有则直接查出数据，并且按id倒序
 		if (!input('get.panduan')) {
-			$list = $commission->order('id desc')->paginate(10);
+			$list = Commission::order('id desc')->paginate(10);
 		}else{
+
 			//否则获取get传参，并且拼接成where语句
-			$get = input('get.');
-			$str = '1';
-			//判断四个字段是否存在，如果存在，则执行拼接where语句操作
-			if (isset($get['user_id'])) {
-				$str = $str." and user_id='".$get['user_id']."'";
-			}
-			if (isset($get['date'])) {
-				//把前端传过来的日期，转为时间戳，再进行拼接判断
-				$date = strtotime($get['date']);
-				$str = $str . ' and date='.$date;
-			}
-			if (isset($get['order_id'])) {
-				$str = $str." and order_id='".$get['order_id']."'";
-			}
-			if (isset($get['house_id'])) {
-				$str = $str." and house_id='" . $get['house_id']."'";
-			}
-			$list = $commission->where($str)->order('id desc')->paginate(10,false,['query'=>$get]);
+			$get = input('get.'); //{"panduan":"1","user_id":"1","date":"2018-12-21","order_id":"2","house_id":"3"}
+			//return json($get);
+            if (isset($get['user_id']) and !empty($get['user_id'])) {
+                $users = User::where('card_name','like','%'.$get['user_id'].'%')->select();
+                $user_ids = '';
+                foreach($users as $k=>$v){
+                    $user_ids .=$v['id'].',';
+                }
+                $where['user_id'] = ['in', $user_ids];
+            }
+
+            if (isset($get['date']) and !empty($get['date'])) {
+                $date = strtotime($get['date']);
+                $where['date'] = $date;
+            }
+            if (empty($get['user_id']) and empty($get['date']) and empty($get['date'])) {
+                $where = null;
+            }
+            $list = Commission::where($where)->order('id desc')->paginate(10,false,['query'=>$where]);
 		}
 		//获取分页代码
 		$page = $list->render();

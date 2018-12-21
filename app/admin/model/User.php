@@ -93,7 +93,7 @@ class User extends BaseModel
     {
         $number = $page * $limit;
         $result = self::limit($number, $limit)
-            ->order('update_time desc')
+            ->order('id desc')
             ->where($where)
             ->where('is_submit',1)
             ->select();

@@ -44,6 +44,8 @@ Route::get('admin_api/user/remove_store_users', 'admin/User/removeStoreUserByIds
 Route::get('admin_api/user/realname', 'admin/User/getRealname');
 Route::get('admin_api/user/update_realname', 'admin/User/updateRealname');
 
+
+
 /**
  * 客户端接口
  */
@@ -66,6 +68,7 @@ Route::get('api/:version/province/list','api/:version.City/getProvinceList');
 Route::get('api/:version/city/list','api/:version.City/getCityByPid');
 Route::get('api/:version/area/list','api/:version.City/getAreaByCid');
 Route::post('api/:version/house/add_used','api/:version.House/addUsed');
+
 
 
 

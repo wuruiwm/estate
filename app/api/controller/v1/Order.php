@@ -1,5 +1,6 @@
-<?php 
+<?php
 namespace app\api\controller\v1;
+use app\api\model\User;
 use think\Controller;
 use app\api\service\Token;
 use think\Db;
@@ -10,14 +11,14 @@ class Order extends Controller{
      * @apiVersion 0.1.0
      * @apiDescription  报备客户信息提交
      * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/order/add
-     * @apiParam {str} house_title 楼盘名字  
+     * @apiParam {str} house_title 楼盘名字
      * @apiParam {int} province 省份ID
      * @apiParam {int} city 市ID
      * @apiParam {int} area 区县ID
      * @apiParam {str} house_id 楼盘id
-     * @apiParam {str} name 用户名 
-     * @apiParam {int} number 手机号码 
-     * @apiParam {int} gender 1男2女 
+     * @apiParam {str} name 用户名
+     * @apiParam {int} number 手机号码
+     * @apiParam {int} gender 1男2女
      * @apiParam {str} date 预计带看时间，例2018-11-11
      * @apiParam {str} content 购房意向
      * @apiParam {str} token 用来获取用户id的token
@@ -53,7 +54,7 @@ class Order extends Controller{
 		$post['date'] = strtotime($post['date']);
 		//判断转出来的时间戳是否是数字，如果不是则说明传来的不是时间
 		if (!is_numeric($post['date'])) {
-			return ['msg'=>'请输入正确的带看时间']; 
+			return ['msg'=>'请输入正确的带看时间'];
 		}
 		//检查购房意向是否存在
 		if (!$post['content']) {
