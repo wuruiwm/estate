@@ -78,6 +78,7 @@ class Notice extends Permissions{
 			return "公告id不合法";
 		}
 		$notice = model('Notice');
+		$res = $notice->where('id',$id)->find();
 		$data = $res->getData();
 		$this->assign('data',$data);
 		return $this->fetch();
