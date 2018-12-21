@@ -48,11 +48,11 @@ class Main extends Permissions
         /**
          *网站信息
          */
-        $web['user_num'] = Db::name('admin')->count();
+        $web['user_num'] = Db::name('user')->count(); // 注册会员
         $web['admin_cate'] = Db::name('admin_cate')->count();
         $ip_ban = Db::name('webconfig')->value('black_ip');
         $web['ip_ban'] = empty($ip_ban) ? 0 : count(explode(',',$ip_ban));
-        
+        $web['store'] = Db::name('store')->count();// 门店数量
         $web['article_num'] = Db::name('article')->count();
         $web['status_article'] = Db::name('article')->where('status',0)->count();
         $web['top_article'] = Db::name('article')->where('is_top',1)->count();
@@ -61,7 +61,11 @@ class Main extends Permissions
         $web['ref_file'] = Db::name('attachment')->where('status',-1)->count();
         $web['message_num'] = Db::name('messages')->count();
         $web['look_message'] = Db::name('messages')->where('is_look',0)->count();
-
+        $web['newhouse'] = Db::name('house_source')->where('init_status',1)->count();//新房
+        $web['used'] = Db::name('house_source')->where('init_status',2)->count();//二手房
+        $web['pending'] = Db::name('order')->where('is_deal',0)->count();//待成交
+        $web['is_pay'] = Db::name('order')->where('is_pay',0)->count();//待结佣
+        $web['is_examine'] = Db::name('user')->where('is_submit',1)->where('is_examine',0)->count();//待实名审核
 
         //登陆次数和下载次数
         $today = date('Y-m-d');
@@ -69,7 +73,7 @@ class Main extends Permissions
         //取当前时间的前十四天
         $date = [];
         $date_string = '';
-        for ($i=9; $i >0 ; $i--) { 
+        for ($i=9; $i >0 ; $i--) {
             $date[] = date("Y-m-d",strtotime("-{$i} day"));
             $date_string.= date("Y-m-d",strtotime("-{$i} day")) . ',';
         }

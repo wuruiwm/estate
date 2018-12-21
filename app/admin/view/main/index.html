@@ -25,26 +25,26 @@
                   <ul class="layui-row layui-col-space10 layui-this">
                     <li class="layui-col-xs6">
                       <a lay-href="" class="layadmin-backlog-body">
-                        <h3>会员</h3>
-                        <p><cite>{$web.user_num}</cite></p>
+                        <h3>注册会员</h3>
+                        <p><cite>{$web.user_num}</cite>个</p>
                       </a>
                     </li>
                     <li class="layui-col-xs6">
                       <a lay-href="" class="layadmin-backlog-body">
-                        <h3>文章</h3>
-                        <p><cite>{$web.article_num}</cite></p>
+                        <h3>门店</h3>
+                        <p><cite>{$web.store}</cite>家</p>
                       </a>
                     </li>
                     <li class="layui-col-xs6">
                       <a lay-href="" class="layadmin-backlog-body">
-                        <h3>文件</h3>
-                        <p><cite>{$web.file_num}</cite></p>
+                        <h3>新房源</h3>
+                        <p><cite>{$web.newhouse}</cite>条</p>
                       </a>
                     </li>
                     <li class="layui-col-xs6">
                       <a lay-href="" class="layadmin-backlog-body">
-                        <h3>留言</h3>
-                        <p><cite>{$web.message_num}</cite></p>
+                        <h3>二手房源</h3>
+                        <p><cite>{$web.used}</cite>条</p>
                       </a>
                     </li>
                   </ul>
@@ -63,28 +63,28 @@
                   <ul class="layui-row layui-col-space10 layui-this">
                     <li class="layui-col-xs6">
                       <a lay-href="" class="layadmin-backlog-body">
-                        <h3>黑名单</h3>
-                        <p><cite>{$web.ip_ban}</cite></p>
+                        <h3>未成交</h3>
+                        <p><cite>{$web.pending}</cite></p>
                       </a>
                     </li>
                     <li class="layui-col-xs6">
                       <a lay-href="" class="layadmin-backlog-body">
-                        <h3>待审文章</h3>
-                        <p><cite>{$web.status_article}</cite></p>
+                        <h3>未结佣</h3>
+                        <p><cite>{$web.is_pay}</cite></p>
                       </a>
                     </li>
                     <li class="layui-col-xs6">
                       <a lay-href="" class="layadmin-backlog-body">
-                        <h3>待审文件</h3>
-                        <p><cite>{$web.status_file}</cite></p>
+                        <h3>实名审核</h3>
+                        <p><cite>{$web.is_examine}</cite></p>
                       </a>
                     </li>
-                    <li class="layui-col-xs6">
+                    <!--<li class="layui-col-xs6">
                       <a lay-href="" class="layadmin-backlog-body">
                         <h3>待处理留言</h3>
                         <p><cite>{$web.look_message}</cite></p>
                       </a>
-                    </li>
+                    </li>-->
                   </ul>
                 </div>
               <button class="layui-icon layui-carousel-arrow" lay-type="sub"></button><button class="layui-icon layui-carousel-arrow" lay-type="add"></button></div>
@@ -101,7 +101,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="layui-col-md4">
       <div class="layui-card">
         <div class="layui-card-header">版本信息</div>
@@ -113,16 +113,15 @@
             </colgroup>
             <tbody>
               <tr>
-                <td>当前版本</td>
+                <td>开发文档</td>
                 <td>
-                    Tplay {$info.tplay}
-                    <a href="http://tplay.pengyichen.cn/tplay/public/index/index/log.shtml" target="_blank" style="padding-left: 15px;">更新日志</a> 
+                    <a href="http://estate.dingdingmaoer.cn/apidoc" target="_blank" style="padding-left: 15px;">API接口</a>
                 </td>
               </tr>
               <tr>
-                <td>基于框架</td>
+                <td>开发版本</td>
                 <td>
-                 layui-v2.2.5 / thinkphp-v{$info.tp} 
+                 0.1.0
                </td>
               </tr>
               <tr>
@@ -130,11 +129,11 @@
                 <td>适配强 / 高颜值 / 清爽 / 简洁</td>
               </tr>
               <tr>
-                <td>下载交流</td>
+                <td>技术支持</td>
                 <td style="padding-bottom: 0;">
                   <div class="layui-btn-container">
-                    <a href="https://jq.qq.com/?_wv=1027&k=5wZeNTd" target="_blank" class="layui-btn layui-btn-danger layui-btn-sm">官方交流群</a>
-                    <a href="http://tplay.pengyichen.cn" target="_blank" class="layui-btn layui-btn-sm">下载最新版</a>
+                    <!--<a href="https://jq.qq.com/?_wv=1027&k=5wZeNTd" target="_blank" class="layui-btn layui-btn-danger layui-btn-sm">官方交流群</a>-->
+                    <a href="http://www.wxluowang.com" target="_blank" class="layui-btn layui-btn-sm">安徽罗网信息科技有限公司</a>
                   </div>
                 </td>
               </tr>
@@ -164,13 +163,13 @@
               <tr>
                 <td>操作系统</td>
                 <td>
-                    {$info.win} 
+                    {$info.win}
                 </td>
               </tr>
               <tr>
                 <td>PHP版本</td>
                 <td>
-                 {$info.php} 
+                 {$info.php}
                </td>
               </tr>
               <tr>
@@ -201,7 +200,7 @@
       </div>
 
     </div>
-    
+
   </div>
   </div>
   </div>

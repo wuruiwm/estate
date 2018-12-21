@@ -11,7 +11,7 @@
  Target Server Version : 100137
  File Encoding         : 65001
 
- Date: 12/12/2018 18:41:46
+ Date: 21/12/2018 17:51:04
 */
 
 SET NAMES utf8mb4;
@@ -37,12 +37,13 @@ CREATE TABLE `tplay_admin`  (
   INDEX `admin_cate_id`(`admin_cate_id`) USING BTREE,
   INDEX `nickname`(`nickname`) USING BTREE,
   INDEX `create_time`(`create_time`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tplay_admin
 -- ----------------------------
-INSERT INTO `tplay_admin` VALUES (1, 'Tplay', 'admin', '972262e4efe2e00f364d979a7c6ae7ee', 2, 1510885948, 1544087338, 1544607886, '127.0.0.1', 1);
+INSERT INTO `tplay_admin` VALUES (1, 'Tplay', 'admin', '972262e4efe2e00f364d979a7c6ae7ee', 2, 1510885948, 1544087338, 1545356153, '127.0.0.1', 1);
+INSERT INTO `tplay_admin` VALUES (16, '管理员', 'boss', '49096548e1619314a3e598141fe83965', 167, 1544683694, 1544683694, 1544685316, '114.102.185.200', 20);
 
 -- ----------------------------
 -- Table structure for tplay_admin_cate
@@ -59,12 +60,13 @@ CREATE TABLE `tplay_admin_cate`  (
   INDEX `id`(`id`) USING BTREE,
   INDEX `name`(`name`) USING BTREE,
   INDEX `create_time`(`create_time`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tplay_admin_cate
 -- ----------------------------
-INSERT INTO `tplay_admin_cate` VALUES (1, '超级管理员', '4,5,6,7,8,11,13,14,16,17,19,20,21,25,26,28,29,34,35,37,38,39,40,42,43,44,45,47,48,52,53,54,55,56,57,58,59', 0, 1544580166, '超级管理员，拥有最高权限！');
+INSERT INTO `tplay_admin_cate` VALUES (1, '超级管理员', '1,4,5,11,13,14,16,17,19,20,21,6,7,8,22,25,26,28,29,34,35,37,38,39,40,42,43,44,45,47,48,52,53,54,55,56,57,58,59,66,60,61,62,63,64,65,67', 0, 1545374126, '超级管理员，拥有最高权限！');
+INSERT INTO `tplay_admin_cate` VALUES (20, '系统管理员', '6,7,8,34,35,37,38,39,40,42,43,44,45,47,48,52,53,54,55,56,57,58,59,60,61,62,63,64,65,67', 1544683164, 1545374118, '系统管理，副官');
 
 -- ----------------------------
 -- Table structure for tplay_admin_log
@@ -81,7 +83,7 @@ CREATE TABLE `tplay_admin_log`  (
   INDEX `id`(`id`) USING BTREE,
   INDEX `admin_id`(`admin_id`) USING BTREE,
   INDEX `create_time`(`create_time`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 201 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 273 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tplay_admin_log
@@ -286,6 +288,78 @@ INSERT INTO `tplay_admin_log` VALUES (197, 49, 1, '127.0.0.1', '139', 1544604032
 INSERT INTO `tplay_admin_log` VALUES (198, 49, 1, '127.0.0.1', '140', 1544604038);
 INSERT INTO `tplay_admin_log` VALUES (199, 49, 1, '127.0.0.1', '141', 1544604364);
 INSERT INTO `tplay_admin_log` VALUES (200, 50, 1, '127.0.0.1', '', 1544607886);
+INSERT INTO `tplay_admin_log` VALUES (201, 50, 1, '127.0.0.1', '', 1544663794);
+INSERT INTO `tplay_admin_log` VALUES (202, 28, 1, '127.0.0.1', '1', 1544663839);
+INSERT INTO `tplay_admin_log` VALUES (203, 49, 1, '127.0.0.1', '142', 1544672236);
+INSERT INTO `tplay_admin_log` VALUES (204, 49, 1, '127.0.0.1', '143', 1544672240);
+INSERT INTO `tplay_admin_log` VALUES (205, 49, 1, '127.0.0.1', '144', 1544672302);
+INSERT INTO `tplay_admin_log` VALUES (206, 49, 1, '127.0.0.1', '145', 1544672308);
+INSERT INTO `tplay_admin_log` VALUES (207, 49, 1, '127.0.0.1', '146', 1544673629);
+INSERT INTO `tplay_admin_log` VALUES (208, 49, 1, '127.0.0.1', '147', 1544673633);
+INSERT INTO `tplay_admin_log` VALUES (209, 49, 1, '127.0.0.1', '148', 1544679246);
+INSERT INTO `tplay_admin_log` VALUES (210, 50, 1, '127.0.0.1', '', 1544679297);
+INSERT INTO `tplay_admin_log` VALUES (211, 49, 1, '127.0.0.1', '149', 1544679323);
+INSERT INTO `tplay_admin_log` VALUES (212, 49, 1, '127.0.0.1', '150', 1544679327);
+INSERT INTO `tplay_admin_log` VALUES (213, 49, 1, '127.0.0.1', '151', 1544679362);
+INSERT INTO `tplay_admin_log` VALUES (214, 49, 1, '127.0.0.1', '152', 1544679664);
+INSERT INTO `tplay_admin_log` VALUES (215, 49, 1, '127.0.0.1', '153', 1544679667);
+INSERT INTO `tplay_admin_log` VALUES (216, 49, 1, '127.0.0.1', '154', 1544679693);
+INSERT INTO `tplay_admin_log` VALUES (217, 49, 1, '127.0.0.1', '155', 1544679733);
+INSERT INTO `tplay_admin_log` VALUES (218, 49, 1, '127.0.0.1', '156', 1544679736);
+INSERT INTO `tplay_admin_log` VALUES (219, 49, 1, '127.0.0.1', '157', 1544679756);
+INSERT INTO `tplay_admin_log` VALUES (220, 49, 1, '127.0.0.1', '158', 1544680213);
+INSERT INTO `tplay_admin_log` VALUES (221, 49, 1, '127.0.0.1', '159', 1544680216);
+INSERT INTO `tplay_admin_log` VALUES (222, 49, 1, '127.0.0.1', '160', 1544680239);
+INSERT INTO `tplay_admin_log` VALUES (223, 49, 1, '127.0.0.1', '161', 1544680279);
+INSERT INTO `tplay_admin_log` VALUES (224, 49, 1, '127.0.0.1', '162', 1544680282);
+INSERT INTO `tplay_admin_log` VALUES (225, 49, 1, '127.0.0.1', '163', 1544680306);
+INSERT INTO `tplay_admin_log` VALUES (226, 49, 1, '127.0.0.1', '164', 1544680994);
+INSERT INTO `tplay_admin_log` VALUES (227, 49, 1, '127.0.0.1', '165', 1544680997);
+INSERT INTO `tplay_admin_log` VALUES (228, 49, 1, '127.0.0.1', '166', 1544681019);
+INSERT INTO `tplay_admin_log` VALUES (229, 28, 1, '127.0.0.1', '20', 1544683164);
+INSERT INTO `tplay_admin_log` VALUES (230, 28, 1, '127.0.0.1', '20', 1544683192);
+INSERT INTO `tplay_admin_log` VALUES (231, 49, 1, '127.0.0.1', '167', 1544683229);
+INSERT INTO `tplay_admin_log` VALUES (232, 25, 1, '127.0.0.1', '16', 1544683694);
+INSERT INTO `tplay_admin_log` VALUES (233, 50, 16, '127.0.0.1', '', 1544683717);
+INSERT INTO `tplay_admin_log` VALUES (234, 50, 1, '127.0.0.1', '', 1544683738);
+INSERT INTO `tplay_admin_log` VALUES (235, 50, 16, '127.0.0.1', '', 1544683818);
+INSERT INTO `tplay_admin_log` VALUES (236, 4, 1, '127.0.0.1', '1', 1544684291);
+INSERT INTO `tplay_admin_log` VALUES (237, 28, 1, '127.0.0.1', '20', 1544684332);
+INSERT INTO `tplay_admin_log` VALUES (238, 28, 1, '127.0.0.1', '20', 1544684361);
+INSERT INTO `tplay_admin_log` VALUES (239, 28, 1, '127.0.0.1', '1', 1544684369);
+INSERT INTO `tplay_admin_log` VALUES (240, 4, 1, '127.0.0.1', '6', 1544684423);
+INSERT INTO `tplay_admin_log` VALUES (241, 4, 1, '127.0.0.1', '22', 1544684457);
+INSERT INTO `tplay_admin_log` VALUES (242, 28, 1, '127.0.0.1', '20', 1544684503);
+INSERT INTO `tplay_admin_log` VALUES (243, 4, 1, '127.0.0.1', '22', 1544684545);
+INSERT INTO `tplay_admin_log` VALUES (244, 4, 1, '127.0.0.1', '22', 1544684598);
+INSERT INTO `tplay_admin_log` VALUES (245, 28, 1, '127.0.0.1', '1', 1544684618);
+INSERT INTO `tplay_admin_log` VALUES (246, 50, 16, '114.102.185.200', '', 1544685047);
+INSERT INTO `tplay_admin_log` VALUES (247, 50, 16, '114.102.185.200', '', 1544685316);
+INSERT INTO `tplay_admin_log` VALUES (248, 50, 1, '127.0.0.1', '', 1544749720);
+INSERT INTO `tplay_admin_log` VALUES (249, 50, 1, '127.0.0.1', '', 1544755355);
+INSERT INTO `tplay_admin_log` VALUES (250, 50, 1, '127.0.0.1', '', 1544770461);
+INSERT INTO `tplay_admin_log` VALUES (251, 50, 1, '127.0.0.1', '', 1544839349);
+INSERT INTO `tplay_admin_log` VALUES (252, 50, 1, '127.0.0.1', '', 1544841078);
+INSERT INTO `tplay_admin_log` VALUES (253, 50, 1, '127.0.0.1', '', 1544859510);
+INSERT INTO `tplay_admin_log` VALUES (254, 50, 1, '127.0.0.1', '', 1545010158);
+INSERT INTO `tplay_admin_log` VALUES (255, 50, 1, '127.0.0.1', '', 1545018224);
+INSERT INTO `tplay_admin_log` VALUES (256, 50, 1, '127.0.0.1', '', 1545095836);
+INSERT INTO `tplay_admin_log` VALUES (257, 50, 1, '127.0.0.1', '', 1545100179);
+INSERT INTO `tplay_admin_log` VALUES (258, 50, 1, '127.0.0.1', '', 1545182707);
+INSERT INTO `tplay_admin_log` VALUES (259, 50, 1, '127.0.0.1', '', 1545202167);
+INSERT INTO `tplay_admin_log` VALUES (260, 28, 1, '127.0.0.1', '20', 1545206096);
+INSERT INTO `tplay_admin_log` VALUES (261, 28, 1, '127.0.0.1', '20', 1545206112);
+INSERT INTO `tplay_admin_log` VALUES (262, 28, 1, '127.0.0.1', '1', 1545206123);
+INSERT INTO `tplay_admin_log` VALUES (263, 50, 1, '127.0.0.1', '', 1545207288);
+INSERT INTO `tplay_admin_log` VALUES (264, 4, 1, '127.0.0.1', '66', 1545208012);
+INSERT INTO `tplay_admin_log` VALUES (265, 28, 1, '127.0.0.1', '1', 1545208031);
+INSERT INTO `tplay_admin_log` VALUES (266, 50, 1, '127.0.0.1', '', 1545267438);
+INSERT INTO `tplay_admin_log` VALUES (267, 50, 1, '127.0.0.1', '', 1545278712);
+INSERT INTO `tplay_admin_log` VALUES (268, 50, 1, '127.0.0.1', '', 1545356153);
+INSERT INTO `tplay_admin_log` VALUES (269, 4, 1, '127.0.0.1', '67', 1545374105);
+INSERT INTO `tplay_admin_log` VALUES (270, 28, 1, '127.0.0.1', '20', 1545374118);
+INSERT INTO `tplay_admin_log` VALUES (271, 28, 1, '127.0.0.1', '1', 1545374126);
+INSERT INTO `tplay_admin_log` VALUES (272, 11, 1, '127.0.0.1', '', 1545385096);
 
 -- ----------------------------
 -- Table structure for tplay_admin_menu
@@ -314,18 +388,18 @@ CREATE TABLE `tplay_admin_menu`  (
   INDEX `function`(`function`) USING BTREE,
   INDEX `is_display`(`is_display`) USING BTREE,
   INDEX `type`(`type`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 60 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统菜单表' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 68 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tplay_admin_menu
 -- ----------------------------
-INSERT INTO `tplay_admin_menu` VALUES (1, '系统', '', '', '', '', '系统设置。', 1, 2, 0, 0, 1517015748, 'fa-cog', 1, 0);
+INSERT INTO `tplay_admin_menu` VALUES (1, '系统', '', '', '', '', '系统设置。', 1, 1, 0, 0, 1544684291, 'fa-cog', 1, 0);
 INSERT INTO `tplay_admin_menu` VALUES (2, '菜单', '', '', '', '', '菜单管理。', 1, 2, 1, 0, 1517015764, 'fa-paw', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (51, '系统菜单排序', 'admin', 'menu', 'orders', '', '系统菜单排序。', 2, 1, 3, 1517562047, 1517562047, '', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (3, '系统菜单', 'admin', 'menu', 'index', NULL, '系统菜单管理', 1, 2, 2, 0, 0, 'fa-share-alt', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (4, '新增/修改系统菜单', 'admin', 'menu', 'publish', '', '新增/修改系统菜单.', 2, 1, 3, 1516948769, 1516948769, '', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (5, '删除系统菜单', 'admin', 'menu', 'delete', '', '删除系统菜单。', 2, 1, 3, 1516948857, 1516948857, '', 0, 0);
-INSERT INTO `tplay_admin_menu` VALUES (6, '个人', '', '', '', '', '个人信息管理。', 1, 1, 1, 1516949308, 1517021986, 'fa-user', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (6, '个人设置', '', '', '', '', '个人信息管理。', 1, 1, 0, 1516949308, 1544684423, 'fa-user', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (7, '个人信息', 'admin', 'admin', 'personal', '', '个人信息修改。', 1, 1, 6, 1516949435, 1516949435, 'fa-user', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (8, '修改密码', 'admin', 'admin', 'editpassword', '', '管理员修改个人密码。', 1, 1, 6, 1516949702, 1517619887, 'fa-unlock-alt', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (9, '设置', '', '', '', '', '系统相关设置。', 1, 2, 1, 1516949853, 1517015878, 'fa-cog', 0, 0);
@@ -341,7 +415,7 @@ INSERT INTO `tplay_admin_menu` VALUES (18, 'URL 设置', 'admin', 'urlsconfig', 
 INSERT INTO `tplay_admin_menu` VALUES (19, '新增/修改url设置', 'admin', 'urlsconfig', 'publish', '', '新增/修改url设置。', 2, 1, 18, 1516950850, 1516950850, '', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (20, '启用/禁用url美化', 'admin', 'urlsconfig', 'status', '', '启用/禁用url美化。', 2, 1, 18, 1516950909, 1516950909, '', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (21, ' 删除url美化规则', 'admin', 'urlsconfig', 'delete', '', ' 删除url美化规则。', 2, 1, 18, 1516950941, 1516950941, '', 0, 0);
-INSERT INTO `tplay_admin_menu` VALUES (22, '会员', '', '', '', '', '会员管理。', 1, 2, 0, 1516950991, 1517015810, 'fa-users', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (22, '会员', '', '', '', '', '会员管理。', 1, 1, 0, 1516950991, 1544684598, 'fa-users', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (23, '管理员', '', '', '', '', '系统管理员管理。', 1, 2, 22, 1516951071, 1517015819, 'fa-user', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (24, '管理员', 'admin', 'admin', 'index', '', '系统管理员列表。', 1, 2, 23, 1516951163, 1516951163, 'fa-user', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (25, '新增/修改管理员', 'admin', 'admin', 'publish', '', '新增/修改系统管理员。', 2, 1, 24, 1516951224, 1516951224, '', 0, 0);
@@ -350,7 +424,7 @@ INSERT INTO `tplay_admin_menu` VALUES (27, '权限组', 'admin', 'admin', 'admin
 INSERT INTO `tplay_admin_menu` VALUES (28, '新增/修改权限组', 'admin', 'admin', 'admincatepublish', '', '新增/修改权限组。', 2, 1, 27, 1516951483, 1516951483, '', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (29, '删除权限组', 'admin', 'admin', 'admincatedelete', '', '删除权限组。', 2, 1, 27, 1516951515, 1516951515, '', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (30, '操作日志', 'admin', 'admin', 'log', '', '系统管理员操作日志。', 1, 2, 23, 1516951754, 1517018196, 'fa-pencil', 0, 0);
-INSERT INTO `tplay_admin_menu` VALUES (31, '内容', '', '', '', '', '内容管理。', 1, 2, 0, 1516952262, 1517015835, 'fa-th-large', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (31, '内容', '', '', '', '', '内容管理。', 1, 1, 0, 1516952262, 1544951848, 'fa-th-large', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (32, '文章', '', '', '', '', '文章相关管理。', 1, 2, 31, 1516952698, 1517015846, 'fa-bookmark', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (33, '分类', 'admin', 'articlecate', 'index', '', '文章分类管理。', 1, 2, 32, 1516952856, 1516952856, 'fa-tag', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (34, '新增/修改文章分类', 'admin', 'articlecate', 'publish', '', '新增/修改文章分类。', 2, 1, 33, 1516952896, 1516952896, '', 0, 0);
@@ -374,10 +448,18 @@ INSERT INTO `tplay_admin_menu` VALUES (52, '首页轮播图', '', '', '', '', '�
 INSERT INTO `tplay_admin_menu` VALUES (53, '轮播图管理', 'admin', 'banner', 'index', '', '', 1, 1, 52, 1544145709, 1544145709, 'fa fa-picture-o', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (54, '房源管理', '', '', '', '', '房源管理: 新房，二手房', 1, 1, 0, 1544253869, 1544253869, 'fa fa-home', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (55, '房源信息', 'admin', 'House', 'index', '', '房源列表信息', 1, 1, 54, 1544254556, 1544254556, 'fa fa-list', 0, 0);
-INSERT INTO `tplay_admin_menu` VALUES (56, '公告', '', '', '', '', '公告增删改查', 1, 1, 0, 1544515442, 1544515442, 'fa fa-desktop', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (56, '公告管理', '', '', '', '', '公告增删改查', 1, 1, 0, 1544515442, 1544602036, 'fa fa-desktop', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (57, '公告列表', 'admin', 'notice', 'noticelist', '', '公告列表', 1, 1, 56, 1544515486, 1544515486, 'fa fa-television', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (58, '佣金管理', '', '', '', '', '佣金管理', 1, 1, 0, 1544579993, 1544579993, 'fa fa-btc', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (59, '佣金方案', 'admin', 'brokerage', 'brokerage_plan', '', '佣金方案', 1, 1, 58, 1544580098, 1544580145, 'fa fa-money', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (60, '报备管理', '', '', '', '', '报备，到访，成交，提额管理', 1, 1, 0, 1544602013, 1544602310, 'fa fa-list', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (61, '报备列表', 'admin', 'Order', 'orderlist', '', '报备，到访，成交，管理', 1, 1, 60, 1544602111, 1544602343, 'fa fa-outdent', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (62, '门店管理', '', '', '', '', '', 1, 1, 0, 1544796196, 1544796387, 'fa fa-institution', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (63, '门店入驻', 'admin', 'store', 'index', '', '', 1, 1, 62, 1544796525, 1544796525, 'fa fa-linkedin-square', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (64, '用户管理', '', '', '', '', '注册用户管理', 1, 1, 0, 1544963080, 1544963080, 'fa fa-user-circle-o', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (65, '用户列表', 'admin', 'user', 'index', '', '用户列表', 1, 1, 64, 1544963132, 1544963132, 'fa fa-user-o', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (66, '佣金列表', 'admin', 'Brokeragelist', 'brokeragelist', '', '', 1, 1, 58, 1545208012, 1545208012, 'fa fa-paypal', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (67, '实名管理', 'admin', 'user', 'realname', '', '用户实名管理', 1, 1, 64, 1545374105, 1545374105, 'fa fa-odnoklassniki-square', 0, 0);
 
 -- ----------------------------
 -- Table structure for tplay_area
@@ -3592,7 +3674,7 @@ CREATE TABLE `tplay_attachment`  (
   INDEX `status`(`status`) USING BTREE,
   INDEX `filename`(`filename`) USING BTREE,
   INDEX `create_time`(`create_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 142 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '附件表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 168 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '附件表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tplay_attachment
@@ -3719,6 +3801,32 @@ INSERT INTO `tplay_attachment` VALUES (138, 'admin', 'b0ce29e4aaf7e8d48b8a4c51b9
 INSERT INTO `tplay_attachment` VALUES (139, 'admin', '4dca9675a23063392eb3fc67479293a0.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\4dca9675a23063392eb3fc67479293a0.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544604032, 1, 1544604032, 'house_cover_head', 0);
 INSERT INTO `tplay_attachment` VALUES (140, 'admin', '7127b4de49d6e50d7c364b084846fdd6.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\7127b4de49d6e50d7c364b084846fdd6.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544604038, 1, 1544604038, 'admin_thumb', 0);
 INSERT INTO `tplay_attachment` VALUES (141, 'admin', '009b7bcc9dea70f0c23ceccbe1e0fe60.png', '\\uploads\\admin\\admin_thumb\\20181212\\009b7bcc9dea70f0c23ceccbe1e0fe60.png', 69514, 'png', 1, '127.0.0.1', 1, 1544604364, 1, 1544604364, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (142, 'admin', '710cc4eb1f24b05cdb7e48de1281b530.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\710cc4eb1f24b05cdb7e48de1281b530.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544672236, 1, 1544672236, 'house_cover_head', 0);
+INSERT INTO `tplay_attachment` VALUES (143, 'admin', 'f1cb3d70b782b928f8f2a8b36588b72a.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\f1cb3d70b782b928f8f2a8b36588b72a.jpg', 13672, 'jpg', 1, '127.0.0.1', 1, 1544672240, 1, 1544672240, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (144, 'admin', '3deb9dec69c12fc968e91f2e9e879228.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\3deb9dec69c12fc968e91f2e9e879228.jpg', 32151, 'jpg', 1, '127.0.0.1', 1, 1544672302, 1, 1544672302, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (145, 'admin', 'bc397afe45e184e686d3fd295bdc8b49.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\bc397afe45e184e686d3fd295bdc8b49.jpg', 29448, 'jpg', 1, '127.0.0.1', 1, 1544672308, 1, 1544672308, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (146, 'admin', 'c731e00ed3ef107c5308aac0122f2d43.png', '\\uploads\\admin\\house_cover_head\\20181213\\c731e00ed3ef107c5308aac0122f2d43.png', 33847, 'png', 1, '127.0.0.1', 1, 1544673629, 1, 1544673629, 'house_cover_head', 0);
+INSERT INTO `tplay_attachment` VALUES (147, 'admin', 'd02f9fc497ea1fe2e6ea712ad41a68bf.png', '\\uploads\\admin\\admin_thumb\\20181213\\d02f9fc497ea1fe2e6ea712ad41a68bf.png', 33847, 'png', 1, '127.0.0.1', 1, 1544673633, 1, 1544673633, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (148, 'admin', '1db8e233b4285eb862821e5dcee7175f.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\1db8e233b4285eb862821e5dcee7175f.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544679246, 1, 1544679246, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (149, 'admin', '65e381e879cb438385b2bf8a070daa22.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\65e381e879cb438385b2bf8a070daa22.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544679323, 1, 1544679323, 'house_cover_head', 0);
+INSERT INTO `tplay_attachment` VALUES (150, 'admin', '8f440134bf92345cc953c83b5afc8a9e.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\8f440134bf92345cc953c83b5afc8a9e.jpg', 13672, 'jpg', 1, '127.0.0.1', 1, 1544679327, 1, 1544679327, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (151, 'admin', 'f8bff72777fefee6136f9c2f4d912202.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\f8bff72777fefee6136f9c2f4d912202.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544679362, 1, 1544679362, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (152, 'admin', 'f334a0e40743b2061743d74cf49f9fcc.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\f334a0e40743b2061743d74cf49f9fcc.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544679664, 1, 1544679664, 'house_cover_head', 0);
+INSERT INTO `tplay_attachment` VALUES (153, 'admin', '6366dc1bbece83792368d6a3edfea6d7.png', '\\uploads\\admin\\admin_thumb\\20181213\\6366dc1bbece83792368d6a3edfea6d7.png', 33847, 'png', 1, '127.0.0.1', 1, 1544679667, 1, 1544679667, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (154, 'admin', 'f3065dc884c5f86eda43a2abaface129.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\f3065dc884c5f86eda43a2abaface129.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544679693, 1, 1544679693, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (155, 'admin', 'd9bcfc647b32722d045818c9b8859284.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\d9bcfc647b32722d045818c9b8859284.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544679733, 1, 1544679733, 'house_cover_head', 0);
+INSERT INTO `tplay_attachment` VALUES (156, 'admin', '8ac9478665946e731bbde8cc04fb19e1.png', '\\uploads\\admin\\admin_thumb\\20181213\\8ac9478665946e731bbde8cc04fb19e1.png', 33847, 'png', 1, '127.0.0.1', 1, 1544679736, 1, 1544679736, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (157, 'admin', 'baad2841b48f206dbb4348a5b2732f1f.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\baad2841b48f206dbb4348a5b2732f1f.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544679756, 1, 1544679756, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (158, 'admin', 'bfbd47e331ba0ab6ea053bfe3258d3f8.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\bfbd47e331ba0ab6ea053bfe3258d3f8.jpg', 11016, 'jpg', 1, '127.0.0.1', 1, 1544680213, 1, 1544680213, 'house_cover_head', 0);
+INSERT INTO `tplay_attachment` VALUES (159, 'admin', '2f101159c023781d6c702907486fed19.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\2f101159c023781d6c702907486fed19.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544680216, 1, 1544680216, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (160, 'admin', '2c6eca2f27907fb372d7ad56499a3920.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\2c6eca2f27907fb372d7ad56499a3920.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544680239, 1, 1544680239, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (161, 'admin', 'c4cdf2692c4b172c8aff9743c449d22f.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\c4cdf2692c4b172c8aff9743c449d22f.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544680279, 1, 1544680279, 'house_cover_head', 0);
+INSERT INTO `tplay_attachment` VALUES (162, 'admin', 'b0c8126e2cdc226026798733108ab89d.png', '\\uploads\\admin\\admin_thumb\\20181213\\b0c8126e2cdc226026798733108ab89d.png', 33847, 'png', 1, '127.0.0.1', 1, 1544680282, 1, 1544680282, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (163, 'admin', 'a94d55edb1492bfaac95fe157aac3578.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\a94d55edb1492bfaac95fe157aac3578.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544680306, 1, 1544680306, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (164, 'admin', 'f3ed11505a29ba66cbc9eb03ae2b6817.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\f3ed11505a29ba66cbc9eb03ae2b6817.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544680994, 1, 1544680994, 'house_cover_head', 0);
+INSERT INTO `tplay_attachment` VALUES (165, 'admin', '777fb6aecab59a3d9d5c877a70062ca3.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\777fb6aecab59a3d9d5c877a70062ca3.jpg', 695944, 'jpg', 1, '127.0.0.1', 1, 1544680997, 1, 1544680997, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (166, 'admin', '5279033afbb166c31ccdaef5702418d6.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\5279033afbb166c31ccdaef5702418d6.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544681019, 1, 1544681019, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (167, 'admin', 'bb685c1663a60b6e352cad79f7313ca0.png', '\\uploads\\admin\\admin_thumb\\20181213\\bb685c1663a60b6e352cad79f7313ca0.png', 95813, 'png', 1, '127.0.0.1', 1, 1544683229, 1, 1544683229, 'admin_thumb', 0);
 
 -- ----------------------------
 -- Table structure for tplay_banner
@@ -3759,21 +3867,26 @@ CREATE TABLE `tplay_brokerage`  (
   `house_area` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '房屋面积范围',
   `house_type` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '房屋类型',
   `price` decimal(10, 2) NOT NULL COMMENT '佣金',
+  `store_percentage` int(10) NOT NULL COMMENT '门店经纪人比例',
+  `public_percentage` int(10) NOT NULL COMMENT '大众经纪人比例',
   `create_time` int(11) NULL DEFAULT NULL,
   `update_time` int(11) NULL DEFAULT NULL,
   `delete_time` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tplay_brokerage
 -- ----------------------------
-INSERT INTO `tplay_brokerage` VALUES (1, '500-1000', '写字楼', 10000.00, 1544431471, 1544582310, NULL);
-INSERT INTO `tplay_brokerage` VALUES (2, '80-100', '住宅', 1200.00, 1544431480, 1544582356, NULL);
-INSERT INTO `tplay_brokerage` VALUES (3, '40-80', '门面', 600.00, 1544431580, 1544582340, NULL);
-INSERT INTO `tplay_brokerage` VALUES (4, '100-120', '住宅', 2000.00, 1544433896, 1544582335, NULL);
-INSERT INTO `tplay_brokerage` VALUES (5, '40-60', '公寓', 2000.00, 1544433931, 1544606177, NULL);
-INSERT INTO `tplay_brokerage` VALUES (8, '30-80', '商铺', 6000.00, 1544582029, 1544606781, NULL);
+INSERT INTO `tplay_brokerage` VALUES (1, '20-30', '门面', 1000.00, 100, 90, 1545053203, 1545054692, NULL);
+INSERT INTO `tplay_brokerage` VALUES (2, '80-100', '住宅', 1200.00, 90, 70, 1544431480, 1545052853, NULL);
+INSERT INTO `tplay_brokerage` VALUES (3, '40-80', '门面', 600.00, 90, 80, 1544431580, 1545052849, NULL);
+INSERT INTO `tplay_brokerage` VALUES (4, '100-120', '住宅', 2000.00, 90, 80, 1544433896, 1545052846, NULL);
+INSERT INTO `tplay_brokerage` VALUES (5, '40-60', '公寓', 2000.00, 100, 80, 1544433931, 1545052842, NULL);
+INSERT INTO `tplay_brokerage` VALUES (8, '30-80', '商铺', 6000.00, 80, 80, 1544582029, 1545052838, NULL);
+INSERT INTO `tplay_brokerage` VALUES (9, '60-120', '住宅', 5000.00, 100, 60, 1545052438, 1545052438, NULL);
+INSERT INTO `tplay_brokerage` VALUES (10, '10-40', '门面', 2000.00, 80, 60, 1545053171, 1545054696, NULL);
+INSERT INTO `tplay_brokerage` VALUES (11, '10-20', '门面', 600.00, 100, 100, 1545053203, 1545054692, NULL);
 
 -- ----------------------------
 -- Table structure for tplay_city
@@ -4136,6 +4249,40 @@ INSERT INTO `tplay_city` VALUES (343, '654300', '阿勒泰地区', '650000');
 INSERT INTO `tplay_city` VALUES (344, '659000', '自治区直辖县级行政区划', '650000');
 
 -- ----------------------------
+-- Table structure for tplay_commission
+-- ----------------------------
+DROP TABLE IF EXISTS `tplay_commission`;
+CREATE TABLE `tplay_commission`  (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) UNSIGNED NOT NULL COMMENT '用户id',
+  `order_id` int(11) UNSIGNED NOT NULL COMMENT '报备订单id',
+  `house_id` int(11) UNSIGNED NOT NULL COMMENT '楼盘id',
+  `brokerage_id` int(11) UNSIGNED NOT NULL COMMENT '佣金方案的id',
+  `house_area` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '楼盘大小 例如80-120',
+  `house_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '房子类型 例如 门面',
+  `price` float(11, 2) UNSIGNED NOT NULL COMMENT '佣金方案的佣金',
+  `store_percentage` int(11) UNSIGNED NOT NULL COMMENT '门店经纪人 佣金比例',
+  `public_percentage` int(11) UNSIGNED NOT NULL COMMENT '大众经纪人 佣金比例',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '报备订单的名字',
+  `house_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '房子名字',
+  `number` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '报备手机号',
+  `commission` float(11, 2) UNSIGNED NOT NULL COMMENT '获得的实际佣金',
+  `level` tinyint(1) NOT NULL COMMENT '用户身份',
+  `date` int(11) NOT NULL DEFAULT 0 COMMENT '佣金结算时间',
+  `create_time` int(11) NULL DEFAULT NULL,
+  `update_time` int(11) NULL DEFAULT NULL,
+  `delete_time` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tplay_commission
+-- ----------------------------
+INSERT INTO `tplay_commission` VALUES (6, 3, 117, 18, 1, '20-30', '门面', 1000.00, 100, 90, '金磊磊', '测试小区名字', '15256935637', 900.00, 2, 1545321600, 1545378095, 1545378095, NULL);
+INSERT INTO `tplay_commission` VALUES (5, 3, 116, 20, 3, '40-80', '门面', 600.00, 90, 80, '金磊磊', '测试小区名字', '15256935637', 480.00, 2, 1545321600, 1545378090, 1545378090, NULL);
+INSERT INTO `tplay_commission` VALUES (4, 2, 123, 18, 3, '40-80', '门面', 600.00, 90, 80, '吴瑞', '标题', '17355105312', 480.00, 2, 1545321600, 1545378042, 1545378042, NULL);
+
+-- ----------------------------
 -- Table structure for tplay_emailconfig
 -- ----------------------------
 DROP TABLE IF EXISTS `tplay_emailconfig`;
@@ -4182,39 +4329,48 @@ CREATE TABLE `tplay_house_source`  (
   `decoration_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '装修类型以 , 逗号相隔',
   `room_map` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '户型图以 , 逗号相隔',
   `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '详情介绍',
+  `is_head` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否头条:0否,1是',
+  `house_type` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '房屋类型,仅供2手房',
   `init_status` tinyint(1) NOT NULL COMMENT '1新房，2二手房',
   `create_time` int(11) NULL DEFAULT NULL,
   `update_time` int(11) NULL DEFAULT NULL,
   `delete_time` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tplay_house_source
 -- ----------------------------
-INSERT INTO `tplay_house_source` VALUES (1, '', '', 0, '0', 0.00, 0, '', '0', '', '', '', '', 0, 0, 0, 0.00, '', '', '', '', 1, 1544518965, 1544518965, NULL);
-INSERT INTO `tplay_house_source` VALUES (2, '新房标题', '新房描述', 64, '0', 5000.00, 0, '房源地址', '2', '开发商', '110000', '110100', '1', 60, 888, 50000, 1.60, '物业公司', '毛坯,简约,豪华装', '', '<p>项目详情</p><p><img src=\"/ueditor/php/upload/image/20181212/1544589074.jpg\" title=\"1544589074.jpg\" alt=\"1_主页.jpg\"/></p>', 1, 1544589077, 1544589077, NULL);
-INSERT INTO `tplay_house_source` VALUES (3, '蜀山区高档别墅', '经开区在2015年上半年以前一直都是刚需的聚集地之一', 69, '0', 60000.00, 0, '房源详情地址', '1', '安徽高山流水房地产有限公司', '110000', '110100', '1', 60, 88, 60000, 1.50, '合肥圣洁物业有限公司', '毛坯,简约,豪华装', '', '<p>详情<br/></p>', 1, 1544589424, 1544589424, NULL);
-INSERT INTO `tplay_house_source` VALUES (4, '标题', '描述', 74, '0', 60.00, 0, '房源地址', '2', '开发商', '110000', '110100', '1', 50, 888, 6000, 3.20, '物业公司', '毛坯,简约,豪华装', '', '<p>详情<br/></p>', 1, 1544592209, 1544592209, NULL);
-INSERT INTO `tplay_house_source` VALUES (5, '标题', '描述', 74, '0', 60.00, 0, '房源地址', '2,8', '开发商', '110000', '110100', '1', 50, 888, 6000, 3.20, '物业公司', '毛坯,简约,豪华装', '', '<p>详情<br/></p>', 1, 1544592661, 1544592661, NULL);
-INSERT INTO `tplay_house_source` VALUES (6, '标题', '描述', 79, '78', 10000.00, 0, '房源地址', '3,8', '开发商', '110000', '110100', '1', 60, 888, 60000, 60.00, '物业公司', '毛坯,简约,豪华装', '', '<p>详情<br/></p>', 1, 1544592751, 1544592751, NULL);
-INSERT INTO `tplay_house_source` VALUES (7, '标题', '描述', 79, '78', 10000.00, 0, '房源地址', '3,8', '开发商', '110000', '110100', '1', 60, 888, 60000, 60.00, '物业公司', '毛坯,简约,豪华装', '81,82', '<p>详情<br/></p>', 1, 1544593135, 1544593135, NULL);
-INSERT INTO `tplay_house_source` VALUES (8, '标题', '描述', 84, '83', 6000.00, 0, '房源', '2,8', '开发商', '110000', '110100', '1', 60, 888, 60000, 6.50, '物业公司', '毛坯,简约,豪华装', '86,87', '<p>详情详情<br/></p>', 1, 1544593293, 1544593293, NULL);
-INSERT INTO `tplay_house_source` VALUES (9, '标题', '描述', 89, '88', 6000.00, 1544544000, '房源地址', '1,3,8', '开发商', '110000', '110100', '1', 60, 888, 5000, 60.00, '物业公司', '毛坯,简约,豪华装', '91,92', '<p>详情<br/></p>', 1, 1544593799, 1544593799, NULL);
-INSERT INTO `tplay_house_source` VALUES (10, '432', '43242', 100, '101,102', 23423.00, 1543939200, '42342', '2,3', '42342', '210000', '211000', '537', 4234, 42342, 324, 42342.00, '23423', '精装', '103', '<p>42342<br/></p>', 1, 1544595436, 1544595436, NULL);
-INSERT INTO `tplay_house_source` VALUES (11, '标题', '描述', 104, '105,106', 10000.00, 1544544000, '房源地址', '3,4', '开发商', '150000', '150700', '404', 30, 888, 60000, 60.00, '物业公司', '毛坯,简约,豪华装,别墅', '107,108', '<p>内容内容内容<br/></p>', 1, 1544595578, 1544595578, NULL);
-INSERT INTO `tplay_house_source` VALUES (12, '标题', '描述', 0, '121,122', 10.00, 1544544000, '房源地址', '1,8', '开发商', '120000', '120100', '20', 6, 888, 60, 60.00, '物业公司', '毛坯,简约,豪华装', '123,124', '<p>内容<br/></p>', 1, 1544602868, 1544602868, NULL);
-INSERT INTO `tplay_house_source` VALUES (13, '标题', '简介', 125, '126', 60000.00, 1544630400, '房源地址', '1,5', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约,豪华装', '127', '<p>内容<br/></p>', 1, 1544603084, 1544603084, NULL);
-INSERT INTO `tplay_house_source` VALUES (14, '标题', '简介', 125, '126,129', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约,豪华装', '127,128', '<p>内容<br/></p>', 1, 1544603140, 1544603140, NULL);
-INSERT INTO `tplay_house_source` VALUES (15, '标题', '简介', 125, '130', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '131', '<p>内容<br/></p>', 1, 1544603180, 1544603180, NULL);
-INSERT INTO `tplay_house_source` VALUES (16, '标题', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '', '<p>内容<br/></p>', 1, 1544603302, 1544603302, NULL);
-INSERT INTO `tplay_house_source` VALUES (17, '标题', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '133', '<p>内容<br/></p>', 1, 1544603337, 1544603337, NULL);
-INSERT INTO `tplay_house_source` VALUES (18, '标题', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134', '<p>内容<br/></p>', 1, 1544603360, 1544603360, NULL);
-INSERT INTO `tplay_house_source` VALUES (19, '标题', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134,135,136', '<p>内容<br/></p>', 1, 1544603390, 1544603390, NULL);
-INSERT INTO `tplay_house_source` VALUES (20, '标题', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134,136', '<p>内容<br/></p>', 1, 1544603402, 1544603402, NULL);
-INSERT INTO `tplay_house_source` VALUES (21, '标题', '简介', 125, '137', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134,136', '<p>内容<br/></p>', 1, 1544603427, 1544603427, NULL);
-INSERT INTO `tplay_house_source` VALUES (22, '标题', '简介', 125, '137,138', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134,136', '<p>内容<br/></p>', 1, 1544603440, 1544603440, NULL);
-INSERT INTO `tplay_house_source` VALUES (23, '标题', '简介', 125, '138', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134', '<p>内容<br/></p>', 1, 1544603458, 1544603458, NULL);
+INSERT INTO `tplay_house_source` VALUES (13, '标题', '简介', 125, '126', 60000.00, 1544630400, '房源地址', '1,5', '开发商', '340000', '340300', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约,豪华装', '127', '<p>内容<br/></p>', 0, '', 1, 1544603084, 1544603084, NULL);
+INSERT INTO `tplay_house_source` VALUES (14, '标题', '简介', 125, '126,129', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '340000', '340300', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约,豪华装', '127,128', '<p>内容<br/></p>', 0, '', 1, 1544603140, 1544603140, NULL);
+INSERT INTO `tplay_house_source` VALUES (15, '标题', '简介', 125, '130', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '340000', '340300', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '131', '<p>内容<br/></p>', 0, '', 1, 1544603180, 1544603180, NULL);
+INSERT INTO `tplay_house_source` VALUES (16, '标题', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '340000', '340300', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '', '<p>内容<br/></p>', 0, '', 2, 1544603302, 1544603302, NULL);
+INSERT INTO `tplay_house_source` VALUES (17, '标题', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '133', '<p>内容<br/></p>', 0, '', 1, 1544603337, 1544603337, NULL);
+INSERT INTO `tplay_house_source` VALUES (18, '测试小区名字', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '340000', '340300', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134', '<p>内容<br/></p>', 0, '', 1, 1544603360, 1544603360, NULL);
+INSERT INTO `tplay_house_source` VALUES (19, '标题', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134,135,136', '<p>内容<br/></p>', 0, '', 1, 1544603390, 1544603390, NULL);
+INSERT INTO `tplay_house_source` VALUES (20, '标题', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134,136', '<p>内容<br/></p>', 0, '', 1, 1544603402, 1544603402, NULL);
+INSERT INTO `tplay_house_source` VALUES (21, '标题', '简介', 125, '137', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134,136', '<p>内容<br/></p>', 1, '', 1, 1544603427, 1544884709, NULL);
+INSERT INTO `tplay_house_source` VALUES (22, '标题', '简介', 125, '137,138', 60000.00, 1544457600, '房源地址', '1,5,8', '开发商', '340000', '340500', '1042', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134,136', '<p>内容<br/></p>', 1, '', 1, 1544603440, 1544789514, NULL);
+INSERT INTO `tplay_house_source` VALUES (23, '标题22', '简介', 125, '138', 60000.00, 1544544000, '房源地址', '2,3,5', '开发商', '340000', '340200', '1015', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134', '<p>内容<br/></p>', 1, '', 2, 1544603458, 1544792873, NULL);
+INSERT INTO `tplay_house_source` VALUES (24, '圣堂别院', '高档别墅住宅', 125, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (25, '12', '1', 125, '188', 12.00, 1545753600, '4545', '4,5,8', '123123', '110000', '110100', '8', 13213, 1313, 131, 4.00, '31310', '毛坯,简约,豪华装', '189', '<p>123</p>', 0, '', 1, 1544948850, 1545115451, NULL);
+INSERT INTO `tplay_house_source` VALUES (26, '圣堂别院', '高档别墅住宅', 125, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545115452, NULL);
+INSERT INTO `tplay_house_source` VALUES (27, '圣堂别院', '高档别墅住宅', 125, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (28, '圣堂别院', '高档别墅住宅', 136, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (29, '圣堂别院', '高档别墅住宅', 137, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (30, '圣堂别院', '高档别墅住宅', 136, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (31, '圣堂别院', '高档别墅住宅', 137, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (32, '圣堂别院', '高档别墅住宅', 137, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (33, '圣堂别院', '高档别墅住宅', 135, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (34, '圣堂别院', '高档别墅住宅', 136, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (35, '圣堂别院', '高档别墅住宅', 137, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (36, '圣堂别院', '高档别墅住宅', 134, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (37, '圣堂别院', '高档别墅住宅', 132, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (38, '圣堂别院', '高档别墅住宅', 131, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (39, '圣堂别院', '高档别墅住宅', 130, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (40, '圣堂别院', '高档别墅住宅', 124, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (41, '圣堂别院', '高档别墅住宅', 139, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (42, '圣堂别院', '高档别墅住宅', 145, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
 
 -- ----------------------------
 -- Table structure for tplay_messages
@@ -4261,6 +4417,127 @@ INSERT INTO `tplay_notice` VALUES (31, '2321312', '<p>312312</p>', 1544427956, 1
 INSERT INTO `tplay_notice` VALUES (32, '213123', '<p>12312312</p>', 1544427959, 1544427959, 0);
 INSERT INTO `tplay_notice` VALUES (42, '1', '<p>212</p>', 1544511960, 1544511960, 0);
 INSERT INTO `tplay_notice` VALUES (43, '啊啊大发发', '<p>大丰收发送啊啊啊<img src=\"/ueditor/php/upload/image/20181212/1544587228.jpg\" title=\"1544587228.jpg\" alt=\"客户信息.jpg\"/></p>', 1544515509, 1544587230, 0);
+
+-- ----------------------------
+-- Table structure for tplay_order
+-- ----------------------------
+DROP TABLE IF EXISTS `tplay_order`;
+CREATE TABLE `tplay_order`  (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '报备的订单id',
+  `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '提交报备的用户id',
+  `name` char(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '名字',
+  `number` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '手机号码',
+  `gender` tinyint(1) UNSIGNED NOT NULL COMMENT '性别 1是男 2是女',
+  `date` int(11) UNSIGNED NOT NULL COMMENT '预计带看时间',
+  `content` char(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '购房意向内容',
+  `create_time` int(11) UNSIGNED NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` int(11) UNSIGNED NULL DEFAULT NULL COMMENT '修改时间',
+  `delete_time` int(11) UNSIGNED NULL DEFAULT NULL COMMENT '删除时间',
+  `is_new` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '已报备状态  1是已报备 ',
+  `is_visit` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '已到访状态  1是已到访',
+  `is_deal` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '已成交状态  1是已成交',
+  `is_pay` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '已提额状态  1是已提额',
+  `house_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '楼盘名字',
+  `province` int(11) NOT NULL DEFAULT 0 COMMENT '省',
+  `city` int(11) NOT NULL DEFAULT 0 COMMENT '市',
+  `area` int(11) NOT NULL DEFAULT 0 COMMENT '区县',
+  `house_id` int(11) NOT NULL DEFAULT 0 COMMENT '楼盘id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 124 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tplay_order
+-- ----------------------------
+INSERT INTO `tplay_order` VALUES (9, 2, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1544604700, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (36, 3, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (37, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (14, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 20);
+INSERT INTO `tplay_order` VALUES (35, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (17, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (29, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (30, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (31, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (32, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (33, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (38, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (39, 2, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759435, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (40, 2, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759484, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 24);
+INSERT INTO `tplay_order` VALUES (41, 1, '金磊磊', '15256935637', 1, 1564070400, '我要买个120平米的房子', 1544607498, 1544769435, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (42, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (43, 1, '金磊磊磊', '15256935637', 1, 1923235200, '我要买个120平米的房子', 1544607498, 1544759200, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (44, 2, '金磊磊', '15256935637', 1, 1544976000, '我要买个120平米的房子', 1544607498, 1544756674, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (45, 1, '金磊磊', '15256935637', 1, 1544371200, '我要买个120平米的房子', 1544607498, 1544759191, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 27);
+INSERT INTO `tplay_order` VALUES (46, 2, '金磊磊', '15256935637', 2, 1803916800, '我要买个120平米的房子', 1544607498, 1544759480, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 29);
+INSERT INTO `tplay_order` VALUES (54, 2, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1544604700, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (55, 2, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1544604700, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (49, 3, '金磊磊', '15256935637', 1, 1525881600, '我要买个120平米的房子', 1544607498, 1544779525, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (56, 2, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1544774138, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (57, 2, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1544604700, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (58, 2, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1544604700, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (59, 3, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1545199011, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (60, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (61, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (62, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (63, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (64, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (65, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (66, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (67, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (68, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (69, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (70, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (71, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (72, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (73, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (74, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (75, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (76, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (77, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (78, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (79, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (80, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (81, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (82, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (83, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (84, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (85, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (86, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (87, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (88, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (89, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (90, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (91, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (92, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (93, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (94, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (95, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (96, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (97, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (98, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (99, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (100, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (101, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (102, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (103, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (104, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (105, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545015369, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (106, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (107, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545199127, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (108, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545199203, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (109, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545198494, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 23);
+INSERT INTO `tplay_order` VALUES (110, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (111, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (112, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545198507, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 22);
+INSERT INTO `tplay_order` VALUES (114, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545378059, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
+INSERT INTO `tplay_order` VALUES (115, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 22);
+INSERT INTO `tplay_order` VALUES (116, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545378090, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 20);
+INSERT INTO `tplay_order` VALUES (117, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545378095, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 18);
+INSERT INTO `tplay_order` VALUES (118, 2, '测试名字', '17355105312', 1, 1545062400, '购房意向测试', 1545103893, 1545269244, NULL, 0, 0, 1, 1, '测试小区名字', 340000, 340200, 0, 22);
+INSERT INTO `tplay_order` VALUES (34, 2, '测试名字', '17355105312', 1, 1545062400, '购房意向测试', 1545104331, 1545187917, NULL, 0, 0, 1, 0, '测试小区名字', 310000, 310100, 310101, 22);
+INSERT INTO `tplay_order` VALUES (120, 2, '吴瑞', '17355105312', 1, 1541779200, '买大房子', 1545292474, 1545371238, NULL, 0, 0, 1, 0, '标题', 110000, 110100, 110101, 15);
+INSERT INTO `tplay_order` VALUES (121, 2, '吴瑞', '17355105312', 1, 1541779200, '买大房子', 1545292491, 1545377990, NULL, 0, 0, 1, 0, '标题', 110000, 110100, 110101, 15);
+INSERT INTO `tplay_order` VALUES (122, 2, '吴瑞', '17355105312', 1, 1541779200, '买大房子', 1545294069, 1545294105, NULL, 0, 0, 1, 1, '标题', 110000, 110100, 110101, 15);
+INSERT INTO `tplay_order` VALUES (123, 2, '吴瑞', '17355105312', 1, 1541779200, '买大房子', 1545298001, 1545378042, NULL, 0, 0, 1, 1, '标题', 110000, 110100, 110101, 18);
 
 -- ----------------------------
 -- Table structure for tplay_province
@@ -4332,6 +4609,35 @@ CREATE TABLE `tplay_smsconfig`  (
 INSERT INTO `tplay_smsconfig` VALUES ('sms', '', '', '', '', '', '');
 
 -- ----------------------------
+-- Table structure for tplay_store
+-- ----------------------------
+DROP TABLE IF EXISTS `tplay_store`;
+CREATE TABLE `tplay_store`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '店名',
+  `manager` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '负责人',
+  `address` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '地址',
+  `img_id` int(10) NOT NULL COMMENT '门店照',
+  `reg_code` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '注册邀请码',
+  `phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '联系方式',
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '入驻状态,1成功入驻',
+  `province` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '省',
+  `city` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '市',
+  `area` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '区',
+  `create_time` int(11) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
+  `delete_time` int(11) NULL DEFAULT NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of tplay_store
+-- ----------------------------
+INSERT INTO `tplay_store` VALUES (1, '合肥超威房产', '刘华超', '安徽省合肥市蜀山区88号', 177, '128839', '17681125543', 0, '', '', '合肥', 1544870532, 1544942595, NULL);
+INSERT INTO `tplay_store` VALUES (8, '安徽华邦地产', '刘华超', '合肥市蜀山区88号', 0, '888888', '13013090543', 0, '', '', '安徽', 1544881777, 1544942619, NULL);
+INSERT INTO `tplay_store` VALUES (9, '刘华超', '刘华超', '刘华超', 179, '549135', '13013090543', 0, '', '', '刘华超', 1544935197, 1544935197, NULL);
+
+-- ----------------------------
 -- Table structure for tplay_urlconfig
 -- ----------------------------
 DROP TABLE IF EXISTS `tplay_urlconfig`;
@@ -4359,36 +4665,35 @@ INSERT INTO `tplay_urlconfig` VALUES (1, 'admin_login', 'admin/common/login', '�
 DROP TABLE IF EXISTS `tplay_user`;
 CREATE TABLE `tplay_user`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nickname` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '微信昵称',
-  `username` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户昵称',
-  `alipay` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '支付宝账号',
+  `nickname` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户昵称',
   `is_realname` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否实名0否,1是',
   `sex` tinyint(1) UNSIGNED ZEROFILL NOT NULL DEFAULT 0 COMMENT '性别',
   `password` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
-  `head_img` int(11) NOT NULL COMMENT '头像',
+  `head_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '头像',
   `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '邮件',
   `phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '手机号',
-  `wx_no` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT '微信号',
-  `is_receive` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否接收消息:0否，1是',
-  `is_earnings` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否接收收益通知：0否，1是',
-  `is_fans` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否接收粉丝通知：0否，1是',
-  `superior_id` int(11) NOT NULL COMMENT '上级',
-  `alipay_no` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '支付宝账号',
-  `alipay_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '支付宝实名姓名',
-  `level` tinyint(1) NOT NULL DEFAULT 0 COMMENT '用户级别:0会员,1代理',
+  `level` tinyint(1) NOT NULL DEFAULT 0 COMMENT '用户级别:1门店经纪人,2大众经纪人',
+  `area` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主营地区',
+  `store_id` int(10) NOT NULL COMMENT '门店id',
   `login_time` int(11) NOT NULL COMMENT '最后一次登录时间',
   `delete_time` int(11) NULL DEFAULT NULL,
   `create_time` int(11) NULL DEFAULT NULL,
   `update_time` int(11) NULL DEFAULT NULL COMMENT ' ',
+  `card_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '实名姓名',
+  `card_number` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '实名身份证号',
+  `card_phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '实名填的手机号',
+  `card_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '身份证照片',
+  `is_submit` int(1) NOT NULL DEFAULT 0 COMMENT '是否提交了实名认证 0未提交  1已提交',
+  `is_examine` int(1) NULL DEFAULT 0 COMMENT '审核状态 0待审核 1已通过 2未通过',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tplay_user
 -- ----------------------------
-INSERT INTO `tplay_user` VALUES (1, '17681125543', '', '', 0, 0, 'f0c1361b39e445af40f69950c6fa05a5', 0, '', '17681125543', '', 1, 0, 0, 0, '', '', 0, 1544170171, NULL, NULL, NULL);
-INSERT INTO `tplay_user` VALUES (2, '17355105312', '', '', 0, 0, 'f0c1361b39e445af40f69950c6fa05a5', 0, '', '17355105312', '', 1, 0, 0, 0, '', '', 0, 0, NULL, NULL, NULL);
-INSERT INTO `tplay_user` VALUES (3, '15256935637', '', '', 0, 0, '47b6f8017c9629e1e6bff9e03083b5e6', 0, '', '15256935637', '', 1, 0, 0, 0, '', '', 0, 1544606324, NULL, 1544583825, 1544583825);
+INSERT INTO `tplay_user` VALUES (1, '明天你好', 0, 0, 'f0c1361b39e445af40f69950c6fa05a5', 'uploads\\user\\20181216\\8213411574ccaf848d65563f854f4108.jpg', '', '17681125543', 2, '合肥', 0, 1545384641, NULL, NULL, 1544971823, '', '0', '', '', 0, NULL);
+INSERT INTO `tplay_user` VALUES (2, '17355105312', 0, 0, 'f0c1361b39e445af40f69950c6fa05a5', '', '', '17355105312', 2, '', 0, 1545294221, NULL, NULL, 1545374250, '金磊磊1', '340827199405050018', '', '', 0, NULL);
+INSERT INTO `tplay_user` VALUES (3, '15256935637', 0, 0, '47b6f8017c9629e1e6bff9e03083b5e6', '', '', '15256935637', 2, '', 0, 1545182615, NULL, 1544583825, 1545374254, '金磊磊2', '340827199405050018', '', '', 0, NULL);
 
 -- ----------------------------
 -- Table structure for tplay_webconfig
@@ -4411,6 +4716,6 @@ CREATE TABLE `tplay_webconfig`  (
 -- ----------------------------
 -- Records of tplay_webconfig
 -- ----------------------------
-INSERT INTO `tplay_webconfig` VALUES ('web', '后台管理系统', 'Tplay,后台管理,thinkphp5,layui', 'Tplay是一款基于ThinkPHP5.0.12 + layui2.2.45 + ECharts + Mysql开发的后台管理框架，集成了一般应用所必须的基础性功能，为开发者节省大量的时间。', 1, 'jpg,png,gif,mp4,zip,jpeg', 80000, '', '', NULL);
+INSERT INTO `tplay_webconfig` VALUES ('web', '后台管理系统', '', '', 1, 'jpg,png,gif,mp4,zip,jpeg', 80000, '', '', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
