@@ -12,14 +12,18 @@ class Housesearch extends Controller{
      * @apiParam {int} city 市的ID 
      */
 	public function search(){
+		//获取搜索关键词
 		$search = input('get.search');
+		//获取传来的市的ID
 		$city = input('get.city');
+		//实例化model并执行查询
 		$house = model('HouseSource');
 		$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status'])->where('city',$city)->where('title','like',"%$search%")->select();
 		$data = [];
 		foreach ($res as $k => $v) {
 			$data[] = $v->getData();
 		}
+		//判断是否有数据，没有则说明没有查到结果，返回提示信息，有结果则把数组return出去
 		if(!$data){
 			return ['reg'=>'关键词没有查到结果，建议更换关键词'];
 		}
