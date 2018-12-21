@@ -830,6 +830,13 @@ define({ "api": [
             "optional": false,
             "field": "search",
             "description": "<p>搜索关键词</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "city",
+            "description": "<p>市的ID</p>"
           }
         ]
       }
