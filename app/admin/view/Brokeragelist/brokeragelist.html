@@ -123,10 +123,12 @@
       });
     });
     function sousou(){
+    	//获取两个input框的值
     	var user_id = $('#exampleInputName2').val();
     	var date = $('#create_time').val();
+    	//生成url
     	var url = "{:url('admin/Brokeragelist/brokeragelist')}";
-    	//console.log(user_id);
+    	//判断user_id框是否为空，走不同的拼接
     	if (user_id != '') {
     		url = url + '?user_id=' + user_id;
     		if (date != '') {
@@ -137,7 +139,9 @@
     		url = url + '?date='+date;
     		}
     	}
+    	//拼接一个状态码， 方便后端判断是否有传参
     	url = url + '&panduan=1';
+    	//执行搜索
     	window.location.href = url;
     }
 </script>
