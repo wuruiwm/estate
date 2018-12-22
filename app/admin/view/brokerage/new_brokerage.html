@@ -78,7 +78,6 @@
                             layer.msg(successMsg.msg);
                         }
                         if (successMsg.errorCode == 20100) {
-                            //弹出loading
                             var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
                             setTimeout(function () {
                                 top.layer.close(index);

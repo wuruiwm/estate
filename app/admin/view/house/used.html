@@ -491,12 +491,11 @@
                             layer.msg(successMsg.msg);
                         }
                         if (successMsg.errorCode == 20100) {
-                            var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
+                            top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
                             setTimeout(function () {
-                                top.layer.close(index);
-                                top.layer.msg("修改成功");
-                                layer.closeAll("iframe");
-                                parent.location.reload();
+                                top.layer.msg("修改成功,请点击页脚[确定]按钮 刷新查看");
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
                             }, 1000);
                         }
                     },

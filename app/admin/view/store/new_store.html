@@ -89,7 +89,7 @@
         var uploadInst = upload.render({
             elem: '#thumb' //绑定元素
             , url: "{:url('common/upload')}" //上传接口
-            , data: {use: 'article_thumb'}
+            , data: {use: 'store'}
             , done: function (res) {
                 //上传完毕回调
                 if (res.code == 2) {
@@ -127,14 +127,11 @@
                             layer.msg(successMsg.msg);
                         }
                         if (successMsg.errorCode == 20100) {
-                            //弹出loading
-                            var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
+                            top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
                             setTimeout(function () {
-                                top.layer.close(index);
-                                top.layer.msg("修改成功");
-                                layer.closeAll("iframe");
-                                //刷新父页面
-                                parent.location.reload();
+                                top.layer.msg("修改成功,请点击页脚[确定]按钮 刷新查看");
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
                             }, 1000);
                         }
                     },

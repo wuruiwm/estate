@@ -33,9 +33,9 @@ class Databackup extends Permissions
        }else if(is_numeric($part) && is_numeric($start)){
 
                $list=session::get('backup_list');
-               
+
                $start= $db->setFile($list)->import($start);
-              
+
                if( false===$start){
                      $this->error('还原数据出错！');
                }elseif(0 === $start){
@@ -44,7 +44,7 @@ class Databackup extends Permissions
                        $this->success("正在还原...#{$part}", '', $data);
                    } else {
                        session::delete('backup_list');
-                       addlog();//写入日志
+                       //addlog();//写入日志
                        $this->success('还原完成！');
                    }
                }else{
@@ -57,15 +57,15 @@ class Databackup extends Permissions
                        $this->success("正在还原...#{$part}", '', $data);
                    }
                    $this->success("正在还原...#{$part}", '');
-                   
+
                }
-           
-           
+
+
        }else{
            $this->error('参数错误！');
        }
 
-      
+
    }
    /**
     * 删除备份文件
@@ -73,7 +73,7 @@ class Databackup extends Permissions
    public function del($time = 0){
        $db= new Backup();
        if($db->delFile($time)){
-           addlog($time);//写入日志
+           //addlog($time);//写入日志
            $this->success("备份文件删除成功！",'admin/databackup/importlist');
        }else{
            $this->error("备份文件删除失败，请检查权限！");
@@ -87,7 +87,7 @@ class Databackup extends Permissions
        $db= new Backup();
        if(Request::instance()->isPost()){
            $input=input('post.');
-          
+
            $fileinfo  =$db->getFile();
            //检查是否有正在执行的任务
            $lock = "{$fileinfo['filepath']}backup.lock";
@@ -124,13 +124,13 @@ class Databackup extends Permissions
            }else if(0 === $start){
                if(isset($tables[++$id])){
                    $tab = array('id' => $id, 'start' => 0);
-                   addlog();//写入日志
+                   //addlog();//写入日志
                    $this->success('备份完成！', '', array('tab' => $tab));
                } else { //备份完成，清空缓存
                    unlink(session::get('lock'));
                    Session::delete('backup_tables');
                    Session::delete('backup_file');
-                   addlog();//写入日志
+                   //addlog($id);//写入日志
                    $this->success('备份完成！');
                }
            }

@@ -11,7 +11,7 @@
  Target Server Version : 100137
  File Encoding         : 65001
 
- Date: 21/12/2018 17:51:04
+ Date: 22/12/2018 16:13:59
 */
 
 SET NAMES utf8mb4;
@@ -42,8 +42,8 @@ CREATE TABLE `tplay_admin`  (
 -- ----------------------------
 -- Records of tplay_admin
 -- ----------------------------
-INSERT INTO `tplay_admin` VALUES (1, 'Tplay', 'admin', '972262e4efe2e00f364d979a7c6ae7ee', 2, 1510885948, 1544087338, 1545356153, '127.0.0.1', 1);
-INSERT INTO `tplay_admin` VALUES (16, '管理员', 'boss', '49096548e1619314a3e598141fe83965', 167, 1544683694, 1544683694, 1544685316, '114.102.185.200', 20);
+INSERT INTO `tplay_admin` VALUES (1, 'admin', 'admin', '972262e4efe2e00f364d979a7c6ae7ee', 1, 1510885948, 1545461617, 1545461670, '127.0.0.1', 1);
+INSERT INTO `tplay_admin` VALUES (16, '管理员', 'boss', '49096548e1619314a3e598141fe83965', 2, 1544683694, 1545461655, 1545461646, '127.0.0.1', 20);
 
 -- ----------------------------
 -- Table structure for tplay_admin_cate
@@ -65,7 +65,7 @@ CREATE TABLE `tplay_admin_cate`  (
 -- ----------------------------
 -- Records of tplay_admin_cate
 -- ----------------------------
-INSERT INTO `tplay_admin_cate` VALUES (1, '超级管理员', '1,4,5,11,13,14,16,17,19,20,21,6,7,8,22,25,26,28,29,34,35,37,38,39,40,42,43,44,45,47,48,52,53,54,55,56,57,58,59,66,60,61,62,63,64,65,67', 0, 1545374126, '超级管理员，拥有最高权限！');
+INSERT INTO `tplay_admin_cate` VALUES (1, '超级管理员', '1,4,5,11,13,14,16,17,19,20,21,6,7,8,22,25,26,28,29,31,34,35,37,38,39,40,42,43,44,45,47,48,52,53,54,55,56,57,58,59,66,60,61,62,63,64,65,67,68,69,70', 0, 1545458715, '超级管理员，拥有最高权限！');
 INSERT INTO `tplay_admin_cate` VALUES (20, '系统管理员', '6,7,8,34,35,37,38,39,40,42,43,44,45,47,48,52,53,54,55,56,57,58,59,60,61,62,63,64,65,67', 1544683164, 1545374118, '系统管理，副官');
 
 -- ----------------------------
@@ -83,7 +83,7 @@ CREATE TABLE `tplay_admin_log`  (
   INDEX `id`(`id`) USING BTREE,
   INDEX `admin_id`(`admin_id`) USING BTREE,
   INDEX `create_time`(`create_time`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 273 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 338 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tplay_admin_log
@@ -360,6 +360,71 @@ INSERT INTO `tplay_admin_log` VALUES (269, 4, 1, '127.0.0.1', '67', 1545374105);
 INSERT INTO `tplay_admin_log` VALUES (270, 28, 1, '127.0.0.1', '20', 1545374118);
 INSERT INTO `tplay_admin_log` VALUES (271, 28, 1, '127.0.0.1', '1', 1545374126);
 INSERT INTO `tplay_admin_log` VALUES (272, 11, 1, '127.0.0.1', '', 1545385096);
+INSERT INTO `tplay_admin_log` VALUES (273, 50, 1, '127.0.0.1', '', 1545441467);
+INSERT INTO `tplay_admin_log` VALUES (274, 50, 1, '127.0.0.1', '', 1545445391);
+INSERT INTO `tplay_admin_log` VALUES (275, 49, 1, '127.0.0.1', '168', 1545446742);
+INSERT INTO `tplay_admin_log` VALUES (276, 49, 1, '127.0.0.1', '169', 1545447196);
+INSERT INTO `tplay_admin_log` VALUES (277, 49, 1, '127.0.0.1', '170', 1545447387);
+INSERT INTO `tplay_admin_log` VALUES (278, 49, 1, '127.0.0.1', '171', 1545447417);
+INSERT INTO `tplay_admin_log` VALUES (279, 49, 1, '127.0.0.1', '172', 1545448227);
+INSERT INTO `tplay_admin_log` VALUES (280, 4, 1, '127.0.0.1', '68', 1545448605);
+INSERT INTO `tplay_admin_log` VALUES (281, 28, 1, '127.0.0.1', '1', 1545448619);
+INSERT INTO `tplay_admin_log` VALUES (282, 4, 1, '127.0.0.1', '69', 1545448698);
+INSERT INTO `tplay_admin_log` VALUES (283, 4, 1, '127.0.0.1', '69', 1545448713);
+INSERT INTO `tplay_admin_log` VALUES (284, 4, 1, '127.0.0.1', '70', 1545448788);
+INSERT INTO `tplay_admin_log` VALUES (285, 28, 1, '127.0.0.1', '1', 1545448801);
+INSERT INTO `tplay_admin_log` VALUES (286, 28, 1, '127.0.0.1', '1', 1545458715);
+INSERT INTO `tplay_admin_log` VALUES (287, 4, 1, '127.0.0.1', '69', 1545459675);
+INSERT INTO `tplay_admin_log` VALUES (288, 4, 1, '127.0.0.1', '68', 1545459698);
+INSERT INTO `tplay_admin_log` VALUES (289, 49, 1, '127.0.0.1', '1', 1545459810);
+INSERT INTO `tplay_admin_log` VALUES (290, 49, 1, '127.0.0.1', '2', 1545459825);
+INSERT INTO `tplay_admin_log` VALUES (291, 49, 1, '127.0.0.1', '3', 1545459837);
+INSERT INTO `tplay_admin_log` VALUES (292, 49, 1, '127.0.0.1', '4', 1545459852);
+INSERT INTO `tplay_admin_log` VALUES (293, 49, 1, '127.0.0.1', '5', 1545460077);
+INSERT INTO `tplay_admin_log` VALUES (294, 49, 1, '127.0.0.1', '6', 1545460213);
+INSERT INTO `tplay_admin_log` VALUES (295, 49, 1, '127.0.0.1', '7', 1545460217);
+INSERT INTO `tplay_admin_log` VALUES (296, 49, 1, '127.0.0.1', '8', 1545460220);
+INSERT INTO `tplay_admin_log` VALUES (297, 49, 1, '127.0.0.1', '9', 1545460224);
+INSERT INTO `tplay_admin_log` VALUES (298, 49, 1, '127.0.0.1', '10', 1545460230);
+INSERT INTO `tplay_admin_log` VALUES (299, 7, 1, '127.0.0.1', '1', 1545461599);
+INSERT INTO `tplay_admin_log` VALUES (300, 49, 1, '127.0.0.1', '1', 1545461615);
+INSERT INTO `tplay_admin_log` VALUES (301, 7, 1, '127.0.0.1', '1', 1545461617);
+INSERT INTO `tplay_admin_log` VALUES (302, 50, 16, '127.0.0.1', '', 1545461646);
+INSERT INTO `tplay_admin_log` VALUES (303, 49, 16, '127.0.0.1', '2', 1545461654);
+INSERT INTO `tplay_admin_log` VALUES (304, 7, 16, '127.0.0.1', '16', 1545461655);
+INSERT INTO `tplay_admin_log` VALUES (305, 50, 1, '127.0.0.1', '', 1545461670);
+INSERT INTO `tplay_admin_log` VALUES (306, 49, 1, '127.0.0.1', '3', 1545461727);
+INSERT INTO `tplay_admin_log` VALUES (307, 49, 1, '127.0.0.1', '4', 1545461742);
+INSERT INTO `tplay_admin_log` VALUES (308, 49, 1, '127.0.0.1', '5', 1545461758);
+INSERT INTO `tplay_admin_log` VALUES (309, 49, 1, '127.0.0.1', '6', 1545461878);
+INSERT INTO `tplay_admin_log` VALUES (310, 49, 1, '127.0.0.1', '7', 1545462035);
+INSERT INTO `tplay_admin_log` VALUES (311, 49, 1, '127.0.0.1', '8', 1545462121);
+INSERT INTO `tplay_admin_log` VALUES (312, 49, 1, '127.0.0.1', '9', 1545462127);
+INSERT INTO `tplay_admin_log` VALUES (313, 49, 1, '127.0.0.1', '10', 1545462131);
+INSERT INTO `tplay_admin_log` VALUES (314, 49, 1, '127.0.0.1', '11', 1545462133);
+INSERT INTO `tplay_admin_log` VALUES (315, 49, 1, '127.0.0.1', '12', 1545462139);
+INSERT INTO `tplay_admin_log` VALUES (316, 49, 1, '127.0.0.1', '13', 1545462144);
+INSERT INTO `tplay_admin_log` VALUES (317, 49, 1, '127.0.0.1', '14', 1545462149);
+INSERT INTO `tplay_admin_log` VALUES (318, 49, 1, '127.0.0.1', '15', 1545462217);
+INSERT INTO `tplay_admin_log` VALUES (319, 49, 1, '127.0.0.1', '16', 1545462220);
+INSERT INTO `tplay_admin_log` VALUES (320, 49, 1, '127.0.0.1', '17', 1545462223);
+INSERT INTO `tplay_admin_log` VALUES (321, 49, 1, '127.0.0.1', '18', 1545462227);
+INSERT INTO `tplay_admin_log` VALUES (322, 49, 1, '127.0.0.1', '19', 1545463225);
+INSERT INTO `tplay_admin_log` VALUES (323, 49, 1, '127.0.0.1', '20', 1545463229);
+INSERT INTO `tplay_admin_log` VALUES (324, 49, 1, '127.0.0.1', '21', 1545463233);
+INSERT INTO `tplay_admin_log` VALUES (325, 49, 1, '127.0.0.1', '22', 1545463236);
+INSERT INTO `tplay_admin_log` VALUES (326, 49, 1, '127.0.0.1', '23', 1545463239);
+INSERT INTO `tplay_admin_log` VALUES (327, 49, 1, '127.0.0.1', '24', 1545463361);
+INSERT INTO `tplay_admin_log` VALUES (328, 49, 1, '127.0.0.1', '25', 1545463364);
+INSERT INTO `tplay_admin_log` VALUES (329, 49, 1, '127.0.0.1', '26', 1545463439);
+INSERT INTO `tplay_admin_log` VALUES (330, 49, 1, '127.0.0.1', '27', 1545463514);
+INSERT INTO `tplay_admin_log` VALUES (331, 49, 1, '127.0.0.1', '28', 1545463517);
+INSERT INTO `tplay_admin_log` VALUES (332, 49, 1, '127.0.0.1', '29', 1545463519);
+INSERT INTO `tplay_admin_log` VALUES (333, 49, 1, '127.0.0.1', '30', 1545463522);
+INSERT INTO `tplay_admin_log` VALUES (334, 49, 1, '127.0.0.1', '31', 1545463632);
+INSERT INTO `tplay_admin_log` VALUES (335, 49, 1, '127.0.0.1', '32', 1545465620);
+INSERT INTO `tplay_admin_log` VALUES (336, 49, 1, '127.0.0.1', '33', 1545465906);
+INSERT INTO `tplay_admin_log` VALUES (337, 49, 1, '127.0.0.1', '34', 1545466164);
 
 -- ----------------------------
 -- Table structure for tplay_admin_menu
@@ -388,7 +453,7 @@ CREATE TABLE `tplay_admin_menu`  (
   INDEX `function`(`function`) USING BTREE,
   INDEX `is_display`(`is_display`) USING BTREE,
   INDEX `type`(`type`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 68 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统菜单表' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 71 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tplay_admin_menu
@@ -396,7 +461,7 @@ CREATE TABLE `tplay_admin_menu`  (
 INSERT INTO `tplay_admin_menu` VALUES (1, '系统', '', '', '', '', '系统设置。', 1, 1, 0, 0, 1544684291, 'fa-cog', 1, 0);
 INSERT INTO `tplay_admin_menu` VALUES (2, '菜单', '', '', '', '', '菜单管理。', 1, 2, 1, 0, 1517015764, 'fa-paw', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (51, '系统菜单排序', 'admin', 'menu', 'orders', '', '系统菜单排序。', 2, 1, 3, 1517562047, 1517562047, '', 0, 0);
-INSERT INTO `tplay_admin_menu` VALUES (3, '系统菜单', 'admin', 'menu', 'index', NULL, '系统菜单管理', 1, 2, 2, 0, 0, 'fa-share-alt', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (3, '系统菜单', 'admin', 'menu', 'index', '', '系统菜单管理', 1, 2, 2, 0, 0, 'fa-share-alt', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (4, '新增/修改系统菜单', 'admin', 'menu', 'publish', '', '新增/修改系统菜单.', 2, 1, 3, 1516948769, 1516948769, '', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (5, '删除系统菜单', 'admin', 'menu', 'delete', '', '删除系统菜单。', 2, 1, 3, 1516948857, 1516948857, '', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (6, '个人设置', '', '', '', '', '个人信息管理。', 1, 1, 0, 1516949308, 1544684423, 'fa-user', 0, 0);
@@ -460,6 +525,9 @@ INSERT INTO `tplay_admin_menu` VALUES (64, '用户管理', '', '', '', '', '注�
 INSERT INTO `tplay_admin_menu` VALUES (65, '用户列表', 'admin', 'user', 'index', '', '用户列表', 1, 1, 64, 1544963132, 1544963132, 'fa fa-user-o', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (66, '佣金列表', 'admin', 'Brokeragelist', 'brokeragelist', '', '', 1, 1, 58, 1545208012, 1545208012, 'fa fa-paypal', 0, 0);
 INSERT INTO `tplay_admin_menu` VALUES (67, '实名管理', 'admin', 'user', 'realname', '', '用户实名管理', 1, 1, 64, 1545374105, 1545374105, 'fa fa-odnoklassniki-square', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (68, '数据库', '', '', '', '', '', 1, 1, 0, 1545448605, 1545459698, 'fa fa-database', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (69, '备份管理', 'admin', 'Databackup', '', 'index', '', 1, 1, 68, 1545448698, 1545459675, 'fa fa-dashboard', 0, 0);
+INSERT INTO `tplay_admin_menu` VALUES (70, '备份列表', 'admin', 'Databackup', 'importlist', '', '', 1, 1, 68, 1545448788, 1545448788, 'fa fa-server', 0, 0);
 
 -- ----------------------------
 -- Table structure for tplay_area
@@ -3674,159 +3742,45 @@ CREATE TABLE `tplay_attachment`  (
   INDEX `status`(`status`) USING BTREE,
   INDEX `filename`(`filename`) USING BTREE,
   INDEX `create_time`(`create_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 168 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '附件表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '附件表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tplay_attachment
 -- ----------------------------
-INSERT INTO `tplay_attachment` VALUES (2, 'admin', '6ec5471633bc59614390baadc165078d.png', '\\uploads\\admin\\admin_thumb\\20181206\\6ec5471633bc59614390baadc165078d.png', 95813, 'png', 1, '127.0.0.1', 1, 1544087337, 1, 1544087337, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (3, 'admin', 'c6d35d5a1b41c852ac993f3c93f7aeb4.jpg', '\\uploads\\admin\\article_thumb\\20181207\\c6d35d5a1b41c852ac993f3c93f7aeb4.jpg', 16042, 'jpg', 1, '127.0.0.1', 1, 1544145868, 1, 1544145868, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (4, 'admin', '99b0ec418f828b9a7bf2bdf11a5664e9.jpg', '\\uploads\\admin\\article_thumb\\20181207\\99b0ec418f828b9a7bf2bdf11a5664e9.jpg', 30986, 'jpg', 1, '127.0.0.1', 1, 1544145993, 1, 1544145993, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (5, 'admin', '6b5a52d99140a06eac5754033de0ac32.jpg', '\\uploads\\admin\\article_thumb\\20181207\\6b5a52d99140a06eac5754033de0ac32.jpg', 16042, 'jpg', 1, '127.0.0.1', 1, 1544146005, 1, 1544146005, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (6, 'admin', '80c1038ce3527e11a337a35a37a57d70.jpg', '\\uploads\\admin\\article_thumb\\20181207\\80c1038ce3527e11a337a35a37a57d70.jpg', 16042, 'jpg', 1, '127.0.0.1', 1, 1544146099, 1, 1544146099, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (7, 'admin', '21ebf907f594bd24bc8259cba1758f93.jpg', '\\uploads\\admin\\article_thumb\\20181207\\21ebf907f594bd24bc8259cba1758f93.jpg', 16042, 'jpg', 1, '127.0.0.1', 1, 1544146168, 1, 1544146168, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (8, 'admin', '4f4cbffe09d37916ac8074d8c3b67a22.jpg', '\\uploads\\admin\\article_thumb\\20181207\\4f4cbffe09d37916ac8074d8c3b67a22.jpg', 50156, 'jpg', 1, '127.0.0.1', 1, 1544146228, 1, 1544146228, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (9, 'admin', '8f2ce6b96f2a483137d01f51abaffe3c.jpg', '\\uploads\\admin\\article_thumb\\20181207\\8f2ce6b96f2a483137d01f51abaffe3c.jpg', 42188, 'jpg', 1, '127.0.0.1', 1, 1544146913, 1, 1544146913, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (10, 'admin', '663344445216cb039bcf34004db22b5e.png', '\\uploads\\admin\\article_thumb\\20181207\\663344445216cb039bcf34004db22b5e.png', 33847, 'png', 1, '127.0.0.1', 1, 1544148362, 1, 1544148362, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (11, 'admin', '7a061307f00646728c180fc1f38ebb83.png', '\\uploads\\admin\\article_thumb\\20181207\\7a061307f00646728c180fc1f38ebb83.png', 33847, 'png', 1, '127.0.0.1', 1, 1544148730, 1, 1544148730, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (12, 'admin', '12f1fba37ad96f6d5c62111692e00253.jpg', '\\uploads\\admin\\article_thumb\\20181207\\12f1fba37ad96f6d5c62111692e00253.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544148734, 1, 1544148734, 'article_thumb', 1);
-INSERT INTO `tplay_attachment` VALUES (13, 'admin', '16cbe01624f35f9099926ec95008b767.jpg', '\\uploads\\admin\\ad_thumb\\20181207\\16cbe01624f35f9099926ec95008b767.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544149225, 1, 1544149225, 'ad_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (14, 'admin', 'bac869dad9610f7943d2488b1b2845a8.jpg', '\\uploads\\admin\\ad_thumb\\20181207\\bac869dad9610f7943d2488b1b2845a8.jpg', 1649289, 'jpg', 1, '127.0.0.1', 1, 1544149770, 1, 1544149770, 'ad_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (15, 'admin', 'ded95d1a3d1d80f6cee87818f2797e39.jpg', '\\uploads\\admin\\ad_thumb\\20181207\\ded95d1a3d1d80f6cee87818f2797e39.jpg', 1649289, 'jpg', 1, '127.0.0.1', 1, 1544150152, 1, 1544150152, 'ad_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (16, 'admin', '1507e7fcf6ed2127ced711319c9cba16.jpg', '\\uploads\\admin\\ad_thumb\\20181207\\1507e7fcf6ed2127ced711319c9cba16.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544150156, 1, 1544150156, 'ad_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (17, 'admin', 'b45ae980e0774ff23d6b785495f2e30a.png', '\\uploads\\admin\\ad_thumb\\20181207\\b45ae980e0774ff23d6b785495f2e30a.png', 3093297, 'png', 1, '127.0.0.1', 1, 1544150407, 1, 1544150407, 'ad_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (18, 'admin', '0c88aba9f98071598407bbb85c0ed296.png', '\\uploads\\admin\\article_thumb\\20181207\\0c88aba9f98071598407bbb85c0ed296.png', 69514, 'png', 1, '127.0.0.1', 1, 1544174346, 1, 1544174346, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (19, 'admin', '9696fa90fea151f0152ac6406de1d651.jpg', '\\uploads\\admin\\article_thumb\\20181207\\9696fa90fea151f0152ac6406de1d651.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544174407, 1, 1544174407, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (20, 'admin', '0776683fe0c074a9194fc403c931498a.jpg', '\\uploads\\admin\\article_thumb\\20181207\\0776683fe0c074a9194fc403c931498a.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544174572, 1, 1544174572, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (21, 'admin', 'e5703807bb6f8949877136f203f7ef5d.png', '\\uploads\\admin\\article_thumb\\20181207\\e5703807bb6f8949877136f203f7ef5d.png', 33847, 'png', 1, '127.0.0.1', 1, 1544174750, 1, 1544174750, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (22, 'admin', 'e895ecd7454f5b6112950bbb01224c6d.png', '\\uploads\\admin\\article_thumb\\20181207\\e895ecd7454f5b6112950bbb01224c6d.png', 33847, 'png', 1, '127.0.0.1', 1, 1544174994, 1, 1544174994, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (23, 'admin', '984a2ed5d233e6d92b214d9daba282d2.jpg', '\\uploads\\admin\\article_thumb\\20181207\\984a2ed5d233e6d92b214d9daba282d2.jpg', 29490, 'jpg', 1, '127.0.0.1', 1, 1544175122, 1, 1544175122, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (24, 'admin', '942771d275d4cca44eb8ef38d7af2926.png', '\\uploads\\admin\\article_thumb\\20181207\\942771d275d4cca44eb8ef38d7af2926.png', 33847, 'png', 1, '127.0.0.1', 1, 1544175220, 1, 1544175220, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (25, 'admin', '91386298f74b576815556fd04a21a044.jpg', '\\uploads\\admin\\article_thumb\\20181207\\91386298f74b576815556fd04a21a044.jpg', 42188, 'jpg', 1, '127.0.0.1', 1, 1544175277, 1, 1544175277, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (26, 'admin', '95b6a7bbe55d23cc6aab9fa05ffbc0ca.jpg', '\\uploads\\admin\\article_thumb\\20181207\\95b6a7bbe55d23cc6aab9fa05ffbc0ca.jpg', 121721, 'jpg', 1, '127.0.0.1', 1, 1544175605, 1, 1544175605, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (27, 'admin', '9804ec4f669224c77d1b355d20792b2f.jpg', '\\uploads\\admin\\article_thumb\\20181207\\9804ec4f669224c77d1b355d20792b2f.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544176099, 1, 1544176099, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (28, 'admin', '57134f203886621ac317f105f152d8e3.jpg', '\\uploads\\admin\\article_thumb\\20181207\\57134f203886621ac317f105f152d8e3.jpg', 29490, 'jpg', 1, '127.0.0.1', 1, 1544176113, 1, 1544176113, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (29, 'admin', '1e58900590b7a3015a8f3980dddc8d06.jpg', '\\uploads\\admin\\article_thumb\\20181207\\1e58900590b7a3015a8f3980dddc8d06.jpg', 50156, 'jpg', 1, '127.0.0.1', 1, 1544176129, 1, 1544176129, 'article_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (30, 'admin', 'c85dc04775e649de3695b04f57725f61.jpg', '\\uploads\\admin\\house_cover_head\\20181211\\c85dc04775e649de3695b04f57725f61.jpg', 34977, 'jpg', 1, '127.0.0.1', 1, 1544518445, 1, 1544518445, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (31, 'admin', '3db222c27e2f3e52c1f23ae5d74ddd73.jpg', '\\uploads\\admin\\admin_thumb\\20181211\\3db222c27e2f3e52c1f23ae5d74ddd73.jpg', 93321, 'jpg', 1, '127.0.0.1', 1, 1544518494, 1, 1544518494, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (32, 'admin', 'ed22660dba488a580ca011cd756f6426.jpg', '\\uploads\\admin\\house_cover_head\\20181211\\ed22660dba488a580ca011cd756f6426.jpg', 34977, 'jpg', 1, '127.0.0.1', 1, 1544518963, 1, 1544518963, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (33, 'admin', '5e15219632ce815a531d5b2ca202b282.jpg', '\\uploads\\admin\\house_cover_head\\20181211\\5e15219632ce815a531d5b2ca202b282.jpg', 105883, 'jpg', 1, '127.0.0.1', 1, 1544519008, 1, 1544519008, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (34, 'admin', '4fca27c28df1c20c82d0681c9bf90b45.png', '\\uploads\\admin\\house_cover_head\\20181211\\4fca27c28df1c20c82d0681c9bf90b45.png', 33847, 'png', 1, '127.0.0.1', 1, 1544519059, 1, 1544519059, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (35, 'admin', '911d3ebed7bacf1e0221c29522238cab.jpg', '\\uploads\\admin\\house_cover_head\\20181211\\911d3ebed7bacf1e0221c29522238cab.jpg', 11016, 'jpg', 1, '127.0.0.1', 1, 1544519155, 1, 1544519155, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (36, 'admin', '1c55f91b5487f7ca843debc85450527a.jpg', '\\uploads\\admin\\house_cover_head\\20181211\\1c55f91b5487f7ca843debc85450527a.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544519276, 1, 1544519276, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (37, 'admin', '6a0107e03fe6969969aaf30b83d1f672.jpg', '\\uploads\\admin\\house_cover_head\\20181211\\6a0107e03fe6969969aaf30b83d1f672.jpg', 13672, 'jpg', 1, '127.0.0.1', 1, 1544519342, 1, 1544519342, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (38, 'admin', 'c66057bb154ad1d8cc46e82d7f327e40.jpg', '\\uploads\\admin\\house_cover_head\\20181211\\c66057bb154ad1d8cc46e82d7f327e40.jpg', 13672, 'jpg', 1, '127.0.0.1', 1, 1544519391, 1, 1544519391, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (39, 'admin', '3e9714cd42bdcbb5ca45d738244e34dc.jpg', '\\uploads\\admin\\house_cover_head\\20181211\\3e9714cd42bdcbb5ca45d738244e34dc.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544519424, 1, 1544519424, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (40, 'admin', '936eb683dac101570e7e89d126d9185e.jpg', '\\uploads\\admin\\house_cover_head\\20181211\\936eb683dac101570e7e89d126d9185e.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544521585, 1, 1544521585, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (41, 'admin', 'f8c432740fb5a0611182a52f7716de65.jpg', '\\uploads\\admin\\house_cover_head\\20181211\\f8c432740fb5a0611182a52f7716de65.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544521831, 1, 1544521831, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (42, 'admin', '9b247b8b455a6a2cead7fe3c58e221ef.jpg', '\\uploads\\admin\\house_cover_head\\20181211\\9b247b8b455a6a2cead7fe3c58e221ef.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544521862, 1, 1544521862, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (43, 'admin', 'eb4438a98a987fff7e85c9849035e964.jpg', '\\uploads\\admin\\house_cover_head\\20181211\\eb4438a98a987fff7e85c9849035e964.jpg', 13672, 'jpg', 1, '127.0.0.1', 1, 1544521902, 1, 1544521902, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (44, 'admin', '17c39e911d20aba39993b746578ac442.jpg', '\\uploads\\admin\\house_cover_head\\20181211\\17c39e911d20aba39993b746578ac442.jpg', 110918, 'jpg', 1, '127.0.0.1', 1, 1544522002, 1, 1544522002, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (63, 'admin', '82dbd94622b1359c211c9fe1e637a7a9.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\82dbd94622b1359c211c9fe1e637a7a9.jpg', 13672, 'jpg', 1, '127.0.0.1', 1, 1544588988, 1, 1544588988, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (64, 'admin', 'b07541ad68732c390f3e6e3fa2bd4e29.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\b07541ad68732c390f3e6e3fa2bd4e29.jpg', 110918, 'jpg', 1, '127.0.0.1', 1, 1544588994, 1, 1544588994, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (65, 'admin', 'd86440ac643c819aad532ce918ca63f4.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\d86440ac643c819aad532ce918ca63f4.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544588997, 1, 1544588997, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (66, 'admin', 'be658c201cf5b014db67298b0733e645.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\be658c201cf5b014db67298b0733e645.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544589044, 1, 1544589044, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (67, 'admin', 'ed5c79e251ee604c3f61eb6143ec75f9.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\ed5c79e251ee604c3f61eb6143ec75f9.jpg', 13672, 'jpg', 1, '127.0.0.1', 1, 1544589046, 1, 1544589046, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (68, 'admin', '30450e35c582af0431bfae1f630f7223.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\30450e35c582af0431bfae1f630f7223.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544589233, 1, 1544589233, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (69, 'admin', '6fb58291583f50ec92e4ce834506cef8.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\6fb58291583f50ec92e4ce834506cef8.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544589237, 1, 1544589237, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (70, 'admin', 'ac03b7795aaadb0c3417d87aeb1fbcc0.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\ac03b7795aaadb0c3417d87aeb1fbcc0.jpg', 695944, 'jpg', 1, '127.0.0.1', 1, 1544589241, 1, 1544589241, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (71, 'admin', '6e6da9d28842d5db754ad787a00fd7ee.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\6e6da9d28842d5db754ad787a00fd7ee.jpg', 13672, 'jpg', 1, '127.0.0.1', 1, 1544589289, 1, 1544589289, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (72, 'admin', 'a1836d5f84c4f799e93f61cc8cbef34b.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\a1836d5f84c4f799e93f61cc8cbef34b.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544589291, 1, 1544589291, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (73, 'admin', 'cc4de177a4ebc014d17efe4cf0f4237c.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\cc4de177a4ebc014d17efe4cf0f4237c.jpg', 110918, 'jpg', 1, '127.0.0.1', 1, 1544592142, 1, 1544592142, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (74, 'admin', '2ca2fefefe49a76c5d0157fd6474c76c.png', '\\uploads\\admin\\admin_thumb\\20181212\\2ca2fefefe49a76c5d0157fd6474c76c.png', 33847, 'png', 1, '127.0.0.1', 1, 1544592146, 1, 1544592146, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (75, 'admin', '2e0bc4d2c012dc787b397fa8944fdf57.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\2e0bc4d2c012dc787b397fa8944fdf57.jpg', 695944, 'jpg', 1, '127.0.0.1', 1, 1544592150, 1, 1544592150, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (76, 'admin', 'fdc696f145465b7881c5be9d2173bdb6.png', '\\uploads\\admin\\admin_thumb\\20181212\\fdc696f145465b7881c5be9d2173bdb6.png', 14762, 'png', 1, '127.0.0.1', 1, 1544592192, 1, 1544592192, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (77, 'admin', 'e91004e59ecd021ffe69cfdf97ecc0cd.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\e91004e59ecd021ffe69cfdf97ecc0cd.jpg', 30986, 'jpg', 1, '127.0.0.1', 1, 1544592198, 1, 1544592198, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (78, 'admin', '2c186fc7e6221f462b4261d13df8120e.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\2c186fc7e6221f462b4261d13df8120e.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544592694, 1, 1544592694, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (79, 'admin', '8d6caecc8080f52ae9b4035c777d9c56.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\8d6caecc8080f52ae9b4035c777d9c56.jpg', 48476, 'jpg', 1, '127.0.0.1', 1, 1544592703, 1, 1544592703, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (80, 'admin', 'fd1b58e966bd9661ccfdf6f3c9e55c61.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\fd1b58e966bd9661ccfdf6f3c9e55c61.jpg', 26940, 'jpg', 1, '127.0.0.1', 1, 1544592707, 1, 1544592707, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (81, 'admin', 'a3b9b2ff7cb3b3816f74b048c4785f4c.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\a3b9b2ff7cb3b3816f74b048c4785f4c.jpg', 30986, 'jpg', 1, '127.0.0.1', 1, 1544592734, 1, 1544592734, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (82, 'admin', '4317fccc172386d979e575e270aef3d6.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\4317fccc172386d979e575e270aef3d6.jpg', 42575, 'jpg', 1, '127.0.0.1', 1, 1544592739, 1, 1544592739, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (83, 'admin', '93142030cfb033ac6b0d1fba4f155527.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\93142030cfb033ac6b0d1fba4f155527.jpg', 24525, 'jpg', 1, '127.0.0.1', 1, 1544593223, 1, 1544593223, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (84, 'admin', '92d1aca693e511ceb6d8f058b71a0104.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\92d1aca693e511ceb6d8f058b71a0104.jpg', 52484, 'jpg', 1, '127.0.0.1', 1, 1544593229, 1, 1544593229, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (85, 'admin', 'bbea9137c6326ecc922a0622b9393aae.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\bbea9137c6326ecc922a0622b9393aae.jpg', 16511, 'jpg', 1, '127.0.0.1', 1, 1544593234, 1, 1544593234, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (86, 'admin', '7a1a5cbcf797357c042ec85ed6c30b76.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\7a1a5cbcf797357c042ec85ed6c30b76.jpg', 16042, 'jpg', 1, '127.0.0.1', 1, 1544593271, 1, 1544593271, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (87, 'admin', '012b051a7f75f97406dc7c76c505e952.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\012b051a7f75f97406dc7c76c505e952.jpg', 42188, 'jpg', 1, '127.0.0.1', 1, 1544593275, 1, 1544593275, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (88, 'admin', '4e4f05cfc2fb94f63884e02dec98dafe.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\4e4f05cfc2fb94f63884e02dec98dafe.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544593740, 1, 1544593740, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (89, 'admin', '22b2a9193dd8f36c4d4db8db57d79e15.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\22b2a9193dd8f36c4d4db8db57d79e15.jpg', 42188, 'jpg', 1, '127.0.0.1', 1, 1544593748, 1, 1544593748, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (90, 'admin', '7e56b6553d3d3c12f2d9917c55b19ae9.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\7e56b6553d3d3c12f2d9917c55b19ae9.jpg', 32151, 'jpg', 1, '127.0.0.1', 1, 1544593753, 1, 1544593753, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (91, 'admin', '85752002e6dabade3dbff4fabbb54e55.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\85752002e6dabade3dbff4fabbb54e55.jpg', 37601, 'jpg', 1, '127.0.0.1', 1, 1544593782, 1, 1544593782, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (92, 'admin', 'e1ce5dfaf3b474e75dfee967dbbf4adc.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\e1ce5dfaf3b474e75dfee967dbbf4adc.jpg', 48476, 'jpg', 1, '127.0.0.1', 1, 1544593788, 1, 1544593788, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (93, 'admin', '56267c23b5adff365b00864cb3b68c88.png', '\\uploads\\admin\\house_cover_head\\20181212\\56267c23b5adff365b00864cb3b68c88.png', 33847, 'png', 1, '127.0.0.1', 1, 1544594192, 1, 1544594192, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (94, 'admin', 'bf20cfecf846402a39780985586efa86.png', '\\uploads\\admin\\admin_thumb\\20181212\\bf20cfecf846402a39780985586efa86.png', 33847, 'png', 1, '127.0.0.1', 1, 1544594281, 1, 1544594281, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (95, 'admin', 'aa239ad48034d10a8395b2047aecbb9e.png', '\\uploads\\admin\\house_cover_head\\20181212\\aa239ad48034d10a8395b2047aecbb9e.png', 33847, 'png', 1, '127.0.0.1', 1, 1544594328, 1, 1544594328, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (96, 'admin', '2a4c3ea57c3da91b5bf5e0d410918e8a.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\2a4c3ea57c3da91b5bf5e0d410918e8a.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544594560, 1, 1544594560, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (97, 'admin', '9f70f2b6393d94c02d887e01743f871e.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\9f70f2b6393d94c02d887e01743f871e.jpg', 695944, 'jpg', 1, '127.0.0.1', 1, 1544594620, 1, 1544594620, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (98, 'admin', '92e6d969549a1a11b5026e2ac91aa55d.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\92e6d969549a1a11b5026e2ac91aa55d.jpg', 695944, 'jpg', 1, '127.0.0.1', 1, 1544594627, 1, 1544594627, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (99, 'admin', 'eae7698e693ab6a7e8fff4623d704abe.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\eae7698e693ab6a7e8fff4623d704abe.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544594630, 1, 1544594630, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (100, 'admin', '5b4f5153805856909058f5df8b88b68a.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\5b4f5153805856909058f5df8b88b68a.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544595272, 1, 1544595272, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (101, 'admin', '1e5c003855fbde50216f85988b2ccc26.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\1e5c003855fbde50216f85988b2ccc26.jpg', 695944, 'jpg', 1, '127.0.0.1', 1, 1544595275, 1, 1544595275, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (102, 'admin', '21d5d928d7360b8a4083aaf07b369a14.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\21d5d928d7360b8a4083aaf07b369a14.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544595277, 1, 1544595277, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (103, 'admin', 'b865ac454a6473e5d02e02408b1b7ac7.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\b865ac454a6473e5d02e02408b1b7ac7.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544595309, 1, 1544595309, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (104, 'admin', '01d37ecbdea1c739ec9ef71748ae189b.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\01d37ecbdea1c739ec9ef71748ae189b.jpg', 158726, 'jpg', 1, '127.0.0.1', 1, 1544595501, 1, 1544595501, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (105, 'admin', '95329841008b50e1cccabaaba92e3c41.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\95329841008b50e1cccabaaba92e3c41.jpg', 32151, 'jpg', 1, '127.0.0.1', 1, 1544595505, 1, 1544595505, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (106, 'admin', '5fcb8e27e037801acb972d4bd514f996.png', '\\uploads\\admin\\admin_thumb\\20181212\\5fcb8e27e037801acb972d4bd514f996.png', 3093297, 'png', 1, '127.0.0.1', 1, 1544595510, 1, 1544595510, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (107, 'admin', '903fa1e62ae050fc0f90ac604463f4ea.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\903fa1e62ae050fc0f90ac604463f4ea.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544595543, 1, 1544595543, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (108, 'admin', '2291f3dc131757726c57aa2bb56c12e5.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\2291f3dc131757726c57aa2bb56c12e5.jpg', 695944, 'jpg', 1, '127.0.0.1', 1, 1544595545, 1, 1544595545, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (109, 'admin', '8773ad9bc46e6e76c81c702255d79555.png', '\\uploads\\admin\\admin_thumb\\20181212\\8773ad9bc46e6e76c81c702255d79555.png', 33847, 'png', 1, '127.0.0.1', 1, 1544601659, 1, 1544601659, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (110, 'admin', '7923cf9ce0d92f2af1be17513b1a6e6b.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\7923cf9ce0d92f2af1be17513b1a6e6b.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544601663, 1, 1544601663, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (111, 'admin', '96b4bcec750fd785231483a3e5ee2834.png', '\\uploads\\admin\\admin_thumb\\20181212\\96b4bcec750fd785231483a3e5ee2834.png', 33847, 'png', 1, '127.0.0.1', 1, 1544601666, 1, 1544601666, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (112, 'admin', '1106e5cb932494b7a08d35a173623098.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\1106e5cb932494b7a08d35a173623098.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544601668, 1, 1544601668, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (113, 'admin', '708076fc029fb9d2522d50e901ee8cff.png', '\\uploads\\admin\\house_cover_head\\20181212\\708076fc029fb9d2522d50e901ee8cff.png', 33847, 'png', 1, '127.0.0.1', 1, 1544601951, 1, 1544601951, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (114, 'admin', '9c9d60e77dc9f5b3735b7fc35bd3dc86.png', '\\uploads\\admin\\admin_thumb\\20181212\\9c9d60e77dc9f5b3735b7fc35bd3dc86.png', 33847, 'png', 1, '127.0.0.1', 1, 1544602015, 1, 1544602015, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (115, 'admin', '50ba836396c5e344ed1dc35586e39035.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\50ba836396c5e344ed1dc35586e39035.jpg', 695944, 'jpg', 1, '127.0.0.1', 1, 1544602018, 1, 1544602018, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (116, 'admin', 'ae91d6a705f77143647f27a514eb2e0e.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\ae91d6a705f77143647f27a514eb2e0e.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544602039, 1, 1544602039, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (117, 'admin', '2f15e8bc9e5994a7d2ef309f22a2b60c.png', '\\uploads\\admin\\admin_thumb\\20181212\\2f15e8bc9e5994a7d2ef309f22a2b60c.png', 33847, 'png', 1, '127.0.0.1', 1, 1544602041, 1, 1544602041, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (118, 'admin', 'df881ec1e9ca877368708c98e625156c.png', '\\uploads\\admin\\admin_thumb\\20181212\\df881ec1e9ca877368708c98e625156c.png', 33847, 'png', 1, '127.0.0.1', 1, 1544602167, 1, 1544602167, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (119, 'admin', 'd913514959353f7b2159e4c463c1edc1.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\d913514959353f7b2159e4c463c1edc1.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544602170, 1, 1544602170, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (120, 'admin', '080ba0d4d6e1e3aa8181c3e1bc7b63cf.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\080ba0d4d6e1e3aa8181c3e1bc7b63cf.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544602771, 1, 1544602771, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (121, 'admin', '55756f1434a4b5a423f732330f788517.png', '\\uploads\\admin\\admin_thumb\\20181212\\55756f1434a4b5a423f732330f788517.png', 33847, 'png', 1, '127.0.0.1', 1, 1544602774, 1, 1544602774, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (122, 'admin', 'c4b6005f3a196f0e1713d331c39fc311.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\c4b6005f3a196f0e1713d331c39fc311.jpg', 13672, 'jpg', 1, '127.0.0.1', 1, 1544602776, 1, 1544602776, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (123, 'admin', '570ed9ebb946e759c0947fbede3679db.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\570ed9ebb946e759c0947fbede3679db.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544602804, 1, 1544602804, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (124, 'admin', 'e02c21604bb0390cebd81094a32b820b.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\e02c21604bb0390cebd81094a32b820b.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544602806, 1, 1544602806, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (125, 'admin', '56e0f5f9f141af02dd74f5f1c008dc20.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\56e0f5f9f141af02dd74f5f1c008dc20.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544603027, 1, 1544603027, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (126, 'admin', '2d024557d43a33fad382053d23e672e4.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\2d024557d43a33fad382053d23e672e4.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544603030, 1, 1544603030, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (127, 'admin', '58cd81574e03b4871534db9980702651.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\58cd81574e03b4871534db9980702651.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544603067, 1, 1544603067, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (128, 'admin', '2efd8c0038a3880c7be7e59385e73d70.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\2efd8c0038a3880c7be7e59385e73d70.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544603118, 1, 1544603118, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (129, 'admin', 'e91f70dcc5f5c9026e3cbb4f964408e4.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\e91f70dcc5f5c9026e3cbb4f964408e4.jpg', 695944, 'jpg', 1, '127.0.0.1', 1, 1544603130, 1, 1544603130, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (130, 'admin', 'aac57b5bb2d5b59b73c8eddc266cf0e5.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\aac57b5bb2d5b59b73c8eddc266cf0e5.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544603171, 1, 1544603171, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (131, 'admin', 'e826d652f8539956145b5fea0d0ba3ca.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\e826d652f8539956145b5fea0d0ba3ca.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544603174, 1, 1544603174, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (132, 'admin', '559201ab55c8a9d6f7add61732f3892f.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\559201ab55c8a9d6f7add61732f3892f.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544603316, 1, 1544603316, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (133, 'admin', '964506177dc10fdf60ec43560f1868c8.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\964506177dc10fdf60ec43560f1868c8.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544603319, 1, 1544603319, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (134, 'admin', '6e4e2716280bd3af3b9e351f073839bd.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\6e4e2716280bd3af3b9e351f073839bd.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544603348, 1, 1544603348, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (135, 'admin', '392db854db9135df7791feea49a95153.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\392db854db9135df7791feea49a95153.jpg', 13672, 'jpg', 1, '127.0.0.1', 1, 1544603372, 1, 1544603372, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (136, 'admin', '37ec82aeb82553c10786a96f6ca4a6a6.png', '\\uploads\\admin\\admin_thumb\\20181212\\37ec82aeb82553c10786a96f6ca4a6a6.png', 69514, 'png', 1, '127.0.0.1', 1, 1544603378, 1, 1544603378, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (137, 'admin', '062a11cb14da5f691f7c87518081f487.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\062a11cb14da5f691f7c87518081f487.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544603424, 1, 1544603424, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (138, 'admin', 'b0ce29e4aaf7e8d48b8a4c51b903b996.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\b0ce29e4aaf7e8d48b8a4c51b903b996.jpg', 695944, 'jpg', 1, '127.0.0.1', 1, 1544603438, 1, 1544603438, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (139, 'admin', '4dca9675a23063392eb3fc67479293a0.jpg', '\\uploads\\admin\\house_cover_head\\20181212\\4dca9675a23063392eb3fc67479293a0.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544604032, 1, 1544604032, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (140, 'admin', '7127b4de49d6e50d7c364b084846fdd6.jpg', '\\uploads\\admin\\admin_thumb\\20181212\\7127b4de49d6e50d7c364b084846fdd6.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544604038, 1, 1544604038, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (141, 'admin', '009b7bcc9dea70f0c23ceccbe1e0fe60.png', '\\uploads\\admin\\admin_thumb\\20181212\\009b7bcc9dea70f0c23ceccbe1e0fe60.png', 69514, 'png', 1, '127.0.0.1', 1, 1544604364, 1, 1544604364, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (142, 'admin', '710cc4eb1f24b05cdb7e48de1281b530.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\710cc4eb1f24b05cdb7e48de1281b530.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544672236, 1, 1544672236, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (143, 'admin', 'f1cb3d70b782b928f8f2a8b36588b72a.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\f1cb3d70b782b928f8f2a8b36588b72a.jpg', 13672, 'jpg', 1, '127.0.0.1', 1, 1544672240, 1, 1544672240, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (144, 'admin', '3deb9dec69c12fc968e91f2e9e879228.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\3deb9dec69c12fc968e91f2e9e879228.jpg', 32151, 'jpg', 1, '127.0.0.1', 1, 1544672302, 1, 1544672302, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (145, 'admin', 'bc397afe45e184e686d3fd295bdc8b49.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\bc397afe45e184e686d3fd295bdc8b49.jpg', 29448, 'jpg', 1, '127.0.0.1', 1, 1544672308, 1, 1544672308, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (146, 'admin', 'c731e00ed3ef107c5308aac0122f2d43.png', '\\uploads\\admin\\house_cover_head\\20181213\\c731e00ed3ef107c5308aac0122f2d43.png', 33847, 'png', 1, '127.0.0.1', 1, 1544673629, 1, 1544673629, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (147, 'admin', 'd02f9fc497ea1fe2e6ea712ad41a68bf.png', '\\uploads\\admin\\admin_thumb\\20181213\\d02f9fc497ea1fe2e6ea712ad41a68bf.png', 33847, 'png', 1, '127.0.0.1', 1, 1544673633, 1, 1544673633, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (148, 'admin', '1db8e233b4285eb862821e5dcee7175f.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\1db8e233b4285eb862821e5dcee7175f.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544679246, 1, 1544679246, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (149, 'admin', '65e381e879cb438385b2bf8a070daa22.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\65e381e879cb438385b2bf8a070daa22.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544679323, 1, 1544679323, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (150, 'admin', '8f440134bf92345cc953c83b5afc8a9e.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\8f440134bf92345cc953c83b5afc8a9e.jpg', 13672, 'jpg', 1, '127.0.0.1', 1, 1544679327, 1, 1544679327, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (151, 'admin', 'f8bff72777fefee6136f9c2f4d912202.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\f8bff72777fefee6136f9c2f4d912202.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544679362, 1, 1544679362, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (152, 'admin', 'f334a0e40743b2061743d74cf49f9fcc.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\f334a0e40743b2061743d74cf49f9fcc.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544679664, 1, 1544679664, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (153, 'admin', '6366dc1bbece83792368d6a3edfea6d7.png', '\\uploads\\admin\\admin_thumb\\20181213\\6366dc1bbece83792368d6a3edfea6d7.png', 33847, 'png', 1, '127.0.0.1', 1, 1544679667, 1, 1544679667, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (154, 'admin', 'f3065dc884c5f86eda43a2abaface129.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\f3065dc884c5f86eda43a2abaface129.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544679693, 1, 1544679693, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (155, 'admin', 'd9bcfc647b32722d045818c9b8859284.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\d9bcfc647b32722d045818c9b8859284.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544679733, 1, 1544679733, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (156, 'admin', '8ac9478665946e731bbde8cc04fb19e1.png', '\\uploads\\admin\\admin_thumb\\20181213\\8ac9478665946e731bbde8cc04fb19e1.png', 33847, 'png', 1, '127.0.0.1', 1, 1544679736, 1, 1544679736, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (157, 'admin', 'baad2841b48f206dbb4348a5b2732f1f.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\baad2841b48f206dbb4348a5b2732f1f.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544679756, 1, 1544679756, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (158, 'admin', 'bfbd47e331ba0ab6ea053bfe3258d3f8.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\bfbd47e331ba0ab6ea053bfe3258d3f8.jpg', 11016, 'jpg', 1, '127.0.0.1', 1, 1544680213, 1, 1544680213, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (159, 'admin', '2f101159c023781d6c702907486fed19.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\2f101159c023781d6c702907486fed19.jpg', 124465, 'jpg', 1, '127.0.0.1', 1, 1544680216, 1, 1544680216, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (160, 'admin', '2c6eca2f27907fb372d7ad56499a3920.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\2c6eca2f27907fb372d7ad56499a3920.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544680239, 1, 1544680239, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (161, 'admin', 'c4cdf2692c4b172c8aff9743c449d22f.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\c4cdf2692c4b172c8aff9743c449d22f.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544680279, 1, 1544680279, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (162, 'admin', 'b0c8126e2cdc226026798733108ab89d.png', '\\uploads\\admin\\admin_thumb\\20181213\\b0c8126e2cdc226026798733108ab89d.png', 33847, 'png', 1, '127.0.0.1', 1, 1544680282, 1, 1544680282, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (163, 'admin', 'a94d55edb1492bfaac95fe157aac3578.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\a94d55edb1492bfaac95fe157aac3578.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544680306, 1, 1544680306, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (164, 'admin', 'f3ed11505a29ba66cbc9eb03ae2b6817.jpg', '\\uploads\\admin\\house_cover_head\\20181213\\f3ed11505a29ba66cbc9eb03ae2b6817.jpg', 64852, 'jpg', 1, '127.0.0.1', 1, 1544680994, 1, 1544680994, 'house_cover_head', 0);
-INSERT INTO `tplay_attachment` VALUES (165, 'admin', '777fb6aecab59a3d9d5c877a70062ca3.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\777fb6aecab59a3d9d5c877a70062ca3.jpg', 695944, 'jpg', 1, '127.0.0.1', 1, 1544680997, 1, 1544680997, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (166, 'admin', '5279033afbb166c31ccdaef5702418d6.jpg', '\\uploads\\admin\\admin_thumb\\20181213\\5279033afbb166c31ccdaef5702418d6.jpg', 50838, 'jpg', 1, '127.0.0.1', 1, 1544681019, 1, 1544681019, 'admin_thumb', 0);
-INSERT INTO `tplay_attachment` VALUES (167, 'admin', 'bb685c1663a60b6e352cad79f7313ca0.png', '\\uploads\\admin\\admin_thumb\\20181213\\bb685c1663a60b6e352cad79f7313ca0.png', 95813, 'png', 1, '127.0.0.1', 1, 1544683229, 1, 1544683229, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (1, 'admin', '0165ca8e55a04367e4154dc17cbb87e5.png', '\\uploads\\admin\\admin_thumb\\20181222\\0165ca8e55a04367e4154dc17cbb87e5.png', 26855, 'png', 1, '127.0.0.1', 1, 1545461615, 1, 1545461615, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (2, 'admin', 'b775dac8b4da24472d47d328e812eabc.png', '\\uploads\\admin\\admin_thumb\\20181222\\b775dac8b4da24472d47d328e812eabc.png', 26855, 'png', 16, '127.0.0.1', 1, 1545461654, 16, 1545461654, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (3, 'admin', '2a9e3f25cb120e6d7ac396d75b9cb06d.png', '\\uploads\\admin\\banner\\20181222\\2a9e3f25cb120e6d7ac396d75b9cb06d.png', 503705, 'png', 1, '127.0.0.1', 1, 1545461727, 1, 1545461727, 'banner', 0);
+INSERT INTO `tplay_attachment` VALUES (4, 'admin', 'f2fe745a7554256b617a5580f5e197f6.png', '\\uploads\\admin\\banner\\20181222\\f2fe745a7554256b617a5580f5e197f6.png', 578229, 'png', 1, '127.0.0.1', 1, 1545461742, 1, 1545461742, 'banner', 0);
+INSERT INTO `tplay_attachment` VALUES (5, 'admin', 'a42f24d4105441c0b8b26922aa95449b.png', '\\uploads\\admin\\banner\\20181222\\a42f24d4105441c0b8b26922aa95449b.png', 425588, 'png', 1, '127.0.0.1', 1, 1545461758, 1, 1545461758, 'banner', 0);
+INSERT INTO `tplay_attachment` VALUES (6, 'admin', '49e70e20aa08a8d6b9f50a04922ad405.png', '\\uploads\\admin\\banner\\20181222\\49e70e20aa08a8d6b9f50a04922ad405.png', 410294, 'png', 1, '127.0.0.1', 1, 1545461878, 1, 1545461878, 'banner', 0);
+INSERT INTO `tplay_attachment` VALUES (7, 'admin', '939044fde44e84dea2062436eee36afd.jpg', '\\uploads\\admin\\banner\\20181222\\939044fde44e84dea2062436eee36afd.jpg', 342275, 'jpg', 1, '127.0.0.1', 1, 1545462035, 1, 1545462035, 'banner', 0);
+INSERT INTO `tplay_attachment` VALUES (8, 'admin', '55945230a8b81821d9d133d18e372fb0.jpg', '\\uploads\\admin\\house_cover_head\\20181222\\55945230a8b81821d9d133d18e372fb0.jpg', 138140, 'jpg', 1, '127.0.0.1', 1, 1545462121, 1, 1545462121, 'house_cover_head', 0);
+INSERT INTO `tplay_attachment` VALUES (9, 'admin', 'a14f5a5fd1e47717fe5308f75ca6e27e.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\a14f5a5fd1e47717fe5308f75ca6e27e.jpg', 342275, 'jpg', 1, '127.0.0.1', 1, 1545462127, 1, 1545462127, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (10, 'admin', '08f2a1a80db0f60f992c974d71cd60c2.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\08f2a1a80db0f60f992c974d71cd60c2.jpg', 134507, 'jpg', 1, '127.0.0.1', 1, 1545462131, 1, 1545462131, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (11, 'admin', 'e7840ad3ebf08b4beaacecc3bb21ad88.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\e7840ad3ebf08b4beaacecc3bb21ad88.jpg', 178895, 'jpg', 1, '127.0.0.1', 1, 1545462133, 1, 1545462133, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (12, 'admin', '88b91a4a7a8a3e53ff9bd691bfc439f2.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\88b91a4a7a8a3e53ff9bd691bfc439f2.jpg', 145887, 'jpg', 1, '127.0.0.1', 1, 1545462139, 1, 1545462139, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (13, 'admin', '863bd7e3c8accc78770057d75bffc98b.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\863bd7e3c8accc78770057d75bffc98b.jpg', 174261, 'jpg', 1, '127.0.0.1', 1, 1545462144, 1, 1545462144, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (14, 'admin', '71b6b40753644b29dfce1da4799a98bd.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\71b6b40753644b29dfce1da4799a98bd.jpg', 664074, 'jpg', 1, '127.0.0.1', 1, 1545462149, 1, 1545462149, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (15, 'admin', '3d4bc75de004efee15bcddb440802866.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\3d4bc75de004efee15bcddb440802866.jpg', 255504, 'jpg', 1, '127.0.0.1', 1, 1545462217, 1, 1545462217, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (16, 'admin', '2805ffdc5067c93a6359c61446219860.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\2805ffdc5067c93a6359c61446219860.jpg', 219148, 'jpg', 1, '127.0.0.1', 1, 1545462220, 1, 1545462220, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (17, 'admin', 'ad0e8a04f0e8b2ab324ffab015122b8a.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\ad0e8a04f0e8b2ab324ffab015122b8a.jpg', 249669, 'jpg', 1, '127.0.0.1', 1, 1545462223, 1, 1545462223, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (18, 'admin', 'cc25c139ebecd7a24235368bf7134438.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\cc25c139ebecd7a24235368bf7134438.jpg', 143020, 'jpg', 1, '127.0.0.1', 1, 1545462227, 1, 1545462227, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (19, 'admin', 'fd186927a936e3230a0e0db1d576d8bf.jpg', '\\uploads\\admin\\house_cover_head\\20181222\\fd186927a936e3230a0e0db1d576d8bf.jpg', 152165, 'jpg', 1, '127.0.0.1', 1, 1545463225, 1, 1545463225, 'house_cover_head', 0);
+INSERT INTO `tplay_attachment` VALUES (20, 'admin', '9fa84cc6b2f488b20a3e944225d1d17c.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\9fa84cc6b2f488b20a3e944225d1d17c.jpg', 280594, 'jpg', 1, '127.0.0.1', 1, 1545463229, 1, 1545463229, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (21, 'admin', '264083cfbcdb399f3621c0f12b184081.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\264083cfbcdb399f3621c0f12b184081.jpg', 255870, 'jpg', 1, '127.0.0.1', 1, 1545463233, 1, 1545463233, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (22, 'admin', 'a87733ee2869b03599c6f1b0aab608b3.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\a87733ee2869b03599c6f1b0aab608b3.jpg', 361837, 'jpg', 1, '127.0.0.1', 1, 1545463236, 1, 1545463236, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (23, 'admin', '2c3234a09beb7569c04f83d955dd00dd.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\2c3234a09beb7569c04f83d955dd00dd.jpg', 637148, 'jpg', 1, '127.0.0.1', 1, 1545463239, 1, 1545463239, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (24, 'admin', '6013dc184feb827e394a23e5094074d4.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\6013dc184feb827e394a23e5094074d4.jpg', 361837, 'jpg', 1, '127.0.0.1', 1, 1545463361, 1, 1545463361, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (25, 'admin', '44f4144077ee32848ddc3c4f72c22ecd.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\44f4144077ee32848ddc3c4f72c22ecd.jpg', 255870, 'jpg', 1, '127.0.0.1', 1, 1545463364, 1, 1545463364, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (26, 'admin', 'f69d58d7cf51adb371e4e954974f2e11.jpg', '\\uploads\\admin\\house_cover_head\\20181222\\f69d58d7cf51adb371e4e954974f2e11.jpg', 113985, 'jpg', 1, '127.0.0.1', 1, 1545463439, 1, 1545463439, 'house_cover_head', 0);
+INSERT INTO `tplay_attachment` VALUES (27, 'admin', '3f12a3084d1e04764c157e9ce0111956.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\3f12a3084d1e04764c157e9ce0111956.jpg', 146135, 'jpg', 1, '127.0.0.1', 1, 1545463514, 1, 1545463514, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (28, 'admin', '131a01f3090ba2bd708beaa6d303f1a8.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\131a01f3090ba2bd708beaa6d303f1a8.jpg', 217145, 'jpg', 1, '127.0.0.1', 1, 1545463517, 1, 1545463517, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (29, 'admin', '8d57fb8f221bd10f7a5b125cfad8b707.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\8d57fb8f221bd10f7a5b125cfad8b707.jpg', 189665, 'jpg', 1, '127.0.0.1', 1, 1545463519, 1, 1545463519, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (30, 'admin', '3ec79add751ac2a3f55b2fbe9adc51d0.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\3ec79add751ac2a3f55b2fbe9adc51d0.jpg', 135799, 'jpg', 1, '127.0.0.1', 1, 1545463522, 1, 1545463522, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (31, 'admin', '2038a05fe24a92e2f24d40e562cc4d55.jpg', '\\uploads\\admin\\admin_thumb\\20181222\\2038a05fe24a92e2f24d40e562cc4d55.jpg', 126219, 'jpg', 1, '127.0.0.1', 1, 1545463632, 1, 1545463632, 'admin_thumb', 0);
+INSERT INTO `tplay_attachment` VALUES (32, 'admin', 'e3be6c7a46f65e58f43f842dc833bdb7.jpg', '\\uploads\\admin\\store\\20181222\\e3be6c7a46f65e58f43f842dc833bdb7.jpg', 45816, 'jpg', 1, '127.0.0.1', 1, 1545465620, 1, 1545465620, 'store', 0);
+INSERT INTO `tplay_attachment` VALUES (33, 'admin', 'af84f0021d5c9e40a1f2c1ebbcb71285.png', '\\uploads\\admin\\store\\20181222\\af84f0021d5c9e40a1f2c1ebbcb71285.png', 26855, 'png', 1, '127.0.0.1', 1, 1545465906, 1, 1545465906, 'store', 0);
+INSERT INTO `tplay_attachment` VALUES (34, 'admin', '47be5a62b5eb05bdfd007fcad45b6ae4.png', '\\uploads\\admin\\store\\20181222\\47be5a62b5eb05bdfd007fcad45b6ae4.png', 62804, 'png', 1, '127.0.0.1', 1, 1545466164, 1, 1545466164, 'store', 0);
 
 -- ----------------------------
 -- Table structure for tplay_banner
@@ -3842,21 +3796,16 @@ CREATE TABLE `tplay_banner`  (
   `create_time` int(11) NULL DEFAULT NULL,
   `update_time` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tplay_banner
 -- ----------------------------
-INSERT INTO `tplay_banner` VALUES (1, 7, '', 1, 1, 1544165534, 1544146170, 1544165534);
-INSERT INTO `tplay_banner` VALUES (2, 7, '1', 1, 11, 1544176082, 1544146217, 1544176082);
-INSERT INTO `tplay_banner` VALUES (3, 8, '10', 1, 10, 1544176084, 1544146234, 1544176084);
-INSERT INTO `tplay_banner` VALUES (4, 8, 'http://baidu.com2', 1, 2, 1544176087, 1544146492, 1544176087);
-INSERT INTO `tplay_banner` VALUES (5, 8, 'http://baidu.com', 1, 3, NULL, 1544146498, 1544170611);
-INSERT INTO `tplay_banner` VALUES (6, 8, 'http://baidu.com', 1, 6, NULL, 1544146501, 1544170614);
-INSERT INTO `tplay_banner` VALUES (7, 9, 'http://baidu.com', 1, 4, NULL, 1544146915, 1544170667);
-INSERT INTO `tplay_banner` VALUES (8, 13, 'http://baidu.com', 1, 9, NULL, 1544149227, 1544176221);
-INSERT INTO `tplay_banner` VALUES (9, 27, 'http://baidu.com', 1, 3, NULL, 1544176102, 1544176222);
-INSERT INTO `tplay_banner` VALUES (10, 28, 'http://baidu.com', 1, 3, NULL, 1544176114, 1544176225);
+INSERT INTO `tplay_banner` VALUES (1, 5, '', 1, 0, NULL, 1545459815, 1545461759);
+INSERT INTO `tplay_banner` VALUES (2, 4, '', 1, 0, NULL, 1545459830, 1545461743);
+INSERT INTO `tplay_banner` VALUES (3, 3, '', 1, 0, NULL, 1545459844, 1545461728);
+INSERT INTO `tplay_banner` VALUES (4, 6, '', 1, 0, NULL, 1545459853, 1545462013);
+INSERT INTO `tplay_banner` VALUES (5, 7, '', 1, 0, NULL, 1545462061, 1545462061);
 
 -- ----------------------------
 -- Table structure for tplay_brokerage
@@ -3873,20 +3822,16 @@ CREATE TABLE `tplay_brokerage`  (
   `update_time` int(11) NULL DEFAULT NULL,
   `delete_time` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tplay_brokerage
 -- ----------------------------
-INSERT INTO `tplay_brokerage` VALUES (1, '20-30', '门面', 1000.00, 100, 90, 1545053203, 1545054692, NULL);
-INSERT INTO `tplay_brokerage` VALUES (2, '80-100', '住宅', 1200.00, 90, 70, 1544431480, 1545052853, NULL);
-INSERT INTO `tplay_brokerage` VALUES (3, '40-80', '门面', 600.00, 90, 80, 1544431580, 1545052849, NULL);
-INSERT INTO `tplay_brokerage` VALUES (4, '100-120', '住宅', 2000.00, 90, 80, 1544433896, 1545052846, NULL);
-INSERT INTO `tplay_brokerage` VALUES (5, '40-60', '公寓', 2000.00, 100, 80, 1544433931, 1545052842, NULL);
-INSERT INTO `tplay_brokerage` VALUES (8, '30-80', '商铺', 6000.00, 80, 80, 1544582029, 1545052838, NULL);
-INSERT INTO `tplay_brokerage` VALUES (9, '60-120', '住宅', 5000.00, 100, 60, 1545052438, 1545052438, NULL);
-INSERT INTO `tplay_brokerage` VALUES (10, '10-40', '门面', 2000.00, 80, 60, 1545053171, 1545054696, NULL);
-INSERT INTO `tplay_brokerage` VALUES (11, '10-20', '门面', 600.00, 100, 100, 1545053203, 1545054692, NULL);
+INSERT INTO `tplay_brokerage` VALUES (1, '30-60', '门面', 800.00, 60, 40, 1545460602, 1545460602, NULL);
+INSERT INTO `tplay_brokerage` VALUES (2, '60-120', '公寓', 1000.00, 70, 50, 1545460796, 1545460796, NULL);
+INSERT INTO `tplay_brokerage` VALUES (3, '80-120', '住宅', 1000.00, 90, 60, 1545460929, 1545460929, NULL);
+INSERT INTO `tplay_brokerage` VALUES (4, '120-180', '住宅', 2000.00, 90, 60, 1545461056, 1545461056, NULL);
+INSERT INTO `tplay_brokerage` VALUES (5, '200-400', '别墅', 10000.00, 95, 70, 1545461078, 1545461078, NULL);
 
 -- ----------------------------
 -- Table structure for tplay_city
@@ -4273,14 +4218,7 @@ CREATE TABLE `tplay_commission`  (
   `update_time` int(11) NULL DEFAULT NULL,
   `delete_time` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tplay_commission
--- ----------------------------
-INSERT INTO `tplay_commission` VALUES (6, 3, 117, 18, 1, '20-30', '门面', 1000.00, 100, 90, '金磊磊', '测试小区名字', '15256935637', 900.00, 2, 1545321600, 1545378095, 1545378095, NULL);
-INSERT INTO `tplay_commission` VALUES (5, 3, 116, 20, 3, '40-80', '门面', 600.00, 90, 80, '金磊磊', '测试小区名字', '15256935637', 480.00, 2, 1545321600, 1545378090, 1545378090, NULL);
-INSERT INTO `tplay_commission` VALUES (4, 2, 123, 18, 3, '40-80', '门面', 600.00, 90, 80, '吴瑞', '标题', '17355105312', 480.00, 2, 1545321600, 1545378042, 1545378042, NULL);
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tplay_emailconfig
@@ -4336,41 +4274,35 @@ CREATE TABLE `tplay_house_source`  (
   `update_time` int(11) NULL DEFAULT NULL,
   `delete_time` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tplay_house_source
 -- ----------------------------
-INSERT INTO `tplay_house_source` VALUES (13, '标题', '简介', 125, '126', 60000.00, 1544630400, '房源地址', '1,5', '开发商', '340000', '340300', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约,豪华装', '127', '<p>内容<br/></p>', 0, '', 1, 1544603084, 1544603084, NULL);
-INSERT INTO `tplay_house_source` VALUES (14, '标题', '简介', 125, '126,129', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '340000', '340300', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约,豪华装', '127,128', '<p>内容<br/></p>', 0, '', 1, 1544603140, 1544603140, NULL);
-INSERT INTO `tplay_house_source` VALUES (15, '标题', '简介', 125, '130', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '340000', '340300', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '131', '<p>内容<br/></p>', 0, '', 1, 1544603180, 1544603180, NULL);
-INSERT INTO `tplay_house_source` VALUES (16, '标题', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '340000', '340300', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '', '<p>内容<br/></p>', 0, '', 2, 1544603302, 1544603302, NULL);
-INSERT INTO `tplay_house_source` VALUES (17, '标题', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '133', '<p>内容<br/></p>', 0, '', 1, 1544603337, 1544603337, NULL);
-INSERT INTO `tplay_house_source` VALUES (18, '测试小区名字', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '340000', '340300', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134', '<p>内容<br/></p>', 0, '', 1, 1544603360, 1544603360, NULL);
-INSERT INTO `tplay_house_source` VALUES (19, '标题', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134,135,136', '<p>内容<br/></p>', 0, '', 1, 1544603390, 1544603390, NULL);
-INSERT INTO `tplay_house_source` VALUES (20, '标题', '简介', 125, '', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134,136', '<p>内容<br/></p>', 0, '', 1, 1544603402, 1544603402, NULL);
-INSERT INTO `tplay_house_source` VALUES (21, '标题', '简介', 125, '137', 60000.00, 1544630400, '房源地址', '1,3', '开发商', '140000', '140600', '267', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134,136', '<p>内容<br/></p>', 1, '', 1, 1544603427, 1544884709, NULL);
-INSERT INTO `tplay_house_source` VALUES (22, '标题', '简介', 125, '137,138', 60000.00, 1544457600, '房源地址', '1,5,8', '开发商', '340000', '340500', '1042', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134,136', '<p>内容<br/></p>', 1, '', 1, 1544603440, 1544789514, NULL);
-INSERT INTO `tplay_house_source` VALUES (23, '标题22', '简介', 125, '138', 60000.00, 1544544000, '房源地址', '2,3,5', '开发商', '340000', '340200', '1015', 60, 888, 12, 60.00, '物业公司', '毛坯,简约', '134', '<p>内容<br/></p>', 1, '', 2, 1544603458, 1544792873, NULL);
-INSERT INTO `tplay_house_source` VALUES (24, '圣堂别院', '高档别墅住宅', 125, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (25, '12', '1', 125, '188', 12.00, 1545753600, '4545', '4,5,8', '123123', '110000', '110100', '8', 13213, 1313, 131, 4.00, '31310', '毛坯,简约,豪华装', '189', '<p>123</p>', 0, '', 1, 1544948850, 1545115451, NULL);
-INSERT INTO `tplay_house_source` VALUES (26, '圣堂别院', '高档别墅住宅', 125, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545115452, NULL);
-INSERT INTO `tplay_house_source` VALUES (27, '圣堂别院', '高档别墅住宅', 125, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (28, '圣堂别院', '高档别墅住宅', 136, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (29, '圣堂别院', '高档别墅住宅', 137, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (30, '圣堂别院', '高档别墅住宅', 136, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (31, '圣堂别院', '高档别墅住宅', 137, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (32, '圣堂别院', '高档别墅住宅', 137, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (33, '圣堂别院', '高档别墅住宅', 135, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (34, '圣堂别院', '高档别墅住宅', 136, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (35, '圣堂别院', '高档别墅住宅', 137, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (36, '圣堂别院', '高档别墅住宅', 134, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (37, '圣堂别院', '高档别墅住宅', 132, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (38, '圣堂别院', '高档别墅住宅', 131, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340200', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (39, '圣堂别院', '高档别墅住宅', 130, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (40, '圣堂别院', '高档别墅住宅', 124, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (41, '圣堂别院', '高档别墅住宅', 139, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
-INSERT INTO `tplay_house_source` VALUES (42, '圣堂别院', '高档别墅住宅', 145, '182,183', 14000.00, 0, '安徽省xxxxxxxx23号', '', '', '340000', '340100', '1006', 0, 0, 230, 1.90, '', '豪华装', '184,185,186', '<p><img src=\"/ueditor/php/upload/image/20181216/1544948685.jpg\" title=\"1544948685.jpg\" alt=\"iznlba_54.jpg\"/></p>', 1, '四室二厅', 2, 1544948687, 1545095933, NULL);
+INSERT INTO `tplay_house_source` VALUES (1, '时代之光', '时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。', 8, '9,10,11,12,13,14', 25556.00, 1544544000, '安徽省合肥市滨湖区庐州大道与南京路交汇处向东100米', '1,2,3,4,5', ' 	合肥万科瑞益地产有限公司', '340000', '340100', '1006', 40, 7946, 85253, 3.20, '南京万科物业服务有限公司', '毛坯,简约,豪华装,别墅', '15,16,17,18', '<h2>省府板块 1号线旁 双平层叠墅</h2><p>时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。时代之光打造纯粹的高端低密社区，开启了合肥创新墅居时代。</p><p class=\"small-remarks\">项目周边配套醇熟。地铁1号线滨湖会展中心站点、约40万方成熟购物中心、五星级酒店、三级甲等滨湖医院、合肥一中等完善配套。南边更有840万方公园，环境优美，是滨湖的天然氧吧。</p><p class=\"small-remarks\"><img src=\"h', 0, '', 1, 1545462574, 1545462943, NULL);
+INSERT INTO `tplay_house_source` VALUES (2, '万科·公园大道', '公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级', 19, '20,21,22,23', 14000.00, 0, '阜阳北路与清颖路交口东南角', '', '', '340000', '340100', '1006', 0, 0, 160, 2.44, '', '毛坯,简约,豪华装', '24,25', '<h2>宽境</h2><p>公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级，一公里范围内可以满足吃喝玩乐、休闲娱乐购，是真正意义上的一公里漫步生活区，能够为业主提供更舒适的生活环境。</p><p class=\"small-remarks\">万科·公园大道项目总建面约33万方，21栋高层，10栋洋房。&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p><p><img s', 0, '三室两厅一卫 |三室两厅两卫', 2, 1545462575, 1545463381, NULL);
+INSERT INTO `tplay_house_source` VALUES (3, '时光印象小区', '时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路', 26, '27,28,29,30', 23546.00, 1546185600, '合肥市滨湖新区四川路与贵阳路交口西200米', '1,2,3,4,5', '合肥新城创域房地产有限公司', '340000', '340100', '1006', 44, 7946, 41479, 2.50, '合肥新城创域物业有限公司', '豪华装', '31', '<h2>时光印象热销中</h2><p>时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路，纵享滨湖十年发展精华， 地处金融西版块发展蓝图的核心位置，打造国际滨湖·人文艺术综合住区。</p><p class=\"small-remarks\">围合式低密社区布局，两轴三园，打造私密的组团、开放的社区，小区内规划樱花大道、梧桐大道，根据不同人群需求，设置儿童活动中心、青年运动场地、老年活动中心等。</p><ul class=\" list-paddingleft-2\"><li><p><i', 0, '', 1, 1545462578, 1545463673, NULL);
+INSERT INTO `tplay_house_source` VALUES (4, '时代之光', '时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。', 8, '9,10,11,12,13,14', 25556.00, 1544544000, '安徽省合肥市滨湖区庐州大道与南京路交汇处向东100米', '1,2,3,4,5', ' 	合肥万科瑞益地产有限公司', '340000', '340100', '1006', 40, 7946, 85253, 3.20, '南京万科物业服务有限公司', '毛坯,简约,豪华装,别墅', '15,16,17,18', '<h2>省府板块 1号线旁 双平层叠墅</h2><p>时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。时代之光打造纯粹的高端低密社区，开启了合肥创新墅居时代。</p><p class=\"small-remarks\">项目周边配套醇熟。地铁1号线滨湖会展中心站点、约40万方成熟购物中心、五星级酒店、三级甲等滨湖医院、合肥一中等完善配套。南边更有840万方公园，环境优美，是滨湖的天然氧吧。</p><p class=\"small-remarks\"><img src=\"h', 1, '', 1, 1545462581, 1545464376, NULL);
+INSERT INTO `tplay_house_source` VALUES (5, '万科·公园大道', '公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级', 19, '20,21,22,23', 14000.00, 0, '阜阳北路与清颖路交口东南角', '', '', '340000', '340100', '1006', 0, 0, 160, 2.44, '', '毛坯,简约,豪华装', '24,25', '<h2>宽境</h2><p>公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级，一公里范围内可以满足吃喝玩乐、休闲娱乐购，是真正意义上的一公里漫步生活区，能够为业主提供更舒适的生活环境。</p><p class=\"small-remarks\">万科·公园大道项目总建面约33万方，21栋高层，10栋洋房。&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p><p><img s', 0, '三室两厅一卫 |三室两厅两卫', 2, 1545462582, 1545463381, NULL);
+INSERT INTO `tplay_house_source` VALUES (6, '时光印象小区', '时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路', 26, '27,28,29,30', 23546.00, 1546185600, '合肥市滨湖新区四川路与贵阳路交口西200米', '1,2,3,4,5', '合肥新城创域房地产有限公司', '340000', '340100', '1006', 44, 7946, 41479, 2.50, '合肥新城创域物业有限公司', '豪华装', '31', '<h2>时光印象热销中</h2><p>时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路，纵享滨湖十年发展精华， 地处金融西版块发展蓝图的核心位置，打造国际滨湖·人文艺术综合住区。</p><p class=\"small-remarks\">围合式低密社区布局，两轴三园，打造私密的组团、开放的社区，小区内规划樱花大道、梧桐大道，根据不同人群需求，设置儿童活动中心、青年运动场地、老年活动中心等。</p><ul class=\" list-paddingleft-2\"><li><p><i', 0, '', 1, 1545462583, 1545463673, NULL);
+INSERT INTO `tplay_house_source` VALUES (7, '时代之光', '时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。', 8, '9,10,11,12,13,14', 25556.00, 1544544000, '安徽省合肥市滨湖区庐州大道与南京路交汇处向东100米', '1,2,3,4,5', ' 	合肥万科瑞益地产有限公司', '340000', '340100', '1006', 40, 7946, 85253, 3.20, '南京万科物业服务有限公司', '毛坯,简约,豪华装,别墅', '15,16,17,18', '<h2>省府板块 1号线旁 双平层叠墅</h2><p>时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。时代之光打造纯粹的高端低密社区，开启了合肥创新墅居时代。</p><p class=\"small-remarks\">项目周边配套醇熟。地铁1号线滨湖会展中心站点、约40万方成熟购物中心、五星级酒店、三级甲等滨湖医院、合肥一中等完善配套。南边更有840万方公园，环境优美，是滨湖的天然氧吧。</p><p class=\"small-remarks\"><img src=\"h', 0, '', 1, 1545462585, 1545462943, NULL);
+INSERT INTO `tplay_house_source` VALUES (8, '万科·公园大道', '公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级', 19, '20,21,22,23', 14000.00, 0, '阜阳北路与清颖路交口东南角', '', '', '340000', '340100', '1006', 0, 0, 160, 2.44, '', '毛坯,简约,豪华装', '24,25', '<h2>宽境</h2><p>公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级，一公里范围内可以满足吃喝玩乐、休闲娱乐购，是真正意义上的一公里漫步生活区，能够为业主提供更舒适的生活环境。</p><p class=\"small-remarks\">万科·公园大道项目总建面约33万方，21栋高层，10栋洋房。&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p><p><img s', 1, '三室两厅一卫 |三室两厅两卫', 2, 1545462586, 1545464377, NULL);
+INSERT INTO `tplay_house_source` VALUES (9, '时光印象小区', '时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路', 26, '27,28,29,30', 23546.00, 1546185600, '合肥市滨湖新区四川路与贵阳路交口西200米', '1,2,3,4,5', '合肥新城创域房地产有限公司', '340000', '340100', '1006', 44, 7946, 41479, 2.50, '合肥新城创域物业有限公司', '豪华装', '31', '<h2>时光印象热销中</h2><p>时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路，纵享滨湖十年发展精华， 地处金融西版块发展蓝图的核心位置，打造国际滨湖·人文艺术综合住区。</p><p class=\"small-remarks\">围合式低密社区布局，两轴三园，打造私密的组团、开放的社区，小区内规划樱花大道、梧桐大道，根据不同人群需求，设置儿童活动中心、青年运动场地、老年活动中心等。</p><ul class=\" list-paddingleft-2\"><li><p><i', 0, '', 1, 1545462587, 1545463673, NULL);
+INSERT INTO `tplay_house_source` VALUES (10, '时代之光', '时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。', 8, '9,10,11,12,13,14', 25556.00, 1544544000, '安徽省合肥市滨湖区庐州大道与南京路交汇处向东100米', '1,2,3,4,5', ' 	合肥万科瑞益地产有限公司', '340000', '340100', '1006', 40, 7946, 85253, 3.20, '南京万科物业服务有限公司', '毛坯,简约,豪华装,别墅', '15,16,17,18', '<h2>省府板块 1号线旁 双平层叠墅</h2><p>时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。时代之光打造纯粹的高端低密社区，开启了合肥创新墅居时代。</p><p class=\"small-remarks\">项目周边配套醇熟。地铁1号线滨湖会展中心站点、约40万方成熟购物中心、五星级酒店、三级甲等滨湖医院、合肥一中等完善配套。南边更有840万方公园，环境优美，是滨湖的天然氧吧。</p><p class=\"small-remarks\"><img src=\"h', 0, '', 1, 1545462589, 1545462943, NULL);
+INSERT INTO `tplay_house_source` VALUES (11, '万科·公园大道', '公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级', 19, '20,21,22,23', 14000.00, 0, '阜阳北路与清颖路交口东南角', '', '', '340000', '340100', '1006', 0, 0, 160, 2.44, '', '毛坯,简约,豪华装', '24,25', '<h2>宽境</h2><p>公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级，一公里范围内可以满足吃喝玩乐、休闲娱乐购，是真正意义上的一公里漫步生活区，能够为业主提供更舒适的生活环境。</p><p class=\"small-remarks\">万科·公园大道项目总建面约33万方，21栋高层，10栋洋房。&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p><p><img s', 1, '三室两厅一卫 |三室两厅两卫', 2, 1545462595, 1545464373, NULL);
+INSERT INTO `tplay_house_source` VALUES (12, '时光印象小区', '时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路', 26, '27,28,29,30', 23546.00, 1546185600, '合肥市滨湖新区四川路与贵阳路交口西200米', '1,2,3,4,5', '合肥新城创域房地产有限公司', '340000', '340100', '1006', 44, 7946, 41479, 2.50, '合肥新城创域物业有限公司', '豪华装', '31', '<h2>时光印象热销中</h2><p>时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路，纵享滨湖十年发展精华， 地处金融西版块发展蓝图的核心位置，打造国际滨湖·人文艺术综合住区。</p><p class=\"small-remarks\">围合式低密社区布局，两轴三园，打造私密的组团、开放的社区，小区内规划樱花大道、梧桐大道，根据不同人群需求，设置儿童活动中心、青年运动场地、老年活动中心等。</p><ul class=\" list-paddingleft-2\"><li><p><i', 0, '', 1, 1545462596, 1545463673, NULL);
+INSERT INTO `tplay_house_source` VALUES (14, '时代之光', '时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。', 8, '9,10,11,12,13,14', 25556.00, 1544544000, '安徽省合肥市滨湖区庐州大道与南京路交汇处向东100米', '1,2,3,4,5', ' 	合肥万科瑞益地产有限公司', '340000', '340100', '1006', 40, 7946, 85253, 3.20, '南京万科物业服务有限公司', '毛坯,简约,豪华装,别墅', '15,16,17,18', '<h2>省府板块 1号线旁 双平层叠墅</h2><p>时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。时代之光打造纯粹的高端低密社区，开启了合肥创新墅居时代。</p><p class=\"small-remarks\">项目周边配套醇熟。地铁1号线滨湖会展中心站点、约40万方成熟购物中心、五星级酒店、三级甲等滨湖医院、合肥一中等完善配套。南边更有840万方公园，环境优美，是滨湖的天然氧吧。</p><p class=\"small-remarks\"><img src=\"h', 0, '', 1, 1545462597, 1545462943, NULL);
+INSERT INTO `tplay_house_source` VALUES (15, '万科·公园大道', '公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级', 19, '20,21,22,23', 14000.00, 0, '阜阳北路与清颖路交口东南角', '', '', '340000', '340100', '1006', 0, 0, 160, 2.44, '', '毛坯,简约,豪华装', '24,25', '<h2>宽境</h2><p>公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级，一公里范围内可以满足吃喝玩乐、休闲娱乐购，是真正意义上的一公里漫步生活区，能够为业主提供更舒适的生活环境。</p><p class=\"small-remarks\">万科·公园大道项目总建面约33万方，21栋高层，10栋洋房。&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p><p><img s', 0, '三室两厅一卫 |三室两厅两卫', 2, 1545462598, 1545463381, NULL);
+INSERT INTO `tplay_house_source` VALUES (16, '时光印象小区', '时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路', 26, '27,28,29,30', 23546.00, 1546185600, '合肥市滨湖新区四川路与贵阳路交口西200米', '1,2,3,4,5', '合肥新城创域房地产有限公司', '340000', '340100', '1006', 44, 7946, 41479, 2.50, '合肥新城创域物业有限公司', '豪华装', '31', '<h2>时光印象热销中</h2><p>时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路，纵享滨湖十年发展精华， 地处金融西版块发展蓝图的核心位置，打造国际滨湖·人文艺术综合住区。</p><p class=\"small-remarks\">围合式低密社区布局，两轴三园，打造私密的组团、开放的社区，小区内规划樱花大道、梧桐大道，根据不同人群需求，设置儿童活动中心、青年运动场地、老年活动中心等。</p><ul class=\" list-paddingleft-2\"><li><p><i', 0, '', 1, 1545462599, 1545463673, NULL);
+INSERT INTO `tplay_house_source` VALUES (17, '时代之光', '时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。', 8, '9,10,11,12,13,14', 25556.00, 1544544000, '安徽省合肥市滨湖区庐州大道与南京路交汇处向东100米', '1,2,3,4,5', ' 	合肥万科瑞益地产有限公司', '340000', '340100', '1006', 40, 7946, 85253, 3.20, '南京万科物业服务有限公司', '毛坯,简约,豪华装,别墅', '15,16,17,18', '<h2>省府板块 1号线旁 双平层叠墅</h2><p>时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。时代之光打造纯粹的高端低密社区，开启了合肥创新墅居时代。</p><p class=\"small-remarks\">项目周边配套醇熟。地铁1号线滨湖会展中心站点、约40万方成熟购物中心、五星级酒店、三级甲等滨湖医院、合肥一中等完善配套。南边更有840万方公园，环境优美，是滨湖的天然氧吧。</p><p class=\"small-remarks\"><img src=\"h', 0, '', 1, 1545462600, 1545462943, NULL);
+INSERT INTO `tplay_house_source` VALUES (18, '万科·公园大道', '公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级', 19, '20,21,22,23', 14000.00, 0, '阜阳北路与清颖路交口东南角', '', '', '340000', '340100', '1006', 0, 0, 160, 2.44, '', '毛坯,简约,豪华装', '24,25', '<h2>宽境</h2><p>公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级，一公里范围内可以满足吃喝玩乐、休闲娱乐购，是真正意义上的一公里漫步生活区，能够为业主提供更舒适的生活环境。</p><p class=\"small-remarks\">万科·公园大道项目总建面约33万方，21栋高层，10栋洋房。&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p><p><img s', 0, '三室两厅一卫 |三室两厅两卫', 2, 1545462601, 1545463381, NULL);
+INSERT INTO `tplay_house_source` VALUES (19, '时光印象小区', '时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路', 26, '27,28,29,30', 23546.00, 1546185600, '合肥市滨湖新区四川路与贵阳路交口西200米', '1,2,3,4,5', '合肥新城创域房地产有限公司', '340000', '340100', '1006', 44, 7946, 41479, 2.50, '合肥新城创域物业有限公司', '豪华装', '31', '<h2>时光印象热销中</h2><p>时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路，纵享滨湖十年发展精华， 地处金融西版块发展蓝图的核心位置，打造国际滨湖·人文艺术综合住区。</p><p class=\"small-remarks\">围合式低密社区布局，两轴三园，打造私密的组团、开放的社区，小区内规划樱花大道、梧桐大道，根据不同人群需求，设置儿童活动中心、青年运动场地、老年活动中心等。</p><ul class=\" list-paddingleft-2\"><li><p><i', 1, '', 1, 1545462602, 1545464368, NULL);
+INSERT INTO `tplay_house_source` VALUES (20, '时代之光', '时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。', 8, '9,10,11,12,13,14', 25556.00, 1544544000, '安徽省合肥市滨湖区庐州大道与南京路交汇处向东100米', '1,2,3,4,5', ' 	合肥万科瑞益地产有限公司', '340000', '340100', '1006', 40, 7946, 85253, 3.20, '南京万科物业服务有限公司', '毛坯,简约,豪华装,别墅', '15,16,17,18', '<h2>省府板块 1号线旁 双平层叠墅</h2><p>时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。时代之光打造纯粹的高端低密社区，开启了合肥创新墅居时代。</p><p class=\"small-remarks\">项目周边配套醇熟。地铁1号线滨湖会展中心站点、约40万方成熟购物中心、五星级酒店、三级甲等滨湖医院、合肥一中等完善配套。南边更有840万方公园，环境优美，是滨湖的天然氧吧。</p><p class=\"small-remarks\"><img src=\"h', 1, '', 1, 1545462606, 1545464368, NULL);
+INSERT INTO `tplay_house_source` VALUES (21, '万科·公园大道', '公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级', 19, '20,21,22,23', 14000.00, 0, '阜阳北路与清颖路交口东南角', '', '', '340000', '340100', '1006', 0, 0, 160, 2.44, '', '毛坯,简约,豪华装', '24,25', '<h2>宽境</h2><p>公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级，一公里范围内可以满足吃喝玩乐、休闲娱乐购，是真正意义上的一公里漫步生活区，能够为业主提供更舒适的生活环境。</p><p class=\"small-remarks\">万科·公园大道项目总建面约33万方，21栋高层，10栋洋房。&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p><p><img s', 0, '三室两厅一卫 |三室两厅两卫', 2, 1545462609, 1545463381, NULL);
+INSERT INTO `tplay_house_source` VALUES (22, '时光印象小区', '时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路', 26, '27,28,29,30', 23546.00, 1546185600, '合肥市滨湖新区四川路与贵阳路交口西200米', '1,2,3,4,5', '合肥新城创域房地产有限公司', '340000', '340100', '1006', 44, 7946, 41479, 2.50, '合肥新城创域物业有限公司', '豪华装', '31', '<h2>时光印象热销中</h2><p>时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路，纵享滨湖十年发展精华， 地处金融西版块发展蓝图的核心位置，打造国际滨湖·人文艺术综合住区。</p><p class=\"small-remarks\">围合式低密社区布局，两轴三园，打造私密的组团、开放的社区，小区内规划樱花大道、梧桐大道，根据不同人群需求，设置儿童活动中心、青年运动场地、老年活动中心等。</p><ul class=\" list-paddingleft-2\"><li><p><i', 0, '', 1, 1545462700, 1545463673, NULL);
+INSERT INTO `tplay_house_source` VALUES (23, '时代之光', '时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。', 8, '9,10,11,12,13,14', 25556.00, 1544544000, '安徽省合肥市滨湖区庐州大道与南京路交汇处向东100米', '1,2,3,4,5', ' 	合肥万科瑞益地产有限公司', '340000', '340100', '1006', 40, 7946, 85253, 3.20, '南京万科物业服务有限公司', '毛坯,简约,豪华装,别墅', '15,16,17,18', '<h2>省府板块 1号线旁 双平层叠墅</h2><p>时代之光为合肥万科高端光系作品，地处滨湖新区省政府核心板块，毗邻国际会展中心及地铁一号线。时代之光打造纯粹的高端低密社区，开启了合肥创新墅居时代。</p><p class=\"small-remarks\">项目周边配套醇熟。地铁1号线滨湖会展中心站点、约40万方成熟购物中心、五星级酒店、三级甲等滨湖医院、合肥一中等完善配套。南边更有840万方公园，环境优美，是滨湖的天然氧吧。</p><p class=\"small-remarks\"><img src=\"h', 1, '', 1, 1545462720, 1545464366, NULL);
+INSERT INTO `tplay_house_source` VALUES (24, '万科·公园大道', '公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级', 19, '20,21,22,23', 14000.00, 0, '阜阳北路与清颖路交口东南角', '', '', '340000', '340100', '1006', 0, 0, 160, 2.44, '', '毛坯,简约,豪华装', '24,25', '<h2>宽境</h2><p>公园大道位于阜阳北路与清颖路交口东南侧，公园大道为万科“公园系”产品的迭代升级，一公里范围内可以满足吃喝玩乐、休闲娱乐购，是真正意义上的一公里漫步生活区，能够为业主提供更舒适的生活环境。</p><p class=\"small-remarks\">万科·公园大道项目总建面约33万方，21栋高层，10栋洋房。&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p><p><img s', 1, '三室两厅一卫 |三室两厅两卫', 2, 1545462730, 1545464365, NULL);
+INSERT INTO `tplay_house_source` VALUES (25, '时光印象小区', '时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路', 26, '27,28,29,30', 23546.00, 1546185600, '合肥市滨湖新区四川路与贵阳路交口西200米', '1,2,3,4,5', '合肥新城创域房地产有限公司', '340000', '340100', '1006', 44, 7946, 41479, 2.50, '合肥新城创域物业有限公司', '豪华装', '31', '<h2>时光印象热销中</h2><p>时光印象为滨湖高端品质社区，项目北至贵阳路，西至贵州路，东至四川路，南至遵义路，纵享滨湖十年发展精华， 地处金融西版块发展蓝图的核心位置，打造国际滨湖·人文艺术综合住区。</p><p class=\"small-remarks\">围合式低密社区布局，两轴三园，打造私密的组团、开放的社区，小区内规划樱花大道、梧桐大道，根据不同人群需求，设置儿童活动中心、青年运动场地、老年活动中心等。</p><ul class=\" list-paddingleft-2\"><li><p><i', 1, '', 1, 1545462734, 1545464365, NULL);
 
 -- ----------------------------
 -- Table structure for tplay_messages
@@ -4401,22 +4333,12 @@ CREATE TABLE `tplay_notice`  (
   `update_time` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '修改时间',
   `delete_time` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 44 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tplay_notice
 -- ----------------------------
-INSERT INTO `tplay_notice` VALUES (38, '3213', '<p>13131</p><p>545</p><p>66516</p>', 1544491065, 1544491065, 0);
-INSERT INTO `tplay_notice` VALUES (39, '3213', '<p>13131</p><p>545</p><p>66516</p>', 1544491071, 1544491071, 0);
-INSERT INTO `tplay_notice` VALUES (40, '232', '<p><br/></p><p>2</p><p>2</p><p>2<img src=\"/ueditor/php/upload/image/20181211/1544516306.jpg\" title=\"1544516306.jpg\" alt=\"3_二手房.jpg\"/><img src=\"/ueditor/php/upload/image/20181211/1544516309.jpg\" title=\"1544516309.jpg\" alt=\"我的客户.jpg\"/></p>', 1544491173, 1544516311, 0);
-INSERT INTO `tplay_notice` VALUES (41, '212', '<p>131313</p>', 1544491232, 1544491232, 0);
-INSERT INTO `tplay_notice` VALUES (28, '3123123', '<p>123123</p>', 1544427949, 1544427949, 0);
-INSERT INTO `tplay_notice` VALUES (29, '321312', '<p>3213213</p>', 1544427952, 1544427952, 0);
-INSERT INTO `tplay_notice` VALUES (30, '312312', '<p>3213123</p>', 1544427954, 1544427954, 0);
-INSERT INTO `tplay_notice` VALUES (31, '2321312', '<p>312312</p>', 1544427956, 1544427956, 0);
-INSERT INTO `tplay_notice` VALUES (32, '213123', '<p>12312312</p>', 1544427959, 1544427959, 0);
-INSERT INTO `tplay_notice` VALUES (42, '1', '<p>212</p>', 1544511960, 1544511960, 0);
-INSERT INTO `tplay_notice` VALUES (43, '啊啊大发发', '<p>大丰收发送啊啊啊<img src=\"/ueditor/php/upload/image/20181212/1544587228.jpg\" title=\"1544587228.jpg\" alt=\"客户信息.jpg\"/></p>', 1544515509, 1544587230, 0);
+INSERT INTO `tplay_notice` VALUES (1, '欢迎进驻和房宝平台', '<p>来的这里，您可以第一时间了解最新房源信息</p>', 1545465459, 1545465459, 0);
 
 -- ----------------------------
 -- Table structure for tplay_order
@@ -4443,101 +4365,7 @@ CREATE TABLE `tplay_order`  (
   `area` int(11) NOT NULL DEFAULT 0 COMMENT '区县',
   `house_id` int(11) NOT NULL DEFAULT 0 COMMENT '楼盘id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 124 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tplay_order
--- ----------------------------
-INSERT INTO `tplay_order` VALUES (9, 2, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1544604700, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (36, 3, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (37, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (14, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 20);
-INSERT INTO `tplay_order` VALUES (35, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (17, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (29, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (30, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (31, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (32, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (33, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (38, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (39, 2, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759435, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (40, 2, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759484, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 24);
-INSERT INTO `tplay_order` VALUES (41, 1, '金磊磊', '15256935637', 1, 1564070400, '我要买个120平米的房子', 1544607498, 1544769435, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (42, 2, '金磊磊', '15256935637', 1, 1544607420, '我要买个120平米的房子', 1544607498, 1544607498, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (43, 1, '金磊磊磊', '15256935637', 1, 1923235200, '我要买个120平米的房子', 1544607498, 1544759200, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (44, 2, '金磊磊', '15256935637', 1, 1544976000, '我要买个120平米的房子', 1544607498, 1544756674, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (45, 1, '金磊磊', '15256935637', 1, 1544371200, '我要买个120平米的房子', 1544607498, 1544759191, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 27);
-INSERT INTO `tplay_order` VALUES (46, 2, '金磊磊', '15256935637', 2, 1803916800, '我要买个120平米的房子', 1544607498, 1544759480, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 29);
-INSERT INTO `tplay_order` VALUES (54, 2, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1544604700, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (55, 2, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1544604700, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (49, 3, '金磊磊', '15256935637', 1, 1525881600, '我要买个120平米的房子', 1544607498, 1544779525, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (56, 2, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1544774138, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (57, 2, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1544604700, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (58, 2, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1544604700, NULL, 1, 0, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (59, 3, '张三', '17355105312', 1, 1539187200, '三室一', 1544604700, 1545199011, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (60, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (61, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (62, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (63, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (64, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (65, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (66, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (67, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (68, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (69, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (70, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (71, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (72, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (73, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (74, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (75, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (76, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (77, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (78, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (79, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (80, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (81, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (82, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (83, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (84, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (85, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (86, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (87, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (88, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (89, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (90, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (91, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (92, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (93, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (94, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (95, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (96, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (97, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (98, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (99, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (100, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (101, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (102, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (103, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (104, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (105, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545015369, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (106, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 1, 0, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (107, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545199127, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (108, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545199203, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (109, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545198494, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 23);
-INSERT INTO `tplay_order` VALUES (110, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (111, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (112, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545198507, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 22);
-INSERT INTO `tplay_order` VALUES (114, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545378059, NULL, 0, 0, 1, 0, '测试小区名字', 0, 0, 0, 0);
-INSERT INTO `tplay_order` VALUES (115, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1544759459, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 22);
-INSERT INTO `tplay_order` VALUES (116, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545378090, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 20);
-INSERT INTO `tplay_order` VALUES (117, 3, '金磊磊', '15256935637', 1, 1544544000, '我要买个120平米的房子', 1544607498, 1545378095, NULL, 0, 0, 1, 1, '测试小区名字', 0, 0, 0, 18);
-INSERT INTO `tplay_order` VALUES (118, 2, '测试名字', '17355105312', 1, 1545062400, '购房意向测试', 1545103893, 1545269244, NULL, 0, 0, 1, 1, '测试小区名字', 340000, 340200, 0, 22);
-INSERT INTO `tplay_order` VALUES (34, 2, '测试名字', '17355105312', 1, 1545062400, '购房意向测试', 1545104331, 1545187917, NULL, 0, 0, 1, 0, '测试小区名字', 310000, 310100, 310101, 22);
-INSERT INTO `tplay_order` VALUES (120, 2, '吴瑞', '17355105312', 1, 1541779200, '买大房子', 1545292474, 1545371238, NULL, 0, 0, 1, 0, '标题', 110000, 110100, 110101, 15);
-INSERT INTO `tplay_order` VALUES (121, 2, '吴瑞', '17355105312', 1, 1541779200, '买大房子', 1545292491, 1545377990, NULL, 0, 0, 1, 0, '标题', 110000, 110100, 110101, 15);
-INSERT INTO `tplay_order` VALUES (122, 2, '吴瑞', '17355105312', 1, 1541779200, '买大房子', 1545294069, 1545294105, NULL, 0, 0, 1, 1, '标题', 110000, 110100, 110101, 15);
-INSERT INTO `tplay_order` VALUES (123, 2, '吴瑞', '17355105312', 1, 1541779200, '买大房子', 1545298001, 1545378042, NULL, 0, 0, 1, 1, '标题', 110000, 110100, 110101, 18);
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tplay_province
@@ -4628,14 +4456,13 @@ CREATE TABLE `tplay_store`  (
   `update_time` int(11) NULL DEFAULT NULL COMMENT '修改时间',
   `delete_time` int(11) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tplay_store
 -- ----------------------------
-INSERT INTO `tplay_store` VALUES (1, '合肥超威房产', '刘华超', '安徽省合肥市蜀山区88号', 177, '128839', '17681125543', 0, '', '', '合肥', 1544870532, 1544942595, NULL);
-INSERT INTO `tplay_store` VALUES (8, '安徽华邦地产', '刘华超', '合肥市蜀山区88号', 0, '888888', '13013090543', 0, '', '', '安徽', 1544881777, 1544942619, NULL);
-INSERT INTO `tplay_store` VALUES (9, '刘华超', '刘华超', '刘华超', 179, '549135', '13013090543', 0, '', '', '刘华超', 1544935197, 1544935197, NULL);
+INSERT INTO `tplay_store` VALUES (1, '百利房地产', '某总', '合肥市蜀山区潜山路888号', 33, '651055', '18888888888', 0, '', '', '合肥', 1545465908, 1545465908, NULL);
+INSERT INTO `tplay_store` VALUES (2, '丽人房产', '李总', '安徽省合肥市包河区金寨路96号', 34, '666666', '17666666666', 0, '', '', '合肥', 1545466165, 1545466165, NULL);
 
 -- ----------------------------
 -- Table structure for tplay_urlconfig
@@ -4692,8 +4519,8 @@ CREATE TABLE `tplay_user`  (
 -- Records of tplay_user
 -- ----------------------------
 INSERT INTO `tplay_user` VALUES (1, '明天你好', 0, 0, 'f0c1361b39e445af40f69950c6fa05a5', 'uploads\\user\\20181216\\8213411574ccaf848d65563f854f4108.jpg', '', '17681125543', 2, '合肥', 0, 1545384641, NULL, NULL, 1544971823, '', '0', '', '', 0, NULL);
-INSERT INTO `tplay_user` VALUES (2, '17355105312', 0, 0, 'f0c1361b39e445af40f69950c6fa05a5', '', '', '17355105312', 2, '', 0, 1545294221, NULL, NULL, 1545374250, '金磊磊1', '340827199405050018', '', '', 0, NULL);
-INSERT INTO `tplay_user` VALUES (3, '15256935637', 0, 0, '47b6f8017c9629e1e6bff9e03083b5e6', '', '', '15256935637', 2, '', 0, 1545182615, NULL, 1544583825, 1545374254, '金磊磊2', '340827199405050018', '', '', 0, NULL);
+INSERT INTO `tplay_user` VALUES (2, '17355105312', 0, 0, 'f0c1361b39e445af40f69950c6fa05a5', 'uploads\\user\\20181216\\8213411574ccaf848d65563f854f4108.jpg', '', '17355105312', 2, '', 0, 1545294221, NULL, NULL, 1545374250, '金磊磊1', '340827199405050018', '', '', 0, NULL);
+INSERT INTO `tplay_user` VALUES (3, '15256935637', 0, 0, '47b6f8017c9629e1e6bff9e03083b5e6', 'uploads\\user\\20181216\\8213411574ccaf848d65563f854f4108.jpg', '', '15256935637', 2, '', 0, 1545460453, NULL, 1544583825, 1545441753, '金磊磊', '340827199405050018', '15256935637', '\\uploads\\user_card\\20181222\\d4df419d3d4ea93afb7d531f020e8fa5.jpg', 1, 0);
 
 -- ----------------------------
 -- Table structure for tplay_webconfig
@@ -4716,6 +4543,6 @@ CREATE TABLE `tplay_webconfig`  (
 -- ----------------------------
 -- Records of tplay_webconfig
 -- ----------------------------
-INSERT INTO `tplay_webconfig` VALUES ('web', '后台管理系统', '', '', 1, 'jpg,png,gif,mp4,zip,jpeg', 80000, '', '', NULL);
+INSERT INTO `tplay_webconfig` VALUES ('web', '后台管理系统', '', '', 1, 'jpg,png,gif,mp4,zip,jpeg', 80000, '', '', '');
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -484,13 +484,11 @@
                             layer.msg(successMsg.msg);
                         }
                         if (successMsg.errorCode == 20100) {
-                            var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
+                            top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.5});
                             setTimeout(function () {
-                                top.layer.close(index);
-                                top.layer.msg("修改成功");
-                                layer.closeAll("iframe");
-                                //parent.location.reload();
-                                $(".layui-laypage-btn")[0].click();
+                                top.layer.msg("修改成功,请点击页脚[确定]按钮 刷新查看");
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
                             }, 1000);
                         }
                     },
@@ -528,8 +526,8 @@
                                 top.layer.close(index);
                                 top.layer.msg("添加成功", {icon: 1});
                                 layer.closeAll("iframe");
-                                //parent.location.reload();
-                                $(".layui-laypage-btn")[0].click();
+                                //刷新父页面
+                                parent.location.reload();
                             }, 1000);
                         }
                     },

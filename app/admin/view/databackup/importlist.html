@@ -12,31 +12,31 @@
     <table class="layui-table"  lay-even="" lay-skin="row" lay-size="sm">
 
       <colgroup>
-        <col width="50">
+        <col width="150">
         <col width="150">
         <col width="150">
         <col width="150">
         <col width="200">
-        <col width="200">
+        <!--<col width="200">-->
         <col width="100">
       </colgroup>
       <thead>
         <tr>
-       
+
           <th>备份名称</th>
           <th>卷数</th>
           <th>压缩</th>
           <th>数据大小</th>
           <th>备份时间</th>
-          <th>状态</th>
+          <!--<th>状态</th>-->
           <th>操作</th>
-        </tr> 
+        </tr>
       </thead>
-    
+
 
 
   <tbody>
-    {foreach name='list' item='data'}   
+    {foreach name='list' item='data'}
        <tr>
 
           <td>{$data.time|date='Ymd-His',###}</td>
@@ -44,7 +44,7 @@
           <td>{$data.compress}</td>
           <td>{$data.size|format_bytes}</td>
           <td>{$key}</td>
-          <td class="status">-</td>
+          <!--<td class="status">-</td>-->
           <td class="action">
               <a class="layui-btn layui-btn-xs db-import" href="{:url('admin/databackup/import',['time'=>$data['time']])}">还原</a>&nbsp;
               <a class="layui-btn layui-btn-xs ajax-get confirm delete" href="javascript:;" time="{$data.time}">删除</a>
@@ -66,7 +66,7 @@ layui.use(['jquery','layer'],function(){
             $.get(self.href, success, "json");
             window.onbeforeunload = function(){ return "正在还原数据库，请不要关闭！" }
             return false;
-        
+
             function success(data){
 
                 if(data.code==1){
@@ -74,12 +74,12 @@ layui.use(['jquery','layer'],function(){
                     $(self).parent().prev().text(data.msg);
 
                     if(data.data.part){
-                        $.get(self.href, 
-                            {"part" : data.data.part, "start" : data.data.start}, 
-                            success, 
+                        $.get(self.href,
+                            {"part" : data.data.part, "start" : data.data.start},
+                            success,
                             "json"
                         );
-                        
+
                     }  else {
                         layer.alert(data.msg);
                         //window.onbeforeunload = function(){ return null; }
@@ -98,10 +98,10 @@ layui.use(['jquery','layer'],function(){
     //     $(this).parent().prevAll('.status').html("").html('等待还原');
     //     thisobj=this;
     //     $.post(this.href, function(data){
-         
+
     //       if(data.code==1){
     //         // statusem.text(""); // 清空数据
-    //         // statusem.append('data'); 
+    //         // statusem.append('data');
     //         // statusem.text("").append('132');
     //         // $(this).parent().prevAll('.status').html("").html(data.msg);//error ：异常原因无法获取当前节点
     //         statusem.html(data.msg);
