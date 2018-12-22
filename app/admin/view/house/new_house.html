@@ -489,7 +489,8 @@
                                 top.layer.close(index);
                                 top.layer.msg("修改成功");
                                 layer.closeAll("iframe");
-                                parent.location.reload();
+                                //parent.location.reload();
+                                $(".layui-laypage-btn")[0].click();
                             }, 1000);
                         }
                     },
@@ -527,7 +528,8 @@
                                 top.layer.close(index);
                                 top.layer.msg("添加成功", {icon: 1});
                                 layer.closeAll("iframe");
-                                parent.location.reload();
+                                //parent.location.reload();
+                                $(".layui-laypage-btn")[0].click();
                             }, 1000);
                         }
                     },

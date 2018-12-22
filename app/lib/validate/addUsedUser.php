@@ -25,6 +25,7 @@ class addUsedUser extends BaseValidate
         'area'=>'require|isNotEmpty',
         'house_address'=>'require|isNotEmpty',
         'room_map'=>'require|isNotEmpty',
+        'house_type'=>'require|isNotEmpty',
         'detail'=>'require|isNotEmpty',
     ];
 
@@ -40,6 +41,7 @@ class addUsedUser extends BaseValidate
         'detail'=>'请输入房源介绍',
         'city'=>'请选择所属城市',
         'province'=>'请选择所属省份',
+        'house_type'=>'请输入房屋类型'
     ];
 
 }

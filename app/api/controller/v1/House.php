@@ -161,6 +161,7 @@ class House extends BaseController
      * @apiParam {string} city 市 取 city_id 值
      * @apiParam {string} area 区 取 area_id 值
      * @apiParam {string} house_address 房源详细地址
+     * @apiParam {string} house_type 房屋类型
      * @apiParam {string} room_map 房源图片 以,分割的字符串 例如：134,136
      * @apiParam {string} detail 房源详情介绍
      * @apiExample {curl} 接口发送示例:
@@ -173,6 +174,7 @@ class House extends BaseController
     "province":340000,
     "city":340100,
     "area":1006,
+    "house_type":"三室一厅",
     "house_address":"安徽省合肥市",
     "room_map":"136",
     "detail":"今年刚刚装修的房子，准备用来结婚用的，因房主公司遇到困难，急需用一笔钱，不议价，有意的朋友请联系13013090543"

@@ -215,6 +215,13 @@
             "group": "Parameter",
             "type": "string",
             "optional": false,
+            "field": "house_type",
+            "description": "<p>房屋类型</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
             "field": "room_map",
             "description": "<p>房源图片 以,分割的字符串 例如：134,136</p>"
           },
@@ -231,7 +238,7 @@
     "examples": [
       {
         "title": "接口发送示例:",
-        "content": "{\n    \"title\":\"用户测试发布二手房\",\n    \"house_price\":\"6000\",\n    \"floor_area\":\"120\",\n    \"property_costs\":\"1.3\",\n    \"decoration_type\":\"毛坯\",\n    \"province\":340000,\n    \"city\":340100,\n    \"area\":1006,\n    \"house_address\":\"安徽省合肥市\",\n    \"room_map\":\"136\",\n    \"detail\":\"今年刚刚装修的房子，准备用来结婚用的，因房主公司遇到困难，急需用一笔钱，不议价，有意的朋友请联系13013090543\"\n    }",
+        "content": "{\n    \"title\":\"用户测试发布二手房\",\n    \"house_price\":\"6000\",\n    \"floor_area\":\"120\",\n    \"property_costs\":\"1.3\",\n    \"decoration_type\":\"毛坯\",\n    \"province\":340000,\n    \"city\":340100,\n    \"area\":1006,\n    \"house_type\":\"三室一厅\",\n    \"house_address\":\"安徽省合肥市\",\n    \"room_map\":\"136\",\n    \"detail\":\"今年刚刚装修的房子，准备用来结婚用的，因房主公司遇到困难，急需用一笔钱，不议价，有意的朋友请联系13013090543\"\n    }",
         "type": "curl"
       }
     ],

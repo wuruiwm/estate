@@ -190,6 +190,10 @@
                     $('table tr').css('background', '');
                     $(this).css('background', '<%=PropKit.use("config.properties").get("table_color")%>');
                 });
+
+                console.log('数据'+res);
+                console.log('当前页面'+curr);
+                console.log('总条数'+count);
             }
         });
 
