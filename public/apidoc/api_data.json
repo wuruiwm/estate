@@ -849,8 +849,8 @@
             "group": "Parameter",
             "type": "int",
             "optional": false,
-            "field": "city",
-            "description": "<p>市的ID</p>"
+            "field": "area",
+            "description": "<p>区县的ID</p>"
           },
           {
             "group": "Parameter",
