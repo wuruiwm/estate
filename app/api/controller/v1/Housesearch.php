@@ -10,7 +10,7 @@ class Housesearch extends Controller{
      * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/House/search
      * @apiParam {string} search 房源名称
      * @apiParam {string} address 地址
-     * @apiParam {int} city 市的ID 
+     * @apiParam {int} area 区县的ID 
      * @apiParam {int} floor_area_min 面积最小值
      * @apiParam {int} floor_area_max 面积最大值
      * @apiParam {int} init_status 房屋类型  1新房 2二手房
@@ -21,9 +21,9 @@ class Housesearch extends Controller{
 		$address = input('get.address');
 		$str = '1';
 		//获取传来的市的ID,拼接成where语句
-		$city = input('get.city');
-		if ($city) {
-			$str = $str . " and city=" . $city;
+		$area = input('get.area');
+		if ($area) {
+			$str = $str . " and area=" . $area;
 		}else{
 			return ['reg'=>'查询的地区不能为空'];
 		}
@@ -34,6 +34,7 @@ class Housesearch extends Controller{
 		}
 		$floor_area_min = input('get.floor_area_min');
 		$floor_area_max = input('get.floor_area_max');
+		//
 		if ((($floor_area_min==='0')||(!empty($floor_area_min)))&&(($floor_area_max==='0')||(!empty($floor_area_max)))) {
 				//实例化model并执行查询
 				//先执行进行标题查询
