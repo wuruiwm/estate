@@ -14,8 +14,14 @@ class Housesearch extends Controller{
 	public function search(){
 		//获取搜索关键词
 		$search = input('get.search');
+		if (!$search) {
+			return ['reg'=>'查询关键词不能为空'];
+		}
 		//获取传来的市的ID
 		$city = input('get.city');
+		if (!$city) {
+			return ['reg'=>'查询的地区不能为空'];
+		}
 		//实例化model并执行查询
 		$house = model('HouseSource');
 		$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status'])->where('city',$city)->where('title','like',"%$search%")->select();
