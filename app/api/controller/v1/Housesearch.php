@@ -39,10 +39,23 @@ class Housesearch extends Controller{
 				//实例化model并执行查询
 				//先执行进行标题查询
 				$house = model('HouseSource');
-				$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status'])->where($str)->where('floor_area','between',"$floor_area_min,$floor_area_max")->where('title','like',"%$search%")->where('house_address','like',"%$address%")->select();
+				$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status','brokerage_plan'])->where($str)->where('floor_area','between',"$floor_area_min,$floor_area_max")->where('title','like',"%$search%")->where('house_address','like',"%$address%")->select();
 				$data = [];
 				foreach ($res as $k => $v) {
-					$data[] = $v->getData();
+					if ($init_status == 1) {
+						$a = $v->getData()['brokerage_plan'];
+						$arr = explode(',',$a);
+						$brokerage =  model('Brokerage');
+						$brok_res = $brokerage->field(['price'])->where('id',$arr['0'])->find();
+						$brok_price=$brok_res->getData()['price'];
+						$array = $v->getData();
+						$array['price'] = $brok_price;
+						unset($array['brokerage_plan']);
+						$data[] = $array;
+					}else{
+						$data[] = $v->getData();
+					}
+					
 				}
 				//判断是否有数据，没有则说明没有查到结果，返回提示信息，有结果则把数组return出去
 				if(!$data){
@@ -53,10 +66,22 @@ class Housesearch extends Controller{
 		//实例化model并执行查询
 		//先执行进行标题查询
 		$house = model('HouseSource');
-		$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status'])->where($str)->where('title','like',"%$search%")->where('house_address','like',"%$address%")->select();
+		$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status','brokerage_plan'])->where($str)->where('title','like',"%$search%")->where('house_address','like',"%$address%")->select();
 		$data = [];
 		foreach ($res as $k => $v) {
-			$data[] = $v->getData();
+			if ($init_status == 1) {
+				$a = $v->getData()['brokerage_plan'];
+				$arr = explode(',',$a);
+				$brokerage =  model('Brokerage');
+				$brok_res = $brokerage->field(['price'])->where('id',$arr['0'])->find();
+				$brok_price=$brok_res->getData()['price'];
+				$array = $v->getData();
+				$array['price'] = $brok_price;
+				unset($array['brokerage_plan']);
+				$data[] = $array;
+			}else{
+				$data[] = $v->getData();
+			}
 		}
 		//判断是否有数据，没有则说明没有查到结果，返回提示信息，有结果则把数组return出去
 		if(!$data){
