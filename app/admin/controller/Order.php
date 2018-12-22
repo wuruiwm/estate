@@ -313,7 +313,8 @@ class Order extends Permissions{
 			$zhuangtai = ['id'=>$get['order_id'],'is_new'=>0,'is_visit'=>0,'is_deal'=>1,'is_pay'=>1];
 			$res = $order->isUpdate(true)->save($zhuangtai);
 			if ($res) {
-				return json(['reg'=>'佣金结算成功']);
+				$str = '佣金结算成功,结算佣金为'.$data['commission'].'元';
+				return json(['reg'=>$str]);
 			}
 		}else{
 			return json(['reg'=>'佣金结算失败']);
