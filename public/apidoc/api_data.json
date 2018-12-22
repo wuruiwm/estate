@@ -836,7 +836,14 @@
             "type": "string",
             "optional": false,
             "field": "search",
-            "description": "<p>搜索关键词</p>"
+            "description": "<p>房源名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "address",
+            "description": "<p>地址</p>"
           },
           {
             "group": "Parameter",
@@ -844,6 +851,27 @@
             "optional": false,
             "field": "city",
             "description": "<p>市的ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "floor_area_min",
+            "description": "<p>面积最小值</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "floor_area_max",
+            "description": "<p>面积最大值</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "init_status",
+            "description": "<p>房屋类型  1新房 2二手房</p>"
           }
         ]
       }
