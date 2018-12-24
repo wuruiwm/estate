@@ -39,7 +39,7 @@ class Housesearch extends Controller{
 				//实例化model并执行查询
 				//先执行进行标题查询
 				$house = model('HouseSource');
-				$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status','brokerage_plan'])->where($str)->where('floor_area','between',"$floor_area_min,$floor_area_max")->where('title','like',"%$search%")->where('house_address','like',"%$address%")->select();
+				$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status','brokerage_plan','cover_img'])->where($str)->where('floor_area','between',"$floor_area_min,$floor_area_max")->where('title','like',"%$search%")->where('house_address','like',"%$address%")->select();
 				$data = [];
 				foreach ($res as $k => $v) {
 					if ($init_status == 1) {
@@ -51,22 +51,25 @@ class Housesearch extends Controller{
 						$array = $v->getData();
 						$array['price'] = $brok_price;
 						unset($array['brokerage_plan']);
-						$data[] = $array;
 					}else{
-						$data[] = $v->getData();
+						$arrat = $v->getData();
 					}
-					
+						$attachment = model('attachment');
+						$atta_res = $attachment->where('id',$array['cover_img'])->find()->getData()['filepath'];
+						$array['img_id'] = $array['cover_img'];
+						$array['cover_img'] = $atta_res;
+						$data[] = $array;
 				}
 				//判断是否有数据，没有则说明没有查到结果，返回提示信息，有结果则把数组return出去
 				if(!$data){
-					return ['reg'=>'关键词没有查到结果，建议更换关键词'];
+					return ['reg'=>'暂无符合搜索条件房源信息!'];
 				}
 				return $data;
 		}
 		//实例化model并执行查询
 		//先执行进行标题查询
 		$house = model('HouseSource');
-		$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status','brokerage_plan'])->where($str)->where('title','like',"%$search%")->where('house_address','like',"%$address%")->select();
+		$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status','brokerage_plan','cover_img'])->where($str)->where('title','like',"%$search%")->where('house_address','like',"%$address%")->select();
 		$data = [];
 		foreach ($res as $k => $v) {
 			if ($init_status == 1) {
@@ -78,14 +81,18 @@ class Housesearch extends Controller{
 				$array = $v->getData();
 				$array['price'] = $brok_price;
 				unset($array['brokerage_plan']);
-				$data[] = $array;
 			}else{
-				$data[] = $v->getData();
+				$array = $v->getData();
 			}
+			$attachment = model('attachment');
+			$atta_res = $attachment->where('id',$array['cover_img'])->find()->getData()['filepath'];
+			$array['img_id'] = $array['cover_img'];
+			$array['cover_img'] = $atta_res;
+			$data[] = $array;
 		}
 		//判断是否有数据，没有则说明没有查到结果，返回提示信息，有结果则把数组return出去
 		if(!$data){
-			return ['reg'=>'关键词没有查到结果，建议更换关键词'];
+			return ['reg'=>'暂无符合搜索条件房源信息!'];
 		}
 		return $data;
 	}
