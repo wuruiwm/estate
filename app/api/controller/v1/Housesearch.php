@@ -34,7 +34,7 @@ class Housesearch extends Controller{
 		}
 		$floor_area_min = input('get.floor_area_min');
 		$floor_area_max = input('get.floor_area_max');
-		//
+		//判断是否有面积参数传入，如果没有则不查面积范围，如果有则查询
 		if ((($floor_area_min==='0')||(!empty($floor_area_min)))&&(($floor_area_max==='0')||(!empty($floor_area_max)))) {
 				//实例化model并执行查询
 				//先执行进行标题查询
@@ -42,6 +42,7 @@ class Housesearch extends Controller{
 				$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status','brokerage_plan','cover_img'])->where($str)->where('floor_area','between',"$floor_area_min,$floor_area_max")->where('title','like',"%$search%")->where('house_address','like',"%$address%")->select();
 				$data = [];
 				foreach ($res as $k => $v) {
+					//判断房源类型，如果是新房，则查出佣金
 					if ($init_status == 1) {
 						$a = $v->getData()['brokerage_plan'];
 						$arr = explode(',',$a);
@@ -52,8 +53,9 @@ class Housesearch extends Controller{
 						$array['price'] = $brok_price;
 						unset($array['brokerage_plan']);
 					}else{
-						$arrat = $v->getData();
+						$array = $v->getData();
 					}
+					//根据cover_img的id值，去attachment表中查出图片路径，赋值到数组里
 						$attachment = model('attachment');
 						$atta_res = $attachment->where('id',$array['cover_img'])->find()->getData()['filepath'];
 						$array['img_id'] = $array['cover_img'];
@@ -72,6 +74,7 @@ class Housesearch extends Controller{
 		$res = $house->field(['id','title','house_price','house_address','decoration_type','init_status','brokerage_plan','cover_img'])->where($str)->where('title','like',"%$search%")->where('house_address','like',"%$address%")->select();
 		$data = [];
 		foreach ($res as $k => $v) {
+			//判断房源类型，如果是新房，则查出佣金
 			if ($init_status == 1) {
 				$a = $v->getData()['brokerage_plan'];
 				$arr = explode(',',$a);
@@ -84,6 +87,7 @@ class Housesearch extends Controller{
 			}else{
 				$array = $v->getData();
 			}
+			//根据cover_img的id值，去attachment表中查出图片路径，赋值到数组里
 			$attachment = model('attachment');
 			$atta_res = $attachment->where('id',$array['cover_img'])->find()->getData()['filepath'];
 			$array['img_id'] = $array['cover_img'];
