@@ -60,6 +60,7 @@ class House extends Permissions
         }
 
         $model = new HouseSource();
+        $post['status'] = 1;
         $result = $model->allowField(true)->save($post);
 
         if ($result) {
@@ -155,7 +156,7 @@ class House extends Permissions
 
     }
 
-    // 是否显示
+    // 是否显示头条
     public function isHead($id = '', $is_head = '')
     {
         $model = new HouseSource();
@@ -168,5 +169,17 @@ class House extends Permissions
         }
     }
 
+    // 是否审核
+    public function isStatus($id = '', $is_status = '')
+    {
+        $model = new HouseSource();
+        $result = $model->where('id', $id)->update([
+            'status' => $is_status,
+            'update_time' => time()
+        ]);
+        if ($result) {
+            throw new SuccessMessage();
+        }
+    }
 
 }

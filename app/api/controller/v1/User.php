@@ -22,6 +22,7 @@ use app\lib\exception\ErrorMessage;
 use app\lib\exception\SuccessMessage;
 use app\lib\validate\AddRealName;
 use app\lib\validate\ChangeNickname;
+use app\lib\validate\IDCard;
 use app\lib\validate\UpdateAlipay;
 use app\lib\validate\UpdateWx;
 use app\lib\validate\VerifyPhone;
@@ -147,7 +148,5 @@ class User extends BaseController
         }
         throw new SuccessMessage();
     }
-
-
 
 }

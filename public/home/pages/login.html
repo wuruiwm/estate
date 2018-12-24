@@ -16,7 +16,12 @@
 		<style>
 			.topbg{width: 100%; position: relative;}
 			.topbg img{max-width: 100%;}
-			.userinfo .userimg{width: 1rem; height: 1rem;}
+			.userinfo .userimg{
+				border: 2px solid rgba(255, 255, 255, .3);
+				width: 1rem;
+				height: 1rem;
+				border-radius: 50%;
+			}
 			.userinfo .userimg img{
 				height: 100%;
 				width: 100%;
@@ -26,6 +31,7 @@
 				left: calc(50% - 25px);
 				position: absolute;
 				top: calc(50% - 65px);
+				text-align: center;
 			}
 			.username{color:#ffffff; margin-top: .1rem;}
 			.loginform {
@@ -67,10 +73,10 @@
 			</header>
 			<div class="topbg">
 				<img src="../static/images/bg.jpg" />
-				<!-- <div class="userinfo">
-					<div class="userimg"><img src="../static/images/house3.png" /></div>
-					<div class="username">用户姓名</div>
-				</div> -->
+				<div class="userinfo">
+					<div class="userimg"><img src="../static/images/loginlogo.jpg" /></div>
+					<div class="username">和房宝</div>
+				</div>
 			</div>
 			<div class="loginform">				
 					<div class="admin">
@@ -82,7 +88,7 @@
 						<input class="font-sty" id="userpsd" type="password" value="" name="password" placeholder="请正确输入密码" />
 					</div>  
 					<button type="submit" class="truelogin font-sty">登录</button>
-					<p style="margin-top: .3rem; color:#666666">没有账号？<a href="./register.html" style="color:#C1060F;">立即注册</a></p>				
+					<p style="margin-top: .4rem; color:#666666">没有账号？<a href="./register.html" style="color:#C1060F;">立即注册</a></p>				
 			</div>
 		</div>
 	</body>

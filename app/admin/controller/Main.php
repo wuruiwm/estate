@@ -66,6 +66,7 @@ class Main extends Permissions
         $web['pending'] = Db::name('order')->where('is_deal',0)->count();//待成交
         $web['is_pay'] = Db::name('order')->where('is_pay',0)->count();//待结佣
         $web['is_examine'] = Db::name('user')->where('is_submit',1)->where('is_examine',0)->count();//待实名审核
+        $web['house_status'] = Db::name('house_source')->where('status',0)->count();//待房源审核
 
         //登陆次数和下载次数
         $today = date('Y-m-d');

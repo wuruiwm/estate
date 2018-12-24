@@ -73,7 +73,7 @@
 			</div>
 		</header>
 		<!-- 房源头条列表 -->
-		<div class="g-scrollview" id="listContent"></div>
+		<div class="g-scrollview" id="list_ontent"></div>
 		<!-- 报备客户按钮 -->
 		<a href="reportecustomers/index.html">
 			<div id="preparation">报备</div>
@@ -81,21 +81,22 @@
 </section>
 <!-- 引入jQuery 3.0+ -->
 <script src="../js/jq331.min.js"></script>
-<script src="../js/template.js"></script>
+
 <script src="../js/common.js"></script>
 <script src="../build/js/ydui.flexible.js"></script>
 <!-- 引入YDUI脚本 -->
 <script src="../build/js/ydui.js"></script>
 <!-- <script src="../js/Index.js"></script> -->
-<script id="houseList" type="text/html">
+<script src="../js/template.js"></script>		
+<script id="house_list" type="text/html">
 	{{each data as value index}}
-		<a
-		{{if data[index].init_status= "新房"}}
-		href="./contentdetails.html?id={{data[index].id}}"
-		{{else}}
-		href="./olddetails.html?id={{data[index].id}}"
+		<a href="
+		{{if data[index].init_status=='新房'}}
+		./contentdetails.html?id={{data[index].id}}
+		{{else if data[index].init_status=='二手房'}}
+		./olddetails.html?id={{data[index].id}}
 		{{/if}}
-		>
+		">
 			<div class="item-list" data-id="{{data[index].id}}">
 				<div class="left-img">
 					<img src="{{data[index].cover_img.img_url}}" />
@@ -113,22 +114,20 @@
 <script>
 	$(document).ready(function(){
 		var nenwslistApi = commapi + 'house/head';//房源头条接口
-		$('.item-list').click(function(){
-			location.href="./contentdetails.html";
-		});
+// 		$('.item-list').click(function(){
+// 			location.href="./contentdetails.html";
+// 		});
 		
 		//获取房源头条列表
 		$.ajax({
 			url: nenwslistApi,
-			type: 'GET',									
-			data: {},											
+			type: 'GET',											
 			success: function (ret) {	
-				console.log(ret)
 				if(ret.length==0){
 					$('#listContent').html("<img style='max-width: 100%;height: auto;' src='../static/images/nodata.png' />");
 				}else{
-					var html = template('houseList', {data: ret});
-					$('#listContent').html(html);
+					var html = template('house_list', {data: ret});
+					$('#list_ontent').html(html);									
 				}
 			}
 		});

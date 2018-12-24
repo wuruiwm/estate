@@ -61,6 +61,12 @@
 		.cell-checkbox-icon:after{
 			color:#C1060F !important;
 		}
+		
+		.uploadbutton{
+			font-size: 0.4rem;
+			border: dashed 1px #7F7F7F;
+			padding: .2rem .3rem;
+		}
 		.submit{
 			text-align: center;
 			display: block;
@@ -74,6 +80,7 @@
 		#J_ShowActionSheet{
 			display: block !important;
 			padding: 0 !important;
+			height: 7rem;
 		}
 		
 		/* 城市列表自定义布局 */
@@ -85,13 +92,40 @@
 			overflow: auto;
 			width: 30% !important;
 			margin: 0 5px;
+			height: 7rem;
 		}
 		#ProviceList a, #CityList a,#AreaList a{
+			line-height: .7rem;
+			height: .7rem;
 			display: block;
 			margin: 1px 0;
+			font-size: .23rem;
 		}
 		.active{
 			color:#C1060F;
+		}
+		
+		#houseimglist img {
+			width: 1rem;
+			height: 1rem;
+			margin: .1rem 0 0 .3rem;
+		}
+		#houseimglist p{
+			position: relative;
+		}
+		.removeimg{
+			display: inline-block;
+			position: absolute;
+			top: -0.1rem;
+			right: -0.1rem;
+			background: red;
+			color: #fff;
+			width: .3rem;
+			height: .3rem;
+			line-height: .25rem;
+			text-align: center;
+			font-size: .5rem;
+			border-radius: 50%;
 		}
 	</style>
 </head>
@@ -103,7 +137,7 @@
 				<i class="back-ico"></i>
 			</a>
 			<div class="navbar-center">
-				<span class="navbar-title">发布房源信息</span>
+				<span class="navbar-title">发布二手房源信息</span>
 			</div>
 		</header>
 		<div class="g-scrollview">
@@ -120,37 +154,45 @@
 				</div>
 				<div class="">
 					<label>详细地址：</label>
-					<input type="text"   value=""  name="" placeholder="街道、门牌号..." />
+					<input type="text"   value=""  name="adressname" placeholder="街道、门牌号..." />
 				</div>
 				<div class="">
 					<label>房源名称：</label>
-					<input type="text"  placeholder="房源名称" value="" name="" />
+					<input type="text"  placeholder="房源名称" value="" name="housename" />
 				</div>
 				<div class="">
 					<label>价格：</label>
-					<input type="text"  placeholder="房源价格" value="" name="" />
+					<input type="text"  placeholder="房源价格" value="" name="houseprice" />
 				</div>
 				<div class="">
 					<label>面积：</label>
-					<input type="text"  placeholder="房源面积/㎡" value="" name="" />
+					<input type="text"  placeholder="房源面积/㎡" value="" name="houses" />
 				</div>
 				<div class="">
 					<label>户型：</label>
-					<input type="text"  placeholder="如:三室一厅一厨一卫..." value="" name="" />
+					<input type="text"  placeholder="如:三室一厅一厨一卫..." value="" name="housestyle" />
 				</div>
 				<div class="">
 					<label>物业费：</label>
-					<input value="" name="" type="text"   placeholder="元/㎡" />
+					<input value="" name="wuyefei" type="text"   placeholder="元/㎡" />
 				</div>
 				<div class="">
 					<label>装修类型：</label>
-					<input value="" name="" type="text"   placeholder="如:毛坯、精装" />
+					<input value="" name="zhuangxiu" type="text"   placeholder="如:毛坯、精装" />
 				</div>
 				<div class="">
-					<label>房源介绍：</label>
-					<textarea rows="10" cols="50" placeholder="房源介绍信息"></textarea>
+					<label>房源图片：</label>
+					<div class="logo-wrapper">
+						<span class="uploadbutton" onclick="$('#sfz_1').click()">+</span>
+						<input type="file" class="ajax-upload" accept="image/gif,image/jpeg,image/x-png"   id="sfz_1"  style="display:none">						
+					</div>					
 				</div>
-				<span class="submit">立即发布</span>
+				<div class="imgitem-list" id="houseimglist"></div>
+				<div class="">
+					<label>房源介绍：</label>
+					<textarea class="desc" rows="10" cols="50" placeholder="房源介绍信息"></textarea>
+				</div>
+				<span id="releasenow" class="submit">立即发布</span>
 			</form>
 		</div>
 		</div>
@@ -175,7 +217,7 @@
 
 <script id="arealistscript" type="text/html">
 	{{each arealist as value index}}
-		<a href="#" onclick="areaclick(this,{{arealist[index].area_id}},'{{arealist[index].name}}')"   class="actionsheet-item" data-code="{{arealist[index].area_id}}">{{arealist[index].name}}</a>
+		<a href="#" onclick="areaclick(this,{{arealist[index]._id}},'{{arealist[index].name}}')"   class="actionsheet-item" data-code="{{arealist[index].area_id}}">{{arealist[index].name}}</a>
 	{{/each}}
 </script>
 
@@ -212,6 +254,35 @@
 			//刷新最后使用时间
 			sessionStorage.setItem("nxgx_lastVisitTime", new Date().getTime());
 			_interval_handler=setInterval(checkExpired, 10*1000);//10秒钟检查一次，是否超时
+			
+			//在登录的状态下检测用户是否提交验证资料并且审核通过
+			var checkApi = commapi + 'yanzheng/shenhe';
+			$.ajax({
+			url: checkApi,
+			type: 'POST',
+			data: {},
+			beforeSend: function(request) {
+					request.setRequestHeader("token", dataToken);
+					},
+			success: function (ret) {
+					console.log(ret);
+					if(ret.is_examine != 1){												
+						!function (win, $) {
+							var dialog = win.YDUI.dialog;						
+								dialog.toast('您的验证资料尚未通过审核，还不能发布房源信息！', 'none', 3000);
+								setTimeout(function () {
+									dialog.loading.close();/* 移除loading */
+									location.href="./checking.html"
+								}, 2000);					  	
+						}(window, jQuery);	
+					};
+					if(ret.is_examine == 1){
+						YDUI.dialog.toast('恭喜您已经通过审核验证，可以发布房源信息啦！', 'none', 3000);
+					}
+				},              
+			}); 
+			
+			
 			}
 		})();
 		
@@ -253,16 +324,50 @@
 					$('#AreaList').html('');
 				},              
 			}); 
-		});					
+		});							
+				
+			//发布房源图片
+			$('.ajax-upload').on('change',function(){//当 input file 已经选中时触发js
+			var uploadimgApi = commapi + 'upload/file_img';
+			var formData = new FormData();//先实例化formdata
+			var file     = this.files[0];//获取文件名
+			var id       = this.id;//本input的id			
+			formData.append("file", file);//append方法用于向formdata中注入内容
+			$.ajax({
+				type: "post",
+				url: uploadimgApi,
+				//async:false,
+				contentType: false,
+				processData: false,
+				data: formData,//传过来
+				dataType: 'json',
+				cache: false,
+				contentType: false,
+				processData: false,
+				beforeSend: function(request) {
+						request.setRequestHeader("token", dataToken);
+						},
+				success: function (data) {
+					console.log(data)							
+					$('#houseimglist').append('<p><img data-id='+ data.id +' src= '+ commimgurl + data.src +' /><span onclick="removeimg(this)" class="removeimg">-</span></p>')							
+				}
+			});
+		});																								
 	});
 	
+	//移除图片
+	function removeimg (e){		
+		$(e).siblings().remove();
+		$(e).remove();
+	}
+
 	//省市区三级联动
 	var provicevalue;
 	var cityvalue;
 	var areavalue;
-	var proCode;
-	var cityCode;
-	var areaCode;
+	var proCode = '';
+	var cityCode= '';
+	var areaCode = '';
 	function proviceclick (e,provicecode,proname){
 		var citylistApi = commapi + 'city/list'; //获取市
 			$('#AreaList').html(''); //清空市内容
@@ -307,9 +412,55 @@
 		areaCode = areacode;		
 		console.log(proCode + '-' + cityCode + '-' + areaCode);
 	}
-								
-	//发布房源
 	
+	//发布房源信息
+	var releasehouseApi = commapi + 'house/add_used'; //发布房源接口
+	$('#releasenow').click(function(){
+		var imgidlist = '';
+		$('#houseimglist p img').each(function(){			
+			imgidlist += $(this).data('id') + ",";				 		
+			return imgidlist;
+		});
+		//去掉最后一个逗号
+		if (imgidlist.length > 0) {
+		imgidlist = imgidlist.substr(0, imgidlist.length - 1);
+		}
+		console.log(imgidlist)		
+		var datalist = {
+			'title': $('input[name="housename"]').val(),
+			'house_price': $('input[name="houseprice"]').val(),
+			'floor_area': $('input[name="houses"]').val(),
+			'property_costs': $('input[name="wuyefei"]').val(),
+			'decoration_type': $('input[name="zhuangxiu"]').val(),
+			'house_type': $('input[name="housestyle"]').val(),
+			'province': proCode,
+			'city': cityCode,
+			'area': areaCode,
+			'house_address': $('input[name="adressname"]').val(),
+			'room_map': imgidlist,
+			'detail':  $('.desc').val()
+		}	
+		$.ajax({
+		url: releasehouseApi,
+		type: 'POST',
+		data: datalist,
+		beforeSend: function(request) {
+				request.setRequestHeader("token", dataToken);
+		},
+		success: function (ret) {
+				console.log(ret);
+				YDUI.dialog.toast('发布成功!', 'none', 3000);
+				setTimeout(function () {					
+					location.href="./oldhouse.html?province="+provicevalue + '&city=' + cityvalue;
+				}, 3000);
+			},
+		  error:function(msg){
+			var json=JSON.parse(msg.responseText);
+			YDUI.dialog.toast(json.msg, 'none', 1500); // 失败返回
+		  }
+		}); 	
+		
+	});						
 </script>
 
 </body>

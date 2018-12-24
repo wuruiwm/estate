@@ -104,7 +104,7 @@
 									{{/if}}
 								{{/if}}
 								</li>
-								<li class="houseplace"><label>楼盘：</label><input value="圣联·香御公馆" name="" readonly="readonly"></input></li>
+								<li class="houseplace"><label>楼盘：</label><input value="{{data[index].house_title}}" name="" readonly="readonly"></input></li>
 								<li class="tel"><label>手机：</label><input value="{{data[index].number}}" name="" readonly="readonly"></input></li>
 								<li class="plan"><label>意向：</label><input value="{{data[index].content}}" name="" readonly="readonly"></input><span><a>{{data[index].date}}</a></span></li>
 							</ul>
@@ -200,15 +200,7 @@
 				$('.tab-nav li').removeClass('tab-active');
 				$(this).addClass('tab-active');
 				getbestnewList(status) //点击显示不同状态的列表信息
-			});	
-			
-// 			$(window).scroll(function() {
-// 			if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
-// 			  
-// 			}
-// 		  });
-			
-			
+			});										
 		})
 	</script>
 </html>

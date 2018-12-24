@@ -33,11 +33,11 @@ $(document).ready(function(){
                    var json=JSON.parse(msg.responseText);
                    // 验证不通过
                    if(json.errorCode==40000){
-                       alert(json.msg);
+										 YDUI.dialog.toast(json.msg, 'none', 2000);                       
                    }
                    // 用户名不存在
                    if(json.errorCode==40301){
-                       alert(json.msg);
+                     YDUI.dialog.toast(json.msg, 'none', 2000);   
                    }
                }
            })

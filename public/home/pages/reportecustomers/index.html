@@ -77,28 +77,35 @@
 		#J_ShowActionSheet{
 			display: block !important;
 			padding: 0 !important;
+			height: 7rem;
 		}
 		/* 城市列表自定义布局 */
 		#ProviceList, #CityList,#AreaList{
 			padding: 0 !important;
 			float: left;
 			display: block !important;
-			height: 5rem;			
+			height: 7rem;			
 			overflow: auto;
 			width: 30% !important;
 			margin: 0 5px;
 		}
 		#ProviceList a, #CityList a,#AreaList a{
+			line-height: .7rem;
+			height: .7rem;
 			display: block;
 			margin: 1px 0;
+			font-size: .23rem;
 		}
 		#houselistActionSheet{
 			display: block !important;
 			padding: 0 !important;
+			height: 4rem;
+    overflow: auto;
 		}
 		.active{
 			color:#C1060F;
 		}
+		.red-a{color:red;}
 	</style>
 </head>
 <body>
@@ -128,9 +135,6 @@
 					<label>报备楼盘</label>
 					<input id="houselist" value="" name="currenHouse" type="text" readonly="readonly"  placeholder="请选择楼盘" />
 					<div class="m-actionsheet" id="houselistActionSheet">
-						<a href="#" class="actionsheet-item">香御·圣联公馆</a>
-						<a href="#" class="actionsheet-item">兴园小区</a>
-						<a href="#" class="actionsheet-item">保利·香槟国际</a>
 						<a href="javascript:;" class="actionsheet-action" id="J_Cancel">取消</a>
 					</div>
 				</div>
@@ -200,12 +204,17 @@
 
 <script id="arealistscript" type="text/html">
 	{{each arealist as value index}}
-		<a href="#" onclick="areaclick(this,{{arealist[index].area_id}},'{{arealist[index].name}}')"   class="actionsheet-item" data-code="{{arealist[index].area_id}}">{{arealist[index].name}}</a>
+		<a href="#" onclick="areaclick(this,{{arealist[index]._id}},'{{arealist[index].name}}')"   class="actionsheet-item" data-code="{{arealist[index].area_id}}">{{arealist[index].name}}</a>
+	{{/each}}
+</script>
+
+<script id="getarealistscript" type="text/html">
+	{{each datarea as value index}}
+		<a href="#" onclick="getareaclick(this,{{datarea[index].id}},'{{datarea[index].title}}')"  class="actionsheet-item" >{{datarea[index].title}}</a>
 	{{/each}}
 </script>
 <script>
 $(document).ready(function(){
-	var postcustomerApi = commapi + "order/add";
 	if(!dataToken){
 		!function (win, $) {
 			var dialog = win.YDUI.dialog;													
@@ -263,20 +272,17 @@ $(document).ready(function(){
 	//报备楼盘选择
     var $as = $('#houselistActionSheet');
     $('#houselist').on('click', function () {
-        $as.actionSheet('open');
+			if($("#J_ActionSheet").val() ==''){
+			YDUI.dialog.toast('请先选择地区', 'none', 1500);
+			}else{
+				 $as.actionSheet('open');
+			}
+       
     });
     $('#J_Cancel').on('click', function () {
         $as.actionSheet('close');
     });
 	
-	$('#houselistActionSheet a').click(function(){
-		var currenHouse = $(this).html();
-		if(currenHouse != '取消'){
-			$("input[name='currenHouse']").val(currenHouse);
-			$as.actionSheet('close');
-		}
-	});
-
 	//日期控件
 	$(function () {
 		var nowData=new Date();
@@ -299,48 +305,6 @@ $(document).ready(function(){
 		};
 		$('#dateinput').mobiscroll(opt);
 	});
-	
-
-	//报备客户
-// 	$('#postcustomer').click(function(){
-// 		var customerName = $("input[name='customername']").val();
-// 		var customerTel = $("input[name='tel']").val();
-// 		var customerSex = $("input[name='sex']:checked").val();
-// 		var dataTime = $('#dateinput').val();
-// 		dataTime = dataTime.substr(0, 10);
-// 		var descTencent = $("#desccontent").val();
-// 		console.log(dataTime);
-// 		$.ajax({
-// 			url: postcustomerApi,
-// 			type: "POST",
-// 			data: {'name': customerName, 'number': customerTel, 'gender': customerSex, 'date': dataTime, 'content': descTencent},
-// 			beforeSend: function(request) {
-//                         request.setRequestHeader("token", dataToken);
-//                     },
-// 			success: function(result) {
-// 				console.log(result);//成功
-// 					!function (win, $) {
-// 						var dialog = win.YDUI.dialog;						
-// 							dialog.toast(result.msg, 'success', 2000);
-// 				}(window, jQuery);	
-// 			}
-// 			error:function(msg){
-// 					console.log(msg) // 失败返回
-// 					console.log('0')
-// 					var json=JSON.parse(msg.responseText);
-// 					// 验证不通过
-// 					if(json.errorCode==40000){
-// 							alert(json.msg);
-// 					}
-// 					// 用户名不存在
-// 					if(json.errorCode==40301){
-// 							alert(json.msg);
-// 					}
-// 			}
-// 		});
-		
-	//});
-	
 });
 
 //选择区域
@@ -363,12 +327,14 @@ $(document).ready(function(){
       });		
    
    //省市区三级联动
-   var provicevalue;
-   var cityvalue;
-   var areavalue;
-   var proCode;
-   var cityCode;
-   var areaCode;
+   var provicevalue='';
+   var cityvalue='';
+   var areavalue='';
+   var proCode = '';
+   var cityCode= '';
+   var areaCode= '';
+	 var getareaid = '';
+	 var housename = '';
    function proviceclick (e,provicecode,proname){
    	var citylistApi = commapi + 'city/list'; //获取市
    		$('#AreaList').html(''); //清空市内容
@@ -387,7 +353,8 @@ $(document).ready(function(){
    			proCode = provicecode;
 			$('#ProviceList a').removeClass('active'); //高亮显示
 			e.classList.add("active");
-   	};				
+   	};		
+				
    function cityclick (e,citycode,cityname){
    	var arealistApi = commapi + 'area/list'; //获取区			
    		console.log(citycode)
@@ -403,9 +370,10 @@ $(document).ready(function(){
    		}); 
    		cityvalue = cityname;
    		cityCode = citycode;
-		$('#CityList a').removeClass('active'); //高亮显示
-		e.classList.add("active");
-   	};			
+			$('#CityList a').removeClass('active'); //高亮显示
+			e.classList.add("active");
+   	};	
+				
    function areaclick (e,areacode,areaname){
    	console.log(areacode);
    	$('#J_ShowActionSheet').actionSheet('close');
@@ -414,9 +382,79 @@ $(document).ready(function(){
    	console.log(proCode + '-' + cityCode + '-' + areaCode);
 	
 	//选完省市区之后 查出对应的楼盘信息
-	
-	
+	var getareahouseApi = commapi + "house/loupan2";
+			$.ajax({
+			url: getareahouseApi,
+			type: 'GET',
+			data: {'province': proCode, 'city':cityCode, 'area':areaCode},             				
+			success: function (ret) {
+					console.log(ret);
+					if(ret.length>0){
+						var html = template('getarealistscript', {datarea: ret});
+						$('#houselistActionSheet').html(html);
+					}else{
+						YDUI.dialog.toast('暂无此地房源信息!', 'none', 3000);
+						var html = template('getarealistscript', {datarea: ret});
+						$('#houselistActionSheet').html('暂无数据！');
+					}
+				},   
+			}); 	
    }
+	 
+	 function getareaclick (e,areaid,content) {
+		 getareaid = areaid;
+		 housename = content;
+		 $('#houselistActionSheet').actionSheet('close'); 
+		 $("input[name='currenHouse']").val(content);
+	 }
+	 
+	 //报备客户
+			var postcustomerApi = commapi + "order/add";
+	  	$('#postcustomer').click(function(){
+	  		var customerName = $("input[name='customername']").val();
+	  		var customerTel = $("input[name='tel']").val();
+	  		var customerSex = $("input[name='sex']:checked").val();
+	  		var dataTime = $('#dateinput').val();
+	  		dataTime = dataTime.substr(0, 10);
+	  		var descTencent = $("#desccontent").val();  					
+				var datalist = {
+					'house_title': housename,
+					'province': proCode,
+					'city': cityCode,
+					'area': areaCode,
+					'house_id': getareaid,
+					'gender': customerSex,
+					'name': customerName,
+					'number': customerTel,
+					'date': dataTime,
+					'content': descTencent,
+				}
+				if(provicevalue ==''){
+					YDUI.dialog.toast('请选择地区!', 'none', 2000);
+				}else if(!housename){
+					YDUI.dialog.toast('请选择楼盘!', 'none', 2000);
+				}else{
+					$.ajax({
+									url: postcustomerApi,
+									type: "POST",
+									data: datalist,
+									beforeSend: function(request) {
+											request.setRequestHeader("token", dataToken);
+										},
+									success: function(result) {
+										console.log(result);//成功
+										if(result.msg != '报备成功'){
+											YDUI.dialog.toast(result.msg, 'none', 3000);
+										}else{
+											YDUI.dialog.toast('报备成功！前往查看', 'none', 3000);				
+											setTimeout(function () {										
+												location.href="../mycustomer.html";
+											}, 2000);
+										}
+									}	  			
+						  });
+				}
+	 });
 
 </script>
 

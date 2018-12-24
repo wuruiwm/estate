@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>房源搜索</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <!-- 引入YDUI样式 -->
+    <link rel="stylesheet" href="../build/css/ydui.css" />
+	<link rel="stylesheet" href="../css/common.css" />
+	<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="../css/jquery.range.css" />
+    <!-- 引入YDUI自适应解决方案类库 -->
+    <script src="../build/js/ydui.flexible.js"></script>
+	<style>
+	#J_ShowActionSheet{
+		display: block !important;
+		padding: 0 !important;
+		height: 7rem;
+	}
+	.searchbox{
+		padding: 0 .2rem;
+	}
+	.searchbox>div{
+		margin: .1rem 0;
+	}
+	
+	.searchbox input, select {
+		width: 60%;
+		border: 1px solid #eee;
+		padding: .1rem .2rem;
+		margin-top: .3rem;
+		font-family: -webkit-pictograph;
+		border-radius: .1rem;
+	}
+	.searchbox label{
+		display: inline-block;
+		min-width: 1.5rem;
+		
+		padding: .2rem 0;
+	}
+	/* 城市列表自定义布局 */
+	#ProviceList, #CityList,#AreaList{
+		padding: 0 !important;
+		float: left;
+		display: block !important;
+		height: 7rem;			
+		overflow: auto;
+		width: 30% !important;
+		margin: 0 5px;
+	}
+	#ProviceList a, #CityList a,#AreaList a{
+		line-height: .7rem;
+		height: .7rem;
+		display: block;
+		margin: 1px 0;
+		font-size: .23rem;
+	}
+	#houselistActionSheet{
+		display: block !important;
+		padding: 0 !important;
+		height: 4rem;
+	overflow: auto;
+	}
+	.active{
+		color:#C1060F;
+	}
+	.red-a{color:red;}
+	#searchpost{
+		font-family: -webkit-pictograph;
+		color: #C1060F;
+		border: 0;
+		background: #eee;
+		padding: .12rem .25rem .12rem .05rem;
+		border-radius: .1rem;
+		font-size: .3rem;
+		margin-top: .8rem;
+	}
+	.theme-green .back-bar{
+		height: 5px;
+	}
+	.theme-green .back-bar .pointer{
+		height: 15px;
+		border-radius: 50%;
+	}
+	.slider-container{
+		margin-top: .4rem;
+	}
+	.theme-green .back-bar .selected-bar{
+		border-radius: 2px;
+		background-color: #a1fad0;
+		background-image: -moz-linear-gradient(top, #FABDE3, #E67BD6) !important;
+		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#C1060F), to(#C1060F));
+		background-image: -webkit-linear-gradient(top, #C1060F, #C1060F);
+		background-image: -o-linear-gradient(top, #FABDE3, #E67BD6);
+		background-image: linear-gradient(to bottom, #C1060F, #C1060F);
+		background-repeat: repeat-x;
+	}
+	.removekey{
+		color: #666;
+		text-decoration: underline;
+		padding: 0 .2rem;
+	}
+	.resultstatus{
+		position: absolute;
+		top: 0;
+		left: 0;
+		color: #fff;
+		background: #C1060F;
+		padding: .02rem .3rem .02rem .1rem;
+		border-radius: 0 .2rem .2rem 0;
+	}
+	/* 搜索结果样式 */
+	.item-list{
+		padding: .3rem;
+	}
+	.item-list .left-img{
+		position: relative;
+		width: 3rem;
+		height: 2rem;
+		margin: 0 .2rem 0 0;
+		float: left;
+	}
+	img{
+		width: 100%;
+		height: 100%;
+	}
+	.desc-right .desc-title{
+		padding: 0 0 .1rem 0;
+	}
+	.desc-right p{
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.desc-right .desc-address{
+		color:#5D5D5D ;
+	}
+	.desc-right .desc-content{
+		color:#898989 ;
+		display: inline-block;
+	}
+	.desc-right{
+		overflow: hidden;
+		text-overflow:ellipsis;
+		white-space: nowrap;
+	}
+	.desc-right span a{
+		padding: .05rem 0;
+		color: #C1060F;
+		display: inline-block;
+	}
+	.desc-right .yong{
+		padding: .02rem .2rem;
+		color:#fff;
+		background: #FF9966;
+		border-radius: .1rem;
+	}
+	p.desc-tip{
+		padding: .1rem 0;
+	}
+	.houseprice{
+		color:#C1060F !important;
+	}
+	
+	</style>
+</head>
+<body>
+	<section class="g-flexview">
+		<!-- 顶部内容 -->
+		<header class="m-navbar">
+			<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+				<i class="back-ico"></i>
+			</a>
+			<div class="navbar-center">
+				<span class="navbar-title">搜索房源</span>
+			</div>
+		</header>
+		<div class="searchbox">			
+			<div>
+				<label>选择地区：</label>
+				<input id="J_ActionSheet" value="" name="currenArea" type="text" readonly="readonly"  placeholder="选择地区" />
+				<div class="m-actionsheet" id="J_ShowActionSheet">
+					<div id="ProviceList" style="width: 30%;"></div>
+					<div id="CityList" style="width: 30%;"></div>	
+					<div id="AreaList" style="width: 30%;"></div>							
+				</div>
+			</div>
+			<div>
+				<label>详细地址：</label>
+				<input id="address" type="text" value="" placeholder="街道、门牌号" />
+			</div>
+			<div>
+				<label>房源类型：</label>
+				<select  id="type">
+					<option value="1" checked>新房</option>
+					<option value="2">二手房</option>
+				</select>
+			</div>
+			
+			<div>
+				<label>房源名称：</label>
+				<input id="keyword" type="text" value="" placeholder="房源名称" />
+			</div>
+			
+			<div id="Range">
+				<label>面积范围(㎡)：</label>
+				<!-- <input  type="search" value="" placeholder="选择面积范围" /> -->
+				<input class="range-slider" id="mianji" type="hidden" value="70,200"/>				
+			</div>
+			
+			<div>
+				<button id="searchpost"><i class="icon-search" style="color:#C1060F; margin: 0 .2rem 0 .2rem;"></i>搜索</button>
+				<span class="removekey">清空条件</span>
+			</div>
+		</div>		
+		<!-- 搜索展示列表 -->
+		<div class="g-scrollview">
+			<div class="g-scrollview" id="searchlist"></div>
+		</div>				
+</section>
+<!-- 引入jQuery 3.0+ -->
+<script src="../js/jq331.min.js"></script>
+<!-- 引入YDUI脚本 -->
+<script src="../build/js/ydui.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/template.js"></script>
+<script src="../js/jquery.range.js"></script>
+<!-- <script src="../js/Index.js"></script> -->
+<script id="prolistscript" type="text/html">
+	{{each data as value index}}
+		<a href="#" onclick="proviceclick(this,{{data[index].province_id}},'{{data[index].name}}')" class="actionsheet-item" data-code="{{data[index].province_id}}">{{data[index].name}}</a>
+	{{/each}}
+</script>
+
+<script id="citylistscript" type="text/html">
+	{{each citylist as value index}}
+		<a href="#" onclick="cityclick(this,{{citylist[index].city_id}},'{{citylist[index].name}}')"  class="actionsheet-item" data-code="{{citylist[index].city_id}}">{{citylist[index].name}}</a>
+	{{/each}}
+</script>
+
+<script id="arealistscript" type="text/html">
+	{{each arealist as value index}}
+		<a href="#" onclick="areaclick(this,{{arealist[index]._id}},'{{arealist[index].name}}')"   class="actionsheet-item" data-code="{{arealist[index].area_id}}">{{arealist[index].name}}</a>
+	{{/each}}
+</script>
+
+
+<!-- 搜索结果显示房源 -->
+<script id="rusultList" type="text.text/html">
+	{{each data as value index}}
+		<a href="
+		{{if data[index].init_status=='新房'}}
+		./contentdetails.html?id={{data[index].id}}
+		{{else if data[index].init_status=='二手房'}}
+		./olddetails.html?id={{data[index].id}}
+		{{/if}}
+		">
+			<div class="item-list" data="{{data[index].id}}">
+				<div class="left-img">
+					<img src="{{data[index].cover_img}}" />
+					<label class="resultstatus">{{data[index].init_status}}</label>
+				</div>
+				<div class="desc-right">
+					<p class="desc-title"><p>{{data[index].title}}</p><span><a>{{data[index].house_price}}&nbsp元/㎡</a></span></p>
+					<p class="desc-address">{{data[index].house_address}}</p>
+					<p class="desc-tip">
+						{{each data[index].decoration_type as item id}}
+						<label class="yong">{{item}}</label>
+						{{/each}}
+					</p>
+					<p class="desc-content" {{if data[index].init_status=='二手房'}}style="display:none;"{{/if}} >
+						<label class="yong">佣</label>&nbsp;&nbsp;
+						<span>{{data[index].price}}元/套</span>
+						<span>({{data[index].brokerage_plan}}个方案)</span>
+					</p>
+				</div>
+			</div>
+		</a>
+	{{/each}}
+</script>
+
+<script>
+	//面积范围双向滑块
+	$('.range-slider').jRange({
+		from: 0,
+		to: 400,
+		step: 1,
+		scale: [0,50,100,150,200,250,300,350,400],
+		format: '%s',
+		width: 300,
+		showLabels: true,
+		isRange : true,
+		//$(".range-slider").val() 选择的范围值
+	});
+	
+	var $as = $('#J_ShowActionSheet');					
+	$('#J_ActionSheet').on('click', function () {
+		var provicelistApi = commapi + 'province/list'; //获取省份				
+		$as.actionSheet('open'); //打开楼盘城市列表
+		$('#CityList').html(''); //清空市内容
+		$.ajax({
+		url: provicelistApi,
+		type: 'GET',
+		data: {},             				
+		success: function (list) {
+				console.log(list);
+				var html = template('prolistscript', {data: list});
+				$('#ProviceList').html(html);
+				$('#AreaList').html('');
+			},              
+		}); 
+	});				
+
+//省市区三级联动
+	var provicevalue;
+	var cityvalue;
+	var areavalue;
+	var proCode = '';
+	var cityCode= '';
+	var areaCode = '';
+	function proviceclick (e,provicecode,proname){
+		var citylistApi = commapi + 'city/list'; //获取市
+			$('#AreaList').html(''); //清空市内容
+			console.log(provicecode)
+			$.ajax({
+			url: citylistApi,
+			type: 'GET',
+			data: {'pid': provicecode},             				
+			success: function (citylist) {
+					console.log(citylist);
+					var html = template('citylistscript', {citylist: citylist});
+					$('#CityList').html(html);
+				},              
+			}); 
+				provicevalue = proname;
+				proCode = provicecode;
+				$('#ProviceList a').removeClass('active'); //高亮显示
+				e.classList.add("active");
+		};				
+	function cityclick (e,citycode,cityname){
+		var arealistApi = commapi + 'area/list'; //获取区			
+			console.log(citycode)
+			$.ajax({
+			url: arealistApi,
+			type: 'GET',
+			data: {'cid': citycode},             				
+			success: function (arealist) {
+					console.log(arealist);
+					var html = template('arealistscript', {arealist: arealist});
+					$('#AreaList').html(html);
+				},              
+			}); 
+			cityvalue = cityname;
+			cityCode = citycode;
+			$('#CityList a').removeClass('active'); //高亮显示
+			e.classList.add("active");
+		};			
+	function areaclick (e,areacode,areaname){
+		console.log(areacode);
+		$('#J_ShowActionSheet').actionSheet('close');
+		$("input[name='currenArea']").val(provicevalue + ' ' + cityvalue+ ' ' + areaname);
+		areaCode = areacode;		
+		console.log(proCode + '-' + cityCode + '-' + areaCode);
+	}
+	
+	$('#searchpost').click(function(){
+		var keywordApi = commapi + 'House/search'; //关键字搜索
+		if($("#type  option:selected").val() == 1){
+			var keylist = {
+				'area': areaCode,
+				'search': $('#keyword').val(),
+				'address': $('#address').val(),				
+				'init_status': $("#type  option:selected").val()
+			}
+		}else if($("#type  option:selected").val() == 2){
+			var keylist = {
+				'area': areaCode,
+				'search': $('#keyword').val(),
+				'address': $('#address').val(),
+				'floor_area_min': $(".val-low").text(),
+				'floor_area_max': $(".val-high").text(),
+				'init_status': $("#type  option:selected").val()
+			}
+		}
+		
+		$.ajax({
+			url: keywordApi,
+			type: 'GET',									
+			data: keylist,											
+			success: function (ret) {	
+				console.log(ret)
+				if(ret.length>0){
+					var num = ret.length;
+					$('.searchbox').hide();
+					YDUI.dialog.toast("已经为您更新 "+ num +" 条信息", 'none', 2000);
+					$('.navbar-title').html('搜索结果')
+						setTimeout(function () {
+						var html = template('rusultList', {data: ret});
+						$('#searchlist').html(html);
+						}, 2000);																																																																					
+				}else{
+					YDUI.dialog.toast(ret.reg, 'none', 3000);
+				}
+			}
+		});	
+	});
+	
+	//清空搜索
+	$('.removekey').click(function(){
+		$('.searchbox input').val('');
+	});
+	
+	$(document).ready(function(){
+		//搜索新房的时候 不给选择面积范围
+		if($("#type option:selected").val() == '1'){
+			$('#Range').hide();
+		}else{
+			$('#Range').show();
+		}
+		$('#type').change(function(){
+			if($("#type option:selected").val() == '1'){
+				$('#Range').hide();
+			}else{
+				$('#Range').show();
+			}
+		})		
+	});
+	
+	
+	
+</script>
+</body>
+</html>

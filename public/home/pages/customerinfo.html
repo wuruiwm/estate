@@ -57,7 +57,7 @@
 				</div>
 				<div>
 					<label>报备楼盘：</label>
-					<input type="text" readonly="readonly" value="" name="" />
+					<input type="text" readonly="readonly" value="" name="housename" />
 				</div>
 				<div>
 					<label>客户电话：</label>
@@ -107,6 +107,7 @@
 					success : function(result) {
 						console.log(result)
 						$("input[name='customerName']").val(result.name);
+						$("input[name='housename']").val(result.house_title);
 						$("input[name='customerTel']").val(result.number);
 						var sex = result.gender;
 						if(sex = '1'){
