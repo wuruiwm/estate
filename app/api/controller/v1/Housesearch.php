@@ -62,6 +62,7 @@ class Housesearch extends Controller{
 						$array['img_id'] = $array['cover_img'];
 						$array['cover_img'] = http_type().$atta_res;
 						$array['decoration_type'] = explode(',',$array['decoration_type']);
+						//将房屋类型字段，处理成字符串，方便前端调用
 						if ($array['init_status'] == 1) {
 							$array['init_status'] = '新房';
 						}else if($array['init_status'] == 2){
@@ -107,6 +108,7 @@ class Housesearch extends Controller{
 			//$atta_res = implode('/', $ex);
 			$array['decoration_type'] = explode(',',$array['decoration_type']);
 			$array['cover_img'] = http_type().$atta_res;
+			//将房屋类型字段，处理成字符串，方便前端调用
 			if ($array['init_status'] == 1) {
 				$array['init_status'] = '新房';
 			}else if($array['init_status'] == 2){

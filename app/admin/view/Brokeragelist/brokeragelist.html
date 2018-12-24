@@ -78,7 +78,7 @@
             <td align="center"><strong>佣金方案</strong></td>
             <td align="center"><strong>实际获得佣金</strong></td>
             <td align="center"><strong>结算时间</strong></td>
-            <td align="center"><strong>操作</strong></td>
+            <!-- <td align="center"><strong>操作</strong></td> -->
         </tr>
         {volist name="list" id="v"}
         <tr id="tr{$v.id}">
@@ -89,9 +89,9 @@
             <td align="center">{$v.house_area}㎡&nbsp;{$v.house_type}&nbsp;佣金{$v.price}&nbsp;大众经纪人佣金比例{$v.public_percentage}%&nbsp;门店经纪人{$v.store_percentage}%</td>
             <td align="center">{$v.commission}元</td>
             <td align="center">{$v.date}</td>
-            <td align="center">
+<!--             <td align="center">
                 <button class="btn btn-danger btn-xs" onclick="revoke({$v.id});">撤销</button>
-            </td>
+            </td> -->
         </tr>
         {/volist}
     </table>

@@ -25,8 +25,6 @@ class Notice extends Controller{
      * @apiParam {int} id 公告id
      */
     public function noticeContent($id){
-        //$id = input('id');
-        //echo $id;exit();
         if (!is_numeric($id)) {
             echo "id不合法";exit();
         }
@@ -42,9 +40,6 @@ class Notice extends Controller{
             }
         }
         echo "id不合法";
-
-        //$id = 'id='+$id;
-
     }
 }
 

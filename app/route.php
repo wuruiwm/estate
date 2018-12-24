@@ -90,8 +90,6 @@ Route::get('api/:version/order/content', 'api/:version.Orderlist/content');
 Route::post('api/:version/yanzheng/yanzheng', 'api/:version.Yanzheng/yanzheng');
 //获取实名是否验证和审核状态
 Route::any('api/:version/yanzheng/shenhe', 'api/:version.Yanzheng/shenhe');
-//获取楼盘信息
-Route::any('api/:version/house/loupan', 'api/:version.Loupan/loupan');
 //传参，获取楼盘信息
 Route::get('api/:version/house/loupan2', 'api/:version.Loupan/loupan2');
 //获取我的客户里的佣金管理

@@ -52,6 +52,8 @@ class Order extends Controller{
 		}
 		//转换时间为时间戳
 		$post['date'] = strtotime($post['date']);
+		$post['date'] = date('Y-n-j',$post['date']);
+		$post['date'] = strtotime($post['date']);
 		//判断转出来的时间戳是否是数字，如果不是则说明传来的不是时间
 		if (!is_numeric($post['date'])) {
 			return ['msg'=>'请输入正确的带看时间'];
