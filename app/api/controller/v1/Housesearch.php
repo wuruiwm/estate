@@ -51,6 +51,7 @@ class Housesearch extends Controller{
 						$brok_price=$brok_res->getData()['price'];
 						$array = $v->getData();
 						$array['price'] = $brok_price;
+						//如果是新房，数出佣金方案数，传给前端
 						$array['brokerage_plan'] = count($arr);
 					}else{
 						$array = $v->getData();
@@ -59,7 +60,13 @@ class Housesearch extends Controller{
 						$attachment = model('attachment');
 						$atta_res = $attachment->where('id',$array['cover_img'])->find()->getData()['filepath'];
 						$array['img_id'] = $array['cover_img'];
-						$array['cover_img'] = $atta_res;
+						$array['cover_img'] = http_type().$atta_res;
+						$array['decoration_type'] = explode(',',$array['decoration_type']);
+						if ($array['init_status'] == 1) {
+							$array['init_status'] = '新房';
+						}else if($array['init_status'] == 2){
+							$array['init_status'] = '二手房';
+						}
 						$data[] = $array;
 				}
 				//判断是否有数据，没有则说明没有查到结果，返回提示信息，有结果则把数组return出去
@@ -76,13 +83,18 @@ class Housesearch extends Controller{
 		foreach ($res as $k => $v) {
 			//判断房源类型，如果是新房，则查出佣金
 			if ($init_status == 1) {
+				//取出佣金方案的字段，多个方案用逗号隔开
 				$a = $v->getData()['brokerage_plan'];
+				//用explode分割成数组
 				$arr = explode(',',$a);
+				//实例化佣金方案的表，然后查出楼盘表佣金方案的第一个方案的佣金
 				$brokerage =  model('Brokerage');
 				$brok_res = $brokerage->field(['price'])->where('id',$arr['0'])->find();
+				//查出佣金，将佣金价格放入数组
 				$brok_price=$brok_res->getData()['price'];
 				$array = $v->getData();
 				$array['price'] = $brok_price;
+				//如果是新房，数出佣金方案数，传给前端
 				$array['brokerage_plan'] = count($arr);
 			}else{
 				$array = $v->getData();
@@ -91,7 +103,15 @@ class Housesearch extends Controller{
 			$attachment = model('attachment');
 			$atta_res = $attachment->where('id',$array['cover_img'])->find()->getData()['filepath'];
 			$array['img_id'] = $array['cover_img'];
-			$array['cover_img'] = $atta_res;
+			//$ex = explode('\\',$atta_res);
+			//$atta_res = implode('/', $ex);
+			$array['decoration_type'] = explode(',',$array['decoration_type']);
+			$array['cover_img'] = http_type().$atta_res;
+			if ($array['init_status'] == 1) {
+				$array['init_status'] = '新房';
+			}else if($array['init_status'] == 2){
+				$array['init_status'] = '二手房';
+			}
 			$data[] = $array;
 		}
 		//判断是否有数据，没有则说明没有查到结果，返回提示信息，有结果则把数组return出去
