@@ -51,7 +51,7 @@ class Housesearch extends Controller{
 						$brok_price=$brok_res->getData()['price'];
 						$array = $v->getData();
 						$array['price'] = $brok_price;
-						unset($array['brokerage_plan']);
+						$array['brokerage_plan'] = count($arr);
 					}else{
 						$array = $v->getData();
 					}
@@ -83,7 +83,7 @@ class Housesearch extends Controller{
 				$brok_price=$brok_res->getData()['price'];
 				$array = $v->getData();
 				$array['price'] = $brok_price;
-				unset($array['brokerage_plan']);
+				$array['brokerage_plan'] = count($arr);
 			}else{
 				$array = $v->getData();
 			}
