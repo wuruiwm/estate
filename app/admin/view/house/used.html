@@ -225,6 +225,7 @@
             <select name="area" lay-filter="area" id="area">
             </select>
         </div>
+        <div class="layui-form-mid layui-word-aux" id="raw_data_city"></div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">房源地址<span style="color: #FF5722;">*</span></label>
@@ -678,6 +679,7 @@
                 ue.setContent(successMsg.detail);
                 // 省份
                 $("#province").val(successMsg.province.id);
+                $("#raw_data_city").html('<span style="color: red">原先选择:'+successMsg.province.name+'-'+successMsg.city.name+'-'+successMsg.area.name+'</span>');
                 // 城市
                 getCityList(successMsg.province.id,form);
 

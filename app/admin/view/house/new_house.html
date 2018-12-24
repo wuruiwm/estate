@@ -218,6 +218,7 @@
             <select name="area" lay-filter="area" id="area">
             </select>
         </div>
+        <div class="layui-form-mid layui-word-aux" id="raw_data_city"></div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">房源地址<span style="color: #FF5722;">*</span></label>
@@ -230,6 +231,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">佣金方案</label>
         <div class="layui-input-block" id="parent_node"></div>
+        <div class="layui-form-mid layui-word-aux" id="raw_data_plan" style="margin-left: 115px;"></div>
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
@@ -551,7 +553,7 @@
             sCallback: function (successMsg) {
                 //初始化赋值
                 $.each(successMsg, function (key, value) {  //遍历键值对
-                    var child_node = "<input type='checkbox' name='brokerage_plan[]' value='"+value.id+"'  title='" + value.house_area + '㎡ '+value.house_type+' 佣金' + value.price + "元'>";
+                    var child_node = "<input type='checkbox' name='brokerage_plan[]' value='"+value.id+"'  title='"+'<span style="border-radius:50px;color:rgb(255,255,255);background-color:rgb(255, 87, 34)">'+value.id+'</span> ' + value.house_area + '㎡ '+value.house_type+' 佣金' + value.price + "元'>";
                     $("#parent_node").append(child_node);
                 })
 
@@ -671,6 +673,7 @@
                 ue.setContent(successMsg.detail);
                 // 省份
                 $("#province").val(successMsg.province.id);
+                $("#raw_data_city").html('<span style="color: red">原先选择:'+successMsg.province.name+'-'+successMsg.city.name+'-'+successMsg.area.name+'</span>');
                 // 城市
                 getCityList(successMsg.province.id,form);
 
@@ -690,7 +693,12 @@
                 });
 
                 $("#parent_node").prop("checked",true);
-
+                // 循环佣金方案
+                var plan_strs = '原先方案：';
+                $.each(successMsg.brokerage_plan.data,function(index,value){
+                    plan_strs+=value.id+' ';
+                });
+                $("#raw_data_plan").html('<span style="color: red">'+plan_strs+'</span>');
                 form.render();
 
             },
