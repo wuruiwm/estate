@@ -55,7 +55,7 @@ class Notice extends Controller{
         foreach ($res as $k => $v) {
             $arr = $v->getData();
             $arr['create_time'] = date('Y-n-j G:i:s',$arr['create_time']);
-            $data['update_time'] = date('Y-n-j G:i:s',$data['update_time']);
+            $arr['update_time'] = date('Y-n-j G:i:s',$arr['update_time']);
             $data[] = $arr;
         }
         return $data;
