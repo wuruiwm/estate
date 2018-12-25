@@ -196,7 +196,7 @@
 					 			},
 					 	success: function (data) {
 								!function (win, $) {
-									var dialog = win.YDUI.dialog;						
+									 var dialog = win.YDUI.dialog;						
 										dialog.toast('提交成功', 'success', 2000);
 										setTimeout(function () {
 											dialog.loading.close();/* 移除loading */
@@ -226,15 +226,19 @@
 									$("input[name='idcard']").attr('readonly','readonly');							
 									$('#submitClick').attr('disabled','disabled');
 									$('#submitClick').addClass('unsubmit');
+									//window.location.reload()
 								}else if(data.is_examine == 1){ //审核通过 不给再次提交
 									$('.appendimg').attr('src','../static/images/pass.png');							
 									$("input[name='name']").attr('readonly','readonly');
 									$("input[name='tel']").attr('readonly','readonly');
-									$("input[name='idcard']").attr('readonly','readonly');							
+									$("input[name='idcard']").attr('readonly','readonly');
+																$('#submitClick').addClass('unsubmit');
 									$('#submitClick').attr('disabled','disabled');
-									$('#submitClick').addClass('unsubmit');
+									
+									//window.location.reload()
 								}else{ //审核不通过
 									$('.appendimg').attr('src','../static/images/unpass.png');
+									$('#submitClick').html('重新提交审核')
 								};
 							
 							$("input[name='name']").val(data.card_name);

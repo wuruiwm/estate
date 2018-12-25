@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="../css/common.css" />
 	<link rel="stylesheet" href="../css/contentdetails.css" />
 	<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
+	<link href="../css/viewer.min.css" rel="stylesheet">
 </head>
 <body>
 	<section class="g-flexview">
@@ -40,7 +41,7 @@
 						<ul>
 							<li><input class="housename" value="" name="housetitle" readonly="readonly"  /><span><a class="houseprice"></a>&nbsp;元&nbsp;/&nbsp;㎡</span></li>
 							<li><label>开盘时间：</label><input style="width:calc(100% - 65px);" value="" name="opentime" readonly="readonly"  /></li>
-							<li><label>房源地址：</label><input style="width:calc(100% - 65px);" value="" name="houseadress" readonly="readonly"  /></li>
+							<li><label>房源地址：</label><input style="width:calc(100% - 65px);overflow: hidden;text-overflow:ellipsis;white-space: nowrap;" value="" name="houseadress" readonly="readonly"  /></li>
 						</ul>
 					</div>
 					<div class="yongjinplan">
@@ -88,6 +89,12 @@
 	<script src="../js/jq331.min.js"></script>
     <script src="../build/js/ydui.flexible.js"></script>
 	<script src="../build/js/ydui.js"></script>
+	<!-- <script src="../js/viewer.min.js"></script>
+	<script src="../js/viewer.esm.js"></script> -->
+	<!-- <script src="../js/viewer.common.js"></script>
+	<script src="../js/viewer.aa.js"></script> -->
+	
+	
 	<script src="../js/template.js"></script>
 	<script src="../js/common.js"></script>
 	<!-- <script src="../js/Index.js"></script> -->
@@ -105,7 +112,7 @@
 	<!-- 户型图 -->
 	<script id="roomimg" type="text/html">
 		{{each dataimg as value index}}
-			<li><img src="{{dataimg[index].img_url}}" /></li>
+			<li><img data-original="{{dataimg[index].img_url}}" src="{{dataimg[index].img_url}}" /></li>
 		{{/each}}
 	</script>
 	
@@ -121,6 +128,19 @@
 	
 	<script>
 		$(document).ready(function(){
+// 			var $image = $('#roomap');
+// 			$image.viewer({
+// 			  inline: true,
+// 			  viewed: function() {
+// 				$image.viewer('zoomTo', 1);
+// 			  }
+// 			});			
+
+			// View a list of images
+			//$('#roomap').viewer();
+			
+			
+			
 			var getdetailsApi = commapi + "house/info"; //详情信息
 			var infoid = params.id;
 			$.ajax({

@@ -20,10 +20,17 @@
 		<!-- 顶部内容 -->
 		<header class="m-navbar header">
 			<div class="header-main">
-				<div class="location"><a id="currentCity"></a><label>&nbsp;&nbsp;▼</label></div>
+				<div class="location">
+					<!-- <a id="J_ActionSheet"></a><label>&nbsp;&nbsp;▼</label> -->
+					<input style="text-align: center;width:1rem;color:#fff;font-family: -webkit-pictograph;" id="J_ActionSheet" value="" name="currenArea" readonly="readonly"  /><label>▼</label>
+					<div class="m-actionsheet" id="J_ShowActionSheet">
+						<div id="ProviceList" style="width: 30%;"></div>
+						<div id="CityList" style="width: 30%;"></div>	
+						<div id="AreaList" style="width: 30%;"></div>								
+					</div>
+				</div>
 				<div class="search"><i class="icon-search" style="color:#C1060F; margin: 0 .2rem 0 .2rem;"></i>
-					<input type="search" value="" placeholder="房源搜索" />
-					
+					<input id="searchword" type="search" value="" placeholder="房源搜索" />					
 				</div>
 				<!-- <label>搜索</label> -->
 				<div class="news">
@@ -118,8 +125,8 @@
 <script src="build/js/ydui.js"></script>
 <!-- 引入YDUI自适应解决方案类库 -->
 <script src="build/js/ydui.flexible.js"></script>
-<script src="build/js/citys.js"></script>
-<script src="build/js/ydui.citys.js"></script>
+
+
 <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=1c2a3d03debccf4e9f5502d493d3acfd"></script>
 <script src="js/template.js"></script>
 <script src="js/common.js"></script>
@@ -167,6 +174,24 @@
 				</div>
 			</div>
 		</a>
+	{{/each}}
+</script>
+
+<!-- 省份、市、区 -->
+<script id="prolistscript" type="text/html">
+	{{each data as value index}}
+		<a href="#" onclick="proviceclick(this,{{data[index].province_id}},'{{data[index].name}}')" class="actionsheet-item" data-code="{{data[index].province_id}}">{{data[index].name}}</a>
+	{{/each}}
+</script>
+<script id="citylistscript" type="text/html">
+	{{each citylist as value index}}
+		<a href="#" onclick="cityclick(this,{{citylist[index].city_id}},'{{citylist[index].name}}')"  class="actionsheet-item" data-code="{{citylist[index].city_id}}">{{citylist[index].name}}</a>
+	{{/each}}
+</script>
+
+<script id="arealistscript" type="text/html">
+	{{each arealist as value index}}
+		<a href="#" onclick="areaclick(this,{{arealist[index].area_id}},'{{arealist[index].name}}')"   class="actionsheet-item" data-code="{{arealist[index].area_id}}">{{arealist[index].name}}</a>
 	{{/each}}
 </script>
 </body>

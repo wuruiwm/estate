@@ -16,7 +16,6 @@ class AddUsedHouse extends BaseValidate
 {
     protected $rule = [
         'title'=>'require|isNotEmpty',
-        'desc' =>'require|isNotEmpty',
         'cover_img'=>'require|isNotEmpty|number',
         'head_img'=>'require|isNotEmpty',
         'house_price'=>'require|isNotEmpty|number',
@@ -33,7 +32,6 @@ class AddUsedHouse extends BaseValidate
 
     protected $message = [
         'title' =>'请输入名称',
-        'desc'=>'请输入简介',
         'cover_img'=>'请上传封面图',
         'head_img'=>'请上传头部轮播图',
         'house_price'=>'请输入房价',

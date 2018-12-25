@@ -167,6 +167,7 @@ class HouseSource extends BaseModel
             $house = self::where('city', $city_Info['city_id'])
                 ->where('province', $city_Info['province_id'])
                 ->where('area', $area['_id'])
+                ->where('status',1)
                 ->where('init_status', 'in', $type)
                 ->field($field)
                 ->order('create_time desc')
@@ -183,6 +184,7 @@ class HouseSource extends BaseModel
             $house = self::where('city', $city_id)
                 ->where('province', $province_id)
                 ->where('init_status', 'in', $type)
+                ->where('status',1)
                 ->field($field)
                 ->order('create_time desc')
                 ->page($page, $limit)
@@ -205,6 +207,7 @@ class HouseSource extends BaseModel
     {
         $field = 'id,title,desc,cover_img,house_address,init_status';
         $head = self::where('is_head', 1)
+            ->where('status',1)
             ->field($field)
             ->limit($limit)
             ->order('update_time desc')

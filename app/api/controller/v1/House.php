@@ -13,6 +13,7 @@ namespace app\api\controller\v1;
 
 
 use app\admin\model\HouseSource;
+use app\lib\exception\ErrorMessage;
 use app\lib\exception\NullException;
 use app\lib\exception\ParameterException;
 use app\lib\exception\SuccessMessage;
@@ -20,6 +21,7 @@ use app\lib\validate\addUsedUser;
 use app\lib\validate\IDMustBePositiveInt;
 use app\lib\validate\Page;
 use app\api\service\Token;
+use app\api\model\User;
 
 class House extends BaseController
 {
@@ -159,7 +161,7 @@ class House extends BaseController
      * @apiParam {string} decoration_type 装修类型
      * @apiParam {string} province 省 取province_id 值
      * @apiParam {string} city 市 取 city_id 值
-     * @apiParam {string} area 区 取 area_id 值
+     * @apiParam {string} area 区 取 _id 值
      * @apiParam {string} house_address 房源详细地址
      * @apiParam {string} house_type 房屋类型
      * @apiParam {string} room_map 房源图片 以,分割的字符串 例如：134,136
@@ -182,6 +184,12 @@ class House extends BaseController
      */
     public function addUsed(){
         $user_id = Token::getCurrentTokenUserId();
+        $is_examine = User::where('id',$user_id)->value('is_examine');
+        if($is_examine!==1){
+            throw new ErrorMessage([
+                'msg'=>'请先申请实名认证'
+            ]);
+        }
         (new addUsedUser())->goCheck();
         $post = input('post.');
         $imgs = input('post.room_map');
@@ -190,6 +198,7 @@ class House extends BaseController
         $post['head_img']=$imgs[0];
         $post['init_status']=2;
         $post['user_id']=$user_id;
+        $post['status']=0;
         $model = new HouseSource();
         $result = $model->allowField(true)->save($post);
         if ($result) {

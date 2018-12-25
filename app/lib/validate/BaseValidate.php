@@ -101,6 +101,7 @@ class BaseValidate extends Validate
         }
     }
 
+
     /**
      * @method 非法参数过滤,以及根据验证规则参数 获取对应参数值
      * @param $data 客户端传来的数据
@@ -119,4 +120,5 @@ class BaseValidate extends Validate
         }
         return $newArray;
     }
+
 }

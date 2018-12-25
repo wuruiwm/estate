@@ -61,6 +61,10 @@
     <input type="checkbox" name="is_head" value="{{d.is_head}}" lay-skin="switch" lay-text="开启|关闭" lay-filter="IsHead"
            {{ d.is_head== 1 ?'checked' : '' }}>
 </script>
+<script type="text/html" id="switch_two">
+    <input type="checkbox" name="status" value="{{d.status}}" lay-skin="switch" lay-text="已审|待审" lay-filter="IsStatus"
+           {{ d.status== 1 ? 'checked' : '' }}>
+</script>
 {include file="public/foot"}
 <script>
     layui.use(['table', 'upload', 'form'], function () {
@@ -138,6 +142,24 @@
                 layer.tips('已关闭', obj.othis);
             }
         });
+        //监听switch操作
+        form.on('switch(IsStatus)', function (obj) {
+            // 获取当前控件
+            var selectIfKey = obj.othis;
+            // 获取当前所在行
+            var parentTr = selectIfKey.parents("tr");
+            // 获取当前所在行的索引
+            var parentTrIndex = parentTr.attr("data-index");
+            // 获取“是否主键”的值
+            var ifKey = parentTr.find(('td:eq(1)')).text().trim();
+            if (obj.elem.checked) {
+                is_status(ifKey, 1);
+                layer.tips('已审', obj.othis);
+            } else {
+                is_status(ifKey, 0);
+                layer.tips('待审', obj.othis);
+            }
+        });
 
         //第一个实例
         table.render({
@@ -157,6 +179,7 @@
                 , {field: 'init_status', title: '房源类型', width: 150,align:'center',sort: true}
                 , {field: 'opening_time', title: '开盘时间', width: 200, align: 'center',sort: true}
                 , {field: "is_head", title: '头条房源', width: 150,sort: true, align: 'center', toolbar: "#switch_one", unresize: true}
+                , {field: "status", title: '审核状态', width: 150,sort: true, align: 'center', toolbar: "#switch_two", unresize: true}
                 , {field: 'house_price', title: '房价(元)', width: 200,sort: true}
                 , {field: 'floor_area', title: '占地面积(㎡)', width: 200,sort: true}
                 , {
@@ -341,10 +364,25 @@
         window.base.getData(params);
     }
 
-    // 是否显示
+    // 是否显示头条
     function is_head(id, is_head) {
         var params = {
             url: 'house/is_head?id=' + id + '&is_head=' + is_head,
+            sCallback: function (successMsg) {
+                if (successMsg.errorCode == 20100) {
+                    //弹出loading
+                }
+            },
+            eCallback: function (errorMsg) {
+                layer.msg('您请求的信息不存在!', {icon: 2});
+            }
+        };
+        window.base.getData(params);
+    }
+    // 是否审核
+    function is_status(id, is_status) {
+        var params = {
+            url: 'house/is_status?id=' + id + '&is_status=' + is_status,
             sCallback: function (successMsg) {
                 if (successMsg.errorCode == 20100) {
                     //弹出loading
