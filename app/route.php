@@ -79,6 +79,8 @@ Route::post('api/:version/user/update_password', 'api/:version.User/updatePasswo
 Route::get('api/:version/notice/find', 'api/:version.Notice/noticeUrl');
 //根据id获取公告内容
 Route::get('api/:version/notice/content', 'api/:version.Notice/noticeContent');
+//公告列表
+Route::get('api/:version/notice/list', 'api/:version.Notice/noticelist');
 //报备客户信息提交
 Route::any('api/:version/order/add', 'api/:version.Order/orderadd');
 //我的客户里四种列表

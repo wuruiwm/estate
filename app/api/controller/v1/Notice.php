@@ -41,7 +41,24 @@ class Notice extends Controller{
         }
         echo "id不合法";
     }
+    /**
+     * @api {get} notice/list 获取公告列表
+     * @apiGroup web
+     * @apiVersion 0.1.0
+     * @apiDescription  获取公告列表
+     * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/notice/list
+     */
+    public function noticelist(){
+        $notice = model('Notice');
+        $res = $notice->field(['id','title','content','create_time','update_time'])->order('create_time desc')->select();
+        $data = [];
+        foreach ($res as $k => $v) {
+            $arr = $v->getData();
+            $arr['create_time'] = date('Y-n-j G:i:s',$arr['create_time']);
+            $arr['update_time'] = date('Y-n-j G:i:s',$arr['update_time']);
+            $data[] = $arr;
+        }
+        return $data;
+    }
 }
-
-
 ?>
