@@ -50,16 +50,15 @@ class Notice extends Controller{
      */
     public function noticelist(){
         $notice = model('Notice');
-        $res = $notice->field(['id','title','content','create_time'])->order('create_time desc')->select();
+        $res = $notice->field(['id','title','content','create_time','update_time'])->order('create_time desc')->select();
         $data = [];
         foreach ($res as $k => $v) {
             $arr = $v->getData();
             $arr['create_time'] = date('Y-n-j G:i:s',$arr['create_time']);
+            $data['update_time'] = date('Y-n-j G:i:s',$data['update_time']);
             $data[] = $arr;
         }
         return $data;
     }
 }
-
-
 ?>
