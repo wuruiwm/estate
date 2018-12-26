@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="../css/common.css" />
 	<link rel="stylesheet" href="../css/contentdetails.css" />
 	<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
+	<link href="../css/viewer.min.css" rel="stylesheet">
 	<style>
 		.info ul li input{
 			width:calc(90% - 80px);
@@ -80,6 +81,7 @@
 	<script src="../js/jq331.min.js"></script>
     <script src="../build/js/ydui.flexible.js"></script>
 	<script src="../build/js/ydui.js"></script>
+	<script src="../js/viewer.min.js"></script>	
 	<script src="../js/template.js"></script>
 	<script src="../js/common.js"></script>
 	<!-- <script src="../js/Index.js"></script> -->
@@ -94,10 +96,10 @@
 		{{/each}}
 	</script>
 	
-	<!-- 户型图 -->
+	<!-- 房源图片 -->
 	<script id="roomimg" type="text/html">
 		{{each dataimg as value index}}
-			<li><img src="{{dataimg[index].img_url}}" /></li>
+			<li><img data-original="{{dataimg[index].img_url}}" src="{{dataimg[index].img_url}}" /></li>
 		{{/each}}
 	</script>
 	
@@ -134,8 +136,14 @@
 					
 						var html = template('roomimg', {dataimg: ret.room_map});
 						$('#roomap').html(html);
+						
+						var viewer = new Viewer(document.getElementById('roomap'), { //图片点击放大预览
+									url: 'data-original'
+							});
+						
 						var html = template('contentscript', {data: ret});
 						$('#content').html(html);
+						
 					},					
 				});
 		});

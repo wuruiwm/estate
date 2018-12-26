@@ -13,6 +13,16 @@
 	<link rel="stylesheet" href="./css/Index.css" />
 	<link rel="stylesheet" href="css/common.css" />
 	<link rel="stylesheet" href="./css/fontcss/css/font-awesome.min.css" />
+	<style>
+		#J_ActionSheet{
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align:right;
+			color:#fff;
+			font-family: -webkit-pictograph;
+		}
+	</style>
 </head>
 <body>
 	<section class="g-flexview">
@@ -20,27 +30,29 @@
 		<!-- 顶部内容 -->
 		<header class="m-navbar header">
 			<div class="header-main">
-				<div class="location">
-					<!-- <a id="J_ActionSheet"></a><label>&nbsp;&nbsp;▼</label> -->
-					<input style="text-align: center;width:1rem;color:#fff;font-family: -webkit-pictograph;" id="J_ActionSheet" value="" name="currenArea" readonly="readonly"  /><label>▼</label>
+				<div class="location" style="width: 20%;">
+					<!-- <a id="J_ActionSheet"></a><label>&nbsp;&nbsp;▼</label> -->					
+					<input id="J_ActionSheet" value="" name="currenArea" readonly="readonly"  />
+					<i class="fa fa-map-marker"></i>					
 					<div class="m-actionsheet" id="J_ShowActionSheet">
 						<div id="ProviceList" style="width: 30%;"></div>
 						<div id="CityList" style="width: 30%;"></div>	
 						<div id="AreaList" style="width: 30%;"></div>								
 					</div>
 				</div>
-				<div class="search"><i class="icon-search" style="color:#C1060F; margin: 0 .2rem 0 .2rem;"></i>
-					<input id="searchword" type="search" value="" placeholder="房源搜索" />					
+				<div style="width: 70%;" class="search"><i class="icon-search" style="color:#C1060F; margin: 0 .2rem 0 .2rem;"></i>
+					<input id="searchword" readonly="readonly" type="search" value="" placeholder="房源搜索" />					
 				</div>
 				<!-- <label>搜索</label> -->
-				<div class="news">
-					<a style="display: inline-block;margin-top: 0.1rem;" href="./pages/newslist.html">
-						<i class="fa fa-server" style="font-size:.35rem;"></i>
+				<div style="width: 10%; text-align: center;" class="news">
+					<a style="display: inline-block;margin-top: 0.1rem;" href="./pages/noticelist.html">
+						<i class="fa fa-volume-down" style="font-size:.4rem;"></i>						
+						<!-- fa-server -->
 					</a>
 				</div>
 			</div>
 		</header>
-		
+				
 		<!-- 主体内容 -->
 		<div class="g-scrollview" id="J_List">
 			<!-- banner 图 -->
@@ -79,7 +91,7 @@
 				</div>
 				<div class="notice">
 					<span class="title">公告</span>&nbsp;&nbsp;
-					<div class="desc"></div>
+					<marquee class="desc"></marquee>
 				</div>
 			</div>
 			
@@ -125,9 +137,8 @@
 <script src="build/js/ydui.js"></script>
 <!-- 引入YDUI自适应解决方案类库 -->
 <script src="build/js/ydui.flexible.js"></script>
-
-
 <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=1c2a3d03debccf4e9f5502d493d3acfd"></script>
+<script src="http://api.map.baidu.com/api?v=2.0&ak=QCeZYkMaipgWAeoedA3Ff23dfO3UZL1f"></script>
 <script src="js/template.js"></script>
 <script src="js/common.js"></script>
 <script src="js/DataLazyLoad.js"></script>
@@ -191,7 +202,7 @@
 
 <script id="arealistscript" type="text/html">
 	{{each arealist as value index}}
-		<a href="#" onclick="areaclick(this,{{arealist[index].area_id}},'{{arealist[index].name}}')"   class="actionsheet-item" data-code="{{arealist[index].area_id}}">{{arealist[index].name}}</a>
+		<a href="#" onclick="areaclick(this,{{arealist[index]._id}},'{{arealist[index].name}}')"   class="actionsheet-item" data-code="{{arealist[index].area_id}}">{{arealist[index].name}}</a>
 	{{/each}}
 </script>
 </body>

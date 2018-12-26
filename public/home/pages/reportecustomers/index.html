@@ -43,7 +43,7 @@
 			background: #EEEEEE;
 			padding: .2rem;
 			height: .7rem !important;
-			font-size: 0.1rem;
+			font-size: 0.2rem;
 			
 		}
 		textarea{
@@ -52,7 +52,7 @@
 			border: 0;
 			background: #EEEEEE;
 			padding: .2rem;
-			font-size: 0.1rem;
+			font-size: 0.2rem;
 		}
 		.cell-item:not(:last-child):after{
 			border: 0;
@@ -65,6 +65,7 @@
 			color:#C1060F !important;
 		}
 		.submit{
+			font-size: .2rem;
 			text-align: center;
 			display: block;
 			margin: 0 auto;
@@ -306,6 +307,27 @@ $(document).ready(function(){
 		$('#dateinput').mobiscroll(opt);
 	});
 });
+
+//进页面显示 从首页带来的城市名 同时查出楼盘信息
+$('#J_ActionSheet').val(dataprovicename +' '+ datacityname + ' ' +dataareaname);
+var getareahouseApi = commapi + "house/loupan2";
+			$.ajax({
+			url: getareahouseApi,
+			type: 'GET',
+			data: {'province': dataproviceid, 'city':datacityid, 'area':dataareaid}, //dataproviceid  datacityid  dataareaid common.js取的，与数据库匹配的省市区id        				
+			success: function (ret) {
+					console.log(ret);
+					if(ret.length>0){
+						var html = template('getarealistscript', {datarea: ret});
+						$('#houselistActionSheet').html(html);
+					}else{
+						YDUI.dialog.toast('暂无此地房源信息!', 'none', 3000);
+						var html = template('getarealistscript', {datarea: ret});
+						$('#houselistActionSheet').html('暂无数据！');
+					}
+				},   
+			}); 	
+
 
 //选择区域
    var $as = $('#J_ShowActionSheet');

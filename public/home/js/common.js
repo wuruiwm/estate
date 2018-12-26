@@ -2,6 +2,15 @@ var commapi = "http://estate.dingdingmaoer.cn/api/v1/"; //接口公共地址
 var commimgurl = "http://estate.dingdingmaoer.cn/"; //图片前缀
 var dataToken = sessionStorage.getItem('token'); // 获取token
 var datamoretime = sessionStorage.getItem('moretime'); // 获取时效时间
+
+
+var dataprovicename = sessionStorage.getItem('provicename'); // 获取省份
+var datacityname = sessionStorage.getItem('cityname'); // 获取市
+var dataareaname = sessionStorage.getItem('areaname'); // 获取区县
+var dataproviceid = sessionStorage.getItem('proviceid'); // 获取省份id
+var datacityid = sessionStorage.getItem('cityid'); // 获取市id
+var dataareaid = sessionStorage.getItem('areaid'); // 获取区县id
+
 //获取地址栏参数 
     //url为空时为调用当前url地址 
     //调用方法为 var params = getPatams();

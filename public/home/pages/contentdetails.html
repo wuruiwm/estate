@@ -45,8 +45,8 @@
 						</ul>
 					</div>
 					<div class="yongjinplan">
-						<h6>佣金方案</h6>
-						<div class="plan-list"></div>
+						<h6 style="padding:.5rem 0 0 0;">佣金方案(%)</h6>						
+						<div class="plan-list"></div>						
 					</div>
 				</div>
 				<!-- 佣金方案下面 -->
@@ -87,14 +87,9 @@
 		</a>
 </section>
 	<script src="../js/jq331.min.js"></script>
-    <script src="../build/js/ydui.flexible.js"></script>
+  <script src="../build/js/ydui.flexible.js"></script>
 	<script src="../build/js/ydui.js"></script>
-	<!-- <script src="../js/viewer.min.js"></script>
-	<script src="../js/viewer.esm.js"></script> -->
-	<!-- <script src="../js/viewer.common.js"></script>
-	<script src="../js/viewer.aa.js"></script> -->
-	
-	
+	<script src="../js/viewer.min.js"></script>	
 	<script src="../js/template.js"></script>
 	<script src="../js/common.js"></script>
 	<!-- <script src="../js/Index.js"></script> -->
@@ -120,27 +115,16 @@
 	<script id="cashplan" type="text/html">
 		{{each dataplan as value index}}
 			<div class="item-list">
-				<div>{{dataplan[index].house_area}}㎡&nbsp;<a>{{dataplan[index].house_type}}</a></div>
-				<div class="rmb">佣:{{dataplan[index].price}}</div>
+				<div>{{dataplan[index].house_area}}㎡&nbsp;<a>{{dataplan[index].house_type}}</a></div>				
+				<div>佣:￥{{dataplan[index].price}}</div>
+				<div class="rmb">普通:￥{{dataplan[index].price * dataplan[index].public_percentage/100}}</div>
+				<div class="rmb">门店:￥{{dataplan[index].price* dataplan[index].store_percentage/100}}</div>
 			</div>	
 		{{/each}}
 	</script>
 	
 	<script>
-		$(document).ready(function(){
-// 			var $image = $('#roomap');
-// 			$image.viewer({
-// 			  inline: true,
-// 			  viewed: function() {
-// 				$image.viewer('zoomTo', 1);
-// 			  }
-// 			});			
-
-			// View a list of images
-			//$('#roomap').viewer();
-			
-			
-			
+		$(document).ready(function(){		
 			var getdetailsApi = commapi + "house/info"; //详情信息
 			var infoid = params.id;
 			$.ajax({
@@ -175,7 +159,10 @@
 						var html = template('roomimg', {dataimg: ret.room_map});
 						$('#roomap').html(html);						
 						var html = template('contentscript', {data: ret});
-						$('#content').html(html);
+						$('#content').html(html);						
+						var viewer = new Viewer(document.getElementById('roomap'), { //图片点击放大预览
+									url: 'data-original'
+							});																		
 					},					
 				});
 		});

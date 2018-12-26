@@ -2,6 +2,7 @@
 namespace app\api\controller\v1;
 use think\Controller;
 use app\api\service\Token;
+use think\Db;
 class Orderlist extends Controller{
 	/**
      * @api {get} order/baobei 获取我的客户里四种列表
@@ -97,13 +98,18 @@ class Orderlist extends Controller{
 		}
 		//实例化model，然后查出数据，再if判断，如果内容为空，则返回内容为空
 		$order = model('Order');
-		$res = $order->field(['id','name','number','gender','date','content','house_title'])->where('user_id',$user_id)->where('id',$id)->find();
+		$res = $order->field(['id','name','number','gender','date','content','house_title','house_id'])->where('user_id',$user_id)->where('id',$id)->find();
 		if (!$res) {
 			return ['reg'=>'传入的id内容为空'];
 		}
 		//取出一行数据，并且转换时间戳为时间，方便前端调用
 		$data = $res->getData();
 		$data['date'] = date('Y-n-j',$data['date']);
+		$conn = Db::connect();
+		$house = $conn->field(['house_address'])->table('tplay_house_source')->where('id',$data['house_id'])->find();
+		$house_address = $house['house_address'];
+		unset($data['house_id']);
+		$data['house_address'] = $house_address;
 		return $data;
 	}
 }

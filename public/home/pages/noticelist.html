@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>公告详情</title>
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+		<!-- 引入YDUI样式 -->
+		<link rel="stylesheet" href="../build/css/ydui.css" />
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
+		<script src="../js/jq331.min.js"></script>
+		<!-- 引入YDUI自适应解决方案类库 -->
+		
+		<style>
+		.item-list{
+			box-shadow: #ccc 0px 0px 1px 1px;
+    padding: .2rem;
+    margin-bottom: 20px;
+		}
+		.desc{
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.title label{
+			font-size: .3rem;
+		}
+		.time{
+			display: inline-block;
+			float: right;
+			color: #C0C0C0;
+		}
+		.desc{
+			padding: .2rem 0;
+			text-indent: 30px;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="logincantion">
+			<header class="m-navbar">
+				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+					<i class="back-ico"></i>
+				</a>
+				<div class="navbar-center">
+					<span class="navbar-title">公告列表</span>
+				</div>
+			</header>
+			<div id="listcontent"></div>
+			<!-- 报备客户按钮 -->
+			<!-- <a href="reportecustomers/index.html">
+				<div id="preparation">报备</div>
+			</a> -->
+		</div>
+	</body>
+	<script src="../build/js/ydui.flexible.js"></script>
+	<!-- 引入YDUI脚本 -->
+	<script src="../build/js/ydui.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/template.js"></script>
+	<script id="listscript" type="text/html">
+		{{each data as value index}}
+			<a href="./noticedetails.html?id={{data[index].id}}">
+				<div class="item-list">
+					<p class="title"><label>{{data[index].title}}</label><span class="time">{{data[index].update_time}}</span></p>					
+					<p class="desc">{{data[index].content}}</p>
+				</div>
+			</a>
+		{{/each}}
+	</script>
+	<script>
+		$(document).ready(function(){
+			function delHtmlTag(str){
+			  return str.replace(/<[^>]+>/g,"");//去掉所有的html标记
+			}
+			var noticelistsApi = commapi + "notice/list";
+			var id =  params.id; //获取地址栏的id
+			var dataToken = sessionStorage.getItem('token'); // 获取token
+			//公告列表
+				$.ajax({
+					url : noticelistsApi,
+					type : "get",
+					async:false,
+					data: {},
+					success : function(result) {
+						console.log(result);
+						var html = template('listscript', {data: result});
+						$('#listcontent').html(html);
+					},
+					error:function(msg){
+							console.log(msg) // 失败返回
+					}
+				});
+		});
+	</script>
+</html>

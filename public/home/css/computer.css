@@ -1,4 +1,6 @@
-
+input,select{
+	font-family: -webkit-pictograph;
+}
 input[type=radio] {
 	-webkit-appearance:radio;
 	
@@ -61,7 +63,6 @@ select{
 }
 
 #way dd{
-    padding-left: 20px;
     display: none;
 }
 #way dd input{
@@ -87,7 +88,7 @@ select{
     line-height: 30px;
 }
 #method{
-    line-height: 35px;
+    line-height: 40px;
 }
 #method label{
 	margin-left: .2rem;
