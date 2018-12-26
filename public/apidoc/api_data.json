@@ -90,6 +90,49 @@
   },
   {
     "type": "get",
+    "url": "city/each_id",
+    "title": "获取省市区id",
+    "group": "city",
+    "version": "0.1.0",
+    "description": "<p>根据当前定位获取的省市区中文名 获取对应id, 参数说明：如果定位为直辖市，则参数 province_name,city_name 直接为直辖市名</p>",
+    "sampleRequest": [
+      {
+        "url": "http://estate.dingdingmaoer.cn/api/v1/city/each_id"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "province_name",
+            "description": "<p>省份名 如安徽省 / 重庆市</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "city_name",
+            "description": "<p>市级名 如合肥市 / 重庆市</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "area_name",
+            "description": "<p>区县名 如蜀山区 / 江北区</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/api/controller/v1/City.php",
+    "groupTitle": "城市",
+    "name": "GetCityEach_id"
+  },
+  {
+    "type": "get",
     "url": "city/list",
     "title": "获取市",
     "group": "city",
@@ -202,7 +245,7 @@
             "type": "string",
             "optional": false,
             "field": "area",
-            "description": "<p>区 取 area_id 值</p>"
+            "description": "<p>区 取 _id 值</p>"
           },
           {
             "group": "Parameter",
