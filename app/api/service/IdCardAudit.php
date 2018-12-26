@@ -18,7 +18,7 @@ class IdCardAudit
         $host = "http://idcard3.market.alicloudapi.com";
         $path = "/idcardAudit";
         $method = "GET";
-        $appcode = "8fd1a7c422134fcf8c8fa65947e0d70d";
+        $appcode = "xxxxxxxxxxxxxxxxxxxx";
         $headers = array();
         array_push($headers, "Authorization:APPCODE " . $appcode);
         $querys = "idcard=$id_card&name=$name";

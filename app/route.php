@@ -67,6 +67,8 @@ Route::post('api/:version/user/update', 'api/:version.User/updateById');
 Route::get('api/:version/province/list','api/:version.City/getProvinceList');
 Route::get('api/:version/city/list','api/:version.City/getCityByPid');
 Route::get('api/:version/area/list','api/:version.City/getAreaByCid');
+Route::get('api/:version/city/each_id','api/:version.City/getCityByName');
+
 Route::post('api/:version/house/add_used','api/:version.House/addUsed');
 Route::get('api/:version/user/realname','api/:version.User/idCardAudit');
 

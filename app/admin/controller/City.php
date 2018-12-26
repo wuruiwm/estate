@@ -12,6 +12,7 @@
 namespace app\admin\controller;
 
 
+use app\common\model\Area;
 use app\common\model\Province;
 use app\lib\validate\CidMustBePositiveInt;
 use app\lib\validate\PidMustBePositiveInt;
@@ -31,4 +32,6 @@ class City extends Permissions
         (new CidMustBePositiveInt())->goCheck();
         return Province::getAreaByCid($cid);
     }
+
+
 }
