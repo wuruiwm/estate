@@ -88,6 +88,7 @@
 			<td align="center"><strong>号码</strong></td>
 			<td align="center"><strong>性别</strong></td>
 			<td align="center"><strong>预计带看时间</strong></td>
+			<td align="center"><strong>报备房子类型</strong></td>
 			<td align="center"><strong>报备楼盘</strong></td>
 			<td align="center"><strong>是否报备</strong></td>
 			<td align="center"><strong>是否到访</strong></td>
@@ -105,14 +106,18 @@
 			<td align="center">{$v.number}</td>
 			<td align="center">{$v.gender}</td>
 			<td align="center">{$v.date}</td>
+			<td align="center">{$v.init}</td>
 			<td align="center">{$v.house_title}</td>
 			<td align="center">{$v.is_new}</td>
 			<td align="center">{$v.is_visit}</td>
 			<td align="center">{$v.is_deal}</td>
 			<td align="center" id="td{$v.id}">{$v.is_pay}</td>
 			<td align="center">
-				{if condition="$v.settlement eq 0"}
+				{if condition="$v.settlement eq 0"}{if condition="$v.init_status eq 1"}
 				<button class="btn btn-primary btn-xs yongjin" value="{$v.id}" data-toggle="modal" data-target="#jiesuan" onclick="chuan({$v.house_id},{$v.id})">结算佣金</button>
+				{else /}
+				<button class="btn btn-primary btn-xs yongjin" onclick="tishi()">结算佣金</button>
+				{/if}
 				{else /}
 				<button class="btn btn-primary btn-xs" disabled="disabled">结算佣金</button>
 				{/if}
@@ -318,6 +323,9 @@
 			layer.msg('请选择佣金方案');
 		}
 
+	}
+	function tishi(){
+		layer.msg('该房屋类型是二手房，不能结算佣金');
 	}
 </script>
 </html>

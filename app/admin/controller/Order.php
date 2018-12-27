@@ -60,6 +60,15 @@ class Order extends Permissions{
 				$list[$k]['gender'] = '女';
 			}
 			$list[$k]['date'] = date('Y-n-j',$v['date']);
+			$house = model('HouseSource');
+			$house_res = $house->field(['init_status'])->where('id',$v['house_id'])->find()->getData();
+			if ($house_res['init_status'] == 1) {
+				$list[$k]['init_status'] = 1;
+				$list[$k]['init'] = '新房';
+			}else if($house_res['init_status'] == 2){
+				$list[$k]['init_status'] = 2;
+				$list[$k]['init'] = '二手房';
+			}
 			if ($v['is_new'] == 1) {
 				$list[$k]['is_new'] = '<span style="color: red;">已报备</span>';
 				$list[$k]['is_visit'] = '未到访';
