@@ -184,7 +184,12 @@
 									location.href="./login.html";
 								}, 2000);					  	
 						}(window, jQuery);
-					}						
+					}else if(json.errorCode==40000){
+						YDUI.dialog.toast(json.msg, 'none', 2000);		
+						setTimeout(function () {							 					
+								location.href='./login.html'
+						}, 1000);						
+					}								
 			}
 		});
 		

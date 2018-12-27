@@ -50,26 +50,24 @@
 	</head>
 	<body>
 		<section class="g-flexview" id="J_List"  >
-		<div class="logincantion" >
-			<div class="g-scrollview" >
-				<header class="m-navbar ">
-					<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
-						<i class="back-ico"></i>
-					</a>
-					<div class="navbar-center">
-						<span class="navbar-title">我的客户</span>
-					</div>
-				</header>
-				<div class="m-tab" data-ydui-tab><!-- 这里添加data-ydui-tab就可以啦 -->
-					<ul class="tab-nav">
-						<li class="tab-nav-item tab-active" data-state="1"><a href="javascript:;">已报备</a></li>
-						<li class="tab-nav-item" data-state="2"><a href="javascript:;">已到访</a></li>
-						<li class="tab-nav-item" data-state="3"><a href="javascript:;">已成交</a></li>
-						<li class="tab-nav-item" data-state="4"><a href="javascript:;">已结佣</a></li>
-					</ul>
-					<div class="tab-panel" ></div>											
+		<div class="logincantion" >			
+			<header class="m-navbar ">
+				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+					<i class="back-ico"></i>
+				</a>
+				<div class="navbar-center">
+					<span class="navbar-title">我的客户</span>
 				</div>
-			</div>
+			</header>
+			<div class="m-tab" data-ydui-tab><!-- 这里添加data-ydui-tab就可以啦 -->
+				<ul class="tab-nav">
+					<li class="tab-nav-item tab-active" data-state="1"><a href="javascript:;">已报备</a></li>
+					<li class="tab-nav-item" data-state="2"><a href="javascript:;">已到访</a></li>
+					<li class="tab-nav-item" data-state="3"><a href="javascript:;">已成交</a></li>
+					<li class="tab-nav-item" data-state="4"><a href="javascript:;">已结佣</a></li>
+				</ul>
+				<div class="tab-panel" ></div>											
+			</div>			
 		</div>
 			
 			
@@ -106,7 +104,7 @@
 								</li>
 								<li class="houseplace"><label>楼盘：</label><input value="{{data[index].house_title}}" name="" readonly="readonly"></input></li>
 								<li class="tel"><label>手机：</label><input value="{{data[index].number}}" name="" readonly="readonly"></input></li>
-								<li class="plan"><label>意向：</label><input value="{{data[index].content}}" name="" readonly="readonly"></input><span><a>{{data[index].date}}</a></span></li>
+								<li class="plan"><label>意向：</label><input value="{{data[index].content}}" name="" readonly="readonly"></input><span><a style="float:right;">{{data[index].date}}</a></span></li>
 							</ul>
 						</div>
 					</div>

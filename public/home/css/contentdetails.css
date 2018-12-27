@@ -34,7 +34,7 @@ input.housename{
 }
 .item-list{
 	box-shadow: 0 3px 0px #ccc;
-	padding: .6rem 0;
+	padding: .1rem 0;
     border-radius: .2rem;
     width: 2rem;
     text-align: center;
@@ -47,6 +47,7 @@ input.housename{
 }
 div.rmb{
 	color:#C1060F;
+	font-size: 12px;
 }
 
 

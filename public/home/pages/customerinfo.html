@@ -22,6 +22,7 @@
 				border:1px solid #eee;
 				padding: .1rem .3rem;
 				color:#666666;
+				font-family: -webkit-pictograph;
 				}
 			.basicinfo{padding: .2rem;}
 			.basicinfo div{
@@ -60,6 +61,10 @@
 					<input type="text" readonly="readonly" value="" name="housename" />
 				</div>
 				<div>
+					<label>楼盘地址：</label>
+					<input type="text" readonly="readonly" value="" name="houseaddress" />
+				</div>
+				<div>
 					<label>客户电话：</label>
 					<input type="number" pattern="[0-9]*" readonly="readonly"  value="" name="customerTel" autocomplete="off" />
 				</div>
@@ -73,9 +78,7 @@
 				</div>
 				<div>
 					<label>购房意向：</label>
-					<textarea style="color:#666666;padding: .2rem;" name="Content" readonly="readonly" rows="10" cols="28"></textarea>			
-				</div>
-				
+					<textarea style="color:#666666;padding:.2rem;font-family:-webkit-pictograph;" name="Content" readonly="readonly" rows="10" cols="28"></textarea>				</div>				
 				<!-- 报备客户按钮 -->
 				<a href="./release.html">
 					<div id="release">发布</div>
@@ -108,6 +111,7 @@
 						console.log(result)
 						$("input[name='customerName']").val(result.name);
 						$("input[name='housename']").val(result.house_title);
+						$("input[name='houseaddress']").val(result.house_address);
 						$("input[name='customerTel']").val(result.number);
 						var sex = result.gender;
 						if(sex = '1'){

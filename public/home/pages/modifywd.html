@@ -11,8 +11,6 @@
 		<link rel="stylesheet" href="../build/css/ydui.css" />
 		<link rel="stylesheet" href="../css/common.css" />
 		<link rel="stylesheet" href="../css/fontcss/css/font-awesome.min.css" />
-		<script src="../js/jq331.min.js"></script>
-		<script src="../js/common.js"></script>
 		<style>
 			label{
 				display: inline-block;
@@ -59,7 +57,7 @@
 			<div class="basicinfo">
 				<div>
 					<label>账号：</label>
-					<input type="text" readonly="readonly" value="15256935637" name="account" /><a class="getcode" id="getcode">获取验证码</a>
+					<input type="text" readonly="readonly" value="" name="account" /><a class="getcode" id="getcode">获取验证码</a>
 				</div>
 				<div id="messageCode">
 					<label>短信验证码：</label>
@@ -77,8 +75,15 @@
 				<button class="truemodify">确认修改</button>
 			</div>
 		</div>
+		<script src="../js/jq331.min.js"></script>
+		<script src="../js/common.js"></script>
+		<!-- 引入YDUI脚本 -->
+		<script src="../build/js/ydui.flexible.js"></script>
+		<script src="../build/js/ydui.js"></script>
 		<script>
 			$(document).ready(function(){
+				var telnum =  params.tel;
+				$("input[name='account']").val(telnum); //用户账号
 				var getCode = commapi + "password/code";
 				var modifypwdApi = commapi + "password/update";
 				var dataToken = sessionStorage.getItem('token'); // 获取token
@@ -94,7 +99,8 @@
 				
 				//获取手机验证码
 				$('#getcode').click(function(){
-					var telnumber = $("input[name='account']").val(); //用户账号
+					var telnumber = $("input[name='account']").val(); //用户账号s
+					console.log(telnumber)
 					$.ajax({
 						url: getCode,
 						type: "POST",
@@ -116,11 +122,12 @@
 								var json=JSON.parse(msg.responseText);
 								// 验证不通过
 								if(json.errorCode==40000){
-										alert(json.msg);
+									YDUI.dialog.toast(json.msg, 'none', 1500);
+								    //alert(json.msg);
 								}
 								// 用户名不存在
 								if(json.errorCode==40301){
-										alert(json.msg);
+										YDUI.dialog.toast(json.msg, 'none', 1500);
 								}
 						}
 					});
@@ -133,13 +140,14 @@
 					var newpwd = $("input[name='newpassword']").val(); //密码
 					var crimpwd = $("input[name='crimpassword']").val(); //确认密码
 					if(newpwd !== crimpwd){
-						!function (win, $) {
-							var dialog = win.YDUI.dialog;
-							dialog.toast('两次密码不一致，请仔细核对！', 'error', 2000);
-								setTimeout(function () {
-									dialog.loading.close();
-								}, 2000);	
-							}(window, jQuery);	
+// 						!function (win, $) {
+// 							var dialog = win.YDUI.dialog;
+// 							dialog.toast('两次密码不一致，请仔细核对！', 'error', 2000);
+// 								setTimeout(function () {
+// 									dialog.loading.close();
+// 								}, 2000);	
+// 							}(window, jQuery);
+							YDUI.dialog.toast('两次密码不一致，请仔细核对！', 'none', 1500);
 							return;
 					}
 					$.ajax({
@@ -164,11 +172,12 @@
 								var json=JSON.parse(msg.responseText);
 								// 验证不通过
 								if(json.errorCode==40000){
-										alert(json.msg);
+									YDUI.dialog.toast(json.msg, 'none', 1500);
+										//alert(json.msg);
 								}
 								// 用户名不存在
 								if(json.errorCode==40301){
-										alert(json.msg);
+										YDUI.dialog.toast(json.msg, 'none', 1500);
 								}
 						}
 					});
@@ -176,8 +185,6 @@
 				
 			})
 		</script>
-		<!-- 引入YDUI脚本 -->
-		<script src="../build/js/ydui.flexible.js"></script>
-		<script src="../build/js/ydui.js"></script>
+		
 	</body>
 </html>

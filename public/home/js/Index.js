@@ -40,36 +40,74 @@
 				error:function(msg){
 						console.log(msg) // 失败返回
 				}
-		});
-							
+		});	
 		
 		//加载地图，调用浏览器定位服务
-		(function (){
-			var map, geolocation;
-			map = new AMap.Map('container', {
-			resizeEnable: true
-			});
-			map.plugin('AMap.Geolocation', function() {
-			geolocation = new AMap.Geolocation({
-					enableHighAccuracy: true, 
-					timeout: 10000 
-					});
-				geolocation.getCityInfo(getCity)
-			});
-			function getCity(status, result) {
-				if(status!='complete'){
-				console.log(status)
-				showToast('定位失败');
-				}else{
-					provincename = result.province;
-					cityname = result.city;
-					$("input[name='currenArea']").val(cityname) //显示当前城市的位置
-					//console.log(provincename + '/' + cityname);
-					getbestnewList(provincename,cityname); //获取当前城市 最新房源列表
-				}												
-			};
-		})();
-
+		$(document).ready(function(){
+			var geolocation = new BMap.Geolocation();
+			geolocation.getCurrentPosition(function(r){
+				console.log(r)
+				if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+					lat = r.point.lat;
+					lng = r.point.lng;
+					province= r.address.province;
+					city = r.address.city;
+					provincename = province;
+					cityname = city;
+					console.log(province+'22'+city)
+					getbestnewList(provincename,cityname);
+					$("input[name='currenArea']").val(cityname);									
+				}
+				//根据经纬度获取具体的 区位置信息
+				$.ajax({					
+						url: 'http://api.map.baidu.com/geocoder/v2/?location='+ lat +','+ lng +'&output=json&ak=QCeZYkMaipgWAeoedA3Ff23dfO3UZL1f&callback=showLocation',  
+						type: 'GET',  
+						dataType: 'jsonp',
+						success:function(location) {
+							//拿到省市区获取数据库的省市区id，带到报备客户去直接显示当前城市
+							var baobeiprovince = location.result.addressComponent.province;
+							var baobeicity = location.result.addressComponent.city;
+							var baobeiarea = location.result.addressComponent.district;
+							var getcityidApi= commapi + 'city/each_id';
+							$.ajax({
+									url: getcityidApi,  
+									type: 'GET',  
+									dataType: 'json',
+									data: {'province_name': baobeiprovince, 'city_name': baobeicity, 'area_name':baobeiarea},
+									success:function(data) {
+											//保存省市区的名称和id，在报备里面直接在混缓存里获取id，与数据库的id匹配										
+											sessionStorage.setItem('provicename', baobeiprovince);
+											sessionStorage.setItem('cityname', baobeicity);
+											sessionStorage.setItem('areaname', baobeiarea);										
+											sessionStorage.setItem('proviceid', data.province_id);
+											sessionStorage.setItem('cityid', data.city_id);
+											sessionStorage.setItem('areaid', data.area_id);										
+									}
+								});							
+						}
+				});
+			})
+		});
+		
+// 		$(function(){
+// 			//获取城市ajax
+// 		$.ajax({
+// 		url: 'http://api.map.baidu.com/location/ip?ak=ia6HfFL660Bvh43exmH9LrI6',  
+// 		type: 'POST',  
+// 		dataType: 'jsonp',
+// 		success:function(data) {
+// 			console.log(data)
+// 			console.log(JSON.stringify(data.content.address_detail.province + "," + data.content.address_detail.city));
+// 			provincename = data.content.address_detail.province;
+// 			cityname = data.content.address_detail.city;
+// 			provincename = provincename.replace(/\"/g, "");
+// 			cityname = cityname.replace(/\"/g, "");
+// 			getbestnewList(provincename,cityname);
+// 			$("input[name='currenArea']").val(cityname)
+// 		}
+// 		});
+// })
+		
 		
 		//首页 获取房源列表	
 		function getbestnewList (provincename ,cityname) {	
@@ -83,7 +121,10 @@
 					async:false,
 					data: { 'page': page, 'limit':pageSize, 'province': provincename, 'city':cityname},
 					success: function (ret) {
-						//console.log(ret);
+						console.log(ret);
+						if(ret.length == 0){
+							$('#bestnewList').html("<p style='text-align:center;padding-top:1rem;'>暂无相关房源信息！</p>")
+						}
 						typeof callback == 'function' && callback(ret);
 					}
 				});
@@ -207,7 +248,9 @@
 				provicevalue = proname;
 				proCode = provicecode;
 				$('#ProviceList a').removeClass('active'); //高亮显示
-				e.classList.add("active");
+				e.classList.add("active");				
+				sessionStorage.setItem('provicename', provicevalue); //把选中的省份名存到缓存
+				sessionStorage.setItem('proviceid', proCode);//把选中的省份id存到缓存
 		};				
 	function cityclick (e,citycode,cityname){
 		var arealistApi = commapi + 'area/list'; //获取区			
@@ -226,6 +269,8 @@
 			cityCode = citycode;
 			$('#CityList a').removeClass('active'); //高亮显示
 			e.classList.add("active");
+			sessionStorage.setItem('cityname', cityvalue); //把选中的市名存到缓存
+			sessionStorage.setItem('cityid', cityCode);//把选中的市id存到缓存
 		};			
 	function areaclick (e,areacode,areaname){
 		console.log(areacode);
@@ -235,7 +280,9 @@
 		console.log(proCode + '-' + cityCode + '-' + areaCode);
 		provincename = provicevalue;
 		cityname = cityvalue;
-		 getbestnewList(provicevalue,cityvalue);
+		getbestnewList(provicevalue,cityvalue);  //选完区就更新房源信息列表	
+		sessionStorage.setItem('areaname', areaname); //把选中的区县名存到缓存
+		sessionStorage.setItem('areaid', areaCode);//把选中的区县id存到缓存				
 	}
 
 

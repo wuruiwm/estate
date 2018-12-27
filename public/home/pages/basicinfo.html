@@ -55,7 +55,7 @@
 				height: .8rem !important;
 				right: 1rem !important;
 				top: 0 !important;
-			}
+			}			
 		</style>
 	</head>
 	<body>
@@ -79,7 +79,7 @@
 				<div>
 					<label>密码：</label>
 					<input type="password" readonly="readonly" value="000" name="password" />
-					<a href="./modifywd.html"  class="modifywd">修改</a>
+					<a href="#"  class="modifywd">修改</a>
 				</div>
 				<div>
 					<label>昵称：</label>
@@ -90,8 +90,12 @@
 					<input type="text"    value="" name="area"/>
 				</div>
 				<div>
+					<label>用户身份：</label>
+					<input type="text" readonly="readonly"    value="" name="usertype"/>
+				</div>
+				<div>
 					<label>所属门店：</label>
-					<input type="text"    value="" name="belong"/>					
+					<input type="text" readonly="readonly"    value="" name="belong"/>					
 				</div>				
 			</div>
 			<p class="modifyinfo">&nbsp;*&nbsp;基本信息编辑即可修改！</p>
@@ -109,10 +113,11 @@
 	<script src="../js/common.js"></script>
 	<script>
 		$(document).ready(function(){
+			var tel;
 			//获取用户基本信息
 			var getuserinfoApi = commapi + "user/info";//获取信息
 			var modifyinfoApi = commapi + 'user/update';//修改信息
-			var modifylogoApi = commapi + 'user/head_img'; //修改头像
+			var modifylogoApi = commapi + 'user/head_img'; //修改头像			
 			$.ajax({
 				url: getuserinfoApi,
 				type: 'GET',									
@@ -125,10 +130,15 @@
 					$('#userlogo').attr('src',ret.head_img);
 					$("input[name='name']").val(ret.nickname);
 					$("input[name='area']").val(ret.area);
-					$("input[name='belong']").val(ret.store_id);					
+					$("input[name='belong']").val(ret.store_id);
+					$("input[name='usertype']").val(ret.level);
+					tel = ret.phone
 				}
 			});
-			
+			//修改密码
+			$('.modifywd').click(function(){
+				location.href="./modifywd.html?tel="+ tel;
+			})
 			//修改基本信息
 			$(".basicinfo div input").blur(function(){
 				var currentVal = $(this).val();
