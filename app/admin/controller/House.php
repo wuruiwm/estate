@@ -18,6 +18,7 @@ use app\lib\validate\AddNewHouse;
 use app\lib\validate\AddUsedHouse;
 use app\lib\validate\IDMustBePositiveInt;
 use app\lib\validate\Page;
+use think\Db;
 
 class House extends Permissions
 {
@@ -137,6 +138,17 @@ class House extends Permissions
         $model = new HouseSource();
         $result = $model::getHouseById($id);
         if ($result) {
+            $imgs = Db::name('house_source')->where('id',$id)->find();
+            $imgs = $imgs['cover_img'].','.$imgs['head_img'].','.$imgs['room_map'];
+            $imgData = Db::name('attachment')->where('id','in',$imgs)->select();
+            foreach($imgData as $k=>$v){
+                if(file_exists(ROOT_PATH . 'public' . $v['filepath'])) {
+                    if(unlink(ROOT_PATH . 'public' . $v['filepath'])) {
+                        Db::name('attachment')->where('id',$v['id'])->delete();
+                    }
+                }
+
+            }
             $result = $model::destroy($id);
             if ($result) {
                 throw new SuccessMessage();
@@ -149,6 +161,19 @@ class House extends Permissions
     public function dels($ids)
     {
         $model = new HouseSource();
+        $houseData = Db::name('house_source')->where('id','in',$ids)->select();
+        foreach($houseData as $k=>$v){
+            $ones = $v['cover_img'].','.$v['head_img'].','.$v['room_map'];
+            $imgData = Db::name('attachment')->where('id','in',$ones)->select();
+            foreach($imgData as $y=>$z){
+                if(file_exists(ROOT_PATH . 'public' . $z['filepath'])) {
+                    if(unlink(ROOT_PATH . 'public' . $z['filepath'])) {
+                        Db::name('attachment')->where('id',$z['id'])->delete();
+                    }
+                }
+            }
+        }
+
         $result = $model::destroy($ids);;
         if ($result > 0) {
             throw new SuccessMessage();

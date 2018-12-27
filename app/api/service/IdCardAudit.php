@@ -18,13 +18,12 @@ class IdCardAudit
         $host = "http://idcard3.market.alicloudapi.com";
         $path = "/idcardAudit";
         $method = "GET";
-        $appcode = "xxxxxxxxxxxxxxxxxxxx";
+        $appcode = "xxxxxxxxxxxxxxxxxxxx"; //身份证实名认证_易源数据 你自己的AppCode
         $headers = array();
         array_push($headers, "Authorization:APPCODE " . $appcode);
         $querys = "idcard=$id_card&name=$name";
         $bodys = "";
         $url = $host . $path . "?" . $querys;
-
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
         curl_setopt($curl, CURLOPT_URL, $url);
@@ -37,8 +36,6 @@ class IdCardAudit
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         }
-
         return json_decode(curl_exec($curl),true);
-
     }
 }

@@ -30,28 +30,36 @@ class Admin extends Permissions
         $model = new adminModel();
 
         $post = $this->request->param();
+
         if (isset($post['keywords']) and !empty($post['keywords'])) {
             $where['nickname'] = ['like', '%' . $post['keywords'] . '%'];
         }
         if (isset($post['admin_cate_id']) and $post['admin_cate_id'] > 0) {
             $where['admin_cate_id'] = $post['admin_cate_id'];
         }
- 
+
         if(isset($post['create_time']) and !empty($post['create_time'])) {
             $min_time = strtotime($post['create_time']);
             $max_time = $min_time + 24 * 60 * 60;
             $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
         }
-        
+
         $admin = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20,false,['query'=>$this->request->param()]);
-        
+        if(Session::get('admin')!==1){
+            //return $admin;
+            unset($admin['1']);
+        }
         $this->assign('admin',$admin);
         $info['cate'] = Db::name('admin_cate')->select();
+        if(Session::get('admin')!==1){
+            unset($info['cate'][0]);
+            //return json($info['cate'][0]);
+        }
         $this->assign('info',$info);
         return $this->fetch();
     }
 
-    
+
     /**
      * 管理员个人资料修改，属于无权限操作，仅能修改昵称和头像，后续可增加其他字段
      * @return [type] [description]
@@ -132,6 +140,12 @@ class Admin extends Permissions
     			//非提交操作
     			$info['admin'] = $model->where('id',$id)->find();
     			$info['admin_cate'] = Db::name('admin_cate')->select();
+
+                if(Session::get('admin')!==1){
+                    unset($info['admin_cate'][0]);
+                    //return json($info);
+                }
+
     			$this->assign('info',$info);
     			return $this->fetch();
     		}
@@ -172,6 +186,10 @@ class Admin extends Permissions
     		} else {
     			//非提交操作
     			$info['admin_cate'] = Db::name('admin_cate')->select();
+
+                if(Session::get('admin')!==1){
+                    unset($info['admin_cate'][0]);
+                }
     			$this->assign('info',$info);
     			return $this->fetch();
     		}
@@ -242,7 +260,7 @@ class Admin extends Permissions
     	}
     }
 
-    
+
     /**
      * 管理员权限分组列表
      * @return [type] [description]
@@ -255,15 +273,18 @@ class Admin extends Permissions
         if (isset($post['keywords']) and !empty($post['keywords'])) {
             $where['name'] = ['like', '%' . $post['keywords'] . '%'];
         }
- 
+
         if(isset($post['create_time']) and !empty($post['create_time'])) {
             $min_time = strtotime($post['create_time']);
             $max_time = $min_time + 24 * 60 * 60;
             $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
         }
-        
+
         $cate = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20,false,['query'=>$this->request->param()]);
-        
+        if(Session::get('admin')!==1){
+            unset($cate['1']);
+            //return json($cate);
+        }
     	$this->assign('cate',$cate);
     	return $this->fetch();
 
@@ -319,6 +340,11 @@ class Admin extends Permissions
                 }
                 $menus = Db::name('admin_menu')->select();
                 $info['menu'] = $this->menulist($menus);
+               // return json($info['menu']);
+                if(Session::get('admin')!==1){
+                    unset($info['menu'][0]);
+                    unset($info['menu'][2]);
+                }
                 $this->assign('info',$info);
                 return $this->fetch();
             }
@@ -354,6 +380,10 @@ class Admin extends Permissions
                 //非提交操作
                 $menus = Db::name('admin_menu')->select();
                 $info['menu'] = $this->menulist($menus);
+                if(Session::get('admin')!==1){
+                    unset($info['menu'][0]);
+                    unset($info['menu'][2]);
+                }
                 //$info['menu'] = $this->menulist($info['menu']);
                 $this->assign('info',$info);
                 return $this->fetch();
@@ -379,7 +409,7 @@ class Admin extends Permissions
 
 
     protected function menulist($menu,$id=0,$level=0){
-        
+
         static $menus = array();
         $size = count($menus)-1;
         foreach ($menu as $value) {
@@ -405,7 +435,7 @@ class Admin extends Permissions
                     $value['str'] = '&emsp;&emsp;'.'└ ';
                     $menus[$size]['list'][] = $value;
                 }
-                
+
                 $this->menulist($menu,$value['id'],$value['level']);
             }
         }
@@ -446,19 +476,19 @@ class Admin extends Permissions
         if (isset($post['admin_menu_id']) and $post['admin_menu_id'] > 0) {
             $where['admin_menu_id'] = $post['admin_menu_id'];
         }
-        
+
         if (isset($post['admin_id']) and $post['admin_id'] > 0) {
             $where['admin_id'] = $post['admin_id'];
         }
- 
+
         if(isset($post['create_time']) and !empty($post['create_time'])) {
             $min_time = strtotime($post['create_time']);
             $max_time = $min_time + 24 * 60 * 60;
             $where['create_time'] = [['>=',$min_time],['<=',$max_time]];
         }
-        
+
         $log = empty($where) ? $model->order('create_time desc')->paginate(20) : $model->where($where)->order('create_time desc')->paginate(20,false,['query'=>$this->request->param()]);
-        
+
         $this->assign('log',$log);
         //身份列表
         $admin_cate = Db::name('admin_cate')->select();
