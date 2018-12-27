@@ -237,6 +237,13 @@
 								}else{ //审核不通过
 									$('.appendimg').attr('src','../static/images/unpass.png');
 									$('#submitClick').html('重新提交审核');
+<<<<<<< HEAD
+=======
+									$('#submitClick').removeAttribute('disabled');
+									$("input[name='name']").removeAttribute('readonly');
+									$("input[name='tel']").removeAttribute('readonly');
+									$("input[name='idcard']").removeAttribute('readonly');
+>>>>>>> ba19f3f74f0ced154c3eb31f0a9d326fab2d0fda
 								};							
 							$("input[name='name']").val(data.card_name);
 							$("input[name='tel']").val(data.card_phone);
