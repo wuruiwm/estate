@@ -382,7 +382,7 @@
 
         });
 
-        // 头部轮播图上传
+        // 户型轮播图上传
         var room_maps = [];
         upload.render({
             elem: '#test1'
@@ -424,7 +424,6 @@
             var s_id = ($(this).context).lastChild.innerHTML;
             room_maps.splice($.inArray(s_id, room_maps), 1);
             $(this).parent().remove();
-
         });
 
 
