@@ -58,7 +58,17 @@ class Housesearch extends Controller{
 					}
 					//根据cover_img的id值，去attachment表中查出图片路径，赋值到数组里
 						$attachment = model('attachment');
-						$atta_res = $attachment->where('id',$array['cover_img'])->find()->getData()['filepath'];
+						$atta_res = $attachment->where('id',$array['cover_img'])->find();
+						if ($atta_res) {
+							$atta_res = $atta_res->getData()['filepath'];
+							$array['img_id'] = $array['cover_img'];
+							$array['cover_img'] = http_type().$atta_res;
+							$array['decoration_type'] = explode(',',$array['decoration_type']);
+						}else{
+							$array['img_id'] = $array['cover_img'];
+							$array['cover_img'] = '该房源暂无图片';
+							$array['decoration_type'] = explode(',',$array['decoration_type']);
+						}
 						$array['img_id'] = $array['cover_img'];
 						$array['cover_img'] = http_type().$atta_res;
 						$array['decoration_type'] = explode(',',$array['decoration_type']);
