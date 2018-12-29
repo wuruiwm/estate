@@ -69,9 +69,6 @@ class Housesearch extends Controller{
 							$array['cover_img'] = '该房源暂无图片';
 							$array['decoration_type'] = explode(',',$array['decoration_type']);
 						}
-						$array['img_id'] = $array['cover_img'];
-						$array['cover_img'] = http_type().$atta_res;
-						$array['decoration_type'] = explode(',',$array['decoration_type']);
 						//将房屋类型字段，处理成字符串，方便前端调用
 						if ($array['init_status'] == 1) {
 							$array['init_status'] = '新房';
