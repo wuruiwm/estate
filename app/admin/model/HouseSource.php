@@ -193,7 +193,9 @@ class HouseSource extends BaseModel
                 return self::DataFormat(0);
             }
         }
-        return $house;
+        $data['total']=$house->count();
+        $data['data']=$house;
+        return $data;
     }
 
     // 客户端
