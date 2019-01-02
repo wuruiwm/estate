@@ -31,11 +31,11 @@ class Yanzheng extends controller{
 		//姓名不能为空
 		$card_name = input('post.card_name');
 		if (!$card_name) {
-			return ['reg'=>'请输入正确的姓名'];
+			return ['msg'=>'请输入正确的姓名'];
 		}
 		//正则验证手机号
 		$card_phone = input('post.card_phone');
-		$search = '/^1[34578]\d{9}$/';
+		$search = '/^1[3456789]\d{9}$/';
 		$bool = preg_match($search,$card_phone);
 		if ($bool == 0) {
 			return ['msg'=>'请输入正确的手机号'];
@@ -63,12 +63,12 @@ class Yanzheng extends controller{
 				$res = $user->isUpdate(true)->save($data);
 				//返回提示信息
 				if ($res) {
-					return ['reg'=>'上传认证信息成功'];
+					return ['msg'=>'上传认证信息成功'];
 				}else{
-					return ['reg'=>'上传认证信息失败'];
+					return ['msg'=>'上传认证信息失败'];
 				}
 			}else{
-				return ['reg'=>'身份证照片失败'];
+				return ['msg'=>'身份证照片失败'];
 			}
 		}
 	}
