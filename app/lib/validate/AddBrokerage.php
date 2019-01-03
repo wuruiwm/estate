@@ -16,14 +16,17 @@ class AddBrokerage extends BaseValidate
 {
     protected $rule = [
         'house_area'=>'require|isNotEmpty',
-        'price' =>'require|isNotEmpty|number',
+        'house_type'=>'require|isNotEmpty',
+        'price' =>'require|number',
+        'store_percentage'=>'require|isNotEmpty|between:0,100',
         'public_percentage'=>'require|isNotEmpty|between:0,100'
     ];
 
     protected $message = [
         'house_area' =>'请输入房屋面积',
-        'price'=>'请输入佣金奖励',
-        'price.number' =>'佣金奖励必须是一个数字',
-        'public_percentage'=>'请输入1-100之间的数字'
+        'house_type'=>'请输入房屋类型',
+        'price'=>'请正确输入佣金奖励',
+        'store_percentage'=>'请正确输入佣金比例',
+        'public_percentage'=>'请正确输入佣金比例'
     ];
 }

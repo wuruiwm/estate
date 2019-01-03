@@ -39,7 +39,7 @@ class BaseValidate extends Validate
     }
 
     /**
-     * @method  检测参数是否为正整数
+     * @method  检测参数是否为正整数 >=0
      * @param $value 参数值
      * @param string $rule
      * @param string $data 参数组
@@ -48,7 +48,7 @@ class BaseValidate extends Validate
      */
     protected function isPositiveInteger($value, $rule = '', $data = '', $field = '')
     {
-        if (is_numeric($value) && is_int($value + 0) && ($value + 0) > 0) {
+        if (is_numeric($value) && is_int($value + 0) && ($value + 0) >= 0) {
             return true;
         } else {
             return false;

@@ -34,7 +34,7 @@ class Brokerage extends Permissions
         return ModelBrokerage::getList($page-1, $limit);
     }
 
-    public function addNewBrokerage($house_area='',$price=''){
+    public function addNewBrokerage(){
         (new AddBrokerage())->goCheck();
         $post = input('post.');
         $model = new ModelBrokerage();
