@@ -29,10 +29,10 @@
 			
 		}
 		#data-form div label{
-			min-width: 1.5rem;
+			min-width: 1.8rem;
 			color: #868686;
-			font-size: .25rem;
-			
+			font-size: .3rem;
+			display: inline-flex;
 			padding: 0 .3rem 0 0 ;
 		}
 		#data-form div input{
@@ -43,7 +43,7 @@
 			background: #EEEEEE;
 			padding: .2rem;
 			height: .7rem !important;
-			font-size: 0.2rem;
+			font-size: 0.3rem;
 			
 		}
 		textarea{
@@ -51,8 +51,8 @@
 			width: 100%;
 			border: 0;
 			background: #EEEEEE;
-			padding: .2rem;
-			font-size: 0.2rem;
+			padding: .3rem;
+			font-size: 0.3rem;
 		}
 		.cell-item:not(:last-child):after{
 			border: 0;
@@ -65,7 +65,7 @@
 			color:#C1060F !important;
 		}
 		.submit{
-			font-size: .2rem;
+			font-size: .3rem;
 			text-align: center;
 			display: block;
 			margin: 0 auto;
@@ -100,8 +100,11 @@
 		#houselistActionSheet{
 			display: block !important;
 			padding: 0 !important;
-			height: 4rem;
+			height: 8rem;
     overflow: auto;
+		}
+		.actionsheet-item{
+			font-size: .4rem;
 		}
 		.active{
 			color:#C1060F;
@@ -113,7 +116,7 @@
 	<section class="g-flexview">
 		<!-- 顶部内容 -->
 		<header class="m-navbar">
-			<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+			<a href="#" onClick="javascript :window.history.back(); return false;" class="navbar-item">
 				<i class="back-ico"></i>
 			</a>
 			<div class="navbar-center">
@@ -244,14 +247,14 @@ $(document).ready(function(){
 	(function () {
 		if (dataToken) {//已登录
 		//刷新最后使用时间
-		sessionStorage.setItem("nxgx_lastVisitTime", new Date().getTime());
+		localStorage.setItem("nxgx_lastVisitTime", new Date().getTime());
 		_interval_handler=setInterval(checkExpired, 10*1000);//10秒钟检查一次，是否超时
 		}
 	})();
 	
 	function checkExpired() {
 	//console.log("10秒检查一次是否过期"+window.location.href+"::"+new Date());
-	var storeLastTime=sessionStorage.getItem("nxgx_lastVisitTime")?sessionStorage.getItem("nxgx_lastVisitTime"):-1;
+	var storeLastTime=localStorage.getItem("nxgx_lastVisitTime")?localStorage.getItem("nxgx_lastVisitTime"):-1;
 	if (storeLastTime==-1) clearInterval(_interval_handler);
 	else {
 			if ((new Date()).getTime()-storeLastTime>_EXPIRE_TIME) {  //过期了
@@ -260,7 +263,7 @@ $(document).ready(function(){
 				/* 加载中提示框 */									
 					dialog.loading.open('登录超时...');
 					setTimeout(function () {
-						sessionStorage.removeItem('token'); //清除token
+						localStorage.removeItem('token'); //清除token
 						dialog.loading.close();/* 移除loading */
 						location.href="../login.html";
 					}, 2000);

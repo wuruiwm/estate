@@ -39,7 +39,11 @@
 				padding: .2rem;
 			}
 			.loginform div{
-				padding: .5rem;
+				align-items: center;
+    width: 100%;
+    padding: .5rem;
+    display: flex;
+    justify-content: center;
 			}
 			.loginform label {
 				color:#C1060F;
@@ -51,7 +55,7 @@
 				padding: .1rem .2rem;
 			}
 			.truelogin{
-				margin-top: 1rem;
+				margin-top: .5rem;
 				border: navajowhite;
 				background: #C1060F;
 				color: #fff;
@@ -59,12 +63,19 @@
 				border-radius: .2rem;
 				text-align: center;
 			}
+			.cell-right input[type=radio]:checked+.cell-checkbox-icon:after,
+			.cell-right input[type=checkbox]:not(.m-switch):checked+.cell-checkbox-icon:after {
+				color: #C1060F;
+			}
+			.clickred{
+				color: #C1060F;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="logincantion">
 			<header class="m-navbar">
-				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+				<a href="#" onClick="javascript :window.history.back(); return false;" class="navbar-item">
 					<i class="back-ico"></i>
 				</a>
 				<div class="navbar-center">
@@ -80,13 +91,17 @@
 			</div>
 			<div class="loginform">				
 					<div class="admin">
-						<label><i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;|</label>&nbsp;
-						<input class="font-sty" id="usertel" type="number" pattern="[0-9]*"  placeholder="请输入手机号码" value="" name="mobile" />
+						<label><i class="fa fa-user-circle-o"></i></label>
+						<input id="usertel" type="number" pattern="[0-9]*"  placeholder="请输入手机号码" value="" name="mobile" />
 					</div>
 					<div class="password">
-						<label><i class="fa fa-unlock-alt"></i>&nbsp;&nbsp;|</label>&nbsp;
-						<input class="font-sty" id="userpsd" type="password" value="" name="password" placeholder="请正确输入密码" />
+						<label><i class="fa fa-unlock-alt"></i></label>
+						<input id="userpsd" type="password" value="" name="password" placeholder="请正确输入密码" />
 					</div>  
+					<div>
+						<label style="color:#757575"><i id="remeberpwd"  class="fa fa-square-o"></i></label>
+						<input style="color:#757575;font-size: 12px;" readonly="readonly" type="text" value="记住密码"  />
+					</div>
 					<button type="submit" class="truelogin font-sty">登录</button>
 					<p style="margin-top: .4rem; color:#666666">没有账号？<a href="./register.html" style="color:#C1060F;">立即注册</a></p>				
 			</div>

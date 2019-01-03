@@ -59,6 +59,7 @@ class Housesearch extends Controller{
 					//根据cover_img的id值，去attachment表中查出图片路径，赋值到数组里
 						$attachment = model('attachment');
 						$atta_res = $attachment->where('id',$array['cover_img'])->find();
+						//判断是否有返回值，因为一些原因，从房源表取出来的图片id，在图片表中可能查不到，就会报错，所以要先判断一下
 						if ($atta_res) {
 							$atta_res = $atta_res->getData()['filepath'];
 							$array['img_id'] = $array['cover_img'];
@@ -109,12 +110,18 @@ class Housesearch extends Controller{
 			}
 			//根据cover_img的id值，去attachment表中查出图片路径，赋值到数组里
 			$attachment = model('attachment');
-			$atta_res = $attachment->where('id',$array['cover_img'])->find()->getData()['filepath'];
-			$array['img_id'] = $array['cover_img'];
-			//$ex = explode('\\',$atta_res);
-			//$atta_res = implode('/', $ex);
-			$array['decoration_type'] = explode(',',$array['decoration_type']);
-			$array['cover_img'] = http_type().$atta_res;
+			$atta_res = $attachment->where('id',$array['cover_img'])->find();
+			//判断是否有返回值，因为一些原因，从房源表取出来的图片id，在图片表中可能查不到，就会报错，所以要先判断一下
+			if ($atta_res) {
+				$atta_res = $atta_res->getData()['filepath'];
+				$array['img_id'] = $array['cover_img'];
+				$array['cover_img'] = http_type().$atta_res;
+				$array['decoration_type'] = explode(',',$array['decoration_type']);
+			}else{
+				$array['img_id'] = $array['cover_img'];
+				$array['cover_img'] = '该房源暂无图片';
+				$array['decoration_type'] = explode(',',$array['decoration_type']);
+			}
 			//将房屋类型字段，处理成字符串，方便前端调用
 			if ($array['init_status'] == 1) {
 				$array['init_status'] = '新房';

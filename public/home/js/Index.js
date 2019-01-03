@@ -7,6 +7,7 @@
 	var cityname='';
 	var p = '';
 	var c = '';
+	var page = {num:1, size:10};
 	 //底部导航高亮显示
 	  $('.m-tabbar a').each(function () {
 			$(this).click(function() {
@@ -14,8 +15,7 @@
 				$(this).addClass('tabbar-active');
 			})
 		});
-		
-		
+				
 		//关键字搜索跳转
 		$('#searchword').click(function(event){
 			location.href="pages/search.html"
@@ -76,44 +76,24 @@
 									data: {'province_name': baobeiprovince, 'city_name': baobeicity, 'area_name':baobeiarea},
 									success:function(data) {
 											//保存省市区的名称和id，在报备里面直接在混缓存里获取id，与数据库的id匹配										
-											sessionStorage.setItem('provicename', baobeiprovince);
-											sessionStorage.setItem('cityname', baobeicity);
-											sessionStorage.setItem('areaname', baobeiarea);										
-											sessionStorage.setItem('proviceid', data.province_id);
-											sessionStorage.setItem('cityid', data.city_id);
-											sessionStorage.setItem('areaid', data.area_id);										
+											localStorage.setItem('provicename', baobeiprovince);
+											localStorage.setItem('cityname', baobeicity);
+											localStorage.setItem('areaname', baobeiarea);										
+											localStorage.setItem('proviceid', data.province_id);
+											localStorage.setItem('cityid', data.city_id);
+											localStorage.setItem('areaid', data.area_id);										
 									}
 								});							
 						}
 				});
-			})
+			});
 		});
 		
-// 		$(function(){
-// 			//获取城市ajax
-// 		$.ajax({
-// 		url: 'http://api.map.baidu.com/location/ip?ak=ia6HfFL660Bvh43exmH9LrI6',  
-// 		type: 'POST',  
-// 		dataType: 'jsonp',
-// 		success:function(data) {
-// 			console.log(data)
-// 			console.log(JSON.stringify(data.content.address_detail.province + "," + data.content.address_detail.city));
-// 			provincename = data.content.address_detail.province;
-// 			cityname = data.content.address_detail.city;
-// 			provincename = provincename.replace(/\"/g, "");
-// 			cityname = cityname.replace(/\"/g, "");
-// 			getbestnewList(provincename,cityname);
-// 			$("input[name='currenArea']").val(cityname)
-// 		}
-// 		});
-// })
-		
-		
-		//首页 获取房源列表	
+		//首页 获取房源列表														
 		function getbestnewList (provincename ,cityname) {	
 			console.log(provincename + '--=--' + cityname)
 			$("#bestnewList").html('');
-			var page = 1, pageSize = 3;		
+			var page = 1, pageSize = 5;
 			var loadMore = function (callback) {
 				$.ajax({
 					url: bestnewhouseApi,
@@ -123,9 +103,10 @@
 					success: function (ret) {
 						console.log(ret);
 						if(ret.length == 0){
-							$('#bestnewList').html("<p style='text-align:center;padding-top:1rem;'>暂无相关房源信息！</p>")
-						}
-						typeof callback == 'function' && callback(ret);
+							$('#bestnewList').append("<p style='text-align:center; padding: .2rem 0;'>暂无相关房源信息！</p>")
+						}else{
+							typeof callback == 'function' && callback(ret);
+						}											
 					}
 				});
 			};
@@ -136,8 +117,8 @@
 				initLoad: true,
 				//doneTxt:'没有更多数据',
 				loadListFn: function () {
-// 					provincename = p;
-// 					cityname = c;
+ 				  //provincename = p;
+ 					//cityname = c;
 					var def = $.Deferred();
 					loadMore(function (listArr) {
 							var html = template('Listitem', {data: listArr});
@@ -249,8 +230,8 @@
 				proCode = provicecode;
 				$('#ProviceList a').removeClass('active'); //高亮显示
 				e.classList.add("active");				
-				sessionStorage.setItem('provicename', provicevalue); //把选中的省份名存到缓存
-				sessionStorage.setItem('proviceid', proCode);//把选中的省份id存到缓存
+				localStorage.setItem('provicename', provicevalue); //把选中的省份名存到缓存
+				localStorage.setItem('proviceid', proCode);//把选中的省份id存到缓存
 		};				
 	function cityclick (e,citycode,cityname){
 		var arealistApi = commapi + 'area/list'; //获取区			
@@ -269,8 +250,8 @@
 			cityCode = citycode;
 			$('#CityList a').removeClass('active'); //高亮显示
 			e.classList.add("active");
-			sessionStorage.setItem('cityname', cityvalue); //把选中的市名存到缓存
-			sessionStorage.setItem('cityid', cityCode);//把选中的市id存到缓存
+			localStorage.setItem('cityname', cityvalue); //把选中的市名存到缓存
+			localStorage.setItem('cityid', cityCode);//把选中的市id存到缓存
 		};			
 	function areaclick (e,areacode,areaname){
 		console.log(areacode);
@@ -281,8 +262,8 @@
 		provincename = provicevalue;
 		cityname = cityvalue;
 		getbestnewList(provicevalue,cityvalue);  //选完区就更新房源信息列表	
-		sessionStorage.setItem('areaname', areaname); //把选中的区县名存到缓存
-		sessionStorage.setItem('areaid', areaCode);//把选中的区县id存到缓存				
+		localStorage.setItem('areaname', areaname); //把选中的区县名存到缓存
+		localStorage.setItem('areaid', areaCode);//把选中的区县id存到缓存				
 	}
 
 

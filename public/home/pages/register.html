@@ -28,11 +28,10 @@
 					font-size: .3rem;
 			}
 			.registerform input {
-				font-family: -webkit-pictograph;
+				font-family: sans-serif;
 				height: .8rem;
 				border: 0;
-				padding: .1rem;
-				
+				padding: .1rem;				
 			}
 			.trueregister{
 			margin-top: 1rem;
@@ -42,11 +41,13 @@
 			padding: .15rem 1.5rem;
 			border-radius: .2rem;
 			text-align: center;
+			font-family: sans-serif;
 			}
 			.btn-warning{
 				background: #C1060F;
 				height: .5rem;
 				line-height: .5rem;
+				font-family: sans-serif;
 			}
 			.btn-disabled{
 				background: #CCC !important;
@@ -61,7 +62,7 @@
 	<body>
 		<div class="logincantion">
 			<header class="m-navbar">
-				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+				<a href="#" onClick="javascript :window.history.back(); return false;" class="navbar-item">
 					<i class="back-ico"></i>
 				</a>
 				<div class="navbar-center">
@@ -76,7 +77,7 @@
 					<div class="admin">
 						<label><i class="fa fa-phone-square"></i>&nbsp;&nbsp;|</label>&nbsp;
 						<input type="number" pattern="[0-9]*"  placeholder="手机号码" value="" name="usertel" autocomplete="off" />
-						<button type="button" class="btn btn-warning font-sty" id="J_GetCode">获取短信验证码</button>
+						<button type="button" class="btn btn-warning" id="J_GetCode">获取短信验证码</button>
 					</div>
 					<div class="messagecode">
 						<label><i class="fa fa-commenting"></i>&nbsp;&nbsp;|</label>&nbsp;
@@ -99,7 +100,7 @@
 					 	<input type="text" value="" name="yaoqingcode" placeholder="正确输入邀请码" />
 					</div>  
 					<p style="text-align: center;">
-						<button class="trueregister font-sty">注册</button><a id='hasCode'>我有邀请码</a>
+						<button class="trueregister">注册</button><a id='hasCode'>我有邀请码</a>
 						<p style="margin-top: .3rem; color:#666666;text-align: center;">已有账号？<a href="./login.html" style="color:#C1060F;">立即登录</a></p>
 					</p>
 			</div>

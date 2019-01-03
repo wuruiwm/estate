@@ -33,7 +33,7 @@ class Loupan extends controller{
 		// 	}
 		// }else{
 			$house = model('HouseSource');
-			$res = $house->field(['id','title'])->where('province',$province)->where('city',$city)->where('area',$area)->select();
+			$res = $house->field(['id','title'])->where('province',$province)->where('init_status',1)->where('city',$city)->where('area',$area)->select();
 			$data = [];
 			foreach ($res as $k => $v) {
 				$data[] = $v->getData();

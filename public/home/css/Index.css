@@ -68,6 +68,9 @@ body{
 	align-items: center;
 	justify-content: center;
 }
+.menu-list label{
+	font-size: .3rem;
+}
 .menu-list .item-menu {
 	width: 20%;
 	margin: .2rem;

@@ -1,8 +1,4 @@
 $(document).ready(function(){
-	/**
-	 * Created by xinliwei on 2016-01-21 0021.
-	 */
-	//计算月还款本息的工具对象
 	var loanTool = {
 	    /**
 	     * 计算并返回月还款本息的方法

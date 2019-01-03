@@ -52,7 +52,7 @@
 		<section class="g-flexview" id="J_List"  >
 		<div class="logincantion" >			
 			<header class="m-navbar ">
-				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+				<a href="#" onClick="javascript :window.history.back(); return false;" class="navbar-item">
 					<i class="back-ico"></i>
 				</a>
 				<div class="navbar-center">
@@ -145,7 +145,7 @@
 			(function () {
 				if (dataToken) {//已登录
 				//刷新最后使用时间
-				sessionStorage.setItem("nxgx_lastVisitTime", new Date().getTime());
+				localStorage.setItem("nxgx_lastVisitTime", new Date().getTime());
 				_interval_handler=setInterval(checkExpired, 10*1000);//10秒钟检查一次，是否超时	
 				
 				//获取已报备列表
@@ -155,7 +155,7 @@
 			
 			function checkExpired() {
 			//console.log("10秒检查一次是否过期"+window.location.href+"::"+new Date());
-			var storeLastTime=sessionStorage.getItem("nxgx_lastVisitTime")?sessionStorage.getItem("nxgx_lastVisitTime"):-1;
+			var storeLastTime=localStorage.getItem("nxgx_lastVisitTime")?localStorage.getItem("nxgx_lastVisitTime"):-1;
 			if (storeLastTime==-1) clearInterval(_interval_handler);
 			else {
 					if ((new Date()).getTime()-storeLastTime>_EXPIRE_TIME) {  //过期了
@@ -165,7 +165,7 @@
 							dialog.loading.open('登录超时...');
 							setTimeout(function () {
 								dialog.loading.close();/* 移除loading */
-								sessionStorage.removeItem('token'); //清除token
+								localStorage.removeItem('token'); //清除token
 								location.href="./login.html";
 							}, 2000);
 					

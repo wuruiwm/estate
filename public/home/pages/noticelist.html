@@ -26,16 +26,12 @@
 			white-space: nowrap;
 		}
 		.title label{
-<<<<<<< HEAD
 			width: 4rem;
 			display: inline-block;
 			font-size: .3rem;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
-=======
-			font-size: .3rem;
->>>>>>> ba19f3f74f0ced154c3eb31f0a9d326fab2d0fda
 		}
 		.time{
 			display: inline-block;
@@ -51,7 +47,7 @@
 	<body>
 		<div class="logincantion">
 			<header class="m-navbar">
-				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+				<a href="#" onClick="javascript :window.history.back(); return false;" class="navbar-item">
 					<i class="back-ico"></i>
 				</a>
 				<div class="navbar-center">
@@ -75,26 +71,16 @@
 			<a href="./noticedetails.html?id={{data[index].id}}">
 				<div class="item-list">
 					<p class="title"><label>{{data[index].title}}</label><span class="time">{{data[index].update_time}}</span></p>					
-<<<<<<< HEAD
 					<p class="desc">{{data[index].content.replace(/<\/?.+?>/g,"")}}</p>
-=======
-					<p class="desc">{{data[index].content}}</p>
->>>>>>> ba19f3f74f0ced154c3eb31f0a9d326fab2d0fda
 				</div>
 			</a>
 		{{/each}}
 	</script>
 	<script>
 		$(document).ready(function(){
-<<<<<<< HEAD
-=======
-			function delHtmlTag(str){
-			  return str.replace(/<[^>]+>/g,"");//去掉所有的html标记
-			}
->>>>>>> ba19f3f74f0ced154c3eb31f0a9d326fab2d0fda
 			var noticelistsApi = commapi + "notice/list";
 			var id =  params.id; //获取地址栏的id
-			var dataToken = sessionStorage.getItem('token'); // 获取token
+			var dataToken = localStorage.getItem('token'); // 获取token
 			//公告列表
 				$.ajax({
 					url : noticelistsApi,

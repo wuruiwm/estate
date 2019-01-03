@@ -88,7 +88,6 @@
 			<td align="center"><strong>号码</strong></td>
 			<td align="center"><strong>性别</strong></td>
 			<td align="center"><strong>预计带看时间</strong></td>
-			<td align="center"><strong>报备房子类型</strong></td>
 			<td align="center"><strong>报备楼盘</strong></td>
 			<td align="center"><strong>是否报备</strong></td>
 			<td align="center"><strong>是否到访</strong></td>
@@ -106,7 +105,6 @@
 			<td align="center">{$v.number}</td>
 			<td align="center">{$v.gender}</td>
 			<td align="center">{$v.date}</td>
-			<td align="center">{$v.init}</td>
 			<td align="center">{$v.house_title}</td>
 			<td align="center">{$v.is_new}</td>
 			<td align="center">{$v.is_visit}</td>
@@ -159,7 +157,7 @@
 <script>
 	function del(can){
 	//弹出窗口
-	layer.confirm('真的删除吗', function(index){
+	layer.confirm('删除后无法恢复,真的删除吗', function(index){
     //关闭窗口
     layer.close(index);
     //拼接get访问的的url
@@ -312,7 +310,7 @@
 		if (options != undefined) {
 			url = url+'&brokerage_id='+options;
 			$.get(url,function(res){
-				if (res['reg'] == '佣金结算成功') {
+				if (res['res'] == '1') {
 					var str = 'td'+order_id;
 					document.getElementById(str).innerHTML = '<span style="color: red;">已结佣</span>';
 					$('button[value='+order_id+']').attr('disabled','disabled');
@@ -322,10 +320,9 @@
 		}else{
 			layer.msg('请选择佣金方案');
 		}
-
 	}
 	function tishi(){
-		layer.msg('该房屋类型是二手房，不能结算佣金');
+		layer.msg('该房源信息被删除，不能结算佣金');
 	}
 </script>
 </html>
