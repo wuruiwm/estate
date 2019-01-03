@@ -265,7 +265,7 @@ class Admin extends Permissions
      * 管理员权限分组列表
      * @return [type] [description]
      */
-    public function admin_cate()
+    public function adminCate()
     {
     	$model = new \app\admin\model\AdminCate;
 
