@@ -14,10 +14,10 @@
   <div class="tplay-body-div">
     <div class="layui-tab">
       <ul class="layui-tab-title">
-        <li><a href="{:url('admin/admin/adminCate')}" class="a_menu">角色管理</a></li>
+        <li><a href="{:url('admin/admin/admin_cate')}" class="a_menu">角色管理</a></li>
         <li class="layui-this">新增角色</li>
       </ul>
-    </div> 
+    </div>
     <div style="margin-top: 20px;">
     </div>
     <form class="layui-form" id="admin">
@@ -46,11 +46,11 @@
                 {/eq}
                 {volist name="$data.list" id="vo"}
                 <tr>
-                  {eq name="vo.is_display" value="1"} 
+                  {eq name="vo.is_display" value="1"}
                   <td>
                     {$vo.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$vo.id}" {notempty name="$info.cate.permissions"}{volist name="$info.cate.permissions" id="datas"}{eq name="$datas" value="$vo.id"}checked {else /}{eq name="$vo.type" value="2"}checked disabled{/eq}{/eq}{/volist}{else /}{eq name="$vo.type" value="2"}checked disabled{/eq}{/notempty}>{$vo.name}
                   </td>
-                  {else /}{eq name="vo.type" value="1"} 
+                  {else /}{eq name="vo.type" value="1"}
                   <td>
                     {$vo.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$vo.id}" {notempty name="$info.cate.permissions"}{volist name="$info.cate.permissions" id="datas"}{eq name="$datas" value="$vo.id"}checked {else /}{eq name="$vo.type" value="2"}checked disabled{/eq}{/eq}{/volist}{else /}{eq name="$vo.type" value="2"}checked disabled{/eq}{/notempty}>{$vo.name}
                   </td>
@@ -100,7 +100,7 @@
           <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
       </div>
-      
+
     </form>
 
 

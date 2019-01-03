@@ -18,7 +18,7 @@
         <li><a href="{:url('admin/admin/adminCatePublish')}" class="a_menu">新增角色</a></li>
       </ul>
     </div>
-    <form class="layui-form serch" action="{:url('admin/admin/admincate')}" method="post">
+    <form class="layui-form serch" action="{:url('admin/admin/admin_cate')}" method="post">
         <div class="layui-form-item" style="float: left;">
           <div class="layui-input-inline">
             <input type="text" name="keywords" lay-verify="title" autocomplete="off" placeholder="请输入关键词" class="layui-input layui-btn-sm">
@@ -52,7 +52,7 @@
           <th>最后修改时间</th>
           <th>备注</th>
           <th>操作</th>
-        </tr> 
+        </tr>
       </thead>
       <tbody>
         {volist name="cate" id="vo"}
@@ -74,7 +74,7 @@
       </tbody>
     </table>
     <div style="padding:0 20px;">{$cate->render()}</div>
-            
+
    {include file="public/foot"}
     <script type="text/javascript">
 

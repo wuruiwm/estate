@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace app\admin\controller;
 use think\Controller;
 use app\lib\exception\ErrorMessage;
@@ -95,9 +95,9 @@ class Notice extends Permissions{
 		}
 		$notice->id = $id;
 		$res = $notice->delete();
-		if ($res) { 
+		if ($res) {
             echo '删除成功';
-		}else { 
+		}else {
 			echo '删除失败';
 		}
 	}
