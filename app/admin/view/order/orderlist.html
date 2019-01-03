@@ -310,7 +310,7 @@
 		if (options != undefined) {
 			url = url+'&brokerage_id='+options;
 			$.get(url,function(res){
-				if (res['reg'] == '佣金结算成功') {
+				if (res['res'] == '1') {
 					var str = 'td'+order_id;
 					document.getElementById(str).innerHTML = '<span style="color: red;">已结佣</span>';
 					$('button[value='+order_id+']').attr('disabled','disabled');

@@ -329,7 +329,7 @@ class Order extends Permissions{
 			$res = $order->isUpdate(true)->save($zhuangtai);
 			if ($res) {
 				$str = '佣金结算成功,结算佣金为'.$data['commission'].'元';
-				return json(['reg'=>$str]);
+				return json(['reg'=>$str,'res'=>1]);
 			}
 		}else{
 			return json(['reg'=>'佣金结算失败']);
