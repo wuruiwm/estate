@@ -47,7 +47,7 @@
 	<body>
 		<div class="logincantion">
 			<header class="m-navbar">
-				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+				<a href="#" onClick="javascript :window.history.back(); return false;" class="navbar-item">
 					<i class="back-ico"></i>
 				</a>
 				<div class="navbar-center">
@@ -86,7 +86,7 @@
 				$("input[name='account']").val(telnum); //用户账号
 				var getCode = commapi + "password/code";
 				var modifypwdApi = commapi + "password/update";
-				var dataToken = sessionStorage.getItem('token'); // 获取token
+				var dataToken = localStorage.getItem('token'); // 获取token
 				console.log(dataToken);
 				if(!dataToken){
 					location.href="./login.html";

@@ -20,7 +20,7 @@
 				color:#666666;
 			}
 			input{
-				font-family: -webkit-pictograph;
+				font-family: sans-serif;
 				border:1px solid #eee;
 				padding: .1rem .3rem;
 				color:#666666;
@@ -61,7 +61,7 @@
 	<body>
 		<div class="logincantion">
 			<header class="m-navbar">
-				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+				<a href="#" onClick="javascript :window.history.back(); return false;" class="navbar-item">
 					<i class="back-ico"></i>
 				</a>
 				<div class="navbar-center">
@@ -141,43 +141,47 @@
 			})
 			//修改基本信息
 			$(".basicinfo div input").blur(function(){
-				var currentVal = $(this).val();
-				if($(this).attr('name')=='name'){
-					var data={
-						'nickname': currentVal
+				var currentVal = $.trim($(this).val());				
+				if(currentVal !=''){
+					if($(this).attr('name')=='name'){
+						var data={
+							'nickname': currentVal
+						}
+					}else if($(this).attr('name')=='area'){
+						var data={
+							'area': currentVal
+						}
+					}else{
+						var data={
+							'store_name': currentVal
+						}
 					}
-				}else if($(this).attr('name')=='area'){
-					var data={
-						'area': currentVal
-					}
+					$.ajax({
+						url: modifyinfoApi,
+						type: 'POST',									
+						data: data,
+						beforeSend: function(request) {
+								request.setRequestHeader("token", dataToken);
+								},
+						success: function (ret) {	
+							YDUI.dialog.toast('信息更新成功', 'none', 1500);
+							
+						},
+						error:function(msg){
+							var json=JSON.parse(msg.responseText);
+							YDUI.dialog.toast(json.msg, 'none', 2000); // 失败返回
+						}
+					});						
 				}else{
-					var data={
-						'store_name': currentVal
-					}
+					YDUI.dialog.toast('修改内容不能为空！', 'none', 1500);
 				}
-				$.ajax({
-					url: modifyinfoApi,
-					type: 'POST',									
-					data: data,
-					beforeSend: function(request) {
-							request.setRequestHeader("token", dataToken);
-							},
-					success: function (ret) {	
-						YDUI.dialog.toast('信息更新成功', 'none', 1500);
-						
-					},
-					error:function(msg){
-						var json=JSON.parse(msg.responseText);
-						YDUI.dialog.toast(json.msg, 'none', 2000); // 失败返回
-					}
-				});
 			});	
 						
 			//换头像
 			$('.ajax-upload').on('change',function(){//当 input file 已经选中时触发js
 			var formData = new FormData();//先实例化formdata
-			var file     = this.files[0];//获取文件名
-			var id       = this.id;//本input的id			
+			var file = this.files[0];//获取文件名
+			var id   = this.id;//本input的id			
 			formData.append("head_img", file);//append方法用于向formdata中注入内容
 			$.ajax({
 				type: "post",
@@ -193,8 +197,7 @@
 				beforeSend: function(request) {
 						request.setRequestHeader("token", dataToken);
 						},
-				success: function (data) {
-					//$('#'+id+"1").val(data.url);//在隐藏的hidden中返回文件的路径
+				success: function (data) {					
 		　　　　　　　$('#userlogo').attr('src',data.url);//改变当前的显示图片
 					window.location.reload();
 				}

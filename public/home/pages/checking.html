@@ -40,7 +40,7 @@
 			}
 			input{
 				font-size: 12px;
-				font-family: -webkit-pictograph;
+			/* 	font-family: -webkit-pictograph; */
 				border:1px solid #eee;
 				padding: .1rem .3rem;
 				color:#666666;
@@ -103,7 +103,7 @@
 		
 		<div class="logincantion" >
 			<header class="m-navbar">
-				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+				<a href="#" onClick="javascript :window.history.back(); return false;" class="navbar-item">
 					<i class="back-ico"></i>
 				</a>
 				<div class="navbar-center">
@@ -156,7 +156,7 @@
 		</div>
 		
 		<!-- 回到首页 -->
-		<a href="../Index.html">
+		<a href="../index.html">
 			<div id="preparation"><i style="font-size: .4rem;" class='fa fa-home'></i></div>
 		</a>
 	</body>
@@ -195,8 +195,10 @@
 					 			request.setRequestHeader("token", dataToken);
 					 			},
 					 	success: function (data) {
+							console.log(data)
+							if(data.msg=="上传认证信息成功"){
 								!function (win, $) {
-									 var dialog = win.YDUI.dialog;						
+									var dialog = win.YDUI.dialog;						
 										dialog.toast('提交成功', 'success', 2000);
 										setTimeout(function () {
 											dialog.loading.close();/* 移除loading */
@@ -204,6 +206,10 @@
 								}(window, jQuery);	
 								$('.appendimg').attr('src','../static/images/checking.png');
 								window.location.reload()
+							}else{
+								console.log('00')
+								YDUI.dialog.toast(data.msg, 'none', 2000);
+							}						
 					 	},              
 					 }); 
 				  }       
@@ -237,13 +243,6 @@
 								}else{ //审核不通过
 									$('.appendimg').attr('src','../static/images/unpass.png');
 									$('#submitClick').html('重新提交审核');
-<<<<<<< HEAD
-=======
-									$('#submitClick').removeAttribute('disabled');
-									$("input[name='name']").removeAttribute('readonly');
-									$("input[name='tel']").removeAttribute('readonly');
-									$("input[name='idcard']").removeAttribute('readonly');
->>>>>>> ba19f3f74f0ced154c3eb31f0a9d326fab2d0fda
 								};							
 							$("input[name='name']").val(data.card_name);
 							$("input[name='tel']").val(data.card_phone);

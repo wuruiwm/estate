@@ -24,7 +24,7 @@
 	<section class="g-flexview">
 		<!-- 顶部内容 -->
 		<header class="m-navbar">
-			<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+			<a href="#" onClick="javascript :window.history.back(); return false;" class="navbar-item">
 				<i class="back-ico"></i>
 			</a>
 			<div class="navbar-center">
@@ -90,7 +90,7 @@
 		{{each data as value index}}
 			<div class="slider-item">
 				<a href="javascript:void(0);">
-					<img data-id="{{data[index].img_id}}" src="{{data[index].img_url}}">
+					<img data-original="{{data[index].img_url}}" data-id="{{data[index].img_id}}" src="{{data[index].img_url}}">
 				</a>
 			</div>
 		{{/each}}
@@ -101,8 +101,7 @@
 		{{each dataimg as value index}}
 			<li><img data-original="{{dataimg[index].img_url}}" src="{{dataimg[index].img_url}}" /></li>
 		{{/each}}
-	</script>
-	
+	</script>	
 	
 	<script>
 		$(document).ready(function(){
@@ -116,15 +115,16 @@
 						console.log(ret);
 						var html = template('topbannerscript', {data: ret.head_img});
 						$('#bannerImage').html(html);
+						var viewer = new Viewer(document.getElementById('bannerImage'), { //轮播图片点击放大预览
+									url: 'data-original'
+							});												
 						$('.m-slider').slider({
 								speed: 200,
-								autoplay: 3000,
+								autoplay: 5000,
 								lazyLoad: true
-						});
-											
+						});											
 						$("input[name='housetitle']").val(ret.title);
-						$('.navbar-title').html(ret.title);
-						
+						$('.navbar-title').html(ret.title);						
 						$("input[name='title']").val(ret.title);
 						$("input[name='floor_area']").val(ret.floor_area);
 						$("input[name='style']").val(ret.init_status);
@@ -132,18 +132,18 @@
 						$("input[name='zhuangxiu']").val(ret.decoration_type.join('、'));
 						$("input[name='wuye']").val(ret.property_costs);
 						$("input[name='houseadress']").val(ret.house_address);
-						$('.houseprice').html(ret.house_price);						
-					
-						var html = template('roomimg', {dataimg: ret.room_map});
-						$('#roomap').html(html);
-						
+						$('.houseprice').html(ret.house_price);											
+						if(ret.room_map.length>0){
+							var html = template('roomimg', {dataimg: ret.room_map});
+						}else{
+							var html = "<p style='text-align: center; padding: .2rem 0; color: #ccc;'>暂无相关图片！</p>"
+						}
+						$('#roomap').html(html);						
 						var viewer = new Viewer(document.getElementById('roomap'), { //图片点击放大预览
 									url: 'data-original'
-							});
-						
+							});						
 						var html = template('contentscript', {data: ret});
-						$('#content').html(html);
-						
+						$('#content').html(html);						
 					},					
 				});
 		});

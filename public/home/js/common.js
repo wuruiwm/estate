@@ -1,15 +1,15 @@
 var commapi = "http://estate.dingdingmaoer.cn/api/v1/"; //接口公共地址
 var commimgurl = "http://estate.dingdingmaoer.cn/"; //图片前缀
-var dataToken = sessionStorage.getItem('token'); // 获取token
-var datamoretime = sessionStorage.getItem('moretime'); // 获取时效时间
-
-
-var dataprovicename = sessionStorage.getItem('provicename'); // 获取省份
-var datacityname = sessionStorage.getItem('cityname'); // 获取市
-var dataareaname = sessionStorage.getItem('areaname'); // 获取区县
-var dataproviceid = sessionStorage.getItem('proviceid'); // 获取省份id
-var datacityid = sessionStorage.getItem('cityid'); // 获取市id
-var dataareaid = sessionStorage.getItem('areaid'); // 获取区县id
+var dataToken = localStorage.getItem('token'); // 获取token
+var dataadmin = localStorage.getItem('admin'); // 获取账号
+var datapassword = localStorage.getItem('password'); // 获取密码
+var datamoretime = localStorage.getItem('moretime'); // 获取时效时间
+var dataprovicename = localStorage.getItem('provicename'); // 获取省份
+var datacityname = localStorage.getItem('cityname'); // 获取市
+var dataareaname = localStorage.getItem('areaname'); // 获取区县
+var dataproviceid = localStorage.getItem('proviceid'); // 获取省份id
+var datacityid = localStorage.getItem('cityid'); // 获取市id
+var dataareaid = localStorage.getItem('areaid'); // 获取区县id
 
 //获取地址栏参数 
     //url为空时为调用当前url地址 

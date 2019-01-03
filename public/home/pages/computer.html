@@ -22,16 +22,14 @@
 	<body>
 		<div class="logincantion">
 			<header class="m-navbar">
-				<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+				<a href="#" onClick="javascript :window.history.back(); return false;" class="navbar-item">
 					<i class="back-ico"></i>
 				</a>
 				<div class="navbar-center">
 					<span class="navbar-title">贷款计算器</span>
 				</div>
 			</header>
-			<div class="basicinfo">
-				
-			</div>
+			<div class="basicinfo"></div>
 		</div>
 		<div class="g-scrollview">
 		<!-- 计算主体 -->
@@ -52,8 +50,8 @@
 										<dl id="way">
 											<dt><label class="count"><input type="radio" name="jsfs" value="0" checked/>根据面积、单价计算</label></dt>
 											<dd style="display: block">
-												<label>单价:</label><input type="text" name="price">元/平米<br><br>
-												<label>面积:</label><input type="text" name="area">平方米<br><br>
+												<label>单价:</label><input type="text" name="price">元&nbsp;/&nbsp;㎡<br><br>
+												<label>面积:</label><input type="text" name="area">㎡<br><br>
 												<label>按揭成数</label>
 												<select class="form-control" name="ajcs">
 													<option value="70" selected>7成</option>

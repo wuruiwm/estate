@@ -1,8 +1,8 @@
 input,select{
-	font-family: -webkit-pictograph;
+	font-family: sans-serif;
 }
 input[type=radio] {
-	-webkit-appearance:radio;
+	-webkit-appearance:checkbox;
 	
 	}
 #box{

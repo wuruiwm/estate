@@ -19,7 +19,7 @@
 	<section class="g-flexview">
 		<!-- 顶部内容 -->
 		<header class="m-navbar">
-			<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+			<a href="#" onClick="javascript :window.history.back(); return false;" class="navbar-item">
 				<i class="back-ico"></i>
 			</a>
 			<div class="navbar-center">
@@ -53,7 +53,7 @@
 				<div class="desc-text">
 					<div class="li-list" id="operlist">
 						<ul>
-							<li><label>开发商：</label><input value="" name="developer" readonly="readonly"  /></li>
+							<li><label>开发商：</label><input style="width: 80%;" value="" name="developer" readonly="readonly"  /></li>
 							<li><label>地区：</label><input value="" name="areaname" readonly="readonly"  /></li>
 							<li><label>绿化率：</label><input value="" name="greening_rate" readonly="readonly"  /></li>
 							<li><label>车位数量：</label><input value="" name="parking_space" readonly="readonly"  /></li>
@@ -98,7 +98,7 @@
 		{{each data as value index}}
 			<div class="slider-item">
 				<a href="javascript:void(0);">
-					<img data-id="{{data[index].img_id}}" src="{{data[index].img_url}}">
+					<img data-original="{{data[index].img_url}}" data-id="{{data[index].img_id}}" src="{{data[index].img_url}}">
 				</a>
 			</div>
 		{{/each}}
@@ -135,9 +135,12 @@
 						console.log(ret);
 						var html = template('topbannerscript', {data: ret.head_img});
 						$('#bannerImage').html(html);
+						var viewer = new Viewer(document.getElementById('bannerImage'), { //轮播图片点击放大预览
+									url: 'data-original'
+							});
 						$('.m-slider').slider({
 								speed: 200,
-								autoplay: 3000,
+								autoplay: 5000,
 								lazyLoad: true
 						});
 						var html = template('cashplan', {dataplan: ret.brokerage_plan.data});
@@ -162,7 +165,10 @@
 						$('#content').html(html);						
 						var viewer = new Viewer(document.getElementById('roomap'), { //图片点击放大预览
 									url: 'data-original'
-							});																		
+							});																									
+							if(ret.brokerage_plan.length == 0){
+								$('.yongjinplan').hide();
+							}																								
 					},					
 				});
 		});

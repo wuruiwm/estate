@@ -26,9 +26,10 @@
 			
 		}
 		#data-form div label{
+			display: inline-block;
 			min-width: 1.8rem;
 			color: #868686;
-			font-size: .25rem;
+			font-size: .3rem;
 			text-align: right;
 			padding: 0 .3rem 0 0 ;
 		}
@@ -40,7 +41,7 @@
 			background: #EEEEEE;
 			padding: .2rem;
 			height: .7rem !important;
-			font-size: 0.2rem;
+			font-size: 0.3rem;
 			
 		}
 		textarea{
@@ -49,7 +50,7 @@
 			border: 0;
 			background: #EEEEEE;
 			padding: .2rem;
-			font-size: 0.2rem;
+			font-size: 0.3rem;
 		}
 		.cell-item:not(:last-child):after{
 			border: 0;
@@ -68,6 +69,7 @@
 			padding: .2rem .3rem;
 		}
 		.submit{
+			font-size: 0.3rem;
 			text-align: center;
 			display: block;
 			margin: 0 auto;
@@ -130,10 +132,10 @@
 	</style>
 </head>
 <body>
-	
+	<section class="g-flexview">
 		<!-- 顶部内容 -->
 		<header class="m-navbar">
-			<a href="#" onClick="javascript :history.back(-1);" class="navbar-item">
+			<a href="#" onClick="javascript :window.history.back(); return false;" class="navbar-item">
 				<i class="back-ico"></i>
 			</a>
 			<div class="navbar-center">
@@ -142,9 +144,8 @@
 		</header>
 		<div class="g-scrollview">
 		<div id="data-form">
-			<form action="">
 				<div class="">
-					<label>选择地区：</label>
+					<label>选择地区</label>
 					<input id="J_ActionSheet" value="" name="currenArea" type="text" readonly="readonly"  placeholder="选择地区" />
 					<div class="m-actionsheet" id="J_ShowActionSheet">
 						<div id="ProviceList" style="width: 30%;"></div>
@@ -153,35 +154,35 @@
 					</div>
 				</div>
 				<div class="">
-					<label>详细地址：</label>
+					<label>详细地址</label>
 					<input type="text"   value=""  name="adressname" placeholder="街道、门牌号..." />
 				</div>
 				<div class="">
-					<label>房源名称：</label>
+					<label>房源名称</label>
 					<input type="text"  placeholder="房源名称" value="" name="housename" />
 				</div>
 				<div class="">
-					<label>价格：</label>
+					<label>价格</label>
 					<input type="text"  placeholder="房源价格" value="" name="houseprice" />
 				</div>
 				<div class="">
-					<label>面积：</label>
+					<label>面积</label>
 					<input type="text"  placeholder="房源面积/㎡" value="" name="houses" />
 				</div>
 				<div class="">
-					<label>户型：</label>
+					<label>户型</label>
 					<input type="text"  placeholder="如:三室一厅一厨一卫..." value="" name="housestyle" />
 				</div>
 				<div class="">
-					<label>物业费：</label>
+					<label>物业费</label>
 					<input value="" name="wuyefei" type="text"   placeholder="元/㎡" />
 				</div>
 				<div class="">
-					<label>装修类型：</label>
+					<label>装修类型</label>
 					<input value="" name="zhuangxiu" type="text"   placeholder="如:毛坯、精装" />
 				</div>
 				<div class="">
-					<label>房源图片：</label>
+					<label>房源图片</label>
 					<div class="logo-wrapper">
 						<span class="uploadbutton" onclick="$('#sfz_1').click()">+</span>
 						<input type="file" class="ajax-upload" accept="image/gif,image/jpeg,image/x-png"   id="sfz_1"  style="display:none">						
@@ -189,13 +190,13 @@
 				</div>
 				<div class="imgitem-list" id="houseimglist"></div>
 				<div class="">
-					<label>房源介绍：</label>
+					<label>房源介绍</label>
 					<textarea class="desc" rows="10" cols="50" placeholder="房源介绍信息"></textarea>
 				</div>
 				<span id="releasenow" class="submit">立即发布</span>
-			</form>
 		</div>
 		</div>
+		</section>
 <!-- 引入jQuery 3.0+ -->
 <script src="../js/jq331.min.js"></script>
 <!-- 引入YDUI脚本 -->
@@ -252,7 +253,7 @@
 		(function () {
 			if (dataToken) {//已登录
 			//刷新最后使用时间
-			sessionStorage.setItem("nxgx_lastVisitTime", new Date().getTime());
+			localStorage.setItem("nxgx_lastVisitTime", new Date().getTime());
 			_interval_handler=setInterval(checkExpired, 10*1000);//10秒钟检查一次，是否超时
 			
 			//在登录的状态下检测用户是否提交验证资料并且审核通过
@@ -269,7 +270,7 @@
 					if(ret.is_examine != 1){												
 						!function (win, $) {
 							var dialog = win.YDUI.dialog;						
-								dialog.toast('您的验证资料尚未通过审核，还不能发布房源信息！', 'none', 3000);
+								dialog.toast('您的验证资料尚未通过审核，还不能发布房源信息！', 'none', 2000);
 								setTimeout(function () {
 									dialog.loading.close();/* 移除loading */
 									location.href="./checking.html"
@@ -277,7 +278,7 @@
 						}(window, jQuery);	
 					};
 					if(ret.is_examine == 1){
-						YDUI.dialog.toast('恭喜您已经通过审核验证，可以发布房源信息啦！', 'none', 3000);
+						YDUI.dialog.toast('恭喜您已经通过审核验证，可以发布房源信息啦！', 'none', 2000);
 					}
 				},              
 			}); 
@@ -288,7 +289,7 @@
 		
 		function checkExpired() {
 		//console.log("10秒检查一次是否过期"+window.location.href+"::"+new Date());
-		var storeLastTime=sessionStorage.getItem("nxgx_lastVisitTime")?sessionStorage.getItem("nxgx_lastVisitTime"):-1;
+		var storeLastTime=localStorage.getItem("nxgx_lastVisitTime")?localStorage.getItem("nxgx_lastVisitTime"):-1;
 		if (storeLastTime==-1) clearInterval(_interval_handler);
 		else {
 				if ((new Date()).getTime()-storeLastTime>_EXPIRE_TIME) {  //过期了

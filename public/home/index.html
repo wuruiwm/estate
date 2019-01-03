@@ -9,10 +9,10 @@
     <meta content="telephone=no" name="format-detection" />
     <!-- 引入YDUI样式 -->
     <link rel="stylesheet" href="build/css/ydui.css" />
-	<link rel="stylesheet" href="build/css/city.css" />
-	<link rel="stylesheet" href="./css/Index.css" />
-	<link rel="stylesheet" href="css/common.css" />
-	<link rel="stylesheet" href="./css/fontcss/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="build/css/city.css" />
+		<link rel="stylesheet" href="./css/Index.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="./css/fontcss/css/font-awesome.min.css" />
 	<style>
 		#J_ActionSheet{
 			overflow: hidden;
@@ -21,6 +21,16 @@
 			text-align:right;
 			color:#fff;
 			font-family: -webkit-pictograph;
+		}
+		.unreader{
+			top: -5px;
+			color: red;
+			font-size: .1rem;
+			position: absolute;
+			right: -5px;
+		}
+		.list-loading{
+			display: none !important;
 		}
 	</style>
 </head>
@@ -44,9 +54,10 @@
 					<input id="searchword" readonly="readonly" type="search" value="" placeholder="房源搜索" />					
 				</div>
 				<!-- <label>搜索</label> -->
-				<div style="width: 10%; text-align: center;" class="news">
-					<a style="display: inline-block;margin-top: 0.1rem;" href="./pages/noticelist.html">
-						<i class="fa fa-volume-down" style="font-size:.4rem;"></i>						
+				<div style="width:10%;" class="news">
+					<a style="display: inline-block;margin-top: 0.1rem; position: relative;" href="./pages/noticelist.html">
+						<i class="fa fa-server" style="font-size:.4rem;"></i>
+						<!-- <i class="fa fa-circle unreader"></i>	 -->					
 						<!-- fa-server -->
 					</a>
 				</div>
@@ -79,7 +90,7 @@
 					<div class="item-menu">
 						<a href="pages/computer.html">
 							<img src="static/images/computer.png" />
-							<label>贷款计算器</label>
+							<label>贷款计算</label>
 						<a/>
 					</div>
 					<div class="item-menu">
@@ -98,7 +109,9 @@
 			<!-- 房源列表 -->
 			<div class="house-list">
 				<p class="tips"><i class="icon-discount"></i>&nbsp;&nbsp;最新房源</p>
-				<div id="bestnewList"></div> <!-- 房源列表模块 -->
+				<div id="mescroll" class="mescroll">
+					<div id="bestnewList"></div> <!-- 房源列表模块 -->					
+				</div>				
 			</div>
 		</div>
 		<!-- 报备客户按钮 -->
@@ -133,7 +146,8 @@
 			</a>
 		</footer>
 </section>
-<script src="js/jq331.min.js"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js" type="text/javascript" charset="utf-8"></script><strong></strong>
+<!-- <script src="js/jq331.min.js"></script> -->
 <script src="build/js/ydui.js"></script>
 <!-- 引入YDUI自适应解决方案类库 -->
 <script src="build/js/ydui.flexible.js"></script>
@@ -142,6 +156,7 @@
 <script src="js/template.js"></script>
 <script src="js/common.js"></script>
 <script src="js/DataLazyLoad.js"></script>
+<script src="build/jquery.lazyload.js"></script>
 <script src="js/Index.js"></script>
 <!-- 轮播图 -->
 <script id="bannerscr" type="text/html">
@@ -167,7 +182,7 @@
 		>
 			<div class="item-list">
 				<div class="left-img">
-					<img src="{{data[index].cover_img.img_url}}" />
+					<img class="lazyload-img" alt=""  src="{{data[index].cover_img.img_url}}"  />
 					<span class="housestyle">{{data[index].init_status}}</span>
 				</div>
 				<div class="desc-right">
@@ -180,7 +195,7 @@
 				</p>
 					{{if data[index].init_status == "二手房"}}<p style="display: none;" class="desc-content"><label class="yong">佣</label>&nbsp;<span>({{data[index].brokerage_plan.number}}个方案)</span>&nbsp;&nbsp;<span>{{data[index].brokerage_plan.price}}元/套&nbsp;</span></p>
 					{{else}}
-					<p class="desc-content"><label class="yong">佣</label>&nbsp;<span>({{data[index].brokerage_plan.number}}个方案)</span>&nbsp;&nbsp;<span>{{data[index].brokerage_plan.price}}元/套&nbsp;</span></p>
+					<p class="desc-content" {{if data[index].brokerage_plan.length == 0}}style="display:none"{{/if}}><label class="yong">佣</label>&nbsp;<span>({{data[index].brokerage_plan.number}}个方案)</span>&nbsp;&nbsp;<span>{{data[index].brokerage_plan.price}}元/套&nbsp;</span></p>
 					{{/if}}
 				</div>
 			</div>

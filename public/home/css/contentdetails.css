@@ -1,11 +1,11 @@
 input{
 	border:0;
-	font-family: -webkit-pictograph;
+	font-family: sans-serif;
 	}
 input.housename{
 	font-weight: bold;
     font-size: .3rem;
-    font-family: -webkit-pictograph;
+    font-family: sans-serif;
 }
 #main-content{
 	padding: .2rem;
@@ -53,6 +53,7 @@ div.rmb{
 
 .li-list,.main-style,.pro-desc{float: left; margin-top: .5rem;    width: 100%;}
 .li-list li {
+	width: 100%;
 	padding: .15rem 0;
 	float: left;
 }
@@ -74,7 +75,6 @@ div.rmb{
 }
 
 #content img{
-	width: 1rem;
-	height: 1rem;
+	max-width: 100%;
 }
 

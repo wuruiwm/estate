@@ -1,0 +1,62 @@
+@charset "utf-8";
+body{
+	font-family: -webkit-pictograph;
+	font-size: 13px;
+}
+form, ul, li, p, h1, h2, h3, h4, h5, h6,dl,dt,dd {margin:0;padding:0}
+input, select {font-size:12px;line-height:16px;color:#999}
+img,input {border:0 none}
+ul, li {list-style-type:none}
+a{color:#333;text-decoration:none;blr:expression(this.onFocus=this.blur());outline:none}
+
+/*-----------公用样式------------*/
+.show{display:block}
+.hidden{display:none}
+.f3{color:#333}
+.f6,.f6 a{color:#666}
+.f9,.f9 a{color:#999}
+.f9 a:hover{color:#ea5504}
+.f63{font:bold 14px "宋体";color:#f63}
+.fb{font-weight:bold}
+.fea5504,.fea5504 a{color:#ea5504}
+.f008000{color:#008000}
+.f14,.f14 a{font-size:14px}
+.white,.white a{color:#fff}
+.f20{font:20px "黑体";color:#ea5504}
+.f24{font:bold 24px "黑体";color:#ea5504}
+.hr_1{clear:both;height:10px;overflow:hidden}
+.hr_2{clear:both;height:13px}
+.hr_3{width:971px;clear:both;height:11px;border-top:1px solid #f5891e}
+.hr_4{clear:both;height:6px}
+.hr_5{clear:both;height:15px}
+.fn a{text-decoration:none}
+select,input{padding: .2rem;}
+td{padding: .4rem 0;}		
+#tab1{width:100%;height:23px;clear:both;background:#fbe5d9}
+#tab1 ul{margin:0 0 0 9px}
+#tab1 li{float:left;height:23px;line-height:23px;text-align:center;font-weight:bold; font-size:14px;padding:0 10px}
+#tab1 li a{color:#666}
+#tab1 li a:hover{color:#ea5504}
+#tab1 li.now{font-weight:bold; font-size:14px;background:#fff}
+#tab1 li.now a{color:#ea5504}
+#tab1 ul li b{ font:12px/22px "宋体"; font-weight:bold}					
+#tab2 ul,#tab3 ul,#tab4 ul{margin-top:10px}
+#tab2 li{margin-left: 20px; height:30px;float:left;display:block;color:#666;cursor:pointer;font-weight:bold;font-size:14px}
+#tab2 li.now,#tab3 li.now,#tab4 li.now{background:url(../../images/calculator/calculator_01.jpg) no-repeat right 3px}
+#tab2 li.now a,#tab3 li.now a,#tab4 li.now a{color:red}				
+.tablist2{}
+.input1{width:43px;border:1px solid #7f9db9}
+.input2{width:75px;border:1px solid #7f9db9}
+.input3{width:143px;border:1px solid #7f9db9}
+.input4{width:99px;border:1px solid #7f9db9}
+.but1{width:76px;height:20px;background:url(../static/images/but_bg.jpg) no-repeat;color:#fff;font:bold 12px "宋体";margin-right:10px}								    #tab3{width:48px;left:80px;position:absolute}
+#tab3 li{width:45px;height:30px;float:left;display:block;color:#666;cursor:pointer;font-weight:bold;font-size:14px}				
+#tablist3 span{padding:10px 0 0 10px;float:left}
+#tablist3 span.s1{float:right;margin-right:10px}				
+#tab4{width:141px;left:50px;position:absolute}
+#tab4 li{width:121px;height:30px;display:block;color:#666;cursor:pointer;font-weight:bold;font-size:14px}												
+.detail table tr td.fbe5d9{background:#fbe5d9}
+.detail table tr td.fff{background:#fff}
+.detail table tr td span{padding:0 10px}
+
+
