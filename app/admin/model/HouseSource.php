@@ -153,7 +153,7 @@ class HouseSource extends BaseModel
     }
 
     // 客户端
-    public static function getHomeList($page, $limit, $province, $city, $type)
+    public static function getHomeList($page, $limit, $province, $city, $area,$type)
     {
         if ($type == '') {
             $type = '1,2';
@@ -162,11 +162,11 @@ class HouseSource extends BaseModel
         $field = 'id,title,cover_img,init_status,house_price,house_address,decoration_type,brokerage_plan,province,city,area';
         if ($province === '北京' || $province === '天津' || $province === '上海' || $province === '重庆') {
             $area_name = mb_substr($city, 0, 2); // 彭水
-            $area = Area::where('name', 'like', "%{$area_name}%")->find();
-            $city_Info = City::where('city_id', $area['city_id'])->find();
+            $area_info = Area::where('name', 'like', "%{$area_name}%")->find();
+            $city_Info = City::where('city_id', $area_info['city_id'])->find();
             $house = self::where('city', $city_Info['city_id'])
                 ->where('province', $city_Info['province_id'])
-                ->where('area', $area['_id'])
+                ->where('area', $area_info['_id'])
                 ->where('status',1)
                 ->where('init_status', 'in', $type)
                 ->field($field)
@@ -181,9 +181,11 @@ class HouseSource extends BaseModel
             $city = City::where('name', 'like', $city)->find();
             $city_id = $city['city_id'];
             $province_id = $city['province_id'];
+            $areaInfo = Area::where('name',$area)->find();
             $house = self::where('city', $city_id)
                 ->where('province', $province_id)
                 ->where('init_status', 'in', $type)
+                ->where('area',$areaInfo['_id'])
                 ->where('status',1)
                 ->field($field)
                 ->order('create_time desc')

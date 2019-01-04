@@ -39,9 +39,10 @@ class House extends BaseController
      * @apiParam {int} limit 每页显示条数
      * @apiParam {string}  province 省
      * @apiParam {string}  city 市
+     * @apiParam {string}  area 区
      * @apiParam {string}  type 房源类型(不传为新房和二手房,值1为新房,值2为二手房)
      */
-    public function getList($page='',$limit='',$province='',$city='',$type=''){
+    public function getList($page='',$limit='',$province='',$city='',$area='',$type=''){
         (new Page())->goCheck();
         if($province===''){
             throw new ParameterException([
@@ -53,7 +54,12 @@ class House extends BaseController
                 'msg'=>'city参数不能为空'
             ]);
         }
-        return HouseSource::getHomeList($page,$limit,$province,$city,$type);
+        if($area===''){
+            throw new ParameterException([
+                'msg'=>'area参数不能为空'
+            ]);
+        }
+        return HouseSource::getHomeList($page,$limit,$province,$city,$area,$type);
     }
 
     /**

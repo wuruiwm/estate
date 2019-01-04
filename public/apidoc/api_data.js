@@ -403,6 +403,13 @@ define({ "api": [
             "group": "Parameter",
             "type": "string",
             "optional": false,
+            "field": "area",
+            "description": "<p>区</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
             "field": "type",
             "description": "<p>房源类型(不传为新房和二手房,值1为新房,值2为二手房)</p>"
           }
