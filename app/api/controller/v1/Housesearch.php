@@ -106,7 +106,7 @@ class Housesearch extends Controller{
 					}
 				}
 				if (!$brok_arr) {
-					$brok_arr[] = '暂无佣金';
+					$brok_arr[] = '0';
 				}
 				//查出佣金，将佣金价格放入数组
 				$brok_price = $brok_arr['0'];
