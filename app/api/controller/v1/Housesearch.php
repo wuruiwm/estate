@@ -96,15 +96,29 @@ class Housesearch extends Controller{
 				$a = $v->getData()['brokerage_plan'];
 				//用explode分割成数组
 				$arr = explode(',',$a);
-				//实例化佣金方案的表，然后查出楼盘表佣金方案的第一个方案的佣金
 				$brokerage =  model('Brokerage');
-				$brok_res = $brokerage->field(['price'])->where('id',$arr['0'])->find();
+				$brok_arr = [];
+				$brok_i = 0;
+				foreach ($arr as $key => $val) {
+					//实例化佣金方案的表，然后查出楼盘表佣金方案的佣金
+					$brok_res = $brokerage->field(['price'])->where('id',$val)->find();
+					if ($brok_res) {
+						$brok_arr[] = $brok_res->getData()['price'];
+						$brok_i = $brok_i + 1;
+					}
+				}
+				if (!$brok_arr) {
+					$brok_arr[] = '0';
+				}
+
 				//查出佣金，将佣金价格放入数组
-				$brok_price=$brok_res->getData()['price'];
+				$brok_price = $brok_arr['0'];
+				//var_dump($v);
 				$array = $v->getData();
 				$array['price'] = $brok_price;
 				//如果是新房，数出佣金方案数，传给前端
-				$array['brokerage_plan'] = count($arr);
+				//$array['brokerage_plan'] = count($arr);
+				$array['brokerage_plan'] = $brok_i;
 			}else{
 				$array = $v->getData();
 			}
@@ -130,6 +144,7 @@ class Housesearch extends Controller{
 			}
 			$data[] = $array;
 		}
+		//exit();
 		//判断是否有数据，没有则说明没有查到结果，返回提示信息，有结果则把数组return出去
 		if(!$data){
 			return ['reg'=>'暂无符合搜索条件房源信息!'];
