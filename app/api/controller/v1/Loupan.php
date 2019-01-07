@@ -14,7 +14,7 @@ class Loupan extends controller{
      * @apiParam {int} area 传县的ID
      */
 	public function loupan2($province='',$city='',$area=''){
-		if (!(is_numeric($province)&&is_numeric($city)&&is_numeric($area))) {
+		if (!(is_numeric($province)&&is_numeric($city))) {
 			return ['reg'=>'请输入正确的省,市,区县ID'];
 		}
 		// $area_model = model('Area');
@@ -33,7 +33,11 @@ class Loupan extends controller{
 		// 	}
 		// }else{
 			$house = model('HouseSource');
-			$res = $house->field(['id','title'])->where('province',$province)->where('init_status',1)->where('city',$city)->where('area',$area)->select();
+			if ($area == '') {
+		    	$res = $house->field(['id','title'])->where('province',$province)->where('init_status',1)->where('city',$city)->select();
+		    }else{
+		    	$res = $house->field(['id','title'])->where('province',$province)->where('init_status',1)->where('city',$city)->where('area',$area)->select();
+		    }
 			$data = [];
 			foreach ($res as $k => $v) {
 				$data[] = $v->getData();
