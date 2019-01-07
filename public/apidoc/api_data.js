@@ -402,9 +402,9 @@ define({ "api": [
           {
             "group": "Parameter",
             "type": "string",
-            "optional": false,
+            "optional": true,
             "field": "area",
-            "description": "<p>区</p>"
+            "description": "<p>区 给空值定位到市</p>"
           },
           {
             "group": "Parameter",

@@ -164,9 +164,14 @@ class HouseSource extends BaseModel
             $area_name = mb_substr($city, 0, 2); // 彭水
             $area_info = Area::where('name', 'like', "%{$area_name}%")->find();
             $city_Info = City::where('city_id', $area_info['city_id'])->find();
+            if($area!==''){
+                $where['area'] = $area_info['_id'];
+            }else{
+                $where = null;
+            }
             $house = self::where('city', $city_Info['city_id'])
                 ->where('province', $city_Info['province_id'])
-                ->where('area', $area_info['_id'])
+                ->where($where)
                 ->where('status',1)
                 ->where('init_status', 'in', $type)
                 ->field($field)
@@ -182,10 +187,15 @@ class HouseSource extends BaseModel
             $city_id = $city['city_id'];
             $province_id = $city['province_id'];
             $areaInfo = Area::where('name',$area)->find();
+            if($area!==''){
+                $where['area'] = $areaInfo['_id'];
+            }else{
+                $where = null;
+            }
             $house = self::where('city', $city_id)
                 ->where('province', $province_id)
                 ->where('init_status', 'in', $type)
-                ->where('area',$areaInfo['_id'])
+                ->where($where)
                 ->where('status',1)
                 ->field($field)
                 ->order('create_time desc')
