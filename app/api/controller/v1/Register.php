@@ -20,6 +20,7 @@ use app\lib\exception\RegisterException;
 use app\lib\exception\SuccessMessage;
 use app\lib\validate\MobileRegister;
 use app\lib\validate\MobileCode;
+use app\lib\validate\UpdataPwd;
 use think\Exception;
 use think\facade\Cache;
 
@@ -169,7 +170,7 @@ class Register extends BaseController
      */
     public function password($mobile = '', $code = '', $password = '', $password_old = '')
     {
-        (new MobileRegister())->goCheck();
+        (new UpdataPwd())->goCheck();
         if ($password !== $password_old) {
             throw new ErrorMessage([
                 'msg' => '新密码与确认密码不一致'
