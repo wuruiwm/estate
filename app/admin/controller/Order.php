@@ -252,6 +252,9 @@ class Order extends Permissions{
 		//获取佣金方案
 		$house =  model('HouseSource');
 		$res = $house->field(['brokerage_plan'])->where('id',$house_id)->find();
+		if (!$res) {
+			return ['reg'=>'0'];
+		}
 		$brokerage_plan = $res->getData()['brokerage_plan'];
 		//获取到楼盘里选中的方案，多个佣金方案的id用逗号隔开 1,5,8
 		//用explode 将字符串分割成数组

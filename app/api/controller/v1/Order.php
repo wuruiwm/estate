@@ -14,10 +14,10 @@ class Order extends Controller{
      * @apiParam {str} house_title 楼盘名字
      * @apiParam {int} province 省份ID
      * @apiParam {int} city 市ID
+     * @apiParam {int} number 手机号码
      * @apiParam {int} area 区县ID
      * @apiParam {str} house_id 楼盘id
      * @apiParam {str} name 用户名
-     * @apiParam {int} number 手机号码
      * @apiParam {int} gender 1男2女
      * @apiParam {str} date 预计带看时间，例2018-11-11
      * @apiParam {str} content 购房意向
@@ -69,6 +69,7 @@ class Order extends Controller{
 		$post['user_id'] = $user_id;
 		//将要插入数据的数组，放到一个空数组里，执行savaAll方法插入数据
 		$data = [];
+		//return $post;
 		$data[] = $post;
 		$res = $order->saveAll($data);
 		//判断返回值是否为空，有值，则返回报备成功，没有值，则返回报备失败
