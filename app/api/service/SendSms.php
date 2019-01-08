@@ -79,7 +79,7 @@ class SendSms
      * 发送短信
      * @return stdClass
      */
-    public static function sendSms($phone, $code) {
+    public static function sendSms($phone, $code,$mb_code) {
 
         // 初始化SendSmsRequest实例用于设置发送短信的参数
         $request = new SendSmsRequest();
@@ -91,7 +91,8 @@ class SendSms
         $request->setSignName("和房宝");
 
         // 必填，设置模板CODE，应严格按"模板CODE"填写, 请参考: https://dysms.console.aliyun.com/dysms.htm#/develop/template
-        $request->setTemplateCode("SMS_154785399");
+        //注册 SMS_154785399 修改密码 SMS_154785398
+        $request->setTemplateCode($mb_code);
 
         // 可选，设置模板参数, 假如模板中存在变量需要替换则为必填项
         $request->setTemplateParam(json_encode(array(  // 短信模板中字段的值

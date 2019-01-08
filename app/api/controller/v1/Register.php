@@ -35,7 +35,7 @@ class Register extends BaseController
      * @apiSampleRequest http://estate.dingdingmaoer.cn/api/v1/register/code
      * @apiParam {string} mobile 手机号
      */
-    public function getRandom()
+    public function getRandom($mb_code='SMS_154785399')
     {
         //1.验证手机号是否合法
         (new MobileCode())->goCheck();
@@ -44,7 +44,7 @@ class Register extends BaseController
         //3.生成随机验证码
         $random = $this->getRandomNumber();
         //4.把随机验证码 发送给用户 并把验证码返回给客户端
-        $result = SendSms::sendSms($mobile, $random);
+        $result = SendSms::sendSms($mobile, $random,$mb_code);
         // 把手机号加入缓存 注册时进行校验（注册号与获取短信码是否同一号码）
         \think\Cache::set('mobile', $mobile, 300);
         // 阿里大鱼短信异常
@@ -153,7 +153,7 @@ class Register extends BaseController
                 'msg' => '该用户不存在'
             ]);
         }
-        $this->getRandom();
+        $this->getRandom($mb_code='SMS_154785398');
     }
 
     /**
