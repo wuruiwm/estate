@@ -16,6 +16,7 @@
         <div class="layui-inline">
             <a class="layui-btn layui-btn-normal newsAdd_btn">添加轮播图</a>
         </div>
+        <span class="layui-badge layui-bg-gray">鼠标点击每个单元格可以进行编辑修改</span>
     </div>
 </blockquote>
 <table id="banner" lay-filter="banner" ></table>
@@ -44,9 +45,9 @@
             , cols: [[ //标题栏 列表信息
                 {checkbox: true, fixed: true}
                 , {field: 'id', title: 'ID', width: 100, fixed: 'left',align: 'center'}
-                , {field: 'link_url', title: '跳转地址(点击可编辑)', width: 300,edit: 'text'}
+                , {field: 'link_url', title: '跳转地址(外链完整url地址 / 房源ID数字号)', width: 500,edit: 'text'}
                 , {field: 'img_url', title: '缩略图', width: 100, templet: '#showimg', align: 'center'}
-                , {field: 'order_id', title: '排序(点击可编辑)', width: 200,edit: 'text',align: 'center'}
+                , {field: 'order_id', title: '排序', width: 200,edit: 'text',align: 'center'}
                 , {field: 'type_id', title: '广告位置', width: 200,align: 'center'}
                 , {field: 'create_time', title: '创建时间', width: 200, align: 'center', sort: true}
                 , {title: '操作', width: 160, align: 'center', toolbar: '#barDemo', fixed: 'right'}
