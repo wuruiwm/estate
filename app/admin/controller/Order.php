@@ -66,9 +66,13 @@ class Order extends Permissions{
 			$v_user_id = $v['user_id'];
 			$user_id_res = $conn->table('tplay_user')->field(['card_name'])->where('id',$v_user_id)->find();
 			if ($user_id_res) {
-				$list[$k]['user_id'] = $user_id_res['card_name'];
+				if ($user_id_res['card_name']) {
+					$list[$k]['user_id'] = $user_id_res['card_name'];
+				}else{
+					$list[$k]['user_id'] = '未实名';
+				}
 			}else{
-				$list[$k]['user_id'] = '该经纪人没有实名姓名';
+				$list[$k]['user_id'] = '该经纪人被删除';
 			}
 			
 			$list[$k]['date'] = date('Y-n-j',$v['date']);
