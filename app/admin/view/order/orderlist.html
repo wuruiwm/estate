@@ -53,9 +53,9 @@
 		<button class="btn btn-warning btn-lg" id="button" onclick="delall();">批量删除</button>
   		<div class="form-group neilian" id="left">
     		<label for="exampleInputName2" class="neilian" id="mingzi">名字搜索:</label>
-    		<input type="text" name="name" class="form-control neilian" id="exampleInputName2" placeholder="请输入姓名">
+    		<input type="text" name="user_id" class="form-control neilian" id="user_id" placeholder="输入经纪人姓名">
   		</div>
-  		<input type="text" name="user_id" class="form-control neilian" id="user_id" placeholder="请输入用户ID">
+  		<input type="text" name="name" class="form-control neilian" id="exampleInputName2" placeholder="输入姓名">
 		<div class="layui-input-inline input">
             <div class="layui-inline">
               <div class="layui-input-inline">
@@ -83,7 +83,9 @@
 		<tr>
 			<td align="center"><input type="checkbox" onclick="xuan();" value="0" id="quanxuan"></td>
 			<td align="center"><strong>ID</strong></td>
-			<td align="center"><strong>用户ID</strong></td>
+			<td align="center"><strong>经纪人姓名</strong></td>
+			<td align="center"><strong>经纪人昵称</strong></td>
+			<td align="center"><strong>经纪人手机号</strong></td>
 			<td align="center"><strong>报备客户姓名</strong></td>
 			<td align="center"><strong>号码</strong></td>
 			<td align="center"><strong>性别</strong></td>
@@ -101,6 +103,8 @@
 			<td align="center"><input type="checkbox" value="{$v.id}" class="xuan"></td>
 			<td align="center">{$v.id}</td>
 			<td align="center">{$v.user_id}</td>
+			<td align="center">{$v.nickname}</td>
+			<td align="center">{$v.phone}</td>
 			<td align="center">{$v.name}</td>
 			<td align="center">{$v.number}</td>
 			<td align="center">{$v.gender}</td>
