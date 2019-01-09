@@ -1,6 +1,7 @@
 <?php
 namespace app\admin\controller;
 use think\Controller;
+use think\Db;
 class Order extends Permissions{
 	//列表
 	public function orderlist(){
@@ -46,12 +47,15 @@ class Order extends Permissions{
 			}
 			$user_id = input('user_id');
 			if (isset($user_id)) {
+				$conn = Db::connect();
+				$user_id = $conn->table('tplay_user')->field(['id'])->where('card_name',$user_id)->find()['id'];
 				$str = $str." and user_id='".$user_id."'";
 			}
 			$list = $order->where($str)->order('id desc')->paginate(10,false,['query'=>$get]);
 		}
 		//获取分页代码
 		$page = $list->render();
+		$conn = Db::connect();
 		//遍历，再if判断数据库中的状态值，改成对应信息，然后再存进数组
 		foreach ($list as $k => $v) {
 			if ($v['gender'] == 1) {
@@ -59,6 +63,14 @@ class Order extends Permissions{
 			}else{
 				$list[$k]['gender'] = '女';
 			}
+			$v_user_id = $v['user_id'];
+			$user_id_res = $conn->table('tplay_user')->field(['card_name'])->where('id',$v_user_id)->find();
+			if ($user_id_res) {
+				$list[$k]['user_id'] = $user_id_res['card_name'];
+			}else{
+				$list[$k]['user_id'] = '该经纪人没有实名姓名';
+			}
+			
 			$list[$k]['date'] = date('Y-n-j',$v['date']);
 			$house = model('HouseSource');
 			$house_res = $house->field(['init_status'])->where('id',$v['house_id'])->find();
