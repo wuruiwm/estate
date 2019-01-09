@@ -68,11 +68,11 @@ class Upload extends BaseController
         }
     }
     /**
-     * @api {post} upload/file_imgs 单上传图片
+     * @api {post} upload/file_imgs 多上传图片
      * @apiGroup upload
      * @apiVersion 0.1.0
-     * @apiDescription  上传图片
-     * @apiParam {files[]} file 文件名
+     * @apiDescription  多上传图片
+     * @apiParam {file} files[] 文件名
      */
     public function uploads(){
         if ($this->request->file('files')) {
