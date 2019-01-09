@@ -423,7 +423,7 @@
   {
     "type": "post",
     "url": "upload/file_img",
-    "title": "上传图片",
+    "title": "单上传图片",
     "group": "upload",
     "version": "0.1.0",
     "description": "<p>上传图片</p>",
@@ -443,6 +443,30 @@
     "filename": "app/api/controller/v1/Upload.php",
     "groupTitle": "上传图片",
     "name": "PostUploadFile_img"
+  },
+  {
+    "type": "post",
+    "url": "upload/file_imgs",
+    "title": "多上传图片",
+    "group": "upload",
+    "version": "0.1.0",
+    "description": "<p>多上传图片</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "file",
+            "optional": false,
+            "field": "files[]",
+            "description": "<p>文件名</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/api/controller/v1/Upload.php",
+    "groupTitle": "上传图片",
+    "name": "PostUploadFile_imgs"
   },
   {
     "type": "get",
@@ -890,16 +914,9 @@
           },
           {
             "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "address",
-            "description": "<p>地址</p>"
-          },
-          {
-            "group": "Parameter",
             "type": "int",
             "optional": false,
-            "field": "area",
+            "field": "city",
             "description": "<p>区县的ID</p>"
           },
           {
@@ -1060,6 +1077,13 @@
             "group": "Parameter",
             "type": "int",
             "optional": false,
+            "field": "number",
+            "description": "<p>手机号码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
             "field": "area",
             "description": "<p>区县ID</p>"
           },
@@ -1076,13 +1100,6 @@
             "optional": false,
             "field": "name",
             "description": "<p>用户名</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "number",
-            "description": "<p>手机号码</p>"
           },
           {
             "group": "Parameter",

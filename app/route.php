@@ -51,6 +51,7 @@ Route::get('admin_api/user/update_realname', 'admin/User/updateRealname');
  * 客户端接口
  */
 Route::post('api/:version/upload/file_img', 'api/:version.Upload/upload');
+Route::post('api/:version/upload/file_imgs', 'api/:version.Upload/uploads');
 
 
 Route::get('api/:version/banner/select', 'api/:version.Banner/getBanner');
