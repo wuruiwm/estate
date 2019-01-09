@@ -69,7 +69,7 @@ class Order extends Permissions{
 				if ($user_id_res['card_name']) {
 					$list[$k]['user_id'] = $user_id_res['card_name'];
 				}else{
-					$list[$k]['user_id'] = '未实名';
+					$list[$k]['user_id'] = '<span style="color: red;">未实名</span>';
 				}
 			}else{
 				$list[$k]['user_id'] = '该经纪人被删除';
