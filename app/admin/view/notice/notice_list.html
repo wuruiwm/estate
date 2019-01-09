@@ -56,12 +56,14 @@
 		<tr>
 			<td align="center"><strong>ID</strong></td>
 			<td align="center"><strong>标题</strong></td>
+			<td align="center"><strong>公告链接</strong></td>
 			<td align="center"><strong>操作</strong></td>
 		</tr>
 		{volist name="list" id="v"}
 		<tr id="tr{$v.id}">
 			<td align="center">{$v.id}</td>
 			<td align="center">{$v.title}</td>
+			<td align="center">{$v.url}</td>
 			<td align="center">				
 				<a href="{:url('admin/Notice/noticeEdit',['id'=>$v.id])}" class="btn btn-success btn-xs" id="bianji">编辑</a>
 				<a href="{:url('admin/Notice/noticeDel')}" class="btn btn-warning btn-xs shanchu">删除</a>
