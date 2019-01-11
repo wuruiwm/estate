@@ -115,7 +115,7 @@
 			</div>
 		</div>
 		<!-- 报备客户按钮 -->
-		<a href="pages/reportecustomers/index.html">
+		<a href="pages/reportecustomers/homebaobei.html">
 			<div id="preparation">报备</div>
 		</a>
 		<!-- 底部导航 -->
@@ -162,7 +162,7 @@
 <script id="bannerscr" type="text/html">
    {{each data as value index}}
 		<div class="slider-item">
-			<a href="#">
+			<a href="{{value.link_url}}">
 				<img src="{{value.img_id}}">
 			</a>
 		</div>
@@ -178,26 +178,31 @@
 		{{else}}
 		href="pages/olddetails.html?id={{data[index].id}}"
 		{{/if}}
-		
 		>
 			<div class="item-list">
-				<div class="left-img">
-					<img class="lazyload-img" alt=""  src="{{data[index].cover_img.img_url}}"  />
+					<div style="position: relative">
+					<img src="{{data[index].cover_img.img_url}}" style="width: 3rem; height: 2rem;" />
 					<span class="housestyle">{{data[index].init_status}}</span>
-				</div>
-				<div class="desc-right">
-				<p class="desc-title"><label class="main-title">{{data[index].title}}</label><span><label class="price">{{data[index].house_price}}</label>&nbsp;元/㎡</span></p>
-				<p class="desc-address">{{data[index].house_address}}</p>
-				<p class="desc-tip">
-					{{each data[index].decoration_type as item index}}
-					<label class="yong style">{{item}}</label>
-					{{/each}}
-				</p>
-					{{if data[index].init_status == "二手房"}}<p style="display: none;" class="desc-content"><label class="yong">佣</label>&nbsp;<span>({{data[index].brokerage_plan.number}}个方案)</span>&nbsp;&nbsp;<span>{{data[index].brokerage_plan.price}}元/套&nbsp;</span></p>
-					{{else}}
-					<p class="desc-content" {{if data[index].brokerage_plan.length == 0}}style="display:none"{{/if}}><label class="yong">佣</label>&nbsp;<span>({{data[index].brokerage_plan.number}}个方案)</span>&nbsp;&nbsp;<span>{{data[index].brokerage_plan.price}}元/套&nbsp;</span></p>
-					{{/if}}
-				</div>
+					</div>
+					<div class="rightdesc">
+						<p>
+							<span class="spantitle">{{data[index].title}}</span>
+							<span style="float: right; display: inline-block;">
+								<label style="color:red; display: inline-block;">{{data[index].house_price}}</laben>&nbsp;元/㎡
+							</span>									
+						</p>
+						<p class="paddress">{{data[index].house_address}}</p>
+						<p class="type">
+							{{each data[index].decoration_type as item index}}
+							<label class="yong">{{item}}</label>
+							{{/each}}
+						</p>
+						{{if data[index].init_status == "二手房"}}
+						<p style="display: none;"><label class="yong">佣</label>&nbsp;<span>({{data[index].brokerage_plan.number}}个方案)</span>&nbsp;&nbsp;<span>{{data[index].brokerage_plan.price}}元/套&nbsp;</span></p>
+						{{else}}
+						<p {{if data[index].brokerage_plan.length == 0}}style="display:none"{{/if}}><label class="yong">佣</label>&nbsp;<span>({{data[index].brokerage_plan.number}}个方案)</span>&nbsp;&nbsp;<span>{{data[index].brokerage_plan.price}}元/套&nbsp;</span></p>
+						{{/if}}
+					</div>
 			</div>
 		</a>
 	{{/each}}

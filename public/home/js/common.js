@@ -1,4 +1,4 @@
-var commapi = "http://estate.dingdingmaoer.cn/api/v1/"; //接口公共地址
+var commapi = "http://estate.dingdingmaoer.cn/api/v1/"; //接口公共地址   http://hfb.luowangtech.club
 var commimgurl = "http://estate.dingdingmaoer.cn/"; //图片前缀
 var dataToken = localStorage.getItem('token'); // 获取token
 var dataadmin = localStorage.getItem('admin'); // 获取账号
@@ -10,6 +10,8 @@ var dataareaname = localStorage.getItem('areaname'); // 获取区县
 var dataproviceid = localStorage.getItem('proviceid'); // 获取省份id
 var datacityid = localStorage.getItem('cityid'); // 获取市id
 var dataareaid = localStorage.getItem('areaid'); // 获取区县id
+var baobeineedareaname = localStorage.getItem('baobeineedareaname');
+var baobeineedareaid = localStorage.getItem('baobeineedareaid');
 
 //获取地址栏参数 
     //url为空时为调用当前url地址 

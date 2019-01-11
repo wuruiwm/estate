@@ -59,8 +59,8 @@
 							<li><label>车位数量：</label><input value="" name="parking_space" readonly="readonly"  /></li>
 							<li><label>占地面积(㎡)：</label><input value="" name="floor_area" readonly="readonly"  /></li>
 							<li><label>物业费(元/㎡)：</label><input value="" name="property_costs" readonly="readonly"  /></li>
-							<li><label>物业公司：</label><input value="" name="property_company" readonly="readonly"  /></li>
-							<li><label>装修类型：</label><input value="" name="style" readonly="readonly"  /></li>
+							<li><label>物业公司：</label><input style="width: 80%;" value="" name="property_company" readonly="readonly"  /></li>
+							<li><label>装修类型：</label><input style="width: 80%;" value="" name="style" readonly="readonly"  /></li>
 						</ul>
 					</div>
 					<!-- 主要户型 -->
@@ -82,7 +82,7 @@
 			
 		</div>
 		<!-- 报备客户按钮 -->
-		<a href="../pages/reportecustomers/index.html">
+		<a href="javascript:void(0)">
 			<div id="preparation">报备</div>
 		</a>
 </section>
@@ -168,7 +168,14 @@
 							});																									
 							if(ret.brokerage_plan.length == 0){
 								$('.yongjinplan').hide();
-							}																								
+							}																															
+							//点击报备.把楼盘名称带过去
+							$('#preparation').click(function(){
+								location.href="../pages/reportecustomers/index.html?name=" + encodeURI(ret.title) +"&houseid=" + ret.id
+							});							
+							localStorage.setItem('baobeineedareaname', ret.area.name);
+							localStorage.setItem('baobeineedareaid', ret.area.id);
+							localStorage.setItem('houseID', ret.id);						
 					},					
 				});
 		});

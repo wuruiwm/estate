@@ -140,33 +140,28 @@
 					var newpwd = $("input[name='newpassword']").val(); //密码
 					var crimpwd = $("input[name='crimpassword']").val(); //确认密码
 					if(newpwd !== crimpwd){
-// 						!function (win, $) {
-// 							var dialog = win.YDUI.dialog;
-// 							dialog.toast('两次密码不一致，请仔细核对！', 'error', 2000);
-// 								setTimeout(function () {
-// 									dialog.loading.close();
-// 								}, 2000);	
-// 							}(window, jQuery);
 							YDUI.dialog.toast('两次密码不一致，请仔细核对！', 'none', 1500);
 							return;
 					}
-					$.ajax({
-						url: modifypwdApi,
-						type: "POST",
-						data: {'mobile': useraccount, 'code': code, 'password': newpwd, 'password_old': crimpwd},
-						success: function(result) {
-							console.log(result);//成功
-								!function (win, $) {
-									var dialog = win.YDUI.dialog;
-									dialog.toast('修改成功,正在跳转登录页...', 'success', 2000);
-										setTimeout(function () {
-											dialog.loading.close();/* 移除loading */
-											location.href="./login.html";
-										}, 2000);
-								
-							}(window, jQuery);	
-						},
-						error:function(msg){
+					console.log(useraccount)
+					if(useraccount){											
+						$.ajax({
+							url: modifypwdApi,
+							type: "POST",
+							data: {'mobile': useraccount, 'code': code, 'password': newpwd, 'password_old': crimpwd},
+							success: function(result) {
+								console.log(result);//成功
+									!function (win, $) {
+										var dialog = win.YDUI.dialog;
+										dialog.toast('修改成功,正在跳转登录页...', 'success', 2000);
+											setTimeout(function () {
+												dialog.loading.close();/* 移除loading */
+												location.href="./login.html";
+											}, 2000);
+									
+								}(window, jQuery);	
+							},
+							error:function(msg){
 								console.log(msg) // 失败返回
 								console.log('0')
 								var json=JSON.parse(msg.responseText);
@@ -179,8 +174,9 @@
 								if(json.errorCode==40301){
 										YDUI.dialog.toast(json.msg, 'none', 1500);
 								}
-						}
-					});
+							}
+						});
+					}
 				});
 				
 			})

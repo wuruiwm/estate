@@ -57,7 +57,7 @@
 			</div>
 		</div>
 		<!-- 报备客户按钮 -->
-		<a href="reportecustomers/index.html">
+		<a href="reportecustomers/homebaobei.html">
 			<div id="preparation">报备</div>
 		</a>
 		<!-- 底部导航 -->
@@ -68,19 +68,19 @@
 				</span>
 				<span class="tabbar-txt">首页</span>
 			</a>
-			<a id="newhouseclick" href="#" class="tabbar-item">
+			<a id="newhouseclick" href="javascript:void(0);" class="tabbar-item">
 				<span class="tabbar-icon">
 					<i class="icon-home"></i>
 				</span>
 				<span class="tabbar-txt">新房分销</span>
 			</a>
-			<a id="oldhouseclick" href="#" class="tabbar-item">
+			<a id="oldhouseclick" href="javascript:void(0);" class="tabbar-item">
 				<span class="tabbar-icon">
 					<i class="fa fa-institution"></i>
 				</span>
 				<span class="tabbar-txt">二手房</span>
 			</a>
-			<a href="#" class="tabbar-item tabbar-active">
+			<a href="javascript:void(0);" class="tabbar-item tabbar-active">
 				<span class="tabbar-icon">
 					<i class="icon-ucenter-outline"></i>
 				</span>
@@ -216,6 +216,7 @@
 		$('#newhouseclick').click(function(){
 			var province = decodeURI(GetQueryString('province'));
 			var city = decodeURI(GetQueryString('city'));
+			//var area = decodeURI(GetQueryString('area'));
 			console.log(city)
 			location.href="./newhouse.html?province="+ encodeURI(province)+'&'+'city='+encodeURI(city);
 		});
@@ -223,6 +224,7 @@
 		$('#oldhouseclick').click(function(){
 			var province = decodeURI(GetQueryString('province'));
 			var city = decodeURI(GetQueryString('city'));
+			var area = decodeURI(GetQueryString('area'));
 			console.log(city)
 			location.href="./oldhouse.html?province="+ encodeURI(province)+'&'+'city='+encodeURI(city);
 		});

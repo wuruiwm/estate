@@ -80,7 +80,40 @@ class User extends BaseController
                 'msg' => '请上传图片'
             ]);
         }
+
+
         $head_img = $head_img->validate(['size' => 4000000, 'ext' => 'jpg,png,jpeg'])->move('../public/uploads/user/');
+
+        $file = 'uploads\user\\' . $head_img->getSaveName();
+        if (exif_imagetype($file) !== IMAGETYPE_JPEG)
+            return;
+        $image = imagecreatefromstring(file_get_contents($file));
+        $exif = exif_read_data($file);     //注意先在php.ini中开启exif扩展
+        if(!empty($exif['Orientation'])) {
+            switch($exif['Orientation']) {
+                case 8:
+                case 7:
+                    $image = imagerotate($image,90,0);
+                    break;
+                case 3:
+                case 4:
+                    $image = imagerotate($image,180,0);
+                    break;
+                case 6:
+                case 5:
+                    $image = imagerotate($image,-90,0);
+                    break;
+            }
+        }
+        $isSuccess = imagejpeg($image,$file);
+
+        if (!$isSuccess) {
+            echo json_encode(["status"=>"fail","msg"=>"图片存储错误！"]);
+            return;
+        }
+
+
+
         if ($head_img) {
             $head_img_path = 'uploads\user\\' . $head_img->getSaveName();
         } else {

@@ -282,7 +282,8 @@ $(document).ready(function(){
 			YDUI.dialog.toast('请先选择地区', 'none', 1500);
 			}else{
 				 $as.actionSheet('open');
-			}      
+			}
+       
     });
     $('#J_Cancel').on('click', function () {
         $as.actionSheet('close');
@@ -324,15 +325,10 @@ $(document).ready(function(){
 			$('#AreaList').html('');
 		},              
 	}); 
-	
-	var loupanname = decodeURI(params.name); //从详情页带过来的楼盘名称在报备显示楼盘名字 (仅限新房)
-	housename = params.houseid // 楼盘id赋值,报备的时候传值
-		$("#houselist").val(loupanname);
 });
 
 var pipeipro =  dataprovicename; //定义两个全局变量,将缓存带来的省市保存,
 var pipeicity = datacityname;
-
 //根据省市区的值自动选中当前的省市区
  var $as = $('#J_ShowActionSheet');
       $('#J_ActionSheet').on('click', function () {     			
@@ -357,22 +353,21 @@ var pipeicity = datacityname;
 				}																				
       });
 
-//从详情页点击报备进来。带来省市区 同时查出楼盘信息
-$('#J_ActionSheet').val(dataprovicename +' '+ datacityname + ' ' + baobeineedareaname);
-//dataprovicename(省) 和 datacityname(市) 是在首页存在缓存里,这里取出显示,baobeineedareaname 是在详情里面存的缓存,具体的区带到报备里去
+//进页面显示 从首页带来的城市名 同时查出楼盘信息
+$('#J_ActionSheet').val(dataprovicename +' '+ datacityname );
 var getareahouseApi = commapi + "house/loupan2";
 			$.ajax({
 			url: getareahouseApi,
 			type: 'GET',
-			data: {'province': dataproviceid, 'city':datacityid, 'area':baobeineedareaid}, 
-			//dataproviceid  datacityid common.js取的，与数据库匹配的省市区id  baobeineedareaid是在详情页存的缓存取出       				
+			data: {'province': dataproviceid, 'city':datacityid, 'area':areaCode}, //dataproviceid  datacityid  dataareaid common.js取的，与数据库匹配的省市区id        				
 			success: function (ret) {
 					console.log(ret);
 					if(ret.length>0){
 						var html = template('getarealistscript', {datarea: ret});
 						$('#houselistActionSheet').html(html);
 					}else{
-						YDUI.dialog.toast('暂无此地房源信息!', 'none', 3000);						
+						YDUI.dialog.toast('暂无此地房源信息!', 'none', 3000);
+						
 						$('#houselistActionSheet').html('暂无数据！');
 					}
 				},   
@@ -384,10 +379,8 @@ var getareahouseApi = commapi + "house/loupan2";
    var proCode = '';
    var cityCode= '';
    var areaCode= '';
-   var getareaid = '';
-   var housename = '';
-   proCode =  dataproviceid;  cityCode = datacityid;  areaCode = baobeineedareaid; //详情页带来的省市区id
-   getareaid = localStorage.getItem('houseID');//房子id,详情页存的缓存
+	 var getareaid = '';
+	 var housename = '';
    function proviceclick (e,provicecode,proname){
 		 provicevalue = proname;
 		 proCode = provicecode;
@@ -415,11 +408,12 @@ var getareahouseApi = commapi + "house/loupan2";
 							container.animate({ 
 									scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop() 
 							},0)
-							$(this).click(); //触发市级的点击请求区
+							$(this).click(); //触发市级的点你请求区
 						}
 					});
    			},              
-   		});  			
+   		}); 
+   			
 			$('#ProviceList a').removeClass('active'); //高亮显示
 			e.classList.add("active");												
    	};		
@@ -432,9 +426,9 @@ var getareahouseApi = commapi + "house/loupan2";
    		type: 'GET',
    		data: {'cid': citycode},             				
    		success: function (arealist) {
-				console.log(arealist);
-				var html = template('arealistscript', {arealist: arealist});
-				$('#AreaList').html(html);
+   				console.log(arealist);
+   				var html = template('arealistscript', {arealist: arealist});
+   				$('#AreaList').html(html);
    			},              
    		}); 
    		cityvalue = cityname;
@@ -463,7 +457,6 @@ var getareahouseApi = commapi + "house/loupan2";
 						var html = template('getarealistscript', {datarea: ret});
 						$('#houselistActionSheet').html(html);
 						$("#houselist").val('');//点击改变区之后 清空带来的区的名称显示值
-						getareaid = ' ';//点击改变qu之后 清空带来的区的id值
 					}else{
 						YDUI.dialog.toast('暂无此地房源信息!', 'none', 3000);
 						$('#houselist').val('');
@@ -483,10 +476,8 @@ var getareahouseApi = commapi + "house/loupan2";
 	 }
 	 
 	 //报备客户
-		var postcustomerApi = commapi + "order/add";
+			var postcustomerApi = commapi + "order/add";
 	  	$('#postcustomer').click(function(){
-			housename = $('#houselist').val(); 			
-			console.log(proCode,cityCode,areaCode)
 	  		var customerName = $("input[name='customername']").val();
 	  		var customerTel = $("input[name='tel']").val();
 	  		var customerSex = $("input[name='sex']:checked").val();

@@ -46,7 +46,8 @@
 					<ul>
 					<li><input class="housename" value="" name="housetitle" readonly="readonly" /><span><a class="houseprice"></a>&nbsp;元&nbsp;/&nbsp;㎡</span></li>
 					<li><label>小区名称：</label><input  value="" name="title" readonly="readonly"  /></li>
-					<li><label>占地面积：</label><input  value="" name="floor_area" readonly="readonly"  /></li>
+					<li><label>房屋面积：</label><input  value="" name="floor_area" readonly="readonly"  /></li>
+					<li><label>房屋总价：</label><input  value="" name="floor_total" readonly="readonly"  /></li>
 					<li><label>房源类型：</label><input  value="" name="style" readonly="readonly"  /></li>
 					<li><label>房源户型：</label><input  value="" name="huxing" readonly="readonly"  /></li>
 					<li><label>装修类型：</label><input  value="" name="zhuangxiu" readonly="readonly"  /></li>
@@ -74,9 +75,9 @@
 			
 		</div>
 		<!-- 报备客户按钮 -->
-		<a href="../pages/reportecustomers/index.html">
+		<!-- <a href="../pages/reportecustomers/index.html">
 			<div id="preparation">报备</div>
-		</a>
+		</a> -->
 </section>
 	<script src="../js/jq331.min.js"></script>
     <script src="../build/js/ydui.flexible.js"></script>
@@ -126,13 +127,15 @@
 						$("input[name='housetitle']").val(ret.title);
 						$('.navbar-title').html(ret.title);						
 						$("input[name='title']").val(ret.title);
-						$("input[name='floor_area']").val(ret.floor_area);
+						$("input[name='floor_area']").val(ret.floor_area + '㎡');
 						$("input[name='style']").val(ret.init_status);
 						$("input[name='huxing']").val(ret.house_type);
 						$("input[name='zhuangxiu']").val(ret.decoration_type.join('、'));
 						$("input[name='wuye']").val(ret.property_costs);
 						$("input[name='houseadress']").val(ret.house_address);
-						$('.houseprice').html(ret.house_price);											
+						$('.houseprice').html(ret.house_price);
+						var total = (ret.house_price * ret.floor_area)/10000;
+						$("input[name='floor_total']").val('￥: ' + total.toFixed(2) + ' 万元')//房屋总价（保留两位）  单价*面积								
 						if(ret.room_map.length>0){
 							var html = template('roomimg', {dataimg: ret.room_map});
 						}else{

@@ -113,6 +113,7 @@
 			margin: .1rem 0 0 .3rem;
 		}
 		#houseimglist p{
+			margin-top: .3rem;
 			position: relative;
 		}
 		.removeimg{
@@ -185,10 +186,10 @@
 					<label>房源图片</label>
 					<div class="logo-wrapper">
 						<span class="uploadbutton" onclick="$('#sfz_1').click()">+</span>
-						<input type="file" class="ajax-upload" accept="image/gif,image/jpeg,image/x-png"   id="sfz_1"  style="display:none">						
+						<input type="file" multiple  class="ajax-upload" accept="image/gif,image/jpeg,image/x-png" name="file[]"   id="sfz_1"  style="display:none">						
 					</div>					
 				</div>
-				<div class="imgitem-list" id="houseimglist"></div>
+				<div class="imgitem-list" id="houseimglist" style="flex-wrap: wrap; padding: 0;"></div>
 				<div class="">
 					<label>房源介绍</label>
 					<textarea class="desc" rows="10" cols="50" placeholder="房源介绍信息"></textarea>
@@ -222,7 +223,16 @@
 	{{/each}}
 </script>
 
+<!-- 多图上传 -->
+<script id="uiploadimages" type="text/html">
+	{{each imglist as value index}}
+		<p><img data-id="{{imglist[index].id}}" src= "{{imglist[index].src}}" /><span onclick="removeimg(this)" class="removeimg">-</span></p>
+	{{/each}}
+</script>
+
 <script>
+	//多图上传图片id集合
+	var imgidlist = [];
 	$(document).ready(function(){		
 		if(!dataToken){
 			!function (win, $) {
@@ -328,40 +338,61 @@
 		});							
 				
 			//发布房源图片
-			$('.ajax-upload').on('change',function(){//当 input file 已经选中时触发js
-			var uploadimgApi = commapi + 'upload/file_img';
-			var formData = new FormData();//先实例化formdata
-			var file     = this.files[0];//获取文件名
-			var id       = this.id;//本input的id			
-			formData.append("file", file);//append方法用于向formdata中注入内容
-			$.ajax({
-				type: "post",
-				url: uploadimgApi,
-				//async:false,
-				contentType: false,
-				processData: false,
-				data: formData,//传过来
-				dataType: 'json',
-				cache: false,
-				contentType: false,
-				processData: false,
-				beforeSend: function(request) {
-						request.setRequestHeader("token", dataToken);
-						},
-				success: function (data) {
-					console.log(data)							
-					$('#houseimglist').append('<p><img data-id='+ data.id +' src= '+ commimgurl + data.src +' /><span onclick="removeimg(this)" class="removeimg">-</span></p>')							
-				}
+				$('.ajax-upload').on('change',function(){
+						 var uploadimgApi = commapi + 'upload/file_imgs';
+						 var formData = new FormData();						 
+						 for(var i=0; i < $("#sfz_1")[0].files.length; i++){
+								 formData.append('files[]', $("#sfz_1")[0].files[i]);
+						 }
+						 $.ajax({
+								url: uploadimgApi,
+								type: "POST",
+								processData: false,
+								contentType: false,
+								data: formData,
+								beforeSend: function(request) {
+											request.setRequestHeader("token", dataToken);
+										},
+								success: function(data){
+									console.log(data)
+									var html = template('uiploadimages', {imglist: data.img_data});
+									$('#houseimglist').append(html);
+									if(imgidlist==''){
+										imgidlist = data.room_map.split(",");//将第一次选中的图片id集合在一个数组,
+										console.log(000)
+									}else{										
+										newimgidlist = data.room_map.split(",");
+										imgidlist = imgidlist.concat(newimgidlist); //将后续增加的图片id合并
+									} 
+									console.log(imgidlist);
+								}
+						 });
+				});					
 			});
-		});																								
-	});
 	
-	//移除图片
-	function removeimg (e){		
-		$(e).siblings().remove();
-		$(e).remove();
-	}
-
+		//删除数组指定的某个元素  封装一个 remove 函数
+			Array.prototype.indexOf = function(val) {
+					for (var i = 0; i < this.length; i++) {
+					if (this[i] == val) return i;
+					}
+					return -1;
+			};
+			Array.prototype.remove = function(val) {
+					var index = this.indexOf(val);
+					if (index > -1) {
+					this.splice(index, 1);
+					}
+			};
+	
+			//移除图片
+			function removeimg (e){		
+				//删除其中一张图片的时候,把imgidlist里面对应的id也删除
+				var removeID = $(e).siblings().data('id'); //当前图的id
+				imgidlist.remove(removeID) //将删除的图片对应的id也删除		
+				console.log(imgidlist);
+				$(e).siblings().remove();  $(e).remove();	
+			}
+	
 	//省市区三级联动
 	var provicevalue;
 	var cityvalue;
@@ -417,16 +448,8 @@
 	//发布房源信息
 	var releasehouseApi = commapi + 'house/add_used'; //发布房源接口
 	$('#releasenow').click(function(){
-		var imgidlist = '';
-		$('#houseimglist p img').each(function(){			
-			imgidlist += $(this).data('id') + ",";				 		
-			return imgidlist;
-		});
-		//去掉最后一个逗号
-		if (imgidlist.length > 0) {
-		imgidlist = imgidlist.substr(0, imgidlist.length - 1);
-		}
-		console.log(imgidlist)		
+		imgidlist = imgidlist.join(',');	
+		console.log(imgidlist)
 		var datalist = {
 			'title': $('input[name="housename"]').val(),
 			'house_price': $('input[name="houseprice"]').val(),
@@ -450,9 +473,9 @@
 		},
 		success: function (ret) {
 				console.log(ret);
-				YDUI.dialog.toast('发布成功!', 'none', 3000);
+				YDUI.dialog.toast('发布成功,正在审核···', 'none', 3000);
 				setTimeout(function () {					
-					location.href="./oldhouse.html?province="+provicevalue + '&city=' + cityvalue;
+					location.href="../index.html" ;
 				}, 3000);
 			},
 		  error:function(msg){
