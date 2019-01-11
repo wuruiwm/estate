@@ -32,17 +32,18 @@ class Upload extends BaseController
      */
     public function upload()
     {
-        if ($this->request->file('file')) {
-            $file = $this->request->file('file');
-        } else {
-            throw new ErrorMessage([
-                'msg' => '上传失败'
-            ]);
-        }
-        $web_config = Db::name('webconfig')->where('web', 'web')->find();
-
-        $info = $file->validate(['size' => $web_config['file_size'] * 1024, 'ext' => $web_config['file_type']])->rule('date')->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . 'user');
-        if ($info) {
+        
+            $files = request()->file('file');
+        // foreach ($files as $key => $value) {
+        //     var_dump($value);
+        // }
+        // exit();
+        // $web_config = Db::name('webconfig')->where('web', 'web')->find();
+        $data = [];
+        foreach ($files as $key => $file) {
+            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . 'user');
+           // var_dump($info);
+            if ($info) {
             //写入到附件表
             $data = [];
             $data['module'] = 'user';
@@ -61,11 +62,14 @@ class Upload extends BaseController
             $res['id'] = Db::name('attachment')->insertGetId($data);
             $res['src'] = DS . 'uploads' . DS . 'user' . DS . $info->getSaveName();
             $res['code'] = 2;
-            return json($res);
-        } else {
-            // 上传失败获取错误信息
-            return $this->error('上传失败：' . $file->getError());
+            $data[] = $res;
+           // return json($res);
+           echo '成功';
+            }else{
+                echo '失败';
+            }
         }
+        return json($data);
     }
     /**
      * @api {post} upload/file_imgs 多上传图片

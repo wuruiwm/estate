@@ -18,6 +18,9 @@ class Notice extends Permissions{
 			}
 			$list = $notice->where('title','like',"%$title%")->order('id desc')->paginate(10,false,['query'=>$get]);
 		}
+		foreach ($list as $k => $v) {
+			$list[$k]['url'] = http_type().'/home/pages/noticedetails.html?id='.$v['id'];
+		}
 		//获取分页代码
 		$page = $list->render();
 		$this->assign('list',$list);
