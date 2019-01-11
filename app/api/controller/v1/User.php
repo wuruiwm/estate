@@ -94,11 +94,9 @@ class User extends BaseController
                 'head_img' => $head_img_path
             ]);
         if ($result) {
-            $image = @ImageCreateFromJpeg($head_img_path);
-            if (!$image)
-            {
-                $image= imagecreatefromstring(file_get_contents($head_img_path));
-            }
+            if (exif_imagetype($head_img_path) !== IMAGETYPE_JPEG)
+                return;
+            $image = imagecreatefromstring(file_get_contents($head_img_path));
             $exif = exif_read_data($head_img_path);     //注意先在php.ini中开启exif扩展
             if(!empty($exif['Orientation'])) {
                 switch($exif['Orientation']) {
