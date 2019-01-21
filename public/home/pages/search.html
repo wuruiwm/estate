@@ -69,13 +69,14 @@
 	}
 	.red-a{color:red;}
 	#searchpost{
+		width: 100%;
 		font-family: -webkit-pictograph;
 		color: #C1060F;
 		border: 0;
 		background: #eee;
 		padding: .12rem .25rem .12rem .05rem;
 		border-radius: .1rem;
-		font-size: .3rem;
+		font-size: .35rem;
 		margin-top: .8rem;
 	}
 	.theme-green .back-bar{
@@ -101,7 +102,8 @@
 	.removekey{
 		color: #666;
 		text-decoration: underline;
-		padding: 0 .2rem;
+		padding: .3rem 0;
+		display: inline-block;
 	}
 	.resultstatus{
 		position: absolute;
@@ -187,11 +189,7 @@
 					<div id="CityList" style="width: 30%;"></div>	
 					<div id="AreaList" style="width: 30%;"></div>							
 				</div>
-			</div>
-			<div>
-				<label>详细地址：</label>
-				<input id="address" type="text" value="" placeholder="街道、门牌号" />
-			</div>
+			</div>			
 			<div>
 				<label>房源类型：</label>
 				<select  id="type">
@@ -283,6 +281,25 @@
 </script>
 
 <script>
+	$(document).ready(function(){
+		var provicelistApi = commapi + 'province/list'; //获取省份				
+		$.ajax({
+		url: provicelistApi,
+		type: 'GET',
+		data: {},             				
+		success: function (list) {
+				console.log(list);
+				var html = template('prolistscript', {data: list});
+				$('#ProviceList').html(html);
+				$('#AreaList').html('');
+			},              
+		}); 
+		
+		//dataprovicename datacityname dataareaname  dataproviceid  datacityid  dataareaid 缓存拿首页带过来的省市区和对应id
+		$('#J_ActionSheet').val(dataprovicename +' '+ datacityname);
+		  cityCode = datacityid  //cityCode
+	});
+	
 	//面积范围双向滑块
 	$('.range-slider').jRange({
 		from: 0,
@@ -296,22 +313,31 @@
 		//$(".range-slider").val() 选择的范围值
 	});
 	
+	var pipeipro =  dataprovicename; //定义两个全局变量,将缓存带来的省市保存,
+	var pipeicity = datacityname;
+	
+	//根据省市区的值自动选中当前的省市区
 	var $as = $('#J_ShowActionSheet');					
 	$('#J_ActionSheet').on('click', function () {
-		var provicelistApi = commapi + 'province/list'; //获取省份				
 		$as.actionSheet('open'); //打开楼盘城市列表
-		$('#CityList').html(''); //清空市内容
-		$.ajax({
-		url: provicelistApi,
-		type: 'GET',
-		data: {},             				
-		success: function (list) {
-				console.log(list);
-				var html = template('prolistscript', {data: list});
-				$('#ProviceList').html(html);
-				$('#AreaList').html('');
-			},              
-		}); 
+		//$('#CityList').html(''); //清空市内容
+		var currentVal = $(this).val();							
+		if(currentVal !=''){				
+			$("#ProviceList a").each(function(){
+				if($(this).text() == pipeipro){	//循环拿到与之匹配的省份													
+					$("#ProviceList a").removeClass('active');
+					$(this).addClass('active');
+					
+					$("#ProviceList a").attr('id','');
+					$(this).attr('id','activeproid');
+					var container = $("#ProviceList"), scrollTo = $("#activeproid");
+					container.animate({ 
+							scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop() 
+					},0)
+					$(this).click(); //触发省份的点击 请求市的内容
+				}
+			})
+		}				
 	});				
 
 //省市区三级联动
@@ -321,7 +347,10 @@
 	var proCode = '';
 	var cityCode= '';
 	var areaCode = '';
-	function proviceclick (e,provicecode,proname){
+	function proviceclick (e,provicecode,proname){	
+		provicevalue = proname;
+		proCode = provicecode;
+		pipeipro = proname;  //手动切换城市 拿到省
 		var citylistApi = commapi + 'city/list'; //获取市
 			$('#AreaList').html(''); //清空市内容
 			console.log(provicecode)
@@ -333,10 +362,23 @@
 					console.log(citylist);
 					var html = template('citylistscript', {citylist: citylist});
 					$('#CityList').html(html);
+					$("#CityList a").each(function(){
+						if($(this).text() == pipeicity){//循环拿到与之匹配的市	
+								console.log($(this).text())
+							$("#CityList a").removeClass('active');
+							$(this).addClass('active');
+							$("#CityList a").attr('id','');
+							$(this).attr('id','activecityid');
+							var container = $("#CityList"), scrollTo = $("#activecityid");
+							container.animate({ 
+									scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop() 
+							},0)
+							$(this).click(); //触发市级的点你请求区
+						}
+					});										
 				},              
 			}); 
-				provicevalue = proname;
-				proCode = provicecode;
+				
 				$('#ProviceList a').removeClass('active'); //高亮显示
 				e.classList.add("active");
 		};				
@@ -355,13 +397,15 @@
 			}); 
 			cityvalue = cityname;
 			cityCode = citycode;
+			pipeicity = cityname;  //手动切换城市 拿到市
 			$('#CityList a').removeClass('active'); //高亮显示
 			e.classList.add("active");
+			$("input[name='currenArea']").val(provicevalue + ' ' + cityvalue);
 		};			
 	function areaclick (e,areacode,areaname){
 		console.log(areacode);
 		$('#J_ShowActionSheet').actionSheet('close');
-		$("input[name='currenArea']").val(provicevalue + ' ' + cityvalue+ ' ' + areaname);
+		$("input[name='currenArea']").val(provicevalue + ' ' + cityvalue);
 		areaCode = areacode;		
 		console.log(proCode + '-' + cityCode + '-' + areaCode);
 	}
@@ -370,16 +414,14 @@
 		var keywordApi = commapi + 'House/search'; //关键字搜索
 		if($("#type  option:selected").val() == 1){
 			var keylist = {
-				'area': areaCode,
-				'search': $('#keyword').val(),
-				'address': $('#address').val(),				
+				'city': cityCode,
+				'search': $('#keyword').val(),					
 				'init_status': $("#type  option:selected").val()
 			}
 		}else if($("#type  option:selected").val() == 2){
 			var keylist = {
-				'area': areaCode,
-				'search': $('#keyword').val(),
-				'address': $('#address').val(),
+				'city': cityCode,
+				'search': $('#keyword').val(),		
 				'floor_area_min': $(".val-low").text(),
 				'floor_area_max': $(".val-high").text(),
 				'init_status': $("#type  option:selected").val()
@@ -428,9 +470,6 @@
 			}
 		})		
 	});
-	
-	
-	
 </script>
 </body>
 </html>

@@ -87,7 +87,7 @@ class BaseValidate extends Validate
     //独立验证方法 是否为手机号
     protected function isMobile($value, $rule = '', $data = '', $field = '')
     {
-        $rule = '^1(3|4|5|7|8)[0-9]\d{8}$^';
+        $rule = '^1(3|4|5|7|8|6|9)[0-9]\d{8}$^';
         $result = preg_match($rule, $value);
         if ($result) {
             return true;

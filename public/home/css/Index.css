@@ -105,75 +105,56 @@ body{
 	text-align: center;
 }
 
-.item-list{
-		padding:.2rem .3rem;
-		}
-.item-list .left-img{
-	position: relative;
-	width: 3rem;
-	height: 2rem;
-	margin: 0 .2rem 0 0;
-	float: left;
-}
-.left-img img{
+#bestnewList .item-list{		
+	display: flex;
+	align-items: center;
+	padding: .1rem;
+	}
+#bestnewList .rightdesc{
 	width: 100%;
-	height: 100%;
-}
-.desc-right .desc-title{
-	padding: 0 0 .1rem 0;
-}
-.desc-right .desc-address{
-	color:#5D5D5D;
-	overflow: hidden;
-	text-overflow:ellipsis;
-	white-space: nowrap;
-}
-.desc-right .desc-content{
-	color:#898989 ;
-	display: inline-block;
-}
-.desc-right{
-	padding: .3rem 0;
-	white-space: nowrap;
+	padding: 0 .1rem;
 }
 
-.desc-right span a{
-	color:#C1060F;
+#bestnewList .rightdesc p{
+	padding: 0 0 .05rem 0;
 }
-.desc-right .yong{
+
+#bestnewList .spantitle{
+	width: 2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    font-size: .35rem;
+}
+#bestnewList .paddress{
+	width: 4rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-block;
+	color:#5D5D5D
+}
+#bestnewList .type{
+	width: 4rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-block;
+}
+
+label.yong{
 	padding: .02rem .2rem;
 	color:#fff;
 	background: #FF9966;
 	border-radius: .1rem;
 }
-p.desc-tip{
-	padding: .1rem 0;
-}
-label.price{
-	color:#C1060F;
-}
-label.main-title{
-	display: inline-block;
-    width: 2rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.housestyle{
+
+#bestnewList .housestyle{
 	position: absolute;
 	top: 0;
 	background: #C1060F;
 	color: #fff;
 	padding: .05rem .4rem .05rem .1rem;
 	border-radius: 0 .2rem .2rem 0;
-}
-.g-scrollview:after{
-	height: 0;
-}
-.list-donetip {
-	color:#C1060F;
-	font-size: .24rem;
-	text-align: center;
-	padding: .3rem 0 .2rem 0;
-	color: #777;
 }

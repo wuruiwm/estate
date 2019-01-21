@@ -85,9 +85,9 @@
 			<div id="release">发布</div>
 		</a>
 		<!-- 报备客户按钮 -->
-		<a href="reportecustomers/index.html">
+		<!-- <a href="reportecustomers/index.html">
 			<div id="preparation">报备</div>
-		</a>
+		</a> -->
 		<!-- 底部导航 -->
 		<footer class="m-tabbar">
 			<a href="../index.html" class="tabbar-item">
@@ -131,7 +131,7 @@
 					<img src="{{data[index].cover_img.img_url}}" />
 				</div>
 				<div class="desc-right">
-					<p class="desc-title"><p>{{data[index].title}}</p><span><a>{{data[index].house_price}}&nbsp元/㎡</a></span></p>
+					<p class="desc-title"><p style="font-size: .3rem;">{{data[index].title}}</p><span><a>{{data[index].house_price}}&nbsp元/㎡</a></span></p>
 					<p class="desc-address">{{data[index].house_address}}</p>
 					<p class="desc-tip">
 						{{each data[index].decoration_type as item id}}
@@ -147,19 +147,20 @@
 <script>
 	$(document).ready(function(){
 		var getnewhouseApi = commapi + "house/list";
-		var page = 1, limit = 10;
+		var page = 1, limit = 100;
 		var province =  decodeURI(GetQueryString('province'));
 		var city =   decodeURI(GetQueryString('city'));
+		//var area = decodeURI(GetQueryString('area'));
 		$.ajax({
 				url: getnewhouseApi,
 				type: 'GET',									
-				data: {'page': page, 'limit': limit, 'province': province, 'city': city, 'type': 2},											
+				data: {'page': page, 'limit': limit, 'province': province, 'city': city,'area':'', 'type': 2},											
 				success: function (ret) {	
 					console.log(ret)
-					if(ret.length==0){						
+					if(ret.total==0){						
 						$('#getoldlist').html("<img style='max-width: 100%;height: auto;' src='../static/images/nodata.png' />");
 					}else{
-						var html = template('oldhouselist', {data: ret});
+						var html = template('oldhouselist', {data: ret.data});
 						$('#getoldlist').html(html);
 					}
 				}

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>报备客户</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <!-- 引入YDUI样式 -->
+    <link rel="stylesheet" href="../../build/css/ydui.css" />
+	<link rel="stylesheet" href="../../css/common.css" />
+	<link href="../../css/datacss/mobiscroll.animation.css" rel="stylesheet" type="text/css" />
+	<link href="../../css/datacss/mobiscroll.widget.css" rel="stylesheet" type="text/css" />
+	<link href="../../css/datacss/mobiscroll.widget.ios.css" rel="stylesheet" type="text/css" />
+	<link href="../../css/datacss/mobiscroll.scroller.css" rel="stylesheet" type="text/css" />
+	<link href="../../css/datacss/mobiscroll.scroller.ios.css" rel="stylesheet" type="text/css" />
+	<style>
+		input,textarea{
+			font-family: initial;
+		}
+		#data-form {
+			padding:.2rem .5rem;
+		}
+		#data-form div{
+			display: flex;
+			align-items: center;
+			padding: .3rem 0;
+			
+		}
+		#data-form div label{
+			min-width: 1.8rem;
+			color: #868686;
+			font-size: .3rem;
+			display: inline-flex;
+			padding: 0 .3rem 0 0 ;
+		}
+		#data-form div input{
+			text-align: right;
+			border-radius: .1rem;
+			width: 100%;
+			border: 0;
+			background: #EEEEEE;
+			padding: .2rem;
+			height: .7rem !important;
+			font-size: 0.3rem;
+			
+		}
+		textarea{
+			border-radius: .1rem;
+			width: 100%;
+			border: 0;
+			background: #EEEEEE;
+			padding: .3rem;
+			font-size: 0.3rem;
+		}
+		.cell-item:not(:last-child):after{
+			border: 0;
+		}
+		.cell-item{
+			margin-left: .5rem;
+		}
+
+		.cell-checkbox-icon:after{
+			color:#C1060F !important;
+		}
+		.submit{
+			font-size: .3rem;
+			text-align: center;
+			display: block;
+			margin: 0 auto;
+			border-radius: .2rem;
+			background: #C1060F;
+			color: #ffffff;
+			padding: .2rem .5rem;
+			margin-top: .5rem !important;
+		}
+		#J_ShowActionSheet{
+			display: block !important;
+			padding: 0 !important;
+			height: 7rem;
+		}
+		/* 城市列表自定义布局 */
+		#ProviceList, #CityList,#AreaList{
+			padding: 0 !important;
+			float: left;
+			display: block !important;
+			height: 7rem;			
+			overflow: auto;
+			width: 30% !important;
+			margin: 0 5px;
+		}
+		#ProviceList a, #CityList a,#AreaList a{
+			line-height: .7rem;
+			height: .7rem;
+			display: block;
+			margin: 1px 0;
+			font-size: .23rem;
+		}
+		#houselistActionSheet{
+			display: block !important;
+			padding: 0 !important;
+			height: 8rem;
+    overflow: auto;
+		}
+		.actionsheet-item{
+			font-size: .4rem;
+		}
+		.active{
+			color:#C1060F;
+		}
+		.red-a{color:red;}
+	</style>
+</head>
+<body>
+	<section class="g-flexview">
+		<!-- 顶部内容 -->
+		<header class="m-navbar">
+			<a href="#" onClick="javascript :window.history.back(); return false;" class="navbar-item">
+				<i class="back-ico"></i>
+			</a>
+			<div class="navbar-center">
+				<span class="navbar-title">报备客户</span>
+			</div>
+		</header>
+		<div class="g-scrollview">
+			<div id="data-form">
+				
+				<div class="">
+					<label>选择地区</label>
+					<input id="J_ActionSheet" value="" name="currenArea" type="text" readonly="readonly"  placeholder="选择地区" />
+					<div class="m-actionsheet" id="J_ShowActionSheet">
+						<div id="ProviceList" style="width: 30%;"></div>
+						<div id="CityList" style="width: 30%;"></div>	
+						<div id="AreaList" style="width: 30%;"></div>							
+					</div>
+				</div>
+				<div class="">
+					<label>报备楼盘</label>
+					<input id="houselist" value="" name="currenHouse" type="text" readonly="readonly"  placeholder="请选择楼盘" />
+					<div class="m-actionsheet" id="houselistActionSheet">
+						<a href="javascript:;" class="actionsheet-action" id="J_Cancel">取消</a>
+					</div>
+				</div>
+				<div class="">
+					<label>客户姓名</label>
+					<input value="" name="customername" type="text"  placeholder="请输入真实姓名" />
+				</div>
+				<div class="">
+					<label>客户电话</label>
+					<input type="number" pattern="[0-9]*" class="cell-input" placeholder="请输入客户联系方式" value="" name="tel" autocomplete="off" />
+				</div>
+				<div class="">
+					<label>客户性别</label>
+					<label class="cell-item">
+						<span class="cell-left">男</span>
+						<label class="cell-right">
+							<input type="radio" name="sex" checked="checked" value="1" />
+							<i class="cell-checkbox-icon"></i>
+						</label>
+					</label>
+					
+					<label class="cell-item">
+						<span class="cell-left">女</span>
+						<label class="cell-right">
+							<input type="radio" name="sex" value="2" />
+							<i class="cell-checkbox-icon"></i>
+						</label>
+					</label>
+				</div>
+				<div class="">
+					<label>预看时间</label>
+					<input id="dateinput" value="" name="user_date" type="text"   placeholder="请选择看盘时间" />
+				</div>
+				<div class="">
+					<label>购房意向</label>
+					<textarea id='desccontent' rows="10" cols="50" placeholder="请输入购房意向,例如:三室一厅..."></textarea>
+				</div>
+				<span class="submit" id="postcustomer">立即报备</span>
+			</div>
+		</div>
+	</section>
+<!-- 引入jQuery 3.0+ -->
+<script src="../../js/jq331.min.js"></script>
+<script src="../../build/js/ydui.flexible.js"></script>
+<script src="../../build/js/ydui.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/template.js"></script>
+<script src="../../js/datajs/mobiscroll.core.js"></script>
+<script src="../../js/datajs/mobiscroll.widget.js"></script>
+<script src="../../js/datajs/mobiscroll.scroller.js"></script>
+<script src="../../js/datajs/mobiscroll.util.datetime.js"></script>
+<script src="../../js/datajs/mobiscroll.datetimebase.js"></script>
+<script src="../../js/datajs/mobiscroll.widget.ios.js"></script>
+<script src="../../js/datajs/mobiscroll.i18n.zh.js"></script>
+<script src="../../build/js/ydui.citys.js"></script>
+<script src="../../js/scroll.js"></script>
+<script id="prolistscript" type="text/html">
+	{{each data as value index}}
+		<a href="#" onclick="proviceclick(this,{{data[index].province_id}},'{{data[index].name}}')" class="actionsheet-item" data-code="{{data[index].province_id}}">{{data[index].name}}</a>
+	{{/each}}
+</script>
+
+<script id="citylistscript" type="text/html">
+	{{each citylist as value index}}
+		<a href="#" onclick="cityclick(this,{{citylist[index].city_id}},'{{citylist[index].name}}')"  class="actionsheet-item" data-code="{{citylist[index].city_id}}">{{citylist[index].name}}</a>
+	{{/each}}
+</script>
+
+<script id="arealistscript" type="text/html">
+	{{each arealist as value index}}
+		<a href="#" onclick="areaclick(this,{{arealist[index]._id}},'{{arealist[index].name}}')"   class="actionsheet-item" data-code="{{arealist[index].area_id}}">{{arealist[index].name}}</a>
+	{{/each}}
+</script>
+
+<script id="getarealistscript" type="text/html">
+	{{each datarea as value index}}
+		<a href="#" onclick="getareaclick(this,{{datarea[index].id}},'{{datarea[index].title}}')"  class="actionsheet-item" >{{datarea[index].title}}</a>
+	{{/each}}
+</script>
+<script>
+$(document).ready(function(){
+	if(!dataToken){
+		!function (win, $) {
+			var dialog = win.YDUI.dialog;													
+			dialog.confirm('系统提示', '您还没有登录，现在去登录...', [
+				{
+					txt: '取消',
+					color: false, /* false:黑色  true:绿色 或 使用颜色值 */
+					callback: function () {
+						history.go(-1);
+					}
+				},
+				{
+					txt: '确定',
+					color: true,
+					callback: function () {
+						location.href="../login.html";
+					}
+				}
+			]);
+		}(window, jQuery);					
+		return;
+	}
+	//token判断时效，超时退出登录
+	var _interval_handler=-1;
+	var _EXPIRE_TIME = datamoretime;//判断时效时间，则注销
+	(function () {
+		if (dataToken) {//已登录
+		//刷新最后使用时间
+		localStorage.setItem("nxgx_lastVisitTime", new Date().getTime());
+		_interval_handler=setInterval(checkExpired, 10*1000);//10秒钟检查一次，是否超时
+		}
+	})();
+	
+	function checkExpired() {
+	//console.log("10秒检查一次是否过期"+window.location.href+"::"+new Date());
+	var storeLastTime=localStorage.getItem("nxgx_lastVisitTime")?localStorage.getItem("nxgx_lastVisitTime"):-1;
+	if (storeLastTime==-1) clearInterval(_interval_handler);
+	else {
+			if ((new Date()).getTime()-storeLastTime>_EXPIRE_TIME) {  //过期了
+			!function (win, $) {
+				var dialog = win.YDUI.dialog;
+				/* 加载中提示框 */									
+					dialog.loading.open('登录超时...');
+					setTimeout(function () {
+						localStorage.removeItem('token'); //清除token
+						dialog.loading.close();/* 移除loading */
+						location.href="../login.html";
+					}, 2000);
+			
+			}(window, jQuery);	
+			clearInterval(_interval_handler);
+		}
+	}
+	};
+
+	//报备楼盘选择
+    var $as = $('#houselistActionSheet');
+    $('#houselist').on('click', function () {
+			if($("#J_ActionSheet").val() ==''){
+			YDUI.dialog.toast('请先选择地区', 'none', 1500);
+			}else{
+				 $as.actionSheet('open');
+			}
+       
+    });
+    $('#J_Cancel').on('click', function () {
+        $as.actionSheet('close');
+    });
+	
+	//日期控件
+	$(function () {
+		var nowData=new Date();
+		var opt= { 
+			theme:'ios', //设置显示主题 
+			mode:'scroller', //设置日期选择方式，这里用滚动
+			display:'bottom', //设置控件出现方式及样式
+			preset : 'datetime', //日期:年 月 日 时 分
+			minDate: nowData, 
+			maxDate:new Date(nowData.getFullYear(),nowData.getMonth(),nowData.getDate()+365),
+			dateFormat: 'yy-mm-dd', // 日期格式
+			//dateOrder: 'yymmdd', //面板中日期排列格式
+			//stepMinute: 5, //设置分钟步长
+			yearText:'年', 
+			monthText:'月',
+			dayText:'日',
+			//hourText:'时',
+			//minuteText:'分',
+			lang:'zh' //设置控件语言};
+		};
+		$('#dateinput').mobiscroll(opt);
+	});
+
+	//选择区域 进页面就获取省份
+	var provicelistApi = commapi + 'province/list'; //获取省份				
+	$.ajax({
+	url: provicelistApi,
+	type: 'GET',
+	data: {},             				
+	success: function (list) {
+			console.log(list);
+			var html = template('prolistscript', {data: list});
+			$('#ProviceList').html(html);
+			$('#AreaList').html('');
+		},              
+	}); 
+});
+
+var pipeipro =  dataprovicename; //定义两个全局变量,将缓存带来的省市保存,
+var pipeicity = datacityname;
+//根据省市区的值自动选中当前的省市区
+ var $as = $('#J_ShowActionSheet');
+      $('#J_ActionSheet').on('click', function () {     			
+      	$as.actionSheet('open'); //打开楼盘城市列表
+      //$('#CityList').html(''); //清空市内容      								
+				var currentVal = $(this).val();							
+				if(currentVal !=''){				
+					$("#ProviceList a").each(function(){
+						if($(this).text() == pipeipro){	//循环拿到与之匹配的省份													
+							$("#ProviceList a").removeClass('active');
+							$(this).addClass('active');
+							
+							$("#ProviceList a").attr('id','');
+							$(this).attr('id','activeproid');
+							var container = $("#ProviceList"), scrollTo = $("#activeproid");
+							container.animate({ 
+									scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop() 
+							},0)
+							$(this).click(); //触发省份的点击 请求市的内容
+						}
+					})
+				}																				
+      });
+
+//进页面显示 从首页带来的城市名 同时查出楼盘信息
+$('#J_ActionSheet').val(dataprovicename +' '+ datacityname );
+var getareahouseApi = commapi + "house/loupan2";
+			$.ajax({
+			url: getareahouseApi,
+			type: 'GET',
+			data: {'province': dataproviceid, 'city':datacityid, 'area':areaCode}, //dataproviceid  datacityid  dataareaid common.js取的，与数据库匹配的省市区id        				
+			success: function (ret) {
+					console.log(ret);
+					if(ret.length>0){
+						var html = template('getarealistscript', {datarea: ret});
+						$('#houselistActionSheet').html(html);
+					}else{
+						YDUI.dialog.toast('暂无此地房源信息!', 'none', 3000);
+						
+						$('#houselistActionSheet').html('暂无数据！');
+					}
+				},   
+			}); 								
+   //省市区三级联动
+   var provicevalue='';
+   var cityvalue='';
+   var areavalue='';
+   var proCode = '';
+   var cityCode= '';
+   var areaCode= '';
+	 var getareaid = '';
+	 var housename = '';
+   function proviceclick (e,provicecode,proname){
+		 provicevalue = proname;
+		 proCode = provicecode;
+		 pipeipro = proname;  //手动切换城市 拿到省
+   	var citylistApi = commapi + 'city/list'; //获取市
+   		$('#AreaList').html(''); //清空市内容
+   		console.log(provicecode)
+   		$.ajax({
+   		url: citylistApi,
+   		type: 'GET',
+   		data: {'pid': provicecode},             				
+   		success: function (citylist) {
+   				console.log(citylist);
+   				var html = template('citylistscript', {citylist: citylist});
+   				$('#CityList').html(html);
+					
+					$("#CityList a").each(function(){
+						if($(this).text() == pipeicity){//循环拿到与之匹配的市	
+								console.log($(this).text())
+							$("#CityList a").removeClass('active');
+							$(this).addClass('active');
+							$("#CityList a").attr('id','');
+							$(this).attr('id','activecityid');
+							var container = $("#CityList"), scrollTo = $("#activecityid");
+							container.animate({ 
+									scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop() 
+							},0)
+							$(this).click(); //触发市级的点你请求区
+						}
+					});
+   			},              
+   		}); 
+   			
+			$('#ProviceList a').removeClass('active'); //高亮显示
+			e.classList.add("active");												
+   	};		
+				
+   function cityclick (e,citycode,cityname){
+   	var arealistApi = commapi + 'area/list'; //获取区			
+   		console.log(citycode)
+   		$.ajax({
+   		url: arealistApi,
+   		type: 'GET',
+   		data: {'cid': citycode},             				
+   		success: function (arealist) {
+   				console.log(arealist);
+   				var html = template('arealistscript', {arealist: arealist});
+   				$('#AreaList').html(html);
+   			},              
+   		}); 
+   		cityvalue = cityname;
+   		cityCode = citycode;
+			pipeicity = cityname;  //手动切换城市 拿到市
+			$('#CityList a').removeClass('active'); //高亮显示
+			e.classList.add("active");
+   	};	
+				
+   function areaclick (e,areacode,areaname){
+   	console.log(areacode);
+   	$('#J_ShowActionSheet').actionSheet('close');
+   	$("input[name='currenArea']").val(provicevalue + ' ' + cityvalue+ ' ' + areaname);
+   	areaCode = areacode;
+   	console.log(proCode + '-' + cityCode + '-' + areaCode);
+	
+	//选完省市区之后 查出对应的楼盘信息
+	var getareahouseApi = commapi + "house/loupan2";
+			$.ajax({
+			url: getareahouseApi,
+			type: 'GET',
+			data: {'province': proCode, 'city':cityCode, 'area':areaCode},             				
+			success: function (ret) {
+					console.log(ret);
+					if(ret.length>0){
+						var html = template('getarealistscript', {datarea: ret});
+						$('#houselistActionSheet').html(html);
+						$("#houselist").val('');//点击改变区之后 清空带来的区的名称显示值
+					}else{
+						YDUI.dialog.toast('暂无此地房源信息!', 'none', 3000);
+						$('#houselist').val('');
+						housename = ''; // 当切换没有楼盘区的时候，把默认带过来的楼盘名字置空						
+						var html = template('getarealistscript', {datarea: ret});
+						$('#houselistActionSheet').html('暂无数据！');
+					}
+				},   
+			}); 	
+   }
+	 
+	 function getareaclick (e,areaid,content) {
+		 getareaid = areaid;
+		 housename = content;
+		 $('#houselistActionSheet').actionSheet('close'); 
+		 $("input[name='currenHouse']").val(content);
+	 }
+	 
+	 //报备客户
+			var postcustomerApi = commapi + "order/add";
+	  	$('#postcustomer').click(function(){
+	  		var customerName = $("input[name='customername']").val();
+	  		var customerTel = $("input[name='tel']").val();
+	  		var customerSex = $("input[name='sex']:checked").val();
+	  		var dataTime = $('#dateinput').val();
+	  		dataTime = dataTime.substr(0, 10);
+	  		var descTencent = $("#desccontent").val();  					
+				var datalist = {
+					'house_title': housename,
+					'province': proCode,
+					'city': cityCode,
+					'area': areaCode,
+					'house_id': getareaid,
+					'gender': customerSex,
+					'name': customerName,
+					'number': customerTel,
+					'date': dataTime,
+					'content': descTencent,
+				}
+				if($("#houselist").val()==""){
+					YDUI.dialog.toast('请选择楼盘!', 'none', 2000);
+					return;
+				}
+			if(!housename){
+					YDUI.dialog.toast('请选择楼盘!', 'none', 2000);
+				}else{
+					$.ajax({
+							url: postcustomerApi,
+							type: "POST",
+							data: datalist,
+							beforeSend: function(request) {
+									request.setRequestHeader("token", dataToken);
+								},
+							success: function(result) {
+								console.log(result);//成功
+								if(result.msg != '报备成功'){
+									YDUI.dialog.toast(result.msg, 'none', 3000);
+								}else{
+									YDUI.dialog.toast('报备成功！前往查看', 'none', 3000);				
+									setTimeout(function () {										
+										location.href="../mycustomer.html";
+									}, 2000);
+								}
+							}	  			
+					});
+				}
+	 });
+
+</script>
+
+</body>
+</html>

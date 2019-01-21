@@ -194,6 +194,7 @@
 <script src="../../js/datajs/mobiscroll.widget.ios.js"></script>
 <script src="../../js/datajs/mobiscroll.i18n.zh.js"></script>
 <script src="../../build/js/ydui.citys.js"></script>
+<script src="../../js/scroll.js"></script>
 <script id="prolistscript" type="text/html">
 	{{each data as value index}}
 		<a href="#" onclick="proviceclick(this,{{data[index].province_id}},'{{data[index].name}}')" class="actionsheet-item" data-code="{{data[index].province_id}}">{{data[index].name}}</a>
@@ -281,8 +282,7 @@ $(document).ready(function(){
 			YDUI.dialog.toast('请先选择地区', 'none', 1500);
 			}else{
 				 $as.actionSheet('open');
-			}
-       
+			}      
     });
     $('#J_Cancel').on('click', function () {
         $as.actionSheet('close');
@@ -310,48 +310,73 @@ $(document).ready(function(){
 		};
 		$('#dateinput').mobiscroll(opt);
 	});
+
+	//选择区域 进页面就获取省份
+	var provicelistApi = commapi + 'province/list'; //获取省份				
+	$.ajax({
+	url: provicelistApi,
+	type: 'GET',
+	data: {},             				
+	success: function (list) {
+			console.log(list);
+			var html = template('prolistscript', {data: list});
+			$('#ProviceList').html(html);
+			$('#AreaList').html('');
+		},              
+	}); 
+	
+	var loupanname = decodeURI(params.name); //从详情页带过来的楼盘名称在报备显示楼盘名字 (仅限新房)
+	housename = params.houseid // 楼盘id赋值,报备的时候传值
+		$("#houselist").val(loupanname);
 });
 
-//进页面显示 从首页带来的城市名 同时查出楼盘信息
-$('#J_ActionSheet').val(dataprovicename +' '+ datacityname + ' ' +dataareaname);
+var pipeipro =  dataprovicename; //定义两个全局变量,将缓存带来的省市保存,
+var pipeicity = datacityname;
+
+//根据省市区的值自动选中当前的省市区
+ var $as = $('#J_ShowActionSheet');
+      $('#J_ActionSheet').on('click', function () {     			
+      	$as.actionSheet('open'); //打开楼盘城市列表
+      //$('#CityList').html(''); //清空市内容      								
+				var currentVal = $(this).val();							
+				if(currentVal !=''){				
+					$("#ProviceList a").each(function(){
+						if($(this).text() == pipeipro){	//循环拿到与之匹配的省份													
+							$("#ProviceList a").removeClass('active');
+							$(this).addClass('active');
+							
+							$("#ProviceList a").attr('id','');
+							$(this).attr('id','activeproid');
+							var container = $("#ProviceList"), scrollTo = $("#activeproid");
+							container.animate({ 
+									scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop() 
+							},0)
+							$(this).click(); //触发省份的点击 请求市的内容
+						}
+					})
+				}																				
+      });
+
+//从详情页点击报备进来。带来省市区 同时查出楼盘信息
+$('#J_ActionSheet').val(dataprovicename +' '+ datacityname + ' ' + baobeineedareaname);
+//dataprovicename(省) 和 datacityname(市) 是在首页存在缓存里,这里取出显示,baobeineedareaname 是在详情里面存的缓存,具体的区带到报备里去
 var getareahouseApi = commapi + "house/loupan2";
 			$.ajax({
 			url: getareahouseApi,
 			type: 'GET',
-			data: {'province': dataproviceid, 'city':datacityid, 'area':dataareaid}, //dataproviceid  datacityid  dataareaid common.js取的，与数据库匹配的省市区id        				
+			data: {'province': dataproviceid, 'city':datacityid, 'area':baobeineedareaid}, 
+			//dataproviceid  datacityid common.js取的，与数据库匹配的省市区id  baobeineedareaid是在详情页存的缓存取出       				
 			success: function (ret) {
 					console.log(ret);
 					if(ret.length>0){
 						var html = template('getarealistscript', {datarea: ret});
 						$('#houselistActionSheet').html(html);
 					}else{
-						YDUI.dialog.toast('暂无此地房源信息!', 'none', 3000);
-						var html = template('getarealistscript', {datarea: ret});
+						YDUI.dialog.toast('暂无此地房源信息!', 'none', 3000);						
 						$('#houselistActionSheet').html('暂无数据！');
 					}
 				},   
-			}); 	
-
-
-//选择区域
-   var $as = $('#J_ShowActionSheet');
-      $('#J_ActionSheet').on('click', function () {
-      	var provicelistApi = commapi + 'province/list'; //获取省份				
-      	$as.actionSheet('open'); //打开楼盘城市列表
-      	$('#CityList').html(''); //清空市内容
-      	$.ajax({
-      	url: provicelistApi,
-      	type: 'GET',
-      	data: {},             				
-      	success: function (list) {
-      			console.log(list);
-      			var html = template('prolistscript', {data: list});
-      			$('#ProviceList').html(html);
-      			$('#AreaList').html('');
-      		},              
-      	}); 
-      });		
-   
+			}); 								
    //省市区三级联动
    var provicevalue='';
    var cityvalue='';
@@ -359,9 +384,14 @@ var getareahouseApi = commapi + "house/loupan2";
    var proCode = '';
    var cityCode= '';
    var areaCode= '';
-	 var getareaid = '';
-	 var housename = '';
+   var getareaid = '';
+   var housename = '';
+   proCode =  dataproviceid;  cityCode = datacityid;  areaCode = baobeineedareaid; //详情页带来的省市区id
+   getareaid = localStorage.getItem('houseID');//房子id,详情页存的缓存
    function proviceclick (e,provicecode,proname){
+		 provicevalue = proname;
+		 proCode = provicecode;
+		 pipeipro = proname;  //手动切换城市 拿到省
    	var citylistApi = commapi + 'city/list'; //获取市
    		$('#AreaList').html(''); //清空市内容
    		console.log(provicecode)
@@ -373,12 +403,25 @@ var getareahouseApi = commapi + "house/loupan2";
    				console.log(citylist);
    				var html = template('citylistscript', {citylist: citylist});
    				$('#CityList').html(html);
+					
+					$("#CityList a").each(function(){
+						if($(this).text() == pipeicity){//循环拿到与之匹配的市	
+								console.log($(this).text())
+							$("#CityList a").removeClass('active');
+							$(this).addClass('active');
+							$("#CityList a").attr('id','');
+							$(this).attr('id','activecityid');
+							var container = $("#CityList"), scrollTo = $("#activecityid");
+							container.animate({ 
+									scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop() 
+							},0)
+							$(this).click(); //触发市级的点击请求区
+						}
+					});
    			},              
-   		}); 
-   			provicevalue = proname;
-   			proCode = provicecode;
+   		});  			
 			$('#ProviceList a').removeClass('active'); //高亮显示
-			e.classList.add("active");
+			e.classList.add("active");												
    	};		
 				
    function cityclick (e,citycode,cityname){
@@ -389,13 +432,14 @@ var getareahouseApi = commapi + "house/loupan2";
    		type: 'GET',
    		data: {'cid': citycode},             				
    		success: function (arealist) {
-   				console.log(arealist);
-   				var html = template('arealistscript', {arealist: arealist});
-   				$('#AreaList').html(html);
+				console.log(arealist);
+				var html = template('arealistscript', {arealist: arealist});
+				$('#AreaList').html(html);
    			},              
    		}); 
    		cityvalue = cityname;
    		cityCode = citycode;
+			pipeicity = cityname;  //手动切换城市 拿到市
 			$('#CityList a').removeClass('active'); //高亮显示
 			e.classList.add("active");
    	};	
@@ -418,8 +462,12 @@ var getareahouseApi = commapi + "house/loupan2";
 					if(ret.length>0){
 						var html = template('getarealistscript', {datarea: ret});
 						$('#houselistActionSheet').html(html);
+						$("#houselist").val('');//点击改变区之后 清空带来的区的名称显示值
+						getareaid = ' ';//点击改变qu之后 清空带来的区的id值
 					}else{
 						YDUI.dialog.toast('暂无此地房源信息!', 'none', 3000);
+						$('#houselist').val('');
+						housename = ''; // 当切换没有楼盘区的时候，把默认带过来的楼盘名字置空						
 						var html = template('getarealistscript', {datarea: ret});
 						$('#houselistActionSheet').html('暂无数据！');
 					}
@@ -435,8 +483,10 @@ var getareahouseApi = commapi + "house/loupan2";
 	 }
 	 
 	 //报备客户
-			var postcustomerApi = commapi + "order/add";
+		var postcustomerApi = commapi + "order/add";
 	  	$('#postcustomer').click(function(){
+			housename = $('#houselist').val(); 			
+			console.log(proCode,cityCode,areaCode)
 	  		var customerName = $("input[name='customername']").val();
 	  		var customerTel = $("input[name='tel']").val();
 	  		var customerSex = $("input[name='sex']:checked").val();
@@ -454,6 +504,10 @@ var getareahouseApi = commapi + "house/loupan2";
 					'number': customerTel,
 					'date': dataTime,
 					'content': descTencent,
+				}
+				if($("#houselist").val()==""){
+					YDUI.dialog.toast('请选择楼盘!', 'none', 2000);
+					return;
 				}
 			if(!housename){
 					YDUI.dialog.toast('请选择楼盘!', 'none', 2000);
