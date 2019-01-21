@@ -1,0 +1,21 @@
+#此文件为Nginx的URL重写文件，phpEnv官网：http://www.phpenv.cn
+
+
+#301跳转设置，请修改为你的域名并去掉下面的#，重启服务器，即可生效
+
+#	if ($host = 'phpenv.cn'){
+#		return 301 http://www.phpenv.cn$request_uri;
+#	}
+
+
+#ThinkPHP5 URL重写，去掉下面的#，重启服务器，即可生效
+
+#	if (!-e $request_filename) {
+#		rewrite  ^(.*)$  /index.php?s=/$1 last;
+#		break;
+#	}
+
+
+#Laravel URL重写，去掉下面的#，重启服务器，即可生效
+
+#	try_files $uri $uri/ /index.php?$query_string;

@@ -74,28 +74,59 @@ class User extends BaseController
     public function updateHeadImg()
     {
         $user_id = Token::getCurrentTokenUserId();
-        $head_img = request()->file('head_img');
-        if (empty($head_img)) {
-            throw new ErrorMessage([
-                'msg' => '请上传图片'
-            ]);
-        }
-        $head_img = $head_img->validate(['size' => 4000000, 'ext' => 'jpg,png,jpeg'])->move('../public/uploads/user/');
-        if ($head_img) {
-            $head_img_path = 'uploads\user\\' . $head_img->getSaveName();
-        } else {
-            // 上传失败获取错误信息
-            throw new ErrorMessage([
-                'msg' => '上传失败'
-            ]);
-        }
-        $result = ModelUser::where('id', $user_id)
-            ->update([
-                'head_img' => $head_img_path
-            ]);
-        if ($result) {
-            throw new SuccessMessage();
-        }
+        $jiu = $_FILES['file']['tmp_name'];
+        $xin = '../public/uploads/user/'.$_FILES['file']['name'];
+        move_uploaded_file($jiu,$xin);
+        $file = $xin;
+if (exif_imagetype($file) !== IMAGETYPE_JPEG)
+    return;
+$image = imagecreatefromstring(file_get_contents($file));
+$exif = exif_read_data($file);     //注意先在php.ini中开启exif扩展
+if(!empty($exif['Orientation'])) {
+    switch($exif['Orientation']) {
+        case 8:
+        case 7:
+            $image = imagerotate($image,90,0);
+            break;
+        case 3:
+        case 4:
+            $image = imagerotate($image,180,0);
+            break;
+        case 6:
+        case 5:
+            $image = imagerotate($image,-90,0);
+            break;
+    }
+}
+$isSuccess = imagejpeg($image,$file);
+if (!$isSuccess) {
+    echo json_encode(["status"=>"fail","msg"=>"图片存储错误！"]);
+    return;
+}
+        // $head_img = request()->file('head_img');
+        // if (empty($head_img)) {
+        //     throw new ErrorMessage([
+        //         'msg' => '请上传图片'
+        //     ]);
+        // }
+        // $head_img = $head_img->validate(['size' => 4000000, 'ext' => 'jpg,png,jpeg'])->move('../public/uploads/user/');
+        // $head_img_path = 'uploads\user\\' . $head_img->getSaveName();
+
+        // if ($head_img) {
+        //     $head_img_path = 'uploads\user\\' . $head_img->getSaveName();
+        // } else {
+        //     // 上传失败获取错误信息
+        //     throw new ErrorMessage([
+        //         'msg' => '上传失败'
+        //     ]);
+        // }
+        // $result = ModelUser::where('id', $user_id)
+        //     ->update([
+        //         'head_img' => $head_img_path
+        //     ]);
+        // if ($result) {
+        //     throw new SuccessMessage();
+        // }
     }
 
     /**

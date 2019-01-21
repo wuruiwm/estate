@@ -4,6 +4,7 @@ use think\Controller;
 use app\lib\exception\ErrorMessage;
 use app\lib\exception\SuccessMessage;
 use app\lib\validate\AddNotice;
+use app\admin\model;
 class Notice extends Permissions{
 	//列表
 	public function noticeList(){

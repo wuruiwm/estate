@@ -10,8 +10,7 @@ class Order extends Permissions{
 		//通过判断这个，来判断有没有get传参
 		if (!input('get.panduan')) {
 			$list = $order->order('id desc')->paginate(10);
-		}
-		else {
+		}else {
 			$get = input('get.');
 			$str = '1';
 			$zhuangtai = input('zhuangtai');
@@ -51,6 +50,7 @@ class Order extends Permissions{
 				$user_id = $conn->table('tplay_user')->field(['id'])->where('card_name',$user_id)->find()['id'];
 				$str = $str." and user_id='".$user_id."'";
 			}
+
 			$list = $order->where($str)->order('id desc')->paginate(10,false,['query'=>$get]);
 		}
 		//获取分页代码
